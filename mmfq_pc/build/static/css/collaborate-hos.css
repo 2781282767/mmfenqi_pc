@@ -1,0 +1,114 @@
+.wrap-hos{
+    width: 1200px;
+    margin: 20px auto;
+}
+
+.Allprovince{
+    padding: 10px 0;
+    border: 1px solid #efefef;
+    height: 100px;
+
+}
+.Allprovince ._left{
+    width: 100px;
+display: inline-block !important;
+}
+
+.left div{
+    padding: 5px;
+}
+.Allprovince .right{
+    width: 1050px;
+  display: inline-block !important;
+}
+
+
+.Allprovince ul li{
+    margin: 20px 0;
+
+    display: inline-block;
+
+    position: relative;
+
+
+}
+
+
+
+
+li:hover .itemCity{
+    display: block;
+
+}
+
+
+
+li .itemCity:hover .itemCity{
+
+    border: 1px solid red;
+
+    display: block !important;
+
+}
+
+
+li > span{
+   padding: 5px;
+}
+
+li .itemCity{
+
+    min-width: 250px;
+    position: absolute;
+    z-index: 200;
+    left:0;
+    top: 20px;
+    display: none;
+    background-color: #dddddd;
+}
+
+li .itemCity span{
+    margin-right: 10px;
+    min-width: 50px;
+    display: inline-block;
+
+}
+
+
+.wrap-hos .provinceContent{
+    width: 100%;
+
+    border: 1px solid #dddddd;
+    padding:20px ;
+    overflow: hidden;
+
+}
+.wrap-hos .provinceContent .c_left{
+    float: left;
+    height: 140px;
+    width: 140px;
+}
+
+.wrap-hos .provinceContent .c_right{
+
+    float: left;
+
+}
+
+.c_right p{
+    padding: 10px 0;
+
+}
+.c_right .c_div{
+
+    min-height: 60px;
+
+}
+
+
+.c-right .c_addr{
+
+}
+
+
+
