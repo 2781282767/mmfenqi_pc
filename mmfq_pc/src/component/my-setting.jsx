@@ -65,14 +65,14 @@ class R_MySetting extends React.Component{
                             <div className="phone">
                                 <ul>
                                     <li>
-                                        <p className="left">
+                                        <div className="left">
                                             <div>
                                                 <img src="../static/images/phone.png" alt=""/>
                                             </div>
-                                        </p>
+                                        </div>
                                         <div className="right">
-                                            <p><b style={{fontSize:'16px'}}>手机号码</b> <span className="bg_b8">{creditType}</span></p>
-                                            <p className="bg_b8">你绑定的手机号码是:{this.state.data.telePhone}</p>
+                                            <div><b style={{fontSize:'16px'}}>手机号码</b> <span className="bg_b8">{creditType}</span></div>
+                                            <div className="bg_b8">你绑定的手机号码是:{this.state.data.telePhone}</div>
                                         </div>
                                     </li>
                                 </ul>
@@ -80,19 +80,19 @@ class R_MySetting extends React.Component{
                             <div className="pwd">
                                 <ul>
                                     <li>
-                                        <p className="left">
+                                        <div className="left">
                                             <div>
                                                 <img src="../static/images/pwd.png" alt=""/>
                                             </div>
-                                        </p>
+                                        </div>
                                         <div className="right">
-                                            <p><b style={{fontSize:'16px'}}>登录密码</b></p>
-                                            <p className="bg_b8">如账号出现异常，请及时修改密码</p>
+                                            <div><b style={{fontSize:'16px'}}>登录密码</b></div>
+                                            <div className="bg_b8">如账号出现异常，请及时修改密码</div>
                                         </div>
                                     </li>
                                     <li>
                                         <p>
-                                           <span>修改</span><img src="../static/images/pwd-right.png" alt=""/>
+                                            <a href="update-pwd.html"><span>修改</span><img src="../static/images/pwd-right.png" alt=""/></a>
                                         </p>
                                     </li>
                                 </ul>
@@ -104,3 +104,5 @@ class R_MySetting extends React.Component{
         )
     }
 }
+
+

@@ -19,12 +19,10 @@ class R_AllOrder extends React.Component {
             id: '',
             pic_img: [],
 
-            length:'-1',
-
-
+            length: '-1',
             index: 1,//上传所需
 
-            blockOrnone:false
+            blockOrnone: false
 
 
         };
@@ -49,12 +47,6 @@ class R_AllOrder extends React.Component {
         };
 
 
-
-
-
-
-
-
     }
 
     loadComments(orderStatus) {
@@ -74,7 +66,7 @@ class R_AllOrder extends React.Component {
             data: jsonData,
             dataType: 'json',
             success: (data)=> {
-                console.log(data)
+                console.log(data);
                 this.setState({
                     data: data,
                     myOrderResponse: data.data.myOrderResponse,
@@ -83,7 +75,7 @@ class R_AllOrder extends React.Component {
                     using_number: data.data.using_number,
                     cancel_number: data.data.cancel_number,
                     refund_number: data.data.refund_number,
-                    length:data.data.myOrderResponse.length
+                    length: data.data.myOrderResponse.length
                 });
             }
 
@@ -123,23 +115,17 @@ class R_AllOrder extends React.Component {
 
     cancel_order(id) {
 
-
-
-        layer.open({
-            title: '请填写取消原因',
-            type: 1,
-            shade: 0.3,
-            closeBtn: 1, //不显示关闭按钮
-            btn: ['取消', '确认'],
-            area: ['400px', '180'],
-            content: '<div><p><img src="../../build/static/images/ca_od.jpg" alt="" style="vertical-align: middle;"> 确认取消该订单？</p></div>',
-            btn1: function (index, layero) {
-                layer.closeAll();
-            },
-            btn2: function (index,layero) {
+        this.setState({
+            blockOrnone: true
+        });
+        this.config = {
+            issure: false,
+            iscancle: false,
+            img: '../../build/static/images/ca_od.jpg',
+            text: '确认取消订单?',
+            yescb: ()=> {
                 var jsonData = {
                     orderId: id,
-
                 };
 
                 $.ajax({
@@ -147,33 +133,23 @@ class R_AllOrder extends React.Component {
                     type: 'post',
                     data: jsonData,
                     dataType: 'json',
-                    success: function (res) {
-                        console.log(res);
+                    success: (res)=> {
                         if (res.result == '0') {
-
-                            layer.closeAll();
+                            this.setState({
+                                blockOrnone: false
+                            });
 
                             window.location.reload();
-
                         }
-                    }.bind(this)
-                });
-
-            }.bind(this),
-            success: function () {
-
-                $('.layui-layer').css({
-
-                    'width': '400px',
-                    'height': '180px',
-                    'top': '50%',
-                    'left': '50%',
-                    'marginLeft': '-200px',
-                    'marginTop': '-90px'
+                    }
                 })
+            },
+            nocb: (blockOrnone)=> {
+                this.setState({
+                    blockOrnone: blockOrnone
+                });
             }
-        })
-
+        };
 
     }
 
@@ -188,56 +164,24 @@ class R_AllOrder extends React.Component {
                 if (res.result == '0') {
                     console.log(res);
 
-                    window.open('my-order-detail.html?orderId=' + res.data.orderInfo.orderId + '&orderNo=' + res.data.orderInfo.orderNo + '&orderName=' + res.data.orderInfo.orderName + '&downpayAmount=' + res.data.orderInfo.downpayAmount + '&creditPay=' + res.data.orderInfo.creditPay + '&telephone=' + res.data.orderInfo.telephone + '&starPhone=' + res.data.orderInfo.starPhone + '');
-
-
+                    window.open('my-order-detail.html?orderId=' + res.data.orderInfo.orderId + '&orderNo=' + res.data.orderInfo.orderNo + '&orderName=' + res.data.orderInfo.orderName + '&downpayAmount=' + res.data.orderInfo.downpayAmount + '&creditPay=' + res.data.orderInfo.creditPay + '&telephone=' + res.data.orderInfo.telephone + '&startPhone=' + res.data.orderInfo.starPhone + '');
                 }
             }.bind(this)
         })
 
     }
 
-    /*确定*/
-    //
-    // yescb() {
-    //     var jsonData = {
-    //         orderId: this.state.id,
-    //     };
-    //
-    //     $.ajax({
-    //         url: '/pc/computer/cancel_order',
-    //         type: 'post',
-    //         data: jsonData,
-    //         dataType: 'json',
-    //         success: function (res) {
-    //             console.log(res);
-    //             if (res.result == '0') {
-    //
-    //
-    //                 this.setState({
-    //                     blockOrnone:false
-    //                 });
-    //                 window.location.reload();
-    //             }
-    //         }.bind(this)
-    //     });
-    // }
-
     render() {
         console.log(this.state.pic_img);
-
         console.log(this.state.blockOrnone);
-        var length=this.state.length
+        var length = this.state.length;
         return (
 
             <div style={{float: 'left'}}>
 
-                {/*<R_Flex blockOrnone={this.state.blockOrnone} option={this.config} content={this.content}*/}
-                        {/*yescb={this.yescb.bind(this)}/>*/}
-
+                <R_Flex config={this.config} blockOrnone={this.state.blockOrnone}/>
 
                 <div className="wrap-content">
-
                     <div className="wrap-content-right">
                         <div>
                             <div className="top">
@@ -264,133 +208,138 @@ class R_AllOrder extends React.Component {
 
 
                                 {
-                                    length==-1
-                                    ?
-
-                                    <div></div>
-
-                                    :
-
-                                    length==0
-
+                                    length == -1
                                         ?
 
-                                        <div>
-                                            <div style={{width:'150px',float:'left','minHeight': 500}}>
-                                                <ul>
-                                                    <li style={{'paddingTop': 10}}>亲，暂还没有订单哦！</li>
-
-                                                </ul>
-                                            </div>
-                                        </div>
+                                        <div></div>
 
                                         :
 
-                                        <div>
+                                        length == 0
 
-                                            <table cellSpacing="0" cellPadding="0" width="100%" style={{border: '0'}}>
-                                                <thead>
-                                                <tr>
-                                                    <th style={{width: 346}}>商品</th>
-                                                    <th style={{width: 108}}>首付金额(元)</th>
-                                                    <th style={{width: 80}}>分期数</th>
-                                                    <th style={{width: 128}}>信用支付(元)</th>
-                                                    <th style={{width: 123}}>订单状态</th>
-                                                    <th style={{width: 133}}>操作</th>
-                                                </tr>
-                                                </thead>
+                                            ?
 
-                                                {
-                                                    this.state.myOrderResponse.map((data)=> {
-                                                        return<tbody key={data.orderId}>
-                                                        <tr>
-                                                            <td style={{collapse: 6}} className="_order">
-                                                                <div className="order-no">订单号:{data.orderNo}</div>
-                                                            </td>
-                                                        </tr>
-                                                        <tr className="bg_bd">
-                                                            <td>
-                                                                <div className="goods-info">
-                                                                    <div className="goods-info-left">
-                                                                        <img src={data.goodsPic} width="100%"
-                                                                             height="100%"/></div>
-                                                                    <div className="goods-info-right">
-                                                                        <li>{data.goodsName}</li>
-                                                                        <li>{data.hospital}</li>
-                                                                        <li>单价:￥{data.orderPrice}</li>
+                                            <div>
+                                                <div style={{width: '150px', float: 'left', 'minHeight': 500}}>
+                                                    <ul>
+                                                        <li style={{'paddingTop': 10}}>亲，暂还没有订单哦！</li>
+
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                            :
+
+                                            <div>
+
+                                                <table cellSpacing="0" cellPadding="0" width="100%"
+                                                       style={{border: '0'}}>
+                                                    <thead>
+                                                    <tr>
+                                                        <th style={{width: 346}}>商品</th>
+                                                        <th style={{width: 108}}>首付金额(元)</th>
+                                                        <th style={{width: 80}}>分期数</th>
+                                                        <th style={{width: 128}}>信用支付(元)</th>
+                                                        <th style={{width: 123}}>订单状态</th>
+                                                        <th style={{width: 133}}>操作</th>
+                                                    </tr>
+                                                    </thead>
+
+                                                    {
+                                                        this.state.myOrderResponse.map((data)=> {
+                                                            return <tbody key={data.orderId}>
+                                                            <tr>
+                                                                <td style={{collapse: 6}} className="_order">
+                                                                    <div className="order-no">订单号:{data.orderNo}</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr className="bg_bd">
+                                                                <td>
+                                                                    <div className="goods-info">
+                                                                        <div className="goods-info-left">
+                                                                            <img src={data.goodsPic} width="100%"
+                                                                                 height="100%"/></div>
+                                                                        <div className="goods-info-right">
+                                                                            <li>{data.goodsName}</li>
+                                                                            <li>{data.hospital}</li>
+                                                                            <li>单价:￥{data.orderPrice}</li>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
-                                                            </td>
-                                                            <td>
-                                                                <li>{data.downpayAmount}</li>
-                                                            </td>
-                                                            <td>
-                                                                <li>{data.staging}</li>
-                                                            </td>
-                                                            <td>
-                                                                <li>{data.creditPay}</li>
-                                                            </td>
-                                                            <td>
-                                                                <li>{this.getType(data.orderStatus)}</li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>{data.downpayAmount}</li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>{data.staging}</li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>{data.creditPay}</li>
+                                                                </td>
+                                                                <td>
+                                                                    <li>{this.getType(data.orderStatus)}</li>
 
-                                                                <li className="color_999"
-                                                                    onClick={this.detail.bind(this, data.orderId)}>订单详情
-                                                                </li>
-                                                            </td>
-                                                            <td>
-                                                                {/*<li><a className="pay">上传知情同意书</a></li>*/}
+                                                                    <li className="color_999"
+                                                                        onClick={this.detail.bind(this, data.orderId)}>
+                                                                        订单详情
+                                                                    </li>
+                                                                </td>
+                                                                <td>
+                                                                    {/*<li><a className="pay">上传知情同意书</a></li>*/}
 
-                                                                <li className={data.orderStatus == '2'}>
-                                                                    {/*<a href="#" className="pay" style={{display:data.projectReviewStatus==0? 'inline':'none'}} onClick={this._uploadBtn.bind(this,data.orderId)}>上传知情同意书</a>*/}
+                                                                    <li className={data.orderStatus == '2'}>
+                                                                        {/*<a href="#" className="pay" style={{display:data.projectReviewStatus==0? 'inline':'none'}} onClick={this._uploadBtn.bind(this,data.orderId)}>上传知情同意书</a>*/}
 
-                                                                    <R_Upload projectReviewStatus={data.projectReviewStatus} orderId={data.orderId}/>
-
-
-                                                                    <a href="#" className=""
-                                                                       style={{display: data.projectReviewStatus == 1 ? 'inline' : 'none'}}>知情同意书待审核</a>
-
-                                                                    <a href="#" className=""
-                                                                       style={{display: data.projectReviewStatus == 3 ? 'inline' : 'none'}}>知情同意书审核不通过</a>
-
-                                                                    <a href="#" className=""
-                                                                       style={{display: data.projectReviewStatus == 2 ? 'inline' : 'none'}}>知情同意书审核通过</a>
-                                                                </li>
+                                                                        <R_Upload
+                                                                            projectReviewStatus={data.projectReviewStatus}
+                                                                            orderId={data.orderId}/>
 
 
-                                                                <li className={data.orderStatus == '3'&&data.isCanBuy==true}>
-                                                                    <a href={"goods-detail.html?goodsId=" + data.goodsId}
-                                                                       target="_blank">再去购买</a>
-                                                                </li>
-                                                                {/*<li className ={data.orderStatus == '3'}>*/}
-                                                                {/*<a href="my-evaluate.html">去评价</a>*/}
-                                                                {/*</li>*/}
+                                                                        <a href="#" className=""
+                                                                           style={{display: data.projectReviewStatus == 1 ? 'inline' : 'none'}}>知情同意书待审核</a>
+
+                                                                        <a href="#" className=""
+                                                                           style={{display: data.projectReviewStatus == 3 ? 'inline' : 'none'}}>知情同意书审核不通过</a>
+
+                                                                        <a href="#" className=""
+                                                                           style={{display: data.projectReviewStatus == 2 ? 'inline' : 'none'}}>知情同意书审核通过</a>
+                                                                    </li>
 
 
-                                                                <li className={ data.orderStatus == '4'&& data.isCanBy==true}>
-                                                                    <a href={"goods-detail.html?goodsId=" + data.goodsId}
-                                                                       target="_blank">重新购买</a>
-                                                                </li>
+                                                                    <li className={data.orderStatus == '3' && data.isCanBuy == true}>
+                                                                        <a href={"goods-detail.html?goodsId=" + data.goodsId}
+                                                                           target="_blank">再去购买</a>
+                                                                    </li>
+                                                                    {/*<li className ={data.orderStatus == '3'}>*/}
+                                                                    {/*<a href="my-evaluate.html">去评价</a>*/}
+                                                                    {/*</li>*/}
 
 
-                                                                <li className={ data.orderStatus == '1'}>
-                                                                    <a href="#" className="pay"
-                                                                       onClick={this.toPay.bind(this, data.orderId)}>去支付</a>
-                                                                </li>
-                                                                <li className={ data.orderStatus == '1'}>
-                                                                    <a href="#"
-                                                                       onClick={this.cancel_order.bind(this, data.orderId)}>取消订单</a>
-                                                                </li>
-                                                            </td>
-                                                        </tr>
-                                                        </tbody>
+                                                                    <li className={ data.orderStatus == '4' && data.isCanBy == true}>
+                                                                        <a href={"goods-detail.html?goodsId=" + data.goodsId}
+                                                                           target="_blank">重新购买</a>
+                                                                    </li>
 
 
-                                                    })
-                                                }
+                                                                    <li className={ data.orderStatus == '1'}>
+                                                                        <a href="#" className="pay"
+                                                                           onClick={this.toPay.bind(this, data.orderId)}>去支付</a>
+                                                                    </li>
 
-                                            </table>
+                                                                    <li className={ data.orderStatus == '1'}>
+                                                                        <a href="#"
+                                                                           onClick={this.cancel_order.bind(this, data.orderId)}>取消订单</a>
+                                                                    </li>
+                                                                </td>
+                                                            </tr>
+                                                            </tbody>
 
-                                        </div>
+
+                                                        })
+                                                    }
+
+                                                </table>
+
+                                            </div>
 
                                 }
 

@@ -12,4 +12,5 @@ function onLoad() {
             <R_ToolBar/>
         </div>
         , document.getElementById("content"));
+
 }

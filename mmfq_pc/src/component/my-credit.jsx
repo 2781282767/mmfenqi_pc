@@ -78,21 +78,21 @@ class RMy_credit extends React.Component{
                             <div className="pseudo">
                                 <ul>
                                     <li>
-                                        <p className="left">
+                                        <div className="left">
                                             <div>
                                                 <img src="../static/images/credit/credit_p.png" alt=""/>
                                             </div>
-                                        </p>
+                                        </div>
                                         <div className="right">
-                                            <p><img src="../static/images/credit/credit_t.png" alt=""/></p>
-                                            <p className="two-dimension">
-                                                <div><img src="../static/images/credit/gong.jpg" alt=""/></div>
+                                            <div><img src="../static/images/credit/credit_t.png" alt=""/></div>
+                                            <div className="two-dimension">
+                                                <div style={{paddingTop:0}}><img src="../static/images/credit/gong.jpg" alt=""/></div>
                                                 <div><img src="../static/images/credit/app.jpg" alt=""/></div>
-                                            </p>
-                                            <p className="two_btn">
+                                            </div>
+                                            <div className="two_btn">
                                                 <img src="../static/images/credit/credit_g.png" alt=""/>
                                                 <img src="../static/images/credit/app.png" alt=""/>
-                                            </p>
+                                            </div>
                                         </div>
                                     </li>
                                     <li style={{marginTop:'50px',marginLeft:'40px'}}>

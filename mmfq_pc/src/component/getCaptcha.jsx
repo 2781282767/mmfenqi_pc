@@ -23,7 +23,6 @@ class R_Capthca extends React.Component {
         };
     }
 
-
     check_phone(){
         if(this.state.telephone==''){
             this.setState({
@@ -35,10 +34,6 @@ class R_Capthca extends React.Component {
 
         return true;
     }
-
-
-
-
 
     handleClick() {
 
@@ -107,9 +102,6 @@ class R_Capthca extends React.Component {
     }
 
     render(){
-
-
-
         return (
             <span onClick={this.handleClick.bind(this)}
                   style={{display:'inline-block',backgroundColor:'#FD657A',height:45,width: 140,marginLeft:'12px',lineHeight:'45px',color: '#fff',textAlign:'center'}}>{this.state.text}</span>

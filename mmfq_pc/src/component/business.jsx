@@ -1,7 +1,7 @@
 /**
  * Created by ChinaHp on 2016/8/3.
  */
-'use strict'
+'use strict';
 class R_Business extends React.Component{
     render(){
         return (

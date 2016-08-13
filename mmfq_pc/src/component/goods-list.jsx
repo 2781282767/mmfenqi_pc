@@ -108,7 +108,7 @@ var Pagination = React.createClass({
             )
         }.bind(this));
         return (
-            <div>
+            <div style={{display:this.props.numberOfPages==0?'none':'block'}}>
                 {nodes}
                 <span>&nbsp;&nbsp;共{this.props.numberOfPages}页</span>
                 <span>&nbsp;&nbsp;转到&nbsp;&nbsp;</span>
@@ -446,7 +446,7 @@ var ProjectList = React.createClass({
                         <div style={this.styles.itemContent}>
                             <div>
                                 <a href={'goods-detail.html?goodsId='+item.goodsHerf} target="_Blank">
-                                    <span style={{fontSize: '18px'}}>{item.hotItemName}</span>
+                                    <span style={{fontSize: '18px',color:'#333'}}>{item.hotItemName}</span>
                                 </a>
                             </div>
                             <div style={{marginTop: '12px'}}>
@@ -612,10 +612,14 @@ var R_ProjectListPage = React.createClass({
         return null; //返回参数值
     },
 
+
+
     changeIndex(index){
         this.setQueryCondition('index', 'index', index);
         window.location.href = '#top';
     },
+
+
 
     render: function () {
         var list = this.state.list;

@@ -85,10 +85,14 @@
     float: left;
 }
 
-.pseudo .right p:first-child{
+.pseudo .right div:first-child{
     padding-top:50px ;
 }
 
 .pseudo .right .two_btn img{
     margin: 0 50px;
+}
+
+*{
+    box-sizing:content-box;
 }

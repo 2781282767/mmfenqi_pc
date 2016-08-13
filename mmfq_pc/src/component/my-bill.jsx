@@ -247,7 +247,7 @@ class R_MyBill extends React.Component{
                                         <div className="one">
                                             <div className="sub-content">
                                                 <ul>
-                                                    <li>距离还款日仅剩: <b>{json.to_repayment_date}</b></li>
+                                                    <li>距离还款日仅剩: <span style={{color:'#fc6578',fontSize:'12px'}}>{json.to_repayment_date}天</span></li>
                                                     <li>期数: <b>{json.staging}</b></li>
                                                     <li>到期时间: <b>{json.expiredTime}</b></li>
                                                     <li style={{display:json.repayment_status==1?'inline-block':'none'}}>还款状态: <b>{this.getType(json.repayment_status)}</b> </li>
@@ -257,7 +257,7 @@ class R_MyBill extends React.Component{
                                                 </ul>
                                                 <ul>
                                                     <li style={{width:'70px'}}>商品名称: <b></b>   </li>
-                                                    <li style={{width:'260px',paddingRight:'100px',color:'#7fa9d3'}}>{json.goodsName}</li>
+                                                    <li style={{width:'260px',paddingRight:'78px',color:'#7fa9d3'}}>{json.goodsName}</li>
                                                     <li>订单号: <b style={{color:'#7fa9d3'}}>{json.orderNo}</b></li>
                                                     <li>所属医院: <b>{json.hosName}</b> </li>
                                                 </ul>
@@ -280,7 +280,7 @@ class R_MyBill extends React.Component{
 
                                                     <p>本期账单应付: <span>￥{json.payAmount}</span> </p>
                                                 </div>
-                                                <div style={{color:'#9e9e9e',marginLeft:'20px'}}>
+                                                <div style={{color:'#9e9e9e'}}>
                                                     应付明细:{json.payAmount}+{json.overBreachAmount} (逾期费)
                                                 </div>
 
@@ -328,16 +328,25 @@ class R_MyBill extends React.Component{
                                                     }))}
                                                 </table>
                                             </div>
+                                            {
+                                                this.state.repaymentedBill=='1'?
+                                                    <div></div>
+                                                    :
+                                                    <div className="page_foot">
+                                                        <div></div>
+                                                        <div>共 <span>{json.orderSurplusNum}</span>个账单，本期还款总额: <span>￥{json.orderSurplusPrice}</span></div>
 
-                                            <div className="page_foot">
-                                                <div></div>
-                                                <div>共 <span>{json.orderSurplusNum}</span>个账单，本期还款总额: <span>￥{json.orderSurplusPrice}</span></div>
+                                                        <div className="pay_type">
+                                                            <div onClick={this.pay.bind(this,json.orderSurplusId)}>全部还清</div>
+                                                        </div>
 
-                                                <div className="pay_type">
-                                                    <div onClick={this.pay.bind(this,json.orderSurplusId)}>全部还清</div>
-                                                </div>
+                                                    </div>
 
-                                            </div>
+
+
+                                            }
+
+
                                         </div>
 
 

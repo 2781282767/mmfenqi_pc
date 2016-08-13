@@ -4,11 +4,13 @@
 'use strict';
 
 function onLoad() {
+
+    var search= CommonService.getUrlParams('search')
     "use strict";
     ReactDOM.render(
         <div style={{flexDirection:'column',display:'flex'}}>
             <R_Header/>
-            <R_Logo/>
+            <R_Logo search={search}/>
             <R_ChannelNav/>
             <R_ProjectListPage/>
             <R_Footer/>

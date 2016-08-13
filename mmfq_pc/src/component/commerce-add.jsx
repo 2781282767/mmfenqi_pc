@@ -15,6 +15,7 @@ class R_Commerce_add extends React.Component {
 
             name: '',
             phone: '',
+            patt_phone:false,
             hos: '',
             addr: '',
 
@@ -133,12 +134,13 @@ class R_Commerce_add extends React.Component {
         }
         if (!phone) {
             this.setState({
-                phone_error: '请填写手机号'
+                phone_error: '请填写手机号',
             })
         }else if(!patt.test(phone)){
             this.setState({
-                phone_error: '手机号格式错误'
-            })
+                phone_error: '手机号格式错误',
+            });
+            return
         } else {
             this.setState({
                 phone_error: '',
@@ -174,14 +176,15 @@ class R_Commerce_add extends React.Component {
 
         if(!addr) this.setState({addr_error:'请填写医院具体地址'});else this.setState({addr_error:''});
 
-        if(!msg) this.setState({msg_error:'请填写医院简介'});else this.setState({msg_error:''})
+        if(!msg) this.setState({msg_error:'请填写医院简介'});else this.setState({msg_error:''});
 
         if(!!name&&!!phone&&hos&&!!provinceId&&!!cityId&&!!id&&!!addr&&!!msg){
             HttpService.save({
                 url:'/pc/computer/addTenantCollaborationApplicationRecord',
                 data:{contacts:phone,telephone:phone,hospitalName:hos,provinceId:provinceId,cityId:cityId,regionId:id,address:addr,message:msg},
                 success:(res=>{
-                    window.location.href='index.html';
+                    alert('提交成功');
+                    window.location.href='business.html';
                 })
             })
         }

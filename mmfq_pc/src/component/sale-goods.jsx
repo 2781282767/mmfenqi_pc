@@ -31,31 +31,80 @@ class R_SaleGoods extends React.Component {
     }
 
     render() {
+        /*限时价*/
+        var style = {
+            display: 'inline-block',
+            width: 107
+        };
+        /*原价*/
+        var style2 = {
+            display: 'inline-block',
+            width: 103,
+            textAlign: 'right'
+        };
+
+        return <div className="activity-main">
 
 
-        return<div className="activity-main">
+            <div className="activity-content">
+
+                {
+                    this.state.sales.map(json=> {
 
 
-
-        <div className="activity-content">
-
-            {
-                this.state.sales.map(json=> {
+                        return <div className="one" key={json.hotItemName}>
+                            <ul>
 
 
-                    return <div className="one" key={json.hotItemName}>
-                        <ul>
+                                {
+                                    (Date.parse(new Date()) < json.teamEndTime) && ( Date.parse(new Date()) >= json.teamBeginTime)
+                                        ?
 
 
-                            {
-                                (Date.parse(new Date()) < json.teamEndTime) && ( Date.parse(new Date()) >= json.teamBeginTime)
-                                    ?
+                                        <li>
+                                            <a href={"goods-detail.html?goodsId=" + json.goodsHerf}>
+                                                <div className="top-img">
+                                                    {/*<img src="../static/images/goods/bit.png" alt=""/>*/}
+                                                </div>
+
+                                                <div className="img">
+                                                    <img src={json.goodsHerPic} alt=""/>
+                                                </div>
+                                                <div className="goods-info">
+                                                    <p>{json.hotItemName}</p>
+                                                    <div>仅剩:{json.lastNumber}</div>
+                                                    <p style={{padding: '10px'}}>
+                                                        <span style={style}>限时价: <b>￥{json.temporaryPrice}</b> </span>
+                                                        <del style={style2}>原价:￥{json.marketPrice}</del>
+
+                                                    </p>
+
+                                                    {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
+                                                    {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
+
+                                                    <div className="bg-img">
+                                                        <div className="month-pay">
+                                                            月供:￥{json.monthlyPrice}
+                                                            <spna>x{json.staging}</spna>
+                                                        </div>
 
 
-                                    <li>
-                                        <a href={"goods-detail.html?goodsId=" + json.goodsHerf}>
+                                                        <div style={{color: '#fff'}}>
+                                                            立即分期
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </a>
+                                        </li>
+
+                                        :
+
+                                        <li>
+
                                             <div className="top-img">
-                                                <img src="../static/images/goods/bit.png" alt=""/>
+                                                {/*<img src="../static/images/goods/bit.png" alt=""/>*/}
                                             </div>
 
                                             <div className="img">
@@ -65,9 +114,8 @@ class R_SaleGoods extends React.Component {
                                                 <p>{json.hotItemName}</p>
                                                 <div>仅剩:{json.lastNumber}</div>
                                                 <p style={{padding: '10px'}}>
-                                                        <span
-                                                            style={{marginRight: '30px'}}>限时价: <b>￥{json.temporaryPrice}</b> </span>
-                                                    <del>原价:￥{json.marketPrice}</del>
+                                                    <span style={style}>限时价: <b>￥{json.temporaryPrice}</b> </span>
+                                                    <del style={style2}>原价:￥{json.marketPrice}</del>
 
                                                 </p>
 
@@ -75,80 +123,30 @@ class R_SaleGoods extends React.Component {
                                                 {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
 
 
-
-
-                                                <div className="bg-img">
+                                                <div className="bg-img2">
                                                     <div className="month-pay">
                                                         月供:￥{json.monthlyPrice}
-                                                        <spna>x12</spna>
+                                                        <spna>x{json.staging}</spna>
                                                     </div>
 
-
-                                                    <div style={{color:'#fff'}}>
-
-                                                        立即分期
+                                                    <div className="active">
+                                                        马上开始
                                                     </div>
-
 
 
                                                 </div>
 
 
                                             </div>
-                                        </a>
-                                    </li>
 
-                                    :
+                                        </li>
+                                }
+                            </ul>
 
-                                    <li>
+                        </div>
 
-                                        <div className="top-img">
-                                            <img src="../static/images/goods/bit.png" alt=""/>
-                                        </div>
-
-                                        <div className="img">
-                                            <img src={json.goodsHerPic} alt=""/>
-                                        </div>
-                                        <div className="goods-info">
-                                            <p>{json.hotItemName}</p>
-                                            <div>仅剩:{json.lastNumber}</div>
-                                            <p style={{padding: '10px'}}>
-                                                        <span
-                                                            style={{marginRight: '30px'}}>限时价: <b>￥{json.temporaryPrice}</b> </span>
-                                                <del>原价:￥{json.marketPrice}</del>
-
-                                            </p>
-
-                                            {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
-                                            {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
-
-
-
-
-                                            <div className="bg-img2">
-                                                <div className="month-pay">
-                                                    月供:￥{json.monthlyPrice}
-                                                    <spna>x12</spna>
-                                                </div>
-
-                                                <div className="active">
-                                                    马上开始
-                                                </div>
-
-
-                                            </div>
-
-
-                                        </div>
-
-                                    </li>
-                            }
-                        </ul>
-
-                    </div>
-
-                })
-            }
+                    })
+                }
 
             </div>
         </div>

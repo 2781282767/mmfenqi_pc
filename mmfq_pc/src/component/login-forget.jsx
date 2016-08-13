@@ -30,7 +30,6 @@ class R_Forget extends React.Component {
         // this.getVerifyCode = this.getVerifyCode.bind(this);
     }
 
-
     handlePhone(e){
         var patt = this.props.phone_regex;        // 这里直接获取正则表达式
         var val = e.target.value;

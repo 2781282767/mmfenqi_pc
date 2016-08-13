@@ -4,8 +4,6 @@ class R_MyOrderDetail extends React.Component {
 
     constructor(props) {
         super(props);
-
-
         this.state = {
             isxingyong: false,
             orderId: '',
@@ -22,9 +20,6 @@ class R_MyOrderDetail extends React.Component {
             disabled: false,
             text: '获取验证码',
             timer: 60,
-
-
-
         }
     }
 
@@ -206,6 +201,9 @@ class R_MyOrderDetail extends React.Component {
 
     componentDidMount() {
 
+
+        this.handleClick();
+
         var c = new Date();
         c.setHours(c.getHours() + 1);
         var a = this.timeStamp2String(c);
@@ -217,7 +215,7 @@ class R_MyOrderDetail extends React.Component {
         let orderName = decodeURIComponent(this.getUrl('orderName'));
         let creditPay = this.getUrl('creditPay');
         let telephone = this.getUrl('telephone');
-        let starPhone = this.getUrl('starPhone');
+        let starPhone = this.getUrl('startPhone');
 
         if (downpayAmount == 0) {
             this.setState({
@@ -253,6 +251,8 @@ class R_MyOrderDetail extends React.Component {
         setInterval(function(){
             _this.check_order_pay_success(orderId)
         },1000)
+
+
     }
 
 
@@ -293,7 +293,7 @@ class R_MyOrderDetail extends React.Component {
             data: {orderId:orderId},
             dataType:'json',
             success:function (res) {
-                console.log(res)
+                console.log(res);
                 if(res.result=='0'){
                     if(res.data.isPaySuccess){
                         window.location.href='pay-success.html?orderId='+orderId+'';

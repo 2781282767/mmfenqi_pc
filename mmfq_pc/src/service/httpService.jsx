@@ -4,11 +4,9 @@
 'use strict';
 
 class HttpService {
-
     static query(config) {
         console.log();
         config = config || {};
-        console.log(config);
 
         var params = HttpService.formatParams(config.data);
 
@@ -20,7 +18,7 @@ class HttpService {
                     var res = JSON.parse(request.responseText);
                     console.log(res);
                     if (res.result == 0) {
-                        config.success && config.success(res.data);
+                            config.success && config.success(res.data);
                     } else if (res.result == 1013) {
                         window.localStorage.referer = window.location.href;
                         window.location.href = 'login.html'
@@ -48,7 +46,7 @@ class HttpService {
                 var status = request.status;
                 if (status >= 200 && status < 300) {
                     var res = JSON.parse(request.responseText);
-                    console.log(res);
+                    toast.toaster(res.msg);
                     if (res.result == 0) {
                         config.success && config.success(res.data);
                     } else if (res.result == 1013) {

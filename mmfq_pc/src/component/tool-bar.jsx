@@ -29,6 +29,7 @@ class R_ToolBar extends React.Component {
                     </div>
                 </div>
             </div>
+
         )
     }
 }

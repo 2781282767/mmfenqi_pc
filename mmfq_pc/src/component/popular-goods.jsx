@@ -49,7 +49,6 @@ class R_PopularGoods extends React.Component {
                             <i className="ft18">￥</i>
                             <i className="ft24">{item.monthlyPrice}x{item.staging}</i>
                         </span>
-                                <b className="info-lab return-lab">返现</b>
                             </p>
                         </div>
                     </a>

@@ -18,7 +18,6 @@ class R_ChannelNav extends React.Component {
             url: '/pc/computer/query_category_pc',
             dataType: 'json',
             success: (res)=> {
-                console.log(res);
                 if (res.result == 0) {
                     this.setState({category: res.data.categoryList})
                 }

@@ -14,10 +14,8 @@ class R_Goods extends React.Component {
             m: '',
             s: '',
             leftOrRight: '0',
-
         }
     }
-
 
     http(url, jsonData, cb) {
         $.ajax({
@@ -36,9 +34,8 @@ class R_Goods extends React.Component {
     }
 
     today_fast(start, end) {
-
         this.setState({
-            leftOrRight:'0'
+            leftOrRight: '0'
         });
 
 
@@ -49,7 +46,7 @@ class R_Goods extends React.Component {
         };
         this.http('/pc/computer/query_flashSaleGoodsList_pc', jsonData, function (res) {
 
-            console.log(res)
+            console.log(res);
             this.setState({
                 json: res.data.flashSaleGoodsItemList
             })
@@ -71,8 +68,6 @@ class R_Goods extends React.Component {
     }
 
     init(time) {
-
-
         var setCountDown = {
             timer: null,
             init: function (opt) {
@@ -128,8 +123,6 @@ class R_Goods extends React.Component {
                 }
             }
         };
-
-
         setCountDown.init({
             endtime: time,
             done: function (data) {
@@ -147,14 +140,10 @@ class R_Goods extends React.Component {
                 // window.location.reload()
             }
         })
-
-
     }
 
     compareTime() {
         var compareTime = new Date();
-
-
         if (compareTime.getHours() >= 10) {
             var before = compareTime.Format('yyyy-MM-dd 23:59:59');
             this.init(before);
@@ -174,22 +163,12 @@ class R_Goods extends React.Component {
 
     tm_fast() {
 
-
         this.setState({
-            leftOrRight:'1'
+            leftOrRight: '1'
         });
-
-
-
-
-        // $('.activity-title >div > div:nth-child(2)').eq(1).addClass('_cb').siblings('div').removeClass('_cb')
         var compareTime = new Date(), start, end, tm;
-
-
         tm = compareTime.setDate(compareTime.getDate() + 1);
-
         start = this.timeStamp2String(tm);
-
         end = this.timeStamp3String(tm);
         var jsonData = {
             index: '1',
@@ -197,8 +176,6 @@ class R_Goods extends React.Component {
             endTime: end
         };
         this.http('/pc/computer/query_flashSaleGoodsList_pc', jsonData, function (res) {
-
-            console.log(res)
             this.setState({
                 json: res.data.flashSaleGoodsItemList
             })
@@ -242,7 +219,6 @@ class R_Goods extends React.Component {
         return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     }
 
-
     componentDidMount() {
 
         Date.prototype.Format = function (fmt) { //author: meizz
@@ -260,167 +236,133 @@ class R_Goods extends React.Component {
                 if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
             return fmt;
         };
-
         var startTime = new Date(), start, end;
-
         console.log(startTime);
-
         var timestamp = Date.parse(new Date()),
             timestamp = timestamp / 1000;
-
-
         console.log("当前时间戳为：" + timestamp - 123);
-
-
         start = startTime.Format('yyyy-MM-dd 00:00:00');
         end = startTime.Format('yyyy-MM-dd 23:59:59');
         this.setState({
             t_startTime: start,
             t_endTime: end
         });
-
         this.today_fast(start, end);
-
         this.compareTime()
 
     }
 
     render() {
 
-
-
+        /*限时价*/
+        var style = {
+            display: 'inline-block',
+            width: 107
+        };
+        /*原价*/
+        var style2 = {
+            display: 'inline-block',
+            width: 103,
+            textAlign: 'right'
+        };
         return (
             <div className="goods-main">
                 <div className="main">
-                    <img src="../static/images/goods/xianshi_banner.jpg"/>
+                    <img src="../static/images/goods/banner.jpg"/>
                 </div>
                 <div className="goods-date">
                     <div className="_main">
                         <div className="left">
                             <div className="today-time">
-                                <div style={{background: 'none',marginRight:'0'}}>{this.state.text}</div>
+                                <div style={{background: 'none', marginRight: '0'}}>{this.state.text}</div>
 
-                                <div className="ooo" style={{color:'#fd657a'}}>{this.state.h}</div>
+                                <div className="ooo"
+                                     style={{color: '#fd657a', border: '1px solid #e4e4e4'}}>{this.state.h}</div>
                                 时
-                                <div className="ooo" style={{color:'#fd657a'}}>{this.state.m}</div>
+                                <div className="ooo"
+                                     style={{color: '#fd657a', border: '1px solid #e4e4e4'}}>{this.state.m}</div>
                                 分
-                                <div className="ooo">{this.state.s}</div>
+                                <div className="ooo" style={{border: '1px solid #e4e4e4'}}>{this.state.s}</div>
                             </div>
 
-                            <div style={{color:'#999'}}>每日10：00-24：00 开抢</div>
+                            <div style={{color: '#999'}}>每日10：00-24：00 开抢</div>
 
                         </div>
                         <div className="right">
                             <img src="../static/images/goods/three.png" alt=""/>
                         </div>
-
                     </div>
-
                 </div>
 
                 <div className="activity-main">
                     <div className="activity-title">
-
-
-
-
-                            {this.state.leftOrRight == 0 ?
-
-                                <div className="left"
-                                     onClick={this.today_fast.bind(this, this.state.t_startTime, this.state.t_endTime)}>
-
-                                    <div style={{height:'66px'}}>
-
-
-                                        <div className="t-content bg">
-                                            <div className="today-seckilling">
-                                                <p style={{color:'#fff'}}>今日秒杀</p>
-
-
-                                            </div>
+                        {this.state.leftOrRight == 0 ?
+                            <div className="left"
+                                 onClick={this.today_fast.bind(this, this.state.t_startTime, this.state.t_endTime)}>
+                                <div style={{height: '66px'}}>
+                                    <div className="t-content bg">
+                                        <div className="today-seckilling">
+                                            <p style={{color: '#fff'}}>今日秒杀</p>
 
                                         </div>
-
-                                        <div className="_cb"></div>
                                     </div>
-
-
-
+                                    <div className="_cb"></div>
                                 </div>
+                            </div>
+                            :
+                            <div className="left"
+                                 onClick={this.today_fast.bind(this, this.state.t_startTime, this.state.t_endTime)}>
 
-                                :
-
-                                <div className="left"
-                                     onClick={this.today_fast.bind(this, this.state.t_startTime, this.state.t_endTime)}>
-
-                                    <div style={{height:'66px'}}>
+                                <div style={{height: '66px'}}>
                                     <div className="t-content bd2">
                                         <div className="today-seckilling">
                                             <p style={{color: '#000'}}>今日秒杀</p>
-
-
                                         </div>
-
                                     </div>
-                                        </div>
-
-
                                 </div>
-                            }
+                            </div>
+                        }
+                        {this.state.leftOrRight == 1 ?
 
-
-                            {this.state.leftOrRight == 1 ?
-
-                                <div className="right" onClick={this.tm_fast.bind(this)}>
-                                    <div style={{height:'66px'}}>
+                            <div className="right" onClick={this.tm_fast.bind(this)}>
+                                <div style={{height: '66px'}}>
                                     <div className="tm bg">
                                         <div className="tm-seckilling">
-                                            <p style={{color:'#fff'}}>明日秒杀</p>
+                                            <p style={{color: '#fff'}}>明日秒杀</p>
 
                                         </div>
                                     </div>
-                                        <div className="_cb"></div>
-                                    </div>
-
+                                    <div className="_cb"></div>
                                 </div>
-
-                                :
-
-                                <div className="right" style={{width:'50%'}} onClick={this.tm_fast.bind(this)}>
-                                    <div style={{height:'66px'}}>
+                            </div>
+                            :
+                            <div className="right" style={{width: '50%'}} onClick={this.tm_fast.bind(this)}>
+                                <div style={{height: '66px'}}>
                                     <div className="tm bd">
                                         <div className="tm-seckilling">
                                             <p>明日秒杀</p>
 
                                         </div>
                                     </div>
-                                        <div></div>
-                                        </div>
-
+                                    <div></div>
                                 </div>
-                            }
 
-
+                            </div>
+                        }
                     </div>
                     <div className="activity-content">
 
                         {
                             this.state.json.map(json=> {
-
-
                                 return <div className="one" key={json.hotItemName}>
                                     <ul>
-
-
                                         {
                                             (Date.parse(new Date()) < json.teamEndTime) && ( Date.parse(new Date()) >= json.teamBeginTime)
                                                 ?
-
-
                                                 <li>
                                                     <a href={"goods-detail.html?goodsId=" + json.goodsHerf}>
                                                         <div className="top-img">
-                                                            <img src="../static/images/goods/bit.png" alt=""/>
+                                                            {/*<img src="../static/images/goods/bit.png" alt=""/>*/}
                                                         </div>
 
                                                         <div className="img">
@@ -430,35 +372,24 @@ class R_Goods extends React.Component {
                                                             <p>{json.hotItemName}</p>
                                                             <div>仅剩:{json.lastNumber}</div>
                                                             <p style={{padding: '10px'}}>
-                                                        <span
-                                                            style={{marginRight: '30px'}}>限时价: <b>￥{json.temporaryPrice}</b> </span>
-                                                                <del>原价:￥{json.marketPrice}</del>
+                                                                <span style={style}>限时价: <b>￥{json.temporaryPrice}</b> </span>
+                                                                <del style={style2}>原价:￥{json.marketPrice}</del>
 
                                                             </p>
 
                                                             {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
                                                             {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
 
-
-
-
                                                             <div className="bg-img">
                                                                 <div className="month-pay">
                                                                     月供:￥{json.monthlyPrice}
-                                                                    <spna>x12</spna>
+                                                                    <spna>x{json.staging}</spna>
                                                                 </div>
-
-
-                                                                <div style={{color:'#fff'}}>
+                                                                <div style={{color: '#fff'}}>
 
                                                                     立即分期
                                                                 </div>
-
-
-
                                                             </div>
-
-
                                                         </div>
                                                     </a>
                                                 </li>
@@ -467,76 +398,50 @@ class R_Goods extends React.Component {
 
                                                 <li>
 
-                                                        <div className="top-img">
-                                                            <img src="../static/images/goods/bit.png" alt=""/>
-                                                        </div>
+                                                    <div className="top-img">
+                                                        {/*<img src="../static/images/goods/bit.png" alt=""/>*/}
+                                                    </div>
+                                                    <div className="img">
+                                                        <img src={json.goodsHerPic} alt=""/>
+                                                    </div>
+                                                    <div className="goods-info">
+                                                        <p>{json.hotItemName}</p>
+                                                        <div>仅剩:{json.lastNumber}</div>
+                                                        <p style={{padding: '10px'}}>
+                                                            <span
+                                                                style={style}>限时价: <b>￥{json.temporaryPrice}</b> </span>
+                                                            <del style={style2}>原价:￥{json.marketPrice}</del>
 
-                                                        <div className="img">
-                                                            <img src={json.goodsHerPic} alt=""/>
-                                                        </div>
-                                                        <div className="goods-info">
-                                                            <p>{json.hotItemName}</p>
-                                                            <div>仅剩:{json.lastNumber}</div>
-                                                            <p style={{padding: '10px'}}>
-                                                        <span
-                                                            style={{marginRight: '30px'}}>限时价: <b>￥{json.temporaryPrice}</b> </span>
-                                                                <del>原价:￥{json.marketPrice}</del>
+                                                        </p>
 
-                                                            </p>
+                                                        {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
+                                                        {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
 
-                                                            {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
-                                                            {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
-
-
-
-
-                                                            <div className="bg-img2">
-                                                                <div className="month-pay">
-                                                                    月供:￥{json.monthlyPrice}
-                                                                    <spna>x12</spna>
-                                                                </div>
-
-                                                                <div className="active">
-                                                                    马上开始
-                                                                </div>
-
-
+                                                        <div className="bg-img2">
+                                                            <div className="month-pay">
+                                                                月供:￥{json.monthlyPrice}
+                                                                <spna>x{json.staging}</spna>
                                                             </div>
 
+                                                            <div className="active">
+                                                                马上开始
+                                                            </div>
 
                                                         </div>
 
+                                                    </div>
                                                 </li>
-
-
-
                                         }
-
-
-
-
-                                                </ul>
+                                    </ul>
 
                                 </div>
 
                             })
                         }
-
-
-
-
-
-
-
-
-
                     </div>
                 </div>
             </div>
         )
 
     }
-
-
-
 }

@@ -12,7 +12,6 @@ function onLoad() {
             <R_OrderEnsure/>
             <R_Footer/>
             <R_ToolBar/>
-
         </div>
         , document.getElementById("content"));
 }

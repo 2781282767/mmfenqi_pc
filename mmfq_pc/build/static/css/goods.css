@@ -40,7 +40,7 @@
 .goods-date .left .today-time > div{
     display: inline-block;
     padding: 8px;
-    margin-right: 10px;
+    margin: 0 5px;
     background: #FFFFff;
 
 }
@@ -215,9 +215,10 @@
 
 .goods-info p:first-child{
     color: #666666;
-    padding: 10px 10px 10px 10px;
+    padding: 10px 10px 0 10px;
     font-size: 14px;
-    min-height: 32px;
+    height: 42px;
+    overflow: hidden;
 }
 
 .goods-info >div{

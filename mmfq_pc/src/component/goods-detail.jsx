@@ -90,7 +90,7 @@ var DetailTabs = React.createClass({
                     <a href="#hos-detail" style={this.styles.link}>医院位置/介绍</a>
                 </div>
                 <div id="ser-detail">
-                    <div>
+                    <div style={{width: 640}}>
                         {this.props.goodsDetail}
                     </div>
                 </div>
@@ -110,7 +110,8 @@ var DetailTabs = React.createClass({
                         <iframe src={"/pcgoods/toBaiduMap/"+this.props.hospitalInfo.hosId} frameBorder='0'
                                 height='260px' width='660px' scrolling='no'></iframe>
                     </div>
-                    <div  style={{marginTop: '10px', marginBottom: '10px', marginLeft: '20px', marginRight: '20px', height: '1px', backgroundColor: '#f3f3f3'}}>
+                    <div
+                        style={{marginTop: '10px', marginBottom: '10px', marginLeft: '20px', marginRight: '20px', height: '1px', backgroundColor: '#f3f3f3'}}>
                         {this.props.hospitalInfo.introduction}
                     </div>
                     <div style={{height: '200px'}}></div>
@@ -1004,7 +1005,7 @@ var DetailOrder = React.createClass({
         }
     },
     createOrder(){
-        if (!this.goodsInfo){
+        if (!this.goodsInfo) {
             return
         }
         var orderData = {};
@@ -1051,10 +1052,10 @@ var DetailOrder = React.createClass({
 
     getFenqiObj(){
         var a = null;
-        if (!!this.goodsInfo){
+        if (!!this.goodsInfo) {
             var _this = this;
             this.goodsInfo.goodsStagingInfoResponse.fenqiObj.forEach(function (item) {
-                if (item.paymentId == _this.state.selectedStagingValue && item.shoufuId == _this.state.selectedFirstPayValue){
+                if (item.paymentId == _this.state.selectedStagingValue && item.shoufuId == _this.state.selectedFirstPayValue) {
                     a = item;
                 }
             })
@@ -1089,10 +1090,11 @@ var DetailOrder = React.createClass({
 
         var kinds = ['全切双眼皮', '全切双眼皮', '全切双眼皮', '全切双眼皮', '全切双眼皮'];
 
+        var obj = this.getFenqiObj();
+
         var mounts = [];
         var insurance = ['不购买'];
         var percent = [];
-        var images = ['', '', '', ''];
         var goodsDetail = '';
         var hospitalInfo = '';
         if (!!this.state.hospitalInfo) {
@@ -1118,12 +1120,18 @@ var DetailOrder = React.createClass({
         });
 
         if (!!this.state.goodsInfo.coverPic) {
-            images = this.state.goodsInfo.coverPic;
+            var images = this.state.goodsInfo.coverPic;
         }
 
         return (
             <div>
-                <DetailPreview images={images}/>
+                {
+                    !!images ?
+                        <DetailPreview images={images}/>
+                        :
+                        ''
+                }
+
                 <div style={{float: 'left', width: '495px'}}>
                     <span
                         style={{color: 'black', fontSize: '18px'}}>{!!this.state.goodsInfo.storeGoods ? this.state.goodsInfo.storeGoods.goodsName : ''}</span>
@@ -1139,7 +1147,9 @@ var DetailOrder = React.createClass({
                         <div style={{border:'1px dashed #FF6980', marginLeft: '12px'}}></div>
                         <div style={{height: '8px'}}></div>
                         <div>
+
                             <span style={{paddingLeft: '12px',fontWeight:'bold',fontSize:'18px'}}>选择规格</span>
+
                             <ReactSku cxt={this} types={!!this.state.goodsTypes ? this.state.goodsTypes : []}
                                       items={this.state.goodsItems}/>
                         </div>
@@ -1193,9 +1203,15 @@ var DetailOrder = React.createClass({
                                     ''
                             }
 
+                            <div style={{margin: '15px 0'}}>
+                                <span style={{paddingLeft: 14}}>首付金额  <span style={{color:'rgb(255, 105, 128)'}}>￥{!!obj ? obj.shoufu : ''}</span></span>
+                                <span style={{paddingLeft: 14}}>月付 <span style={{color:'rgb(255, 105, 128)'}}>{!!obj ? obj.yuefu : ''}</span></span>
+                            </div>
+
                         </div>
 
                         <div style={{height: '12px'}}></div>
+
                         <div>
                             <input type='button' onClick={this.createOrder}
                                    value="立即分期"
@@ -1204,6 +1220,7 @@ var DetailOrder = React.createClass({
                                        height: '48px',
                                        fontSize: '18px',
                                        backgroundColor: '#FF6980',
+                                       fontFamily: 'Microsoft Yahei',
                                        color: 'white'}}/>
                         </div>
                     </div>

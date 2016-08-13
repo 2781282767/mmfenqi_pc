@@ -3,7 +3,7 @@
 class R_Combo extends React.Component {
 
     constructor(){
-        super()
+        super();
         this.state={
             data:[],
             goodsMapList:[],
@@ -41,7 +41,7 @@ class R_Combo extends React.Component {
 
         this.http('/pc/computer/query_netRedPack_pc', '', function (res) {
 
-            console.log(res)
+            console.log(res);
 
             this.setState({
                 data:res.data.orderList,
@@ -55,13 +55,9 @@ class R_Combo extends React.Component {
                 item11:res.data.goodsMapList[1].netRedGoodsItem,
                 item22:res.data.goodsMapList[2].netRedGoodsItem,
 
-
-
                 goodsId0:res.data.goodsMapList[0].goodsId,
                 goodsId1:res.data.goodsMapList[1].goodsId,
                 goodsId2:res.data.goodsMapList[2].goodsId,
-
-
 
             })
 
@@ -80,29 +76,29 @@ class R_Combo extends React.Component {
         var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
         return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     }
-    componentDidMount(){
+    componentWillMount(){
         this.combo();
     }
     render() {
-
-        var goodsMapList=this.state.goodsMapList;
-
-
-
-        for(var i=0;i<goodsMapList.length;i++){
-
-        }
-
-        console.log(this.state.item0);
-        console.log(this.state.item1);
-        console.log(this.state.item2);
 
         var goodsId0=this.state.goodsId0;
         var goodsId1=this.state.goodsId1;
         var goodsId2=this.state.goodsId2;
 
+        var str=0;
+        var str1=0;
+        var str2=0;
+        this.state.item0.forEach(function (item,index) {
 
+             str+=(item.presentPrice)
+        });
+        this.state.item1.forEach(function (item,index) {
 
+             str1+=(item.presentPrice)
+        });this.state.item2.forEach(function (item,index) {
+
+             str2+=(item.presentPrice)
+        });
         return (
             <div className="combo-main">
                 <div className="main">
@@ -126,7 +122,7 @@ class R_Combo extends React.Component {
                                                     <div className="babyInfo">
                                                         <div className="infoTit1">{json.hotItemName}</div>
                                                         <div className="infoTit2">
-                                                            <div><b className="pink"><i>￥</i><span>{json.presentPrice}</span></b></div>
+                                                            <div className="pink"><span style={{fontSize:18}}>￥</span><span>{json.presentPrice}</span></div>
 
                                                             <div><del>市场价￥{json.marketPrice}</del></div>
 
@@ -144,11 +140,14 @@ class R_Combo extends React.Component {
 
                             <div className="one-pay">
                                 <div style={{width:'150px'}}>
-                                    <del>￥{this.state.item00.marketPrice}</del>
+                                    <del>￥{this.state.item00.presentPrice}</del>
                                 </div>
-                                <div style={{width:'382px'}}>美眉专享价: <i>￥</i> <b>{this.state.item00.monthlyPrice}</b> <span>x{this.state.item00.staging}</span></div>
+                                <div style={{width:'382px'}}><b><span style={{fontSize:20}}>美眉专享价:
+                                </span> <i>￥</i> <span style={{fontSize:35}}>{this.state.item00.monthlyPrice}</span> <span>x{this.state.item00.staging}</span></b></div>
 
-                                <div><a href={"goods-detail.html?goodsId=" + goodsId0}><div className="_btn btn_btn" style={{padding:'9px'}}>立刻分期</div></a></div>
+                                <div style={{verticalAlign:'top'}}><a href={"goods-detail.html?goodsId=" + goodsId0}><div className="_btn btn_btn" style={{padding:'11px 6px'}}>立即分期</div></a></div>
+
+                                {/*<div style={{fontSize:20}}>5555</div>*/}
 
                             </div>
                         </div>
@@ -177,7 +176,7 @@ class R_Combo extends React.Component {
                                                     <div className="babyInfo">
                                                         <div className="infoTit1">{json.hotItemName}</div>
                                                         <div className="infoTit2">
-                                                            <div><b className="pink"><i>￥</i><span>{json.presentPrice}</span></b></div>
+                                                            <div className="pink"><span style={{fontSize:18}}>￥</span><span>{json.presentPrice}</span></div>
 
                                                             <div><del>市场价￥{json.marketPrice}</del></div>
 
@@ -195,11 +194,12 @@ class R_Combo extends React.Component {
 
                             <div className="one-pay">
                                 <div style={{width:'150px'}}>
-                                    <del>￥{this.state.item11.marketPrice}</del>
+                                    <del>￥{this.state.item11.presentPrice}</del>
                                 </div>
-                                <div style={{width:'377px'}}>美眉专享价: <i>￥</i> <b>{this.state.item11.monthlyPrice}</b> <span>x{this.state.item11.staging}</span></div>
+                                <div style={{width:'382px'}}><b><span style={{fontSize:20}}>美眉专享价:
+                                </span> <i>￥</i> <span style={{fontSize:35}}>{this.state.item11.monthlyPrice}</span> <span>x{this.state.item11.staging}</span></b></div>
 
-                                <a href={"goods-detail.html?goodsId=" + goodsId1}><div className="_btn btn_btn" style={{padding:'9px'}}>立刻分期</div></a>
+                                <div style={{verticalAlign:'top'}}><a href={"goods-detail.html?goodsId=" + goodsId1}><div className="_btn btn_btn" style={{padding:'11px 6px'}}>立即分期</div></a></div>
 
                             </div>
                         </div>
@@ -228,7 +228,7 @@ class R_Combo extends React.Component {
                                                         <div className="babyInfo">
                                                             <div className="infoTit1">{json.hotItemName}</div>
                                                             <div className="infoTit2">
-                                                                <div><b className="pink"><i>￥</i><span>{json.presentPrice}</span></b></div>
+                                                                <div className="pink"><span style={{fontSize:18}}>￥</span><span>{json.presentPrice}</span></div>
 
                                                                 <div><del>市场价￥{json.marketPrice}</del></div>
 
@@ -245,11 +245,11 @@ class R_Combo extends React.Component {
 
                             <div className="one-pay">
                                 <div style={{width:'150px'}}>
-                                    <del>￥{this.state.item22.marketPrice}</del>
+                                    <del>￥{this.state.item22.presentPrice}</del>
                                 </div>
-                                <div style={{width:'377px'}}>美眉专享价: <i>￥</i> <b>{this.state.item22.monthlyPrice}</b> <span>x{this.state.item22.staging}</span></div>
-
-                                <a href={"goods-detail.html?goodsId=" + goodsId2}><div className="_btn btn_btn" style={{padding:'9px'}}>立刻分期</div></a>
+                                <div style={{width:'382px'}}><b><span style={{fontSize:20}}>美眉专享价:
+                                </span><i>￥</i> <span style={{fontSize:35}}>{this.state.item22.monthlyPrice}</span> <span>x{this.state.item22.staging}</span></b></div>
+                                <div style={{verticalAlign:'top'}}><a href={"goods-detail.html?goodsId=" + goodsId2}><div className="_btn btn_btn" style={{padding:'11px 6px'}}>立即分期</div></a></div>
 
                             </div>
                         </div>

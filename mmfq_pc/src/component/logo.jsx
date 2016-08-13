@@ -8,7 +8,7 @@ class R_Logo extends React.Component {
     constructor(props){
         super(props);
         this.state = {
-            searchValue: ''
+            searchValue: this.props.search
         }
     }
 
@@ -23,6 +23,15 @@ class R_Logo extends React.Component {
         console.log(this.state.searchValue);
         window.open('goods-list.html?search='+this.state.searchValue);
     }
+    componentWillReceiveProps(){
+        setTimeout( function () {
+            this.setState({
+                searchValue:this.props.search
+            })
+        }.bind(this),0)
+
+    }
+
 
     render() {
         return (
@@ -36,10 +45,9 @@ class R_Logo extends React.Component {
                     <div className="ym-search">
                         <div className="search-box">
                             <form  onSubmit={this.search.bind(this)}>
-                                <input id="searchWd" style={{color:'black'}} className="search" data-type="tao" onChange={this.changeValue.bind(this)} value={this.state.searchValue}
-                                       type="text" placeholder="轮廓锁的美 还能巨补水"/>
+                                <input id="searchWd" style={{color:'black'}} className="search" data-type="tao" onChange={this.changeValue.bind(this)} value={this.state.searchValue} type="text" placeholder="轮廓锁的美 还能巨补水"/>
                                 <input value="搜索" type="submit" id="YMsearch"
-                                       className="search-btn"/>
+                                       className="search-btn" />
                             </form>
                         </div>
                         <ul className="search-list">

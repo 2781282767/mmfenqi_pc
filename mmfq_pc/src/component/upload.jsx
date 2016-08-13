@@ -20,9 +20,7 @@ class R_Upload extends React.Component {
             id: id
         });
 
-
         $('#_layer'+this.props.orderId).css('display', 'block');
-
 
         this.look_informed_consent(id);
 
@@ -31,7 +29,6 @@ class R_Upload extends React.Component {
     /*删除知情同意书*/
 
     delete_img(i) {
-
 
         console.log(i);
         var jsonData = {

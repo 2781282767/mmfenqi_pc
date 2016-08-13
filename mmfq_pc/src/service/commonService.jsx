@@ -203,5 +203,4 @@ class CommonService {
         if (r != null) return unescape(decodeURI(r[2]));
         return null; //返回参数值
     }
-
 }

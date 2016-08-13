@@ -268,7 +268,7 @@ class R_About extends React.Component {
                                             <div style={{marginTop: 30}}>联系人 ：肖小姐</div>
                                         </div>
                                         <div style={{width: '49%',float:'left'}}>
-                                            <img src="../static/images/about/map.jpg" style={{width: '100%'}}/>
+                                            <iframe src="../static/map/address.html" width="439" height="293" frameborder="0" scrolling="no"></iframe>
                                         </div>
                                     </div>
                                 </div>
