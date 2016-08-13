@@ -12,7 +12,7 @@ export class R_c extends React.Component{
     render(){
         return (
             <div>
-                <div>asb</div><div>ssssss</div><div>asb</div><div>333333</div>
+                <div>hellow,</div>
             </div>
         )
     }
