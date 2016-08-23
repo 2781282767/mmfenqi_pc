@@ -2,24 +2,27 @@
 import React, {Component} from 'react';
 import ReactDOM, {render} from 'react-dom';
 
-class componentName extends Component {
-    render() {
+import './css/app.less'
+
+
+
+
+export class R_c extends React.Component{
+    constructor(){
+        super()
+    }
+    render(){
         return (
             <div>
-                
-                
+                <div>22233</div>
+                <div><img src='/dist/start.png' alt=""/></div>
             </div>
-        );
+        )
     }
 }
-
-export default componentName;
-
-
 ReactDOM.render(
     <div>
-        <componentName/>
+        <R_c/>
     </div>
-    ,document.getElementById("content")
-)
+    , document.getElementById("content"));
 
