@@ -12,7 +12,7 @@ export class R_c extends React.Component{
     render(){
         return (
             <div>
-                <div>hellow,888889992222</div>
+                <div>hellow,88888999222266666663333111113333ww333ww6666633</div>
             </div>
         )
     }

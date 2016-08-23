@@ -45,11 +45,7 @@ webpackJsonp([0,2],[
 	    _createClass(componentName, [{
 	        key: 'render',
 	        value: function render() {
-	            return _react2.default.createElement(
-	                'div',
-	                null,
-	                '44444'
-	            );
+	            return _react2.default.createElement('div', null);
 	        }
 	    }]);
 
