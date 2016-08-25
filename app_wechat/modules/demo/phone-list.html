@@ -1,0 +1,41 @@
+
+<div>
+
+    <form ng-submit="goToSearch()">
+        <input type="search" placeholder="i'm the input to search">
+        <input type="submit" value="toSearch">
+    </form>
+    <div>父scope：
+        <div>Say：{{value}}</div>
+    </div>
+    <div>隔离scope：
+        <div isolated-directive action="click()"></div>
+    </div>
+
+    <input type="text" ng-model="value" isolated-directive /><br />
+
+    <button con countable='aaaa'></button>
+    <span>Got {{aaaa}} clicks!</span>
+
+    <div class="result">
+        <div>父scope：
+            <div>Say：{{name}}改变父scope的name：<input type="text" value="" ng-model="name"/></div>
+        </div>
+        <div>隔离scope：
+            <div sss name="{{name}}"></div>
+        </div>
+        <div>隔离scope（不使用{{name}}）：
+            <div sss name="name"></div>
+        </div>
+    </div>
+    <abc time='time' config="config"></abc>
+    <div ng-click="action()"><img src="modules/bill/img/weihao.png" height="17" style="vertical-align: middle; float: right;"></div>
+
+
+
+
+    <ul repeater="20">
+        <li>222</li>
+    </ul>
+
+</div>
