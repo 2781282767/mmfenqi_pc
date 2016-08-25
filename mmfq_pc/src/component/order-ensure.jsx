@@ -9,9 +9,9 @@ class R_OrderEnsure extends React.Component {
         this.order = JSON.parse(window.localStorage.orderData);
         console.log(this.order);
     }
-
     createOrderConfirm() {
         var orderData = this.order;
+
         $.ajax({
             type: 'post',
             url: '/pc/computer/user_goods_confirm_order',
@@ -33,8 +33,12 @@ class R_OrderEnsure extends React.Component {
                 } else if (res.result == 1013) {
                     window.location.href = 'login.html';
                     window.localStorage.referer = window.location.href;
+                } else if(res.result== 6) {
+
+                    alert(res.msg);
+                    window.location.href = 'my-credit.html';
                 } else {
-                    alert(res.msg)
+                    alert(res.msg);
                 }
             }
         });

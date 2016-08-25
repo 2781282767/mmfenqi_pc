@@ -9,7 +9,7 @@ function onLoad() {
             <R_Nav/>
             <div style={{borderTop: '2px solid #ff5370'}}>
                 <div className="wrap">
-                    <R_MyBar/>
+                    <R_MyBar status="collect"/>
                     <R_MyCollects/>
                     <div style={{overflow:'hidden'}}></div>
                 </div>

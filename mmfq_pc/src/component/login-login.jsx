@@ -157,7 +157,37 @@ class R_Login extends React.Component {
 
 
     goToLogin(phone, pwd,e) {
+
         e.preventDefault();
+
+
+        function getSessionId(){
+            var c_name = 'JSESSIONID';
+            if(document.cookie.length>0){
+                var c_start=document.cookie.indexOf(c_name + "=");
+                if(c_start!=-1){
+                    c_start=c_start + c_name.length+1;
+                    var c_end=document.cookie.indexOf(";",c_start);
+                    if(c_end==-1) c_end=document.cookie.length;
+                    return unescape(document.cookie.substring(c_start,c_end));
+                }
+            }
+        }
+
+        (function() {
+            var _fmOpt = {
+                partner: 'mmfenqi',
+                appName: 'mmfenqi_web',
+                token:  getSessionId()       };
+            var cimg = new Image(1,1);
+            cimg.onload = function() {
+                _fmOpt.imgLoaded = true;
+            };
+            cimg.src = "https://fp.fraudmetrix.cn/fp/clear.png?partnerCode=mmfenqi&appName=mmfenqi_web&tokenId=" + _fmOpt.token;
+            var fm = document.createElement('script'); fm.type = 'text/javascript'; fm.async = true;
+            fm.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'static.fraudmetrix.cn/fm.js?ver=0.1&t=' + (new Date().getTime()/3600000).toFixed(0);
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(fm, s);
+        })();
 
         if (!this.check_phone(phone) || !this.check_pwd(pwd)) {
             return;
@@ -172,7 +202,14 @@ class R_Login extends React.Component {
                 if (data.result == 0) {
                     $.cookie('name', data.data.baseUserDomain.user.telphone, {expires: 30, path: "/"});
 
-                    window.location.href = 'index.html';
+
+                    if(localStorage.getItem("referer")){
+                        window.location.href=localStorage.getItem("referer")
+                    }else{
+
+                        window.location.href = 'index.html';
+                    }
+
 
                 } else {
                     this.setState({

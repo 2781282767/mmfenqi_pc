@@ -140,6 +140,23 @@ var DetailPreview = React.createClass({
     firstIndex: -1,
     lastIndex: -1,
 
+
+    saveCollect:function (collectionId,collectionType) {
+        HttpService.save({
+            url:'/pc/computer/products_collection',
+            data:{collectionId:collectionId,collectionType:collectionType},
+            success:function (res) {
+                console.log(res);
+            }
+        })
+    },
+    onClickCt:function () {
+        this.saveCollect(CommonService.getUrlParams('goodsId'),'1')
+    },
+
+
+
+
     onChange: function (index) {
         return function () {
             this.setState({currentIndex: index});
@@ -159,6 +176,7 @@ var DetailPreview = React.createClass({
     },
 
     render: function () {
+
 
         if (this.firstIndex == -1 && this.lastIndex == -1) {
             this.firstIndex = 0;
@@ -236,6 +254,15 @@ var DetailPreview = React.createClass({
                 </div>
                 <div
                     style={{width: '438px', height: '1px', margin: '0 auto', marginTop: '25px', backgroundColor: '#f3f3f3'}}></div>
+
+
+                <div style={{width:'438px',margin:'0 22px',padding:'14px 0'}}>
+                    <span><img src="../static/images/goods-detail/true.png" alt="" style={{verticalAlign:'middle'}}/></span>
+                    <span style={{verticalAlign:'middle',color:'#999',margin:'0 10px',fontSize:16}}>{this.props.hospital}</span>
+                    <span style={{verticalAlign:'middle',color:'#e6e6e6'}}>|</span>
+                    <span onClick={this.onClickCt}><img src="../static/images/goods-detail/collect.png" alt="" style={{verticalAlign:'middle',margin:'0 10px',cursor: 'pointer'}}/></span>
+                    <span onClick={this.onClickCt} style={{verticalAlign:'middle',color:'#999', cursor: 'pointer'}}>收藏</span>
+                </div>
             </div>
         )
     }
@@ -243,13 +270,11 @@ var DetailPreview = React.createClass({
 
 
 var Selector = React.createClass({
-
     getDefaultProps: function () {
         return {
             items: []
         }
     },
-
     getInitialState: function () {
         return {
             currentIndex: (!!this.props.currentIndex ? this.props.currentIndex : 0)
@@ -904,9 +929,19 @@ var DetailOrder = React.createClass({
             goodsInfo: {},
             goodsTypes: [],
             goodsItems: [],
+            goodsTeam: {},
             isInsuranceBuy: true,
             selectedFirstPayNo: 0,
-            selectedStagingNo: 0
+            selectedStagingNo: 0,
+            hospital:[],
+            json: [],
+            t_startTime: '',
+            t_endTime: '',
+            text: '',
+            h: '',
+            m: '',
+            s: '',
+            leftOrRight: '0'
         }
     },
 
@@ -942,7 +977,9 @@ var DetailOrder = React.createClass({
                         goodsInfo: res.data.goodsStagingInfoResponse.goodsDetailsInfo,
                         goodsTypes: res.data.combinationTypeInfoList,
                         goodsItems: res.data.goodsCombinationExtMap,
-                        goodsDetail: res.data.goodsStagingInfoResponse.goodsDetailsInfo.goodsDetailUrlList
+                        goodsDetail: res.data.goodsStagingInfoResponse.goodsDetailsInfo.goodsDetailUrlList,
+                        goodsTeam: res.data.goodsTeam,
+                        hospital:res.data.goodsStagingInfoResponse.hospital.hosName
                     })
                 }
             }
@@ -950,7 +987,37 @@ var DetailOrder = React.createClass({
     },
 
     componentWillMount(){
-        this.getGoodsInfo()
+        this.getGoodsInfo();
+
+        Date.prototype.Format = function (fmt) { //author: meizz
+            var o = {
+                "M+": this.getMonth() + 1, //月份
+                "d+": this.getDate(), //日
+                "h+": this.getHours(), //小时
+                "m+": this.getMinutes(), //分
+                "s+": this.getSeconds(), //秒
+                "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+                "S": this.getMilliseconds() //毫秒
+            };
+            if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+            for (var k in o)
+                if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            return fmt;
+        };
+        var startTime = new Date(), start, end;
+        console.log(startTime);
+        var timestamp = Date.parse(new Date()),
+            timestamp = timestamp / 1000;
+        console.log("当前时间戳为：" + timestamp - 123);
+        start = startTime.Format('yyyy-MM-dd 00:00:00');
+        end = startTime.Format('yyyy-MM-dd 23:59:59');
+        this.setState({
+            t_startTime: start,
+            t_endTime: end
+        });
+        this.today_fast(start, end);
+        this.compareTime()
+
     },
     getQueryString(name)
     {
@@ -1063,6 +1130,178 @@ var DetailOrder = React.createClass({
         return a
     },
 
+    //倒计时相关
+
+    today_fast(start, end) {
+        this.setState({
+            leftOrRight: '0'
+        });
+
+
+        var jsonData = {
+            index: '1',
+            startTime: start,
+            endTime: end
+        };
+
+    },
+
+    more() {
+        var jsonData = {
+            index: '2',
+            startTime: this.state.t_startTime,
+            endTime: this.state.t_endTime
+        };
+    },
+
+    init(time) {
+        var setCountDown = {
+            timer: null,
+            init: function (opt) {
+                var _this = this;
+                this.setShowTime(opt.endtime, opt.done);
+                this.timer = setInterval(function () {
+                    _this.setShowTime(opt.endtime, opt.done, opt.callback)
+                }, 1000);
+
+                console.log(this.timer)
+            },
+            getCountdown: function (time) {
+                var curShowTimeSecondsVal = this.getSecond(time) - this.getSecond();
+                if (curShowTimeSecondsVal < 0) return [0, '00', '00', '00'];
+                // console.log(curShowTimeSecondsVal)
+                // 剩余秒数
+                var curShowTimeSeconds = parseInt(curShowTimeSecondsVal % 60);
+                // 计算剩余天数
+                var curShowTimeDays = parseInt(curShowTimeSecondsVal / 3600 / 24);
+                // 计算剩余小时
+                var curShowTimeHours = parseInt((curShowTimeSecondsVal / 3600)) - curShowTimeDays * 24;
+                // 计算剩余分钟
+                var curShowTimeMinutes = parseInt((curShowTimeSecondsVal - parseInt((curShowTimeSecondsVal / 3600)) * 3600) / 60);
+                curShowTimeHours = curShowTimeHours > 9 ? curShowTimeHours : '0' + curShowTimeHours;
+                curShowTimeSeconds = curShowTimeSeconds > 9 ? curShowTimeSeconds : '0' + curShowTimeSeconds;
+                curShowTimeMinutes = curShowTimeMinutes > 9 ? curShowTimeMinutes : '0' + curShowTimeMinutes;
+                return [curShowTimeDays, curShowTimeHours, curShowTimeMinutes, curShowTimeSeconds];
+            },
+            getSecond: function (times) {
+                if (times) {
+                    var year = parseInt(times.slice(0, 4)),
+                        month = parseInt(times.match(/-\d*/gi)[0].replace('-', '') - 1),
+                        day = parseInt(times.match(/-\d*/gi)[1].replace('-', '')),
+                        hour = parseInt(times.match(/\d*:/)[0].replace(':', '')),
+                        minute = parseInt(times.match(/:\d*/)[0].replace(':', ''));
+                    return (new Date(year, month, day, hour, minute, 0)).getTime() / 1000;
+                }
+                return (new Date()).getTime() / 1000;
+            },
+            setShowTime: function (endtime, done, callback) {
+                var _this = this;
+                // var oSetTime = document.getElementById('time');
+                var day = this.getCountdown(endtime)[0],
+                    hour = this.getCountdown(endtime)[1],
+                    minute = this.getCountdown(endtime)[2],
+                    second = this.getCountdown(endtime)[3];
+                done([day, hour, minute, second]);
+                // oSetTime.innerHTML = '剩余时间：'+day+'天'+hour+'小时'+minute+'分'+second+'秒';
+                if (day == 0 && hour == '00' && minute == '00' && second == '00') {
+                    clearInterval(_this.timer);
+                    _this.timer = null;
+                    if (callback) callback();
+                }
+            }
+        };
+        setCountDown.init({
+            endtime: time,
+            done: function (data) {
+
+                // console.log(data)
+
+                this.setState({
+                    h: data[1],
+                    m: data[2],
+                    s: data[3]
+                });
+
+            }.bind(this),
+            callback: function () {
+                // window.location.reload()
+            }
+        })
+    },
+
+    compareTime() {
+        var compareTime = new Date();
+        if (compareTime.getHours() >= 10) {
+            var before = compareTime.Format('yyyy-MM-dd 23:59:59');
+            this.init(before);
+            this.setState({
+                text: '距离结束仅剩'
+            });
+
+            return;
+        }
+
+        var after = compareTime.Format('yyyy-MM-dd 10:00:00');
+        this.init(after);
+        this.setState({
+            text: '距离开始仅剩'
+        });
+    },
+
+    tm_fast() {
+
+        this.setState({
+            leftOrRight: '1'
+        });
+        var compareTime = new Date(), start, end, tm;
+        tm = compareTime.setDate(compareTime.getDate() + 1);
+        start = this.timeStamp2String(tm);
+        end = this.timeStamp3String(tm);
+        var jsonData = {
+            index: '1',
+            startTime: start,
+            endTime: end
+        };
+    },
+
+
+    timeStamp2String(time) {
+        var datetime = new Date();
+        datetime.setTime(time);
+        var year = datetime.getFullYear();
+        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+        var hour = '00';
+        var minute = '00';
+        var second = '00';
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+    },
+    timeStamp3String(time) {
+        var datetime = new Date();
+        datetime.setTime(time);
+        var year = datetime.getFullYear();
+        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+        var hour = '23';
+        var minute = '59';
+        var second = '59';
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+    },
+
+    timeStamp4String(time) {
+        var datetime = new Date();
+        datetime.setTime(time);
+        var year = datetime.getFullYear();
+        var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
+        var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
+        var hour = datetime.getHours() < 10 ? "0" + datetime.getHours() : datetime.getHours();
+        var minute = datetime.getMinutes() < 10 ? "0" + datetime.getMinutes() : datetime.getMinutes();
+        var second = datetime.getSeconds() < 10 ? "0" + datetime.getSeconds() : datetime.getSeconds();
+        return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
+    },
+
+    //倒计时相关
+
     render: function () {
 
         var hotItems = [
@@ -1123,11 +1362,17 @@ var DetailOrder = React.createClass({
             var images = this.state.goodsInfo.coverPic;
         }
 
+        var a = 10;
+
+        setInterval(() => {
+            a--;
+        }, 1000);
+
         return (
             <div>
                 {
                     !!images ?
-                        <DetailPreview images={images}/>
+                        <DetailPreview images={images} hospital={this.state.hospital}/>
                         :
                         ''
                 }
@@ -1137,14 +1382,41 @@ var DetailOrder = React.createClass({
                         style={{color: 'black', fontSize: '18px'}}>{!!this.state.goodsInfo.storeGoods ? this.state.goodsInfo.storeGoods.goodsName : ''}</span>
                     <div style={{height: '16px'}}></div>
                     <div style={{color: '#646464'}}>
-                        <span style={{paddingLeft: '12px'}}>商品价格</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span
-                            style={{color: '#FF6980', fontSize: '30px'}}>￥{!!this.state.goodsInfo.storeGoods ? (!!this.state.orderPrice ? this.state.orderPrice : this.state.goodsInfo.storeGoods.shopPrice) : ''}</span>
-                        <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
-                        <span
-                            style={{textDecoration: 'line-through'}}>￥{!!this.state.goodsInfo.storeGoods ? this.state.goodsInfo.storeGoods.marketPrice : ''}</span>
-                        <div style={{border:'1px dashed #FF6980', marginLeft: '12px'}}></div>
+
+                        {
+                            !!this.state.goodsTeam ?
+                                <div style={{height: 40,backgroundColor:'#FD657A',color:'#fff',lineHeight:'40px'}}>
+                                    <span style={{paddingLeft: '12px',lineHeight:'40px'}}>限时抢购</span>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                             <span
+                                 style={{color: '#FFF', fontSize: '30px',lineHeight:'40px'}}>￥{!!this.state.goodsInfo.storeGoods ? (!!this.state.orderPrice ? this.state.orderPrice : this.state.goodsInfo.storeGoods.shopPrice) : ''}</span>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                                    <span style={{paddingRight: 10}}>{this.state.text}</span>
+                            <span
+                                style={{display:'inline-block',height: '22px',padding: '3px',borderRadius:'3px',backgroundColor: '#fff',color:'#FD657A',fontSize:'18px', lineHeight:'27px' }}>{this.state.h}</span>
+                                    <span style={{padding: 5}}>:</span>
+                                    <span
+                                        style={{display:'inline-block',height: '22px',padding: '3px',borderRadius:'3px',backgroundColor: '#fff',color:'#FD657A',fontSize:'18px', lineHeight:'27px' }}>{this.state.m}</span>
+                                    <span style={{padding: 5}}>:</span>
+                                    <span
+                                        style={{display:'inline-block',height: '22px',padding: '3px',borderRadius:'3px',backgroundColor: '#fff',color:'#FD657A',fontSize:'18px', lineHeight:'27px' }}>{this.state.s}</span>
+                                    <span style={{fontSize: 20 ,padding: 10}}>|</span>
+                                    <span style={{paddingLeft: 10}}>已购买:{this.state.goodsTeam.alreadyBuyProple}</span>
+                                </div>
+                                :
+                                <div>
+                                    <span style={{paddingLeft: '12px'}}>商品价格</span>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span
+                                style={{color: '#FF6980', fontSize: '30px'}}>￥{!!this.state.goodsInfo.storeGoods ? (!!this.state.orderPrice ? this.state.orderPrice : this.state.goodsInfo.storeGoods.shopPrice) : ''}</span>
+                                    <span>&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                            <span
+                                style={{textDecoration: 'line-through'}}>￥{!!this.state.goodsInfo.storeGoods ? this.state.goodsInfo.storeGoods.marketPrice : ''}</span>
+                                    <div style={{border:'1px dashed #FF6980', marginLeft: '12px'}}></div>
+                                </div>
+                        }
+
+
                         <div style={{height: '8px'}}></div>
                         <div>
 
@@ -1161,6 +1433,7 @@ var DetailOrder = React.createClass({
                             </div>
                             <Selector cxt={this} callbackSetValue={this.setInsurance} items={insurance}
                                       currentIndex="1"/>
+                            <a href="../static/pdf/insuranceIntroduction.pdf" target="_blank"><img src="../static/images/goods-detail/question.png" style={{marginLeft: 10}}/></a>
                             <div style={{clear:'both'}}></div>
                         </div>
 
@@ -1203,9 +1476,11 @@ var DetailOrder = React.createClass({
                                     ''
                             }
 
-                            <div style={{margin: '15px 0'}}>
-                                <span style={{paddingLeft: 14}}>首付金额  <span style={{color:'rgb(255, 105, 128)'}}>￥{!!obj ? obj.shoufu : ''}</span></span>
-                                <span style={{paddingLeft: 14}}>月付 <span style={{color:'rgb(255, 105, 128)'}}>{!!obj ? obj.yuefu : ''}</span></span>
+                            <div style={{padding: '15px 0'}}>
+                                <span style={{paddingLeft: 14}}>首付金额  <span
+                                    style={{color:'rgb(255, 105, 128)'}}>￥{!!obj ? obj.shoufu : ''}</span></span>
+                                <span style={{paddingLeft: 14}}>月付 <span
+                                    style={{color:'rgb(255, 105, 128)'}}>{!!obj ? obj.yuefu : ''}</span></span>
                             </div>
 
                         </div>
@@ -1221,7 +1496,8 @@ var DetailOrder = React.createClass({
                                        fontSize: '18px',
                                        backgroundColor: '#FF6980',
                                        fontFamily: 'Microsoft Yahei',
-                                       color: 'white'}}/>
+                                       color: 'white',
+                                       cursor: 'pointer'}}/>
                         </div>
                     </div>
                 </div>

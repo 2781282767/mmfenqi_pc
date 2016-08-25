@@ -8,7 +8,7 @@ function onLoad() {
             <R_Banner/>
             <R_IndexTitle firstTitle="限时" secondTitle="秒杀" subTitle="Time spike" href={"goods.html"} time="1"/>
             <R_SaleGoods/>
-            <R_IndexTitle firstTitle="合作" secondTitle="医院" subTitle="Cooperative Hospital"/>
+            <R_IndexTitle firstTitle="合作" secondTitle="医院" subTitle="Cooperative Hospital" href={"collaborate-hos.html"} />
             <R_IndexHospital/>
             <R_IndexTitle firstTitle="人气" secondTitle="项目" subTitle="Popular Project" isRed="true" href={"goods-list.html"}/>
             <R_PopularGoods/>

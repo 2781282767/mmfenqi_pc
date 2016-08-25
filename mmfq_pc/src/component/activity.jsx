@@ -4,7 +4,6 @@
 'use strict';
 
 class R_ActivityComponet extends React.Component {
-
     constructor(props) {
         super(props);
         this.state = {
@@ -19,10 +18,10 @@ class R_ActivityComponet extends React.Component {
     }
 
     render() {
-        var goods = this.props.goods.map((item, index)=>{
+        var goods = this.props.goods.map((item, index)=> {
 
-            if (!this.state.isShowMore){
-                if (index > 5){
+            if (!this.state.isShowMore) {
+                if (index > 5) {
                     return
                 }
             }
@@ -69,16 +68,12 @@ class R_ActivityComponet extends React.Component {
         return (
             <div>
                 <div style={{paddingTop: 48,marginBottom: 48,textAlign: 'center'}}>
-                    <img src={this.props.banner} style={{width:'938px',height: 'auto'}}/>
-                </div>
-                <div style={{width: 1130,margin: 'auto'}}>
-                    <div style={{marginBottom: 20,textAlign: 'left'}}>
-                        <div
-                            style={{width: 210,height: 58,lineHeight:'55px',backgroundColor: '#0199c5',borderRadius:'10px',textAlign: 'center',fontSize:'40px',color: '#fff'}}>
-                            {this.props.title}
-                        </div>
+                    <div>
+                        <img src={this.props.title} style={{width:'938px',height: 'auto'}}/>
                     </div>
-                    <div style={{marginBottom: 20,backgroundColor:'#0199c5',width: 1128,height: 2}}>
+                    <div>
+                        <img src={this.props.banner}
+                             style={{width:'938px',height: 'auto',marginTop:60,marginBottom:20}}/>
                     </div>
                 </div>
                 <div style={{width: 1172,margin: 'auto',minHeight: 40}}>
@@ -135,6 +130,7 @@ class R_Activity extends React.Component {
             url: '/appinterface/queryGoods_activity_number',
             data: {index: !!CommonService.getUrlParams('index') ? CommonService.getUrlParams('index') : 1},
             success: res=> {
+                console.log(res);
                 this.setState({
                     banner: res.activityThemeImage,
                     goods: res.activityTempInfoList
@@ -148,7 +144,8 @@ class R_Activity extends React.Component {
         var columns = this.state.goods.map(function (item, index) {
             return (
                 <div className="wrap" style={{background:item.backgroundColor,minHeight:50}} key={index}>
-                    <R_ActivityComponet title={item.moduleTitle} banner={item.moduleIcon} goods={item.goodsItemList}/>
+                    <R_ActivityComponet title={item.moduleTitlePic} banner={item.moduleIcon} goods={item.goodsItemList}
+                                        buttonColor={item.buttonColor}/>
                 </div>
             )
         });

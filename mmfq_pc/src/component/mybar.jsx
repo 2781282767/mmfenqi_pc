@@ -119,6 +119,20 @@ class R_MyBar extends React.Component {
                             </a>
                     }
                     {
+                        this.props.status == 'collect' ?
+                            <a
+                                style={{height:48,lineHeight:'48px',borderBottom:'1px solid #222',backgroundColor:'#3e3e3e',display:'block',color:'#a7a7a7'}}>
+                                <span>我的收藏</span>
+                                <div style={{backgroundColor: '#3a3a3a',height:1}}></div>
+                            </a>
+                            :
+                            <a href="my-collects.html"
+                               style={{height:48,lineHeight:'48px',borderBottom:'1px solid #222',display:'block',color:'#a7a7a7'}}>
+                                <span>我的收藏</span>
+                                <div style={{backgroundColor: '#3a3a3a',height:1}}></div>
+                            </a>
+                    }
+                    {
                         this.props.status == 'setting' ?
                             <a
                                 style={{height:48,lineHeight:'48px',borderBottom:'1px solid #222',backgroundColor:'#3e3e3e',display:'block',color:'#a7a7a7'}}>
@@ -132,6 +146,7 @@ class R_MyBar extends React.Component {
                                 <div style={{backgroundColor: '#3a3a3a',height:1}}></div>
                             </a>
                     }
+
                 </div>
             </div>
         )

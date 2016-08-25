@@ -111,6 +111,7 @@ class R_ChannelNav extends React.Component {
                                 <a href="combo.html"> 网红套餐</a>}
                             {this.props.now == 3 ? <a href="goods.html" className='now'> 限时秒杀</a> :
                                 <a href="goods.html"> 限时秒杀</a>}
+                            {this.props.now == 4 ? <a href="hospital-active.html" className='now'> 院长主刀</a>:<a href="hospital-active.html" > 院长主刀</a>}
                         </div>
                     </div>
                 </div>

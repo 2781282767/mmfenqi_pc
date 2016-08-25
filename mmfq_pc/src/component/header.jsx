@@ -9,6 +9,7 @@ class R_Header extends React.Component {
             dataType: 'json'
         });
         window.location.href = 'index.html';
+        localStorage.clear();
     }
 
     render() {

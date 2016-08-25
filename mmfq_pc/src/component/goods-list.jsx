@@ -348,12 +348,12 @@ var ProjectList = React.createClass({
         },
         body: {
             width: '100%',
-            padding: '12px'
         },
         item: {
             height: '118px',
             position: 'relative',
-            cursor: 'pointer'
+            cursor: 'pointer',
+            margin:12
         },
         itemImg: {
             width: '181px',
@@ -392,7 +392,7 @@ var ProjectList = React.createClass({
     },
 
     render: function () {
-        var items = ['销量', '价格','最新上架'];
+        var items = ['销量最高', '价格最低','最新上架','销量最低','价格最高'];
         var tabs = items.map(function (item, index) {
             var style = {
                 borderRight: '1px solid #e3e3e3',
@@ -431,7 +431,7 @@ var ProjectList = React.createClass({
         var nodes = items.map(function (item, index) {
             if (index % 2 == 1) {
                 return (
-                    <div style={{backgroundColor: '#f3f3f3', height: '1px', marginTop: '12px', marginBottom: '12px'}}
+                    <div style={{backgroundColor: '#f3f3f3', height: '1px', margin:12}}
                          key={index}></div>
                 );
             } else {
@@ -496,7 +496,6 @@ var R_ProjectListPage = React.createClass({
         },
 
         filter: {
-            width: '100%',
             border: '1px solid #f3f3f3',
             padding: '12px',
             marginTop: '12px'

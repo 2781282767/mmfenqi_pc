@@ -122,7 +122,11 @@ class R_Combo extends React.Component {
                                                     <div className="babyInfo">
                                                         <div className="infoTit1">{json.hotItemName}</div>
                                                         <div className="infoTit2">
-                                                            <div className="pink"><span style={{fontSize:18}}>￥</span><span>{json.presentPrice}</span></div>
+                                                            <div className="pink">
+                                                                <span style={{fontSize:18}}>￥</span>
+                                                                <span>{json.monthlyPrice}</span>
+                                                                <span style={{fontSize:18}}>x{json.staging}</span>
+                                                            </div>
 
                                                             <div><del>市场价￥{json.marketPrice}</del></div>
 
@@ -140,7 +144,7 @@ class R_Combo extends React.Component {
 
                             <div className="one-pay">
                                 <div style={{width:'150px'}}>
-                                    <del>￥{this.state.item00.presentPrice}</del>
+                                    <del>￥{this.state.item00.marketPrice}</del>
                                 </div>
                                 <div style={{width:'382px'}}><b><span style={{fontSize:20}}>美眉专享价:
                                 </span> <i>￥</i> <span style={{fontSize:35}}>{this.state.item00.monthlyPrice}</span> <span>x{this.state.item00.staging}</span></b></div>
@@ -176,7 +180,11 @@ class R_Combo extends React.Component {
                                                     <div className="babyInfo">
                                                         <div className="infoTit1">{json.hotItemName}</div>
                                                         <div className="infoTit2">
-                                                            <div className="pink"><span style={{fontSize:18}}>￥</span><span>{json.presentPrice}</span></div>
+                                                            <div className="pink">
+                                                                <span style={{fontSize:18}}>￥</span>
+                                                                <span>{json.monthlyPrice}</span>
+                                                                <span style={{fontSize:18}}>x{json.staging}</span>
+                                                            </div>
 
                                                             <div><del>市场价￥{json.marketPrice}</del></div>
 
@@ -194,7 +202,7 @@ class R_Combo extends React.Component {
 
                             <div className="one-pay">
                                 <div style={{width:'150px'}}>
-                                    <del>￥{this.state.item11.presentPrice}</del>
+                                    <del>￥{this.state.item11.marketPrice}</del>
                                 </div>
                                 <div style={{width:'382px'}}><b><span style={{fontSize:20}}>美眉专享价:
                                 </span> <i>￥</i> <span style={{fontSize:35}}>{this.state.item11.monthlyPrice}</span> <span>x{this.state.item11.staging}</span></b></div>
@@ -212,31 +220,26 @@ class R_Combo extends React.Component {
                         <div className="main-content">
                             <div className="goods-info goods3-info">
                                 <ul>
-
-
-
                                     {
                                         this.state.item2.map(json=>{
                                             return<li style={{margin:0,marginBottom:'20px'}} key={json.goodsId}>
                                                     <div className="infoImg">
-
                                                         <img src={json.goodsHerPic} alt=""/>
-
-
                                                     </div>
-
                                                         <div className="babyInfo">
                                                             <div className="infoTit1">{json.hotItemName}</div>
                                                             <div className="infoTit2">
-                                                                <div className="pink"><span style={{fontSize:18}}>￥</span><span>{json.presentPrice}</span></div>
+                                                                <div className="pink">
+                                                                    <span style={{fontSize:18}}>￥</span>
+                                                                    <span>{json.monthlyPrice}</span>
+                                                                    <span style={{fontSize:18}}>x{json.staging}</span>
+                                                                </div>
 
                                                                 <div><del>市场价￥{json.marketPrice}</del></div>
 
                                                             </div>
                                                         </div>
-
                                                 </li>
-
                                         })
                                     }
 
@@ -245,7 +248,7 @@ class R_Combo extends React.Component {
 
                             <div className="one-pay">
                                 <div style={{width:'150px'}}>
-                                    <del>￥{this.state.item22.presentPrice}</del>
+                                    <del>￥{this.state.item22.marketPrice}</del>
                                 </div>
                                 <div style={{width:'382px'}}><b><span style={{fontSize:20}}>美眉专享价:
                                 </span><i>￥</i> <span style={{fontSize:35}}>{this.state.item22.monthlyPrice}</span> <span>x{this.state.item22.staging}</span></b></div>

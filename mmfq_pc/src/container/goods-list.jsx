@@ -5,7 +5,7 @@
 
 function onLoad() {
 
-    var search= CommonService.getUrlParams('search')
+    var search= CommonService.getUrlParams('search');
     "use strict";
     ReactDOM.render(
         <div style={{flexDirection:'column',display:'flex'}}>

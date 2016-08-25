@@ -2,7 +2,6 @@
  * Created by sheldon on 2016/7/11.
  */
 'use strict';
-
 class R_SaleGoods extends React.Component {
 
     constructor(props) {

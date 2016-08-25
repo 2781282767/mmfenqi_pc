@@ -7,7 +7,6 @@ class HttpService {
     static query(config) {
         console.log();
         config = config || {};
-
         var params = HttpService.formatParams(config.data);
 
         var request = new XMLHttpRequest();
@@ -16,9 +15,8 @@ class HttpService {
                 var status = request.status;
                 if (status >= 200 && status < 300) {
                     var res = JSON.parse(request.responseText);
-                    console.log(res);
                     if (res.result == 0) {
-                            config.success && config.success(res.data);
+                        config.success && config.success(res.data);
                     } else if (res.result == 1013) {
                         window.localStorage.referer = window.location.href;
                         window.location.href = 'login.html'
@@ -40,7 +38,6 @@ class HttpService {
         var params = HttpService.formatParams(config.data);
 
         var request = new XMLHttpRequest();
-
         request.onreadystatechange = function () {
             if (request.readyState == 4) {
                 var status = request.status;

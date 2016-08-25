@@ -33,7 +33,7 @@ class R_Footer extends React.Component {
                                 <dl style={{marginLeft:70}}>
                                     <dt style={{marginLeft: -6}}>商务合作</dt>
                                     <dd><a href="business.html">合作方式</a></dd>
-                                    <dd style={{marginTop: 40}}><a>合作医院</a></dd>
+                                    <dd style={{marginTop: 40}}><a href="collaborate-hos.html">合作医院</a></dd>
                                 </dl>
                             </div>
                             <div className="ym-public">
@@ -57,9 +57,16 @@ class R_Footer extends React.Component {
                         <img src="../static/images/common/partners.jpg"/>
                     </div>
                     <div className="wrap" style={{textAlign: 'center',color:'#999'}}>
-                        2015-2016 © 杭州优呗网络科技有限公司 浙ICP备15021758号
+                        <div style={{width:'300px',margin:'0 auto',padding:'10px 0'}}>
+                            <a target="_blank" href=""
+                               style={{display:'inline-block',textDecoration:'none',height:20,lineHeight:20}}>
+                                <img src="../static/images/common/icon-police.png" style={{float:'left'}}/>
+                                <p style={{float:'left',height:'20px',lineHeight:'20px',margin: '0px 0px 0px 5px',color:'#939393'}}>
+                                    浙公网安备 33010602005229号</p>
+                            </a>
+                        </div>
                     </div>
-                    <div className="wrap" style={{textAlign: 'center',marginTop:20,color:'#999',paddingBottom:40}}>
+                    <div className="wrap" style={{textAlign: 'center',marginTop:10,color:'#999',paddingBottom:40}}>
                         客服电话: 400-711-8898 (工作时间:9点-21点)
                     </div>
                 </div>

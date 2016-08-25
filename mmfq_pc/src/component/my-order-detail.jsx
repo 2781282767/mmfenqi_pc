@@ -110,8 +110,7 @@ class R_MyOrderDetail extends React.Component {
         return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     }
 
-
-    handleClick() {
+    handleClick(telephone) {
 
 
         if (this.state.disabled) {
@@ -124,7 +123,7 @@ class R_MyOrderDetail extends React.Component {
             dataType: "json",
             data: {
                 smsFmtId: 'payCredit',
-                telephone: this.state.telephone
+                telephone: this.state.telephone||telephone
             },
             error: function () {
             },
@@ -175,9 +174,17 @@ class R_MyOrderDetail extends React.Component {
             dataType: 'json',
 
             success: function (data) {
-                this.setState({
-                    url: '/pc/weixin/getQRCode?codeUrl=' + data.data.resPar.codeUrl + ''
-                })
+
+                if(data.result=='0'){
+
+                    this.setState({
+                        url: '/pc/weixin/getQRCode?codeUrl=' + data.data.resPar.codeUrl + ''
+                    })
+                }else{
+                    alert(data.msg)
+
+                }
+
 
             }.bind(this)
 
@@ -199,23 +206,21 @@ class R_MyOrderDetail extends React.Component {
     }
 
 
+
     componentDidMount() {
-
-
-        this.handleClick();
-
         var c = new Date();
         c.setHours(c.getHours() + 1);
         var a = this.timeStamp2String(c);
         this.init(a);
 
-        let orderId = this.getUrl('orderId');
-        let orderNo = this.getUrl('orderNo');
-        let downpayAmount = this.getUrl('downpayAmount');
-        let orderName = decodeURIComponent(this.getUrl('orderName'));
-        let creditPay = this.getUrl('creditPay');
-        let telephone = this.getUrl('telephone');
-        let starPhone = this.getUrl('startPhone');
+        var orderId = this.getUrl('orderId');
+        var orderNo = this.getUrl('orderNo');
+        var downpayAmount = this.getUrl('downpayAmount');
+        var orderName = decodeURIComponent(this.getUrl('orderName'));
+        var creditPay = this.getUrl('creditPay');
+        var telephone = this.getUrl('telephone');
+        var starPhone = this.getUrl('startPhone');
+
 
         if (downpayAmount == 0) {
             this.setState({
@@ -227,7 +232,9 @@ class R_MyOrderDetail extends React.Component {
                 creditPay: creditPay,
                 telephone:telephone,
                 starPhone:starPhone
-            })
+            });
+            this.handleClick(telephone);
+
         } else {
 
 
@@ -278,6 +285,8 @@ class R_MyOrderDetail extends React.Component {
 
                 if (res.result == '0') {
                     window.location.href = 'my-order.html';
+                }else{
+                    alert(res.msg)
                 }
 
             }
@@ -399,7 +408,7 @@ class R_MyOrderDetail extends React.Component {
                         <div className="knowing-agreeing">
                             <img src="../static/images/kown.png" alt=""/>
 
-                            <div>确认支付即表示您已阅读并同意 <span>分期服务协议</span>、<span>借款协议</span></div>
+                            <div>确认支付即表示您已阅读并同意 <a href="../static/pdf/stagingServiceContact.pdf" target="_blank">《分期服务协议》</a>、<a href="../static/pdf/loanContact.pdf" target="_blank">《借款协议》</a>、<a href="../static/pdf/insuranceContact.pdf" target="_blank">《医疗意外保险》</a></div>
                         </div>
 
                     </div>

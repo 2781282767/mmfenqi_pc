@@ -24,7 +24,7 @@ class R_MyDetail extends React.Component {
             data: jsonData,
             dataType: 'json',
             success: (data)=> {
-                console.log(data)
+                console.log(data);
 
                 this.setState({
                     data: data,
@@ -217,7 +217,6 @@ class R_MyDetail extends React.Component {
                                     {/*</div>*/}
                                 </div>
                             </div>
-
 
                             {/*已支付*/}
                             <div className="order-info-content"
@@ -419,6 +418,42 @@ class R_MyDetail extends React.Component {
                                         <td>
                                             <li style={{color: '#fc657a', fontSize: '20px'}}>{json.monthPay}</li>
                                             <li style={{color: '#999999'}}>(每月包含服务费{json.monthServicePay}元)</li>
+                                        </td>
+                                    </tr>
+
+
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div className="information">保险 <span  style={{color:'#FF647a'}}>(貌美如花意外险)</span></div>
+                            <div>
+                                <table cellSpacing="0" cellPadding="0">
+                                    <thead>
+                                    <tr>
+                                        <th className="width-20">被保险人</th>
+                                        <th className="width-20">身份证</th>
+                                        <th className="width-20">保费(元)</th>
+                                        <th className="width-20">保单号</th>
+                                        <th className="width-20">保险时间</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr className="bg_bd">
+                                        <td>
+                                            <li>{json.insuredName}</li>
+                                        </td>
+                                        <td>
+                                            <li>{json.insuredIdentitycode}</li>
+                                        </td>
+                                        <td>
+                                            <li>{json.insuranceOrderAmount}</li>
+                                        </td>
+                                        <td>
+                                            <li>{json.insuranceNumber}</li>
+                                        </td>
+                                        <td>
+                                            <li>{json.insuranceBeginDate}</li>
                                         </td>
                                     </tr>
 

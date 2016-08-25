@@ -17,7 +17,9 @@ class R_Coll_hos extends React.Component {
             index:1,//总页码
             currentPage:1,
 
-            cityId:''
+            cityId:'',
+
+            proid:''
         };
         this.removeConditionListers = []
     }
@@ -102,10 +104,11 @@ class R_Coll_hos extends React.Component {
         // this.setState({currentIndex: -1});
     }
 
-    handleClick(index,id, name) {
+    handleClick(index,id, name,proid) {
         this.setState({
             currentIndex: index,
-            cityId:id
+            cityId:id,
+            proid:proid
         });
 
         this.onFilterChange(id, name);
@@ -138,16 +141,17 @@ class R_Coll_hos extends React.Component {
     }
 
     render() {
+        console.log(this.state.ProvinceList);
         var HospitalList = this.state.hospitalList;
         var nodes = this.state.ProvinceList.map(function (item, index) {
             var style = { cursor: 'pointer'};
 
-            // if (index2 == this.state.currentIndex) {
-            //     style = {
-            //         cursor: 'pointer',
-            //         color: 'rgb(233,113,125)'
-            //     };
-            // }
+            if (item.proid == this.state.proid) {
+                style = {
+                    cursor: 'pointer',
+                    color: 'rgb(233,113,125)'
+                };
+            }
 
             return (
                 <li key={index}>
@@ -157,7 +161,7 @@ class R_Coll_hos extends React.Component {
                             this.state.ProvinceList[index].cityList.map(function (item, index2) {
 
                                 return (
-                                    <span  key={index2} onClick={this.handleClick.bind(this,index2, item.cityid, item.cityname)}>{item.cityname}</span>
+                                    <span  key={index2} onClick={this.handleClick.bind(this,index2, item.cityid, item.cityname,item.proid)}>{item.cityname}</span>
                                 )
                             }.bind(this))
                         }
@@ -185,6 +189,7 @@ class R_Coll_hos extends React.Component {
                             </ul>
                         </div>
                     </div>
+
                     <Conditions cxt={this} conditions={this.state.conditions}/>
                 </div>
                 <div className="provinceContent">
@@ -268,7 +273,7 @@ class Conditions extends React.Component {
         }.bind(this));
 
         return (
-            <div style={{margin: '37px 20px',borderTop:'1px solid #ddd',padding:'10px 0'}}>
+            <div style={{margin: '20px',borderTop:'1px solid #ddd',padding:'7px  0',clear:'both'}}>
                 <div style={{width: '5%', float: 'left'}}>
                     <span
                         style={{
@@ -281,7 +286,7 @@ class Conditions extends React.Component {
                 <div style={{width: '95%', float: 'left'}}>
                     {nodes}
                 </div>
-                <div style={{clear: 'both'}}></div>
+                {/*<div style={{clear: 'both'}}></div>*/}
             </div>
         )
     }

@@ -37,20 +37,23 @@ class R_MyBill extends React.Component{
                 url: '/pc/computer/repaymented_bill',
                 dataType: 'json',
                 success: (data)=> {
+                    console.log('+++');
+                    console.log(data);
                     if (data.result == 1013){
                         window.location.href = 'login.html'
+                    }else if(data.result==0){
+                        console.log(data);
+                        this.setState({
+                            data: data.data,
+                            myBillResponse: data.data.myBillResponse,
+                            length:data.data.billNum,
+                        })
                     }
-                    console.log(data);
-                    this.setState({
-                        data: data.data,
-                        myBillResponse: data.data.myBillResponse,
-                        length:data.data.billNum,
 
-                    })
                 }
 
             });
-            return;
+
         }else if(periodType=='0'){//本期
             let jsonData = {
                 periodType:periodType,
@@ -64,15 +67,16 @@ class R_MyBill extends React.Component{
                     console.log(data);
                     if (data.result == 1013){
                         window.location.href = 'login.html'
+                    }else if(data.result==0){
+                        this.setState({
+                            data: data.data,
+                            myBillResponse: data.data.myBillResponse,
+                            length:data.data.billNum,
+                            isOpen:'1',
+                            repaymentedBill:'0'
+                        })
                     }
-                    this.setState({
-                        data: data.data,
-                        myBillResponse: data.data.myBillResponse,
-                        length:data.data.billNum,
 
-                        isOpen:'1',
-                        repaymentedBill:'0'
-                    })
                 }
 
             })
@@ -89,15 +93,17 @@ class R_MyBill extends React.Component{
                     console.log(data);
                     if (data.result == 1013){
                         window.location.href = 'login.html'
-                    }
-                    this.setState({
-                        data: data.data,
-                        myBillResponse: data.data.myBillResponse,
-                        length:data.data.billNum,
+                    }else if(data.result==0){
+                        this.setState({
+                            data: data.data,
+                            myBillResponse: data.data.myBillResponse,
+                            length:data.data.billNum,
 
-                        isOpen:'0',
-                        repaymentedBill:'0'
-                    })
+                            isOpen:'0',
+                            repaymentedBill:'0'
+                        })
+                    }
+
                 }
 
             })
@@ -177,10 +183,10 @@ class R_MyBill extends React.Component{
     }
     render(){
         var data=this.state.data;
-        var length=this.state.length
-        console.log(length)
+        var length=this.state.length;
+        console.log(length);
 
-        console.log(this.state.myBillResponse)
+        console.log(this.state.myBillResponse);
 
         return (
             <div style={{float:'left'}}>

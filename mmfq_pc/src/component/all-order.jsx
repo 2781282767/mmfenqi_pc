@@ -164,7 +164,8 @@ class R_AllOrder extends React.Component {
                 if (res.result == '0') {
                     console.log(res);
 
-                    window.open('my-order-detail.html?orderId=' + res.data.orderInfo.orderId + '&orderNo=' + res.data.orderInfo.orderNo + '&orderName=' + res.data.orderInfo.orderName + '&downpayAmount=' + res.data.orderInfo.downpayAmount + '&creditPay=' + res.data.orderInfo.creditPay + '&telephone=' + res.data.orderInfo.telephone + '&startPhone=' + res.data.orderInfo.starPhone + '');
+                    window.location.target="_blank";
+                    window.location.href='my-order-detail.html?orderId=' + res.data.orderInfo.orderId + '&orderNo=' + res.data.orderInfo.orderNo + '&orderName=' + res.data.orderInfo.orderName + '&downpayAmount=' + res.data.orderInfo.downpayAmount + '&creditPay=' + res.data.orderInfo.creditPay + '&telephone=' + res.data.orderInfo.telephone + '&startPhone=' + res.data.orderInfo.starPhone + '';
                 }
             }.bind(this)
         })

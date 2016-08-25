@@ -12,7 +12,7 @@ function onLoad() {
 
             <div style={{borderTop: '2px solid #ff5370'}}>
                 <div className="wrap">
-                    <R_MyBar status="order"/>
+                    <R_MyBar status="setting"/>
                     <R_aa pwd_regex={/^.{6,16}$/}/>
                     <div style={{overflow:'hidden'}}></div>
                 </div>

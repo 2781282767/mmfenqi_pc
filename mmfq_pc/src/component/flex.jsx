@@ -49,7 +49,6 @@ class R_Flex extends React.Component{
                         <div className="layer_content2">
                             <div>
                                 <img src={img} alt=""/>
-
                             </div>
 
                         </div>

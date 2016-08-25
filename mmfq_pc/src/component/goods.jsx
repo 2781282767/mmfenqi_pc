@@ -14,155 +14,88 @@ class R_Goods extends React.Component {
             m: '',
             s: '',
             leftOrRight: '0',
+
+
+            showMore:false
+
+
+        };
+
+        this.currentPage=1;
+
+        this.timeConfig = {
+            h: '时',
+            m: '分',
+            style_t: {
+                padding: 5, margin: '0 5px',
+            },
+            style_h: {
+                color: '#fd657a', border: '1px solid #e4e4e4', padding: 5, margin: '0 5px', background: '#FFFFff'
+            },
+            style_s: {
+                color: '#fd657a', border: '1px solid #e4e4e4', padding: 5, margin: '0 5px', background: '#FFFFff'
+            },
+            style_m: {
+                color: '#666666', border: '1px solid #e4e4e4', padding: 5, margin: '0 5px', background: '#FFFFff'
+            },
+
+            compare: function () {
+
+                var compareTime = new Date();
+                if (compareTime.getHours() >= 10) {
+                    var time = compareTime.Format('yyyy-MM-dd 23:59:59');
+                    return {
+                        time: time,
+                        text: '距离结束仅剩'
+                    };
+                }
+                var time = compareTime.Format('yyyy-MM-dd 10:00:00');
+                return {
+                    time: time,
+                    text: '距离开始仅剩'
+                }
+            }
         }
+
+
     }
 
-    http(url, jsonData, cb) {
-        $.ajax({
-            type: 'post',
-            url: url,
-            data: jsonData,
-            dataType: 'json',
-            success: function (res) {
-                if (res.result == 0) {
-                    return cb(res)
-                } else if (res.result == 1013) {
-                    alert(333)
+
+    query(index,start,end){
+        HttpService.query({
+            url: '/pc/computer/query_flashSaleGoodsList_pc',
+            data:{index:index,startTime:start,endTime:end},
+            success:(res)=>{
+
+                this.currentPage=index;
+                this.totalPage=res.paginator.totalPage;
+                if(this.totalPage>this.currentPage){
+                    this.setState({showMore:true});
+                }else{
+                    this.setState({showMore:false});
                 }
+                this.setState({
+                    json: this.state.json.concat(res.flashSaleGoodsItemList)
+                })
             }
         })
     }
 
-    today_fast(start, end) {
+    today_fast() {
         this.setState({
             leftOrRight: '0'
         });
 
+        var startTime = new Date();
+        var today_start = startTime.Format('yyyy-MM-dd 00:00:00');
+        var today_end = startTime.Format('yyyy-MM-dd 23:59:59');
 
-        var jsonData = {
-            index: '1',
-            startTime: start,
-            endTime: end
-        };
-        this.http('/pc/computer/query_flashSaleGoodsList_pc', jsonData, function (res) {
+        this.query(1,today_start,today_end)
 
-            console.log(res);
-            this.setState({
-                json: res.data.flashSaleGoodsItemList
-            })
-        }.bind(this));
 
-    }
-
-    more() {
-        var jsonData = {
-            index: '2',
-            startTime: this.state.t_startTime,
-            endTime: this.state.t_endTime
-        };
-        this.http('/pc/computer/query_flashSaleGoodsList_pc', jsonData, function (res) {
-            this.setState({
-                json: res.data.flashSaleGoodsItemList
-            })
-        }.bind(this));
-    }
-
-    init(time) {
-        var setCountDown = {
-            timer: null,
-            init: function (opt) {
-                var _this = this;
-                this.setShowTime(opt.endtime, opt.done);
-                this.timer = setInterval(function () {
-                    _this.setShowTime(opt.endtime, opt.done, opt.callback)
-                }, 1000);
-
-                console.log(this.timer)
-            },
-            getCountdown: function (time) {
-                var curShowTimeSecondsVal = this.getSecond(time) - this.getSecond();
-                if (curShowTimeSecondsVal < 0) return [0, '00', '00', '00'];
-                // console.log(curShowTimeSecondsVal)
-                // 剩余秒数
-                var curShowTimeSeconds = parseInt(curShowTimeSecondsVal % 60);
-                // 计算剩余天数
-                var curShowTimeDays = parseInt(curShowTimeSecondsVal / 3600 / 24);
-                // 计算剩余小时
-                var curShowTimeHours = parseInt((curShowTimeSecondsVal / 3600)) - curShowTimeDays * 24;
-                // 计算剩余分钟
-                var curShowTimeMinutes = parseInt((curShowTimeSecondsVal - parseInt((curShowTimeSecondsVal / 3600)) * 3600) / 60);
-                curShowTimeHours = curShowTimeHours > 9 ? curShowTimeHours : '0' + curShowTimeHours;
-                curShowTimeSeconds = curShowTimeSeconds > 9 ? curShowTimeSeconds : '0' + curShowTimeSeconds;
-                curShowTimeMinutes = curShowTimeMinutes > 9 ? curShowTimeMinutes : '0' + curShowTimeMinutes;
-                return [curShowTimeDays, curShowTimeHours, curShowTimeMinutes, curShowTimeSeconds];
-            },
-            getSecond: function (times) {
-                if (times) {
-                    var year = parseInt(times.slice(0, 4)),
-                        month = parseInt(times.match(/-\d*/gi)[0].replace('-', '') - 1),
-                        day = parseInt(times.match(/-\d*/gi)[1].replace('-', '')),
-                        hour = parseInt(times.match(/\d*:/)[0].replace(':', '')),
-                        minute = parseInt(times.match(/:\d*/)[0].replace(':', ''));
-                    return (new Date(year, month, day, hour, minute, 0)).getTime() / 1000;
-                }
-                return (new Date()).getTime() / 1000;
-            },
-            setShowTime: function (endtime, done, callback) {
-                var _this = this;
-                // var oSetTime = document.getElementById('time');
-                var day = this.getCountdown(endtime)[0],
-                    hour = this.getCountdown(endtime)[1],
-                    minute = this.getCountdown(endtime)[2],
-                    second = this.getCountdown(endtime)[3];
-                done([day, hour, minute, second]);
-                // oSetTime.innerHTML = '剩余时间：'+day+'天'+hour+'小时'+minute+'分'+second+'秒';
-                if (day == 0 && hour == '00' && minute == '00' && second == '00') {
-                    clearInterval(_this.timer);
-                    _this.timer = null;
-                    if (callback) callback();
-                }
-            }
-        };
-        setCountDown.init({
-            endtime: time,
-            done: function (data) {
-
-                // console.log(data)
-
-                this.setState({
-                    h: data[1],
-                    m: data[2],
-                    s: data[3]
-                });
-
-            }.bind(this),
-            callback: function () {
-                // window.location.reload()
-            }
-        })
-    }
-
-    compareTime() {
-        var compareTime = new Date();
-        if (compareTime.getHours() >= 10) {
-            var before = compareTime.Format('yyyy-MM-dd 23:59:59');
-            this.init(before);
-            this.setState({
-                text: '距离结束仅剩'
-            });
-
-            return;
-        }
-
-        var after = compareTime.Format('yyyy-MM-dd 10:00:00');
-        this.init(after);
-        this.setState({
-            text: '距离开始仅剩'
-        });
     }
 
     tm_fast() {
-
         this.setState({
             leftOrRight: '1'
         });
@@ -170,17 +103,27 @@ class R_Goods extends React.Component {
         tm = compareTime.setDate(compareTime.getDate() + 1);
         start = this.timeStamp2String(tm);
         end = this.timeStamp3String(tm);
-        var jsonData = {
-            index: '1',
-            startTime: start,
-            endTime: end
-        };
-        this.http('/pc/computer/query_flashSaleGoodsList_pc', jsonData, function (res) {
-            this.setState({
-                json: res.data.flashSaleGoodsItemList
-            })
-        }.bind(this));
+
+        this.query(1,start,end)
     }
+
+    more() {
+        this.currentPage=this.currentPage+1;
+        if(this.state.leftOrRight=='0'){
+            var startTime = new Date();
+            var today_start = startTime.Format('yyyy-MM-dd 00:00:00');
+            var today_end = startTime.Format('yyyy-MM-dd 23:59:59');
+            this.query(this.currentPage,today_start,today_end)
+        }else if(this.state.leftOrRight=='1'){
+            var compareTime = new Date(), start, end, tm;
+            tm = compareTime.setDate(compareTime.getDate() + 1);
+            start = this.timeStamp2String(tm);
+            end = this.timeStamp3String(tm);
+            this.query(this.currentPage,start,end)
+
+        }
+    }
+
 
 
     timeStamp2String(time) {
@@ -201,13 +144,14 @@ class R_Goods extends React.Component {
         var year = datetime.getFullYear();
         var month = datetime.getMonth() + 1 < 10 ? "0" + (datetime.getMonth() + 1) : datetime.getMonth() + 1;
         var date = datetime.getDate() < 10 ? "0" + datetime.getDate() : datetime.getDate();
-        var hour = '23';
+        var hour = '59';
         var minute = '59';
         var second = '59';
         return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     }
 
     timeStamp4String(time) {
+
         var datetime = new Date();
         datetime.setTime(time);
         var year = datetime.getFullYear();
@@ -219,7 +163,7 @@ class R_Goods extends React.Component {
         return year + "-" + month + "-" + date + " " + hour + ":" + minute + ":" + second;
     }
 
-    componentDidMount() {
+    componentWillMount() {
 
         Date.prototype.Format = function (fmt) { //author: meizz
             var o = {
@@ -247,8 +191,7 @@ class R_Goods extends React.Component {
             t_startTime: start,
             t_endTime: end
         });
-        this.today_fast(start, end);
-        this.compareTime()
+        this.query(1,start, end);
 
     }
 
@@ -267,22 +210,22 @@ class R_Goods extends React.Component {
         };
         return (
             <div className="goods-main">
-                <div className="main">
-                    <img src="../static/images/goods/banner.jpg"/>
-                </div>
+                <div className="main"></div>
                 <div className="goods-date">
                     <div className="_main">
                         <div className="left">
                             <div className="today-time">
-                                <div style={{background: 'none', marginRight: '0'}}>{this.state.text}</div>
+                                {/*<div style={{background: 'none', marginRight: '0'}}>{this.state.text}</div>*/}
 
-                                <div className="ooo"
-                                     style={{color: '#fd657a', border: '1px solid #e4e4e4'}}>{this.state.h}</div>
-                                时
-                                <div className="ooo"
-                                     style={{color: '#fd657a', border: '1px solid #e4e4e4'}}>{this.state.m}</div>
-                                分
-                                <div className="ooo" style={{border: '1px solid #e4e4e4'}}>{this.state.s}</div>
+                                {/*<div className="ooo"*/}
+                                     {/*style={{color: '#fd657a', border: '1px solid #e4e4e4'}}>{this.state.h}</div>*/}
+                                {/*时*/}
+                                {/*<div className="ooo"*/}
+                                     {/*style={{color: '#fd657a', border: '1px solid #e4e4e4'}}>{this.state.m}</div>*/}
+                                {/*分*/}
+                                {/*<div className="ooo" style={{border: '1px solid #e4e4e4'}}>{this.state.s}</div>*/}
+
+                                <R_TimeOver cxt={this}/>
                             </div>
 
                             <div style={{color: '#999'}}>每日10：00-24：00 开抢</div>
@@ -298,7 +241,7 @@ class R_Goods extends React.Component {
                     <div className="activity-title">
                         {this.state.leftOrRight == 0 ?
                             <div className="left"
-                                 onClick={this.today_fast.bind(this, this.state.t_startTime, this.state.t_endTime)}>
+                                 onClick={this.today_fast.bind(this)}>
                                 <div style={{height: '66px'}}>
                                     <div className="t-content bg">
                                         <div className="today-seckilling">
@@ -311,7 +254,7 @@ class R_Goods extends React.Component {
                             </div>
                             :
                             <div className="left"
-                                 onClick={this.today_fast.bind(this, this.state.t_startTime, this.state.t_endTime)}>
+                                 onClick={this.today_fast.bind(this)}>
 
                                 <div style={{height: '66px'}}>
                                     <div className="t-content bd2">
@@ -377,8 +320,8 @@ class R_Goods extends React.Component {
 
                                                             </p>
 
-                                                            {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
-                                                            {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
+                                                            <div>{this.timeStamp4String(json.teamBeginTime)}</div>
+                                                            <div>{this.timeStamp4String(json.teamEndTime)}</div>
 
                                                             <div className="bg-img">
                                                                 <div className="month-pay">
@@ -386,7 +329,6 @@ class R_Goods extends React.Component {
                                                                     <spna>x{json.staging}</spna>
                                                                 </div>
                                                                 <div style={{color: '#fff'}}>
-
                                                                     立即分期
                                                                 </div>
                                                             </div>
@@ -397,6 +339,8 @@ class R_Goods extends React.Component {
                                                 :
 
                                                 <li>
+
+                                                    <a href={"goods-detail.html?goodsId=" + json.goodsHerf}>
 
                                                     <div className="top-img">
                                                         {/*<img src="../static/images/goods/bit.png" alt=""/>*/}
@@ -414,8 +358,8 @@ class R_Goods extends React.Component {
 
                                                         </p>
 
-                                                        {/*<div>{this.timeStamp4String(json.teamBeginTime)}</div>*/}
-                                                        {/*<div>{this.timeStamp4String(json.teamEndTime)}</div>*/}
+                                                        <div>{this.timeStamp4String(json.teamBeginTime)}</div>
+                                                        <div>{this.timeStamp4String(json.teamEndTime)}</div>
 
                                                         <div className="bg-img2">
                                                             <div className="month-pay">
@@ -430,6 +374,7 @@ class R_Goods extends React.Component {
                                                         </div>
 
                                                     </div>
+                                                        </a>
                                                 </li>
                                         }
                                     </ul>
@@ -438,6 +383,17 @@ class R_Goods extends React.Component {
 
                             })
                         }
+
+                        {
+                            this.state.showMore?
+                                <div style={{clear:'both',textAlign:'center', margin:'0 auto' }} onClick={this.more.bind(this)}>
+                                    <button>查看更多</button>
+                                </div>
+                                :
+                                <div></div>
+
+                        }
+
                     </div>
                 </div>
             </div>
