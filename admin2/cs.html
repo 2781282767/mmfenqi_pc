@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>蓝色理了个想</title>
+    <style>
+        .wrap{width: 300px;}
+        .wrap .box{border:2px solid red;width:100px;height:20px;float:left;margin-right: 10px;margin-bottom: 10px; display: inline-block; position: relative;}
+        .wrap .box:hover div{display:block;}
+        .wrap .box div:hover{display:block;}
+        .wrap .box div{background:#333;color:white;display:none; left: 10px; position: absolute; z-index: 9999; width: 50px;}
+
+        .div{
+
+            position: absolute;
+            z-index: 111;
+
+            width: 100px;
+            height: 100px;
+        }
+        table{
+            border: 1px solid red;
+        }
+
+        table tr{
+            text-align: center;
+        }
+
+        table tr td{
+            text-align: center;
+
+        }
+
+
+    </style>
+</head>
+<body>
+<div class="wrap">
+    <!--<div class="div" style="background: red;">1</div>-->
+    <!--<div class="div">2</div>-->
+    <!--<div class="div">3</div>-->
+    <!--<div class="div">4</div>-->
+    <!--<div class="div">5</div>-->
+    <!--<div class="div" style="background: #000000">6</div>-->
+
+    <!--<div>-->
+        <!--<div style="position: absolute; z-index: 999;">-->
+            <!--<div style="position: absolute; z-index: 1001; width: 200px ; background: red; height: 200px;"></div>-->
+        <!--</div>-->
+        <!--<div style="position: absolute; z-index: 1000;  width: 200px ; background: blue; height: 200px;"></div>-->
+    <!--</div>-->
+
+    <input type="text" maxlength="4">
+
+    <table border="1">
+        <tr>
+            <th>Month</th>
+            <th>Savings</th>
+        </tr>
+        <tr>
+            <td colspan="2">January</td>
+        </tr>
+        <tr>
+            <td colspan="2">February</td>
+        </tr>
+    </table>
+
+
+
+</div>
+<script>
+    var a=function (success) {
+      console.log(4)
+        return success()
+    };
+
+    var b=function (success) {
+        console.log(2)
+        return success()
+    }
+
+    var c=function (success) {
+        console.log(3)
+        return success()
+    }
+
+
+    a(function () {
+        c(function () {
+            b(function () {
+                
+            })
+        })
+    })
+
+
+</script>
+</body>
+</html>
