@@ -1,16 +1,13 @@
 'use strict';
 import React, {Component} from 'react';
 import ReactDOM, {render} from 'react-dom';
-
-import './css/app.less'
-
-
-
-
+import '../src/scss/app.scss'
 export class R_c extends React.Component{
     constructor(){
         super()
     }
+
+   
     render(){
         return (
             <div>

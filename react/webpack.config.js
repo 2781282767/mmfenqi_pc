@@ -7,20 +7,20 @@ var publicPath = '/dist/'; //服务器路径
 var plugins = [];
 plugins.push(new ExtractTextPlugin('css/[name].css')); //css单独打包
 plugins.push(new webpack.HotModuleReplacementPlugin());
-plugins.push(new HtmlWebpackPlugin({ 
+plugins.push(new HtmlWebpackPlugin({
         filename: '../index.html', //生成的html存放路径，相对于 path
         template: './src/template/index.html', //html模板路径
         hash: true,
-            //为静态资源生成hash值
+        //为静态资源生成hash值
         chunks: ['index', 'vendors'],
         inject: 'body'
     }),
 
     new HtmlWebpackPlugin({
         filename: '../app.html', //生成的html存放路径，相对于 path
-        template: './src/template/app.html', //html模板路径 
+        template: './src/template/app.html', //html模板路径
         hash: true,
-            //为静态资源生成hash值
+        //为静态资源生成hash值
         chunks: ['app', 'vendors'],
         inject: 'body'
     })
@@ -45,6 +45,7 @@ module.exports = {
         path: path.join(__dirname, 'dist'), //编译到当前目录
         filename: '[name].js'
     },
+    devtool: 'source-map',
     module: {
         loaders: [
 
@@ -61,13 +62,17 @@ module.exports = {
                 exclude: /^node_modules$/,
                 loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')
             }, {
+                test: /\.scss/,
+                exclude: /^node_modules$/,
+                loaders: ["style", "css?sourceMap", "sass?sourceMap"]
+            }, {
                 test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
                 exclude: /^node_modules$/,
                 loader: 'file-loader?name=[name].[ext]'
             }, {
                 test: /\.(png|jpg)$/,
                 exclude: /^node_modules$/,
-                loader: 'url?limit=20000&name=../images/[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+                loader: 'url?limit=20000&name=[name].[ext]' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
             }, {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,

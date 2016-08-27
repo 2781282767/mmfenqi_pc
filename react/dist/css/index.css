@@ -1,0 +1,10 @@
+div .abc {
+  color: red;
+  font-size: 50px;
+}
+div .abc .cs {
+  font-size: 30px;
+  color: blue;
+}
+
+/*# sourceMappingURL=index.css.map*/
