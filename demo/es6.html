@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+</body>
+
+<script>
+    let arrayLike = {
+        '0': 'a',
+        '1': 'b',
+        '2': 'c',
+    };
+
+    var sss=[];
+
+
+    var ab={
+        ab:'22'
+    };
+
+    sss.push(ab);
+    console.log(sss[0].ab);
+    var b=[];
+
+
+    for(var y in arrayLike){
+        b.push(arrayLike[y])
+    }
+
+    console.log(b);
+
+
+    var a={
+        ab:'abc',
+        cd:'cd'
+    };
+
+    var arry=[];
+    for( var x in a){
+
+        var ddd={a:a[x]}
+        arry.push(ddd)
+    }
+
+    console.log(arry)
+
+
+
+
+    function f(x, y) {
+        return {x, y};
+    }
+
+
+    console.log(f(1,2))
+
+
+
+
+
+    /*对象合并*/
+    var target = { a: 1 };
+
+    var source1 = { b: 2 };
+    var source2 = { c: 3 };
+
+    Object.assign(target, source1, source2);
+
+
+    console.log(target)
+
+
+    var ccc=function () {
+
+    }
+
+    ccc.__proto__()
+
+    ccc.prototype={
+        abc:function () {
+            console.log('222')
+        }
+    }
+
+    console.log(ccc)
+</script>
+</html>
