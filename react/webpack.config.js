@@ -5,8 +5,9 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var publicPath = '/dist/'; //服务器路径
 
 var plugins = [];
+plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false}}));//代码压缩
 plugins.push(new ExtractTextPlugin('css/[name].css')); //css单独打包
-plugins.push(new webpack.HotModuleReplacementPlugin());
+plugins.push(new webpack.HotModuleReplacementPlugin());//热替换
 plugins.push(new HtmlWebpackPlugin({
         filename: '../index.html', //生成的html存放路径，相对于 path
         template: './src/template/index.html', //html模板路径
@@ -52,7 +53,8 @@ module.exports = {
             {
                 test: /\.js$/,
                 exclude: /^node_modules$/,
-                loader: 'babel?presets=es2015'
+                loader: 'babel',
+                query:{compact:false}
             }, {
                 test: /\.css$/,
                 exclude: /^node_modules$/,
@@ -83,7 +85,7 @@ module.exports = {
     },
     plugins: plugins,
     resolve: {
-        extensions: ['', '.js', '.jsx'], //后缀名自动补全
+        extensions: ['', '.js', '.jsx'] //后缀名自动补全
     },
     watch: true
 };

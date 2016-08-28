@@ -6,6 +6,11 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM, {render} from 'react-dom';
 
 
+import {connect} from 'react-redux';
+
+
+import * as action from './action/index'
+
 import '../src/less/index.less';
 
 
