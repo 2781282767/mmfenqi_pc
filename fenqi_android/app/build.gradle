@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion "23.0.2"
+
+    defaultConfig {
+        applicationId "com.mmfenqi.mmfq"
+        minSdkVersion 15
+        targetSdkVersion 23
+        versionCode 3
+        versionName "1.2"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    sourceSets { main { assets.srcDirs = ['src/main/assets', 'src/main/assets/ShareSDK.xml'] } }
+}
+android {
+    useLibrary 'org.apache.http.legacy'
+}
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
+    compile project(':mmfqLibraly')
+    compile files('libs/alipaySDK-20150818.jar')
+    compile files('libs/BaiduLBS_Android.jar')
+    compile project(':shareSDK_V263')
+    compile files('libs/easemobchat_2.2.3.jar')
+    compile 'com.android.support:appcompat-v7:23.2.0'
+    compile 'com.android.support:design:23.2.0'
+    compile 'com.google.code.gson:gson:2.4'
+    compile 'com.android.support:support-v4:23.2.0'
+    compile 'com.alibaba:fastjson:1.2.8'
+    compile 'com.android.support:support-v13:23.2.0'
+    compile files('libs/zmxySDKALCmini_V1.01450366738902_release.jar')
+}

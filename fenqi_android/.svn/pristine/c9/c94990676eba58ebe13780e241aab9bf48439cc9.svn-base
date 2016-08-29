@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:background="@drawable/dialog_bg"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:orientation="vertical">
+    <TextView 
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:gravity="center_vertical"
+        android:text="图片"
+        android:textColor="@color/pink_text_color"
+        android:textSize="16sp"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="3dp"
+        android:background="@color/gray"/>
+    <TextView 
+        android:id="@+id/cameraTV"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        style="@style/textview_14_dark"
+        android:gravity="center_vertical"
+        android:text="拍照"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="@color/gray"/>
+    <TextView 
+        android:id="@+id/chooseTV"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        style="@style/textview_14_dark"
+        android:gravity="center_vertical"
+        android:text="从相册选取"/>
+</LinearLayout>
+    
