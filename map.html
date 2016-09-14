@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%;">
+<head>
+    <meta http-equiv="content-type" content="text/html" ; charset="utf-8"/>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>随寻</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+    <script type="text/javascript"
+            src="http://api.map.baidu.com/api?v=2.0&ak=Rs3MsZBDNuaSFqlhGuN2qcgpEEwurbEK"></script>
+    <script language="javascript" src="assets/js/angular.min.js"></script>
+    <script language="javascript" src="assets/lib/js/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+
+<div class="container" ng-app="myApp" ng-controller="mapCtrl">
+    <div class="position-bar">
+        <h4 id="lblPosition">
+            <div ng-click="open()"><span id="babyName">{{babyName}} <i ng-hide="isOpen" class="fa fa-caret-up"></i><i
+                    ng-show="isOpen" class="fa fa-caret-down"></i></span></div>
+
+            <a class="btn-account" href="#" ng-click="viewInfo()">
+                <i class="fa fa-user"></i>
+            </a>
+        </h4>
+    </div>
+    <div class="content" ng-click="open()">
+        <div class="map-container" id="allmap">
+        </div>
+    </div>
+
+    <!--<div class="che">-->
+    <!--<div class="zIndex" ng-click="open()">-->
+
+    <!--</div>-->
+
+    <!--<div class="tooltips-content" ng-show="isOpen">-->
+    <!--<div class="tooltips"></div>-->
+    <!--<div class="tooltips-device-info">-->
+    <!--<div class="tooltips-device-name" ng-repeat="x in deviceList" ng-click="changeBabyName(x.babyname)">-->
+
+    <!--<img ng-src="{{x.headimg}}">-->
+    <!--<span>{{x.babyname}}</span>-->
+
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <div class="tooltips-content" ng-show="isOpen">
+        <div class="tooltips"></div>
+        <div class="tooltips-device-info">
+            <div class="tooltips-device-name" ng-repeat="x in deviceList"
+                 ng-click="changeBabyName(x.babyname,x.babyid)">
+
+                <img ng-src="{{x.headimg}}">
+                <span>{{x.babyname}}</span>
+
+            </div>
+        </div>
+    </div>
+
+
+    <a class="btn-battery">
+        <i class="fa fa-battery-2"></i>
+    </a>
+
+    <a class="btn-phone" id="btnCall">
+        <!--<i class="fa fa-volume-control-phone"></i>-->
+        <i class="fa fa-volume-control-phone"></i>
+        <p>通话</p>
+    </a>
+
+    <a class="btn-location" href="#" ng-click="showPoint()">
+        <i class="fa fa-map-marker"></i>
+        <p>定位</p>
+    </a>
+
+</div>
+
+<script language="javascript" src="assets/js/common.js"></script>
+
+
+<script>
+
+    var app = angular.module("myApp", []);
+    app.controller("mapCtrl", ['$scope','$interval',function ($scope,$interval) {
+
+        $scope.isOpen = false;
+
+        $scope.changeBabyName = function (name, babyid) {
+            $scope.babyName = name;
+            $scope.babyid = babyid;
+
+            $scope.isOpen=false;
+        };
+
+        $scope.open = function () {
+            if ($scope.isOpen) {
+                $scope.isOpen = false;
+                return;
+            }
+            $scope.isOpen = true;
+
+        };
+        var isMap = true;
+        //var sid = getUrlParam("sid") || 'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
+        var sid='5RTnpUAfXuSDN3WjLtVfPDn82MBGdazZX_RZzIzVDNkEXa5j525aNB625j2gATTMZZDrHFuSAmlHTGqEqykgR-lMUFqTpMH8-k2DOxY4LseqhOA2GhjClGQftMIbMuWW8D-SIbaxza6schAi_axIpw';
+        var data = doLogin(sid);
+//    function demo(requestUrl) {
+//        $.ajax({url:requestUrl,async : true}).then(successFunc, failureFunc);
+//    }
+//
+//    demo('/apph5/user/login');
+//
+//
+//    function successFunc(data) {
+//        console.log(data)
+//    }
+//
+//    function failureFunc(data) {
+//        console.log('2222'+data)
+//    }
+
+
+        var token = "0";
+        //$scope.babyid="0";
+        var lat = 0;
+        var lng = 0;
+        if ("30010" == data.code) {
+            token = data.data.token;
+
+            $scope.deviceList = getDeviceList(token);
+            $scope.deviceList = $scope.deviceList.data;
+            console.log($scope.deviceList);
+
+            var list = getDeviceList(token);
+            var devices = list.data;
+            if (devices.length > 0) {
+                $scope.babyid = devices[0].babyid;
+                $scope.babyName = devices[0].babyname;
+                var latlng = getTrack(token, $scope.babyid);
+                var device = getDevice(token, $scope.babyid);
+                if ("10060" == latlng.code) {
+                    lng = latlng.data.lng;
+                    lat = latlng.data.lat;
+                }
+                $("#btnCall").attr("href", "tel:" + devices[0].babytelephone);
+            } else {
+                window.location.href = "/nobind.html";
+            }
+        } else {
+            window.location.href = "/nobind.html";
+        }
+        var map = new BMap.Map("allmap");
+        var point = new BMap.Point(lng, lat);
+        var marker = new BMap.Marker();
+
+        $scope.showPoint=function () {
+            if (token != "" && $scope.babyid != "") {
+                latlng = getTrack(token, $scope.babyid);
+                if ("10060" == latlng.code) {
+                    lng = latlng.data.lng;
+                    lat = latlng.data.lat;
+                    point = new BMap.Point(lng, lat);
+                    map.centerAndZoom(point, 15);
+                    marker.setPosition(point);  // 创建标注
+                    map.addOverlay(marker);               // 将标注添加到地图中
+                }
+            }
+        };
+        $scope.showPoint();
+        //setInterval("$scope.showPoint()", "1000");//300000
+
+        $interval($scope.showPoint,'300000');
+
+        $scope.viewInfo = function () {
+            if (token != "" && $scope.babyid != "") {
+                window.location.href = "/index.html?token=" + token + "&babyid=" + $scope.babyid;
+            }
+        }
+
+
+        }]);
+
+</script>
+<script language="javascript" src="assets/js/app.js"></script>
+<script language="JavaScript" src="assets/js/auto-set-rem.js"></script>
+</body>
+</html>

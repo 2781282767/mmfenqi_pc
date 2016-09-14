@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <title>随寻</title>
+    <link type="text/css" rel="stylesheet" href="assets/css/style.css">
+    <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
+    <script language="javascript" src="assets/lib/js/jquery-2.2.4.min.js"></script>
+</head>
+<body>
+
+
+<div class="container">
+    <div class="position-bar">
+        <h4 id="lblPosition">未绑定</h4>
+    </div>
+    <div class="content">
+        <div class="nobinding">
+            <img src="assets/images/wei-icon.jpg">
+        </div>
+        <div class="binding">
+            <ul>
+                <li>随寻账号 <span class="pull-right" id="accountInfo">1234567</span></li>
+                <li>设备续费日期 <span class="pull-right blue" id="endTime">2001-12-11</span></li>
+                <li>手表手机号 <span class="pull-right blue" id="babyPhone">13700000001</span></li>
+            </ul>
+
+            <h5 class="list-title">监护成员</h5>
+            <ul id="homes">
+            </ul>
+
+        </div>
+    </div>
+
+</div>
+<script language="javascript" src="assets/js/common.js"></script>
+<script>
+    var isMap = false;
+    var token= getUrlParam('token');
+    var babyid= getUrlParam('babyid');
+    var device = getDevice(token, babyid);
+    if(device.code=="10038"){
+        $("#accountInfo").html(device.data.babyname);
+        $("#endTime").html(device.data.endtime);
+        $("#babyPhone").html(device.data.telephone);
+        var homes = getHomes(token, babyid);
+        if(homes.code=="10068"){
+            for(var i=0;i<homes.data.length;i++){
+                $("#homes").append('<li>'+homes.data[i].familystatus+' <span class="pull-right">'+homes.data[i].telephone+'</span></li>');
+            }
+        }
+    }
+</script>
+<script language="javascript" src="assets/js/app.js"></script>
+</body>
+</html>
+

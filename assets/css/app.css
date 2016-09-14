@@ -1,0 +1,124 @@
+/* app css stylesheet */
+
+html body {
+    height: 100%;
+    position: relative;
+    font-family: "Microsoft JhengHei","Adobe Fan Heiti Std B";
+}
+
+body {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -khtml-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    font-size: 1rem;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+p,
+blockquote,
+pre,
+address,
+img,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+input,
+tfoot,
+thead,
+tr,
+th,
+td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+    font-variant: normal;
+    font-style: normal;
+}
+.border-bottom{
+    border-bottom: 1px solid #dddddd;
+}
+
+.app-white-input {
+    background-color: #FFFFFF;
+    padding: 1rem 1rem;
+    font-size: 1.4rem;
+    width: 100%;
+}
+
+.margin-one{
+    margin: 1rem 0;
+}
+
+.app-pink-radius-button {
+    background-color: #1eb5eb;
+    color: #FFFFFF;
+    border-radius: 0;
+    font-size: 1.4rem;
+    padding: 1rem 0;
+}
+
+.app-blue-radius-button{
+    background-color: #1eb5eb;
+    color: #FFFFFF;
+    border-radius: 0;
+    font-size: 1rem;
+    padding: 0 1rem;
+}
+
+.app-little-pink-radius-button {
+    background-color: #F2AACF;
+    color: #FFFFFF;
+    margin-top: 1.7rem;
+    border-radius: 0.5rem;
+    font-size: 1.4rem;
+}
+
+
+.font-color-blue{
+    color: #00b4ed;
+}
+
+.app-bootstrap-hr {
+    padding: 0;
+    margin: 0 -15px;
+    color: rgb(204, 204, 204);
+}
+
+
+.app-content-title{
+    margin-top: 2rem;
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+}
+
+.app-padding-zero{
+    padding:0;
+}
+
+.app-white-input-label{
+    width: 33%;
+    text-align: right;
+    margin-right: 1rem;
+}
