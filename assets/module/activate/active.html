@@ -11,35 +11,82 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <title></title>
+
     <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
+
 </head>
-<body style="height: 100%;background-color: #eee;">
+<body style="height: 100%;background-color: #eee;" ng-app="app" ng-controller="mapCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" onclick="goBack()"><i class="fa fa-arrow-left"></i></div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><i class="fa fa-arrow-left"></i></div>
         <div class="col-xs-4 text-center">输入IMEI号</div>
     </div>
 </div>
 
 
 <div class="container">
-    <div class="col-xs-12 app-white-input margin-one">
-        <input type="text" placeholder="请输入设备的IMEI号" style="width: 100%;">
-    </div>
-    <div class="col-xs-12 app-pink-radius-button text-center"><a href="/assets/module/activate/gotoactive.html">激活设备</a></div>
-    <div class="col-xs-12" style="margin-top: 1rem;">注：请输入设备背面、包装或说明书上的IMEI号的前14位数字、最后一位数字为核验码，不用输入！</div>
+
+    <form ng-submit="submit()" name="form">
+        <div class="col-xs-12 app-white-input margin-one">
+            <input type="text" ng-model="mdtcode" placeholder="请输入设备的IMEI号" style="width: 100%;" required>
+        </div>
+
+        <label style="display: block">
+            <div class="col-xs-12 app-pink-radius-button text-center">激活设备</div>
+            <button type="submit" style="display: none"></button>
+        </label>
+
+        <div class="col-xs-12" style="margin-top: 1rem;">注：请输入设备背面、包装或说明书上的IMEI号的前14位数字、最后一位数字为核验码，不用输入！</div>
+    </form>
+
 </div>
 
 
-
+</form>
 
 </body>
+<script language="javascript" src="/assets/js/angular.min.js"></script>
 <script language="JavaScript" src="/assets/js/auto-set-rem.js"></script>
+<script language="javascript" src="/assets/js/toast.js"></script>
+<script language="javascript" src="/assets/js/angular-resource/angular-resource.js"></script>
 <script>
-    function goBack() {
-        window.history.go(-1);
-    }
+
+
+    var app = angular.module("app", ['ngResource']);
+
+    app.factory('scanDeviceService', ['$resource',
+        function ($resource) {
+            return {
+                scanDeviceInfo: function () {
+                    return $resource('/app/device/scanDevice', {}, {
+                        query: {
+                            method: 'GET', params: {}
+                        }
+                    })
+                }
+            }
+        }]);
+    app.controller("mapCtrl", ['$scope', '$interval', 'scanDeviceService', function ($scope, $interval, scanDeviceService) {
+
+        $scope.submit = function () {
+            scanDeviceService.scanDeviceInfo().query({
+                mdtcode: $scope.mdtcode, mdtid: $scope.mdtcode, token: localStorage.appToken
+            }).$promise.then(function (res) {
+                console.log(res);
+                if (res.code == 10078) {
+                    $scope.telephone = res.telephone || 12334444;
+                    $scope.mdtid = res.mdtid || 11222;
+                    window.location.href = '/assets/module/activate/gotoactive.html?telephone=' + $scope.telephone + '&mdtid=' + $scope.mdtid + '';
+                } else if (res.code == 100783) {
+                    window.location.href = '/assets/module/activate/verifyText.html'
+                } else {
+                    Toast(res.msg, 3000);
+                }
+            });
+        }
+
+    }]);
 </script>
 </html>

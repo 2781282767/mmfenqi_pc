@@ -14,74 +14,96 @@
     <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
+    <script language="javascript" src="/assets/js/angular.min.js"></script>
 </head>
-<body style="height: 100%;background-color: #eee;">
+<body style="height: 100%;background-color: #eee;" ng-app="app" ng-controller="activeCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" onclick="goBack()"><i class="fa fa-arrow-left"></i></div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><i class="fa fa-arrow-left"></i></div>
         <div class="col-xs-4 text-center">激活设备</div>
     </div>
 </div>
-
-
-
-<!--<div class="container">-->
-    <!--<div class="app-white-input row app-margin-top-two-px">-->
-        <!--<label class="col-xs-1 app-bootstrap-padding-zero app-white-input-label">姓名</label>-->
-        <!--<input type="text" ng-model="location.name" class="col app-white-input-text" disabled="disabled" style="background-color: white"-->
-               <!--placeholder="姓名"-->
-               <!--required>-->
-    <!--</div>-->
-
-    <!--<hr class="app-bootstrap-hr">-->
-<!--</div>-->
-
 <div class="container">
-    <div class="col-xs-12 app-content-title app-padding-zero">设备信息</div>
-    <div class="col-xs-12 app-white-input">
-        <label for="number" class="app-white-input-label">设备IMEI号</label>
-        <input id="number" type="text" placeholder="23764761536276">
-    </div>
-    <hr class="app-bootstrap-hr">
-    <div class="col-xs-12 app-white-input">
-        <label for="number2" class="app-white-input-label">设备手机号</label>
-        <input id="number2" type="text" placeholder="请输入设备手机号">
-    </div>
+    <form ng-submit="submit()" name="form">
+        <div class="col-xs-12 app-content-title app-padding-zero">设备信息</div>
+        <div class="col-xs-12 app-white-input">
+            <label for="number" class="app-white-input-label">设备IMEI号</label>
+            <input id="number" disabled type="text" placeholder="23764761536276" ng-model="mdtid" required>
+        </div>
+        <hr class="app-bootstrap-hr">
+        <div class="col-xs-12 app-white-input">
+            <label for="number2" class="app-white-input-label">设备手机号</label>
+            <input id="number2" type="text" disabled placeholder="请输入设备手机号" ng-model="telephone" required>
+        </div>
+        <div class="col-xs-12 app-content-title app-padding-zero">学校监管</div>
+        <div class="col-xs-12 app-white-input">
+            <label for="number3" class="app-white-input-label">宝贝姓名</label>
+            <input id="number3" type="text" placeholder="请输入宝贝姓名" ng-model="studentname" required>
+        </div>
+        <hr class="app-bootstrap-hr">
+        <div class="col-xs-12 app-white-input">
+            <label for="number4" class="app-white-input-label">班主任手机号</label>
+            <input id="number4" type="text" placeholder="请输入班主任手机号码" ng-model="teachertel" required>
+        </div>
 
 
-    <div class="col-xs-12 app-content-title app-padding-zero">学校监管</div>
-    <div class="col-xs-12 app-white-input">
-        <label for="number3" class="app-white-input-label">宝贝姓名</label>
-        <input id="number3" type="text" placeholder="请输入宝贝姓名">
-    </div>
-    <hr class="app-bootstrap-hr">
-    <div class="col-xs-12 app-white-input">
-        <label for="number4" class="app-white-input-label">班主任手机号</label>
-        <input id="number4" type="text" placeholder="请输入班主任手机号码">
-    </div>
+        <label style="display: block">
 
+            <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;">激活设备</div>
+            <button type="submit" style="display: none"></button>
+        </label>
 
-
-
-
-
-
-
-
-    <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;"><a href="/assets/module/activate/verifyText.html">激活设备</a></div>
-    <!--<div class="col-xs-12" style="margin-top: 1rem;">注：请输入设备背面、包装或说明书上的IMEI号的前14位数字、最后一位数字为核验码，不用输入！</div>-->
-    <!---->
-
+    </form>
 
 </div>
 
-
-
 </body>
 <script language="JavaScript" src="/assets/js/auto-set-rem.js"></script>
+<script language="javascript" src="/assets/js/toast.js"></script>
+<script language="javascript" src="/assets/js/angular-resource/angular-resource.js"></script>
 <script>
-    function goBack() {
-        window.history.go(-1);
-    }
+    var app = angular.module("app", ['ngResource']);
+    app.factory('guardianActiveService', ['$resource',
+        function ($resource) {
+            return {
+                guardianActive: function () {
+                    return $resource('/app/device/guardianActive', {}, {
+                        query: {
+                            method: 'GET', params: {}
+                        }
+                    })
+                }
+            }
+        }]);
+    app.controller("activeCtrl", ['$scope', 'guardianActiveService', function ($scope, guardianActiveService) {
+        $scope.goBack = function () {
+            window.history.go(-1);
+        };
+
+        function getUrlParams(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(decodeURI(r[2]));
+            return null; //返回参数值
+        }
+
+//        $scope.mdtid=getUrlParams('mdtid');
+//        $scope.telephone=getUrlParams('telephone');
+
+        $scope.submit = function () {
+
+            $scope.guardianActives = guardianActiveService.guardianActive().query({
+                mdtid: $scope.mdtid,
+                telephone: $scope.telephone,
+                studentname: $scope.studentname,
+                teachertel: $scope.teachertel,
+                token: localStorage.token
+            }).$promise.then(function (res) {
+                console.log(res)
+            })
+
+        }
+
+    }])
 </script>
 </html>

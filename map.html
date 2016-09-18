@@ -134,6 +134,8 @@
         if ("30010" == data.code) {
             token = data.data.token;
 
+            window.localStorage.appToken = data.data.token;
+
             $scope.deviceList = getDeviceList(token);
             $scope.deviceList = $scope.deviceList.data;
             console.log($scope.deviceList);

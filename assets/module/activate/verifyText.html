@@ -14,31 +14,128 @@
     <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
+    <script language="javascript" src="/assets/js/angular.min.js"></script>
 </head>
-<body style="height:100%;background-color: #eee;">
+<body style="height:100%;background-color: #eee;" ng-app="app" ng-controller="mapCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" onclick="goBack()"><i class="fa fa-arrow-left"></i></div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><i class="fa fa-arrow-left"></i></div>
         <div class="col-xs-4 text-center">填写验证码</div>
     </div>
 </div>
 <div class="container">
-    <div class="col-xs-12 text-center" style="padding: 2rem 0 1.5rem 0; font-size: 1.4rem; color: #333333;">请向设备管理员(1)索取验证码</div>
-    <div class="col-xs-12 app-white-input" style="line-height: 3rem">
-        <div class="col-xs-2"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"> </div>
-        <div class="col-xs-6"><input id="number" type="text" placeholder="2376" style="width: 100%; vertical-align: middle;"></div>
-        <div class="col-xs-4 app-blue-radius-button text-center">获取验证码</div>
-    </div>
-    
-    <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;font-size: 1.6rem;"><a
-            href="/assets/module/activate/success.html">添加</a></div>
+    <form ng-submit="submit()" name="form">
+        <div class="col-xs-12 text-center" style="padding: 2rem 0 1.5rem 0; font-size: 1.4rem; color: #333333;">
+            请向设备管理员(1)索取验证码
+        </div>
+        <div class="col-xs-12 app-white-input" style="line-height: 3rem">
+            <div class="col-xs-2"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
+            <div class="col-xs-6"><input id="number" type="text" placeholder="2376" required
+                                         style="width: 100%; vertical-align: middle;"></div>
+            <div class="col-xs-4 app-blue-radius-button text-center" ng-click="getCode()">{{text}}</div>
+        </div>
+
+        <label style="display: block">
+
+            <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;font-size: 1.6rem;">添加
+            </div>
+            <button type="submit" style="display: none"></button>
+        </label>
+    </form>
 </div>
 
 </body>
 <script language="JavaScript" src="/assets/js/auto-set-rem.js"></script>
+<script language="javascript" src="/assets/js/httpserver.js"></script>
+<script language="javascript" src="/assets/js/toast.js"></script>
+<script language="javascript" src="/assets/js/angular-resource/angular-resource.js"></script>
 <script>
-    function goBack() {
-        window.history.go(-1);
-    }
+
+
+    var app = angular.module("app", ['ngResource']);
+
+    app.factory('generateSMSCodeService', ['$resource',
+        function ($resource) {
+            return {
+                generateSMSCode: function () {
+                    return $resource('/app/device/generateSMSCode', {}, {
+                        save: {
+                            method: 'POST', params: {}
+                        }
+                    })
+                },
+                addGuardian: function () {
+                    return $resource('/app/user/addGuardian', {}, {
+                        save: {
+                            method: 'POST', params: {}
+                        }
+                    })
+                }
+
+            }
+        }]);
+    app.controller("mapCtrl", ['$scope', '$interval', 'generateSMSCodeService', function ($scope, $interval, generateSMSCodeService) {
+        $scope.goBack = function () {
+            window.history.go(-1);
+        };
+
+
+        $scope.text = '获取验证码';
+        $scope.verifyStatus = true;
+        $scope.getCode = function () {
+
+
+            if (!$scope.verifyStatus) return;
+            $scope.verifyStatus = false;
+
+            $scope.getVerifyCodeReq = generateSMSCodeService.generateSMSCode().save({
+                token: localStorage.token,
+                telephone: $scope.telephone,
+                admintelephone: $scope.telephone,
+                module: $scope.module,
+                mdtid: $scope.mdtid
+            });
+            $scope.getVerifyCodeReq.$promise.then(function (res) {
+                if (res.result == 10004) {
+                    Toast('发送成功');
+                    $scope.counter = 60;
+                    $scope.verifyStatus = false;
+                    var interval = $interval(function () {
+                        $scope.verifyText = $scope.counter + 's后可再发送';
+                        if ($scope.counter < 1) {
+                            $interval.cancel(interval);
+                            $scope.verifyStatus = true;
+                            $scope.verifyText = '发送验证码'
+                        }
+                        $scope.counter--;
+                    }, 1000)
+                } else {
+                    Toast(res.msg);
+                    $scope.verifyStatus = true;
+                }
+                console.log(res);
+            }).catch(function (error) {
+                $scope.$root.loading = false;
+                Toast('服务器开小差了~');
+                console.log(error);
+                $scope.verifyStatus = true;
+            })
+        };
+
+        $scope.submit=function () {
+            $scope.addGuardian=generateSMSCodeService.addGuardian().save({
+                token:localStorage.token,
+                admintelephone:$scope.admintelephone,
+                smscode:$scope.smscode,
+                deviceid:$scope. deviceid
+            }).$promise.then(function (res) {
+                if(res.code== 10080){
+                    window.location.href='/assets/module/activate/success.html'
+                }else{
+                    Toast(res.msg,3000);
+                }
+            })
+        }
+    }])
 </script>
 </html>
