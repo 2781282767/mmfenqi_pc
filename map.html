@@ -87,6 +87,9 @@
 
 <script>
 
+
+    var isMap = true;
+
     var app = angular.module("myApp", []);
     app.controller("mapCtrl", ['$scope','$interval',function ($scope,$interval) {
 
@@ -95,6 +98,8 @@
         $scope.changeBabyName = function (name, babyid) {
             $scope.babyName = name;
             $scope.babyid = babyid;
+
+            $scope.latlng = getTrack(token, $scope.babyid);
 
             $scope.isOpen=false;
         };
@@ -107,9 +112,10 @@
             $scope.isOpen = true;
 
         };
-        var isMap = true;
-        //var sid = getUrlParam("sid") || 'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
-        var sid='5RTnpUAfXuSDN3WjLtVfPDn82MBGdazZX_RZzIzVDNkEXa5j525aNB625j2gATTMZZDrHFuSAmlHTGqEqykgR-lMUFqTpMH8-k2DOxY4LseqhOA2GhjClGQftMIbMuWW8D-SIbaxza6schAi_axIpw';
+
+        //var sid = getUrlParam("sid") || 'gfJFBeDje5UN3yd_euMoB2BYMLQhczzBpug7kts0B_WaAsGMt7VcGofQLPpsizM86uOXppUN6u6jS-d2uaJ0buOOlfnYCSptSNw-j0J8mIz0lSb9eI8ZB0JdajTTE6mTYEQF5uypLZLAlNsrzIsR8Q';
+        //var sid='5RTnpUAfXuSDN3WjLtVfPDn82MBGdazZX_RZzIzVDNkEXa5j525aNB625j2gATTMZZDrHFuSAmlHTGqEqykgR-lMUFqTpMH8-k2DOxY4LseqhOA2GhjClGQftMIbMuWW8D-SIbaxza6schAi_axIpw';
+        var sid='gfJFBeDje5UN3yd_euMoB2BYMLQhczzBpug7kts0B_WaAsGMt7VcGofQLPpsizM86uOXppUN6u6jS-d2uaJ0buOOlfnYCSptSNw-j0J8mIz0lSb9eI8ZB0JdajTTE6mTYEQF5uypLZLAlNsrzIsR8Q';
         var data = doLogin(sid);
 //    function demo(requestUrl) {
 //        $.ajax({url:requestUrl,async : true}).then(successFunc, failureFunc);
@@ -145,11 +151,11 @@
             if (devices.length > 0) {
                 $scope.babyid = devices[0].babyid;
                 $scope.babyName = devices[0].babyname;
-                var latlng = getTrack(token, $scope.babyid);
+                $scope.latlng = getTrack(token, $scope.babyid);
                 var device = getDevice(token, $scope.babyid);
-                if ("10060" == latlng.code) {
-                    lng = latlng.data.lng;
-                    lat = latlng.data.lat;
+                if ("10060" == $scope.latlng.code) {
+                    lng = $scope.latlng.data.lng;
+                    lat = $scope.latlng.data.lat;
                 }
                 $("#btnCall").attr("href", "tel:" + devices[0].babytelephone);
             } else {
@@ -171,7 +177,7 @@
                     point = new BMap.Point(lng, lat);
                     map.centerAndZoom(point, 15);
                     marker.setPosition(point);  // 创建标注
-                    map.addOverlay(marker);               // 将标注添加到地图中
+                    map.addOverlay(marker);    // 将标注添加到地图中
                 }
             }
         };

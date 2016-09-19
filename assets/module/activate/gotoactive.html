@@ -87,8 +87,8 @@
             return null; //返回参数值
         }
 
-//        $scope.mdtid=getUrlParams('mdtid');
-//        $scope.telephone=getUrlParams('telephone');
+        $scope.mdtid=getUrlParams('mdtid');
+        $scope.telephone=getUrlParams('telephone');
 
         $scope.submit = function () {
 
@@ -99,7 +99,13 @@
                 teachertel: $scope.teachertel,
                 token: localStorage.token
             }).$promise.then(function (res) {
-                console.log(res)
+                console.log(res);
+                if(res.code==10150){
+                    $scope.endTime=res.enttime;
+                    window.location.href='/assets/module/activate/success.html?endTime='+$scope.endTime+''
+                }else{
+                    Toast(res.msg,'3000');
+                }
             })
 
         }

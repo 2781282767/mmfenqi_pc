@@ -10,9 +10,8 @@
     <meta name="format-detection" content="telephone=no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <title></title>
+    <title>成功</title>
     <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/assets/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body style="height:100%;background-color: #eee;">
@@ -22,18 +21,17 @@
     </div>
 </div>
 
-<div class="container">
+<div class="container" style="margin: 6rem 0;">
     <div class="col-xs-12 text-center">
         <img src="/assets/module/activate/images/success.png" style="width: 8rem; height: 8rem;">
     </div>
     <div class="col-xs-12 text-center"
          style="padding-top: 1.5rem; padding-bottom: 2rem; font-size: 1.7rem; color: #333;">激活成功！
     </div>
-    <div class="col-xs-12 text-center" style="font-size: 1.4rem; color: #666;"><span>套餐试用期至：</span><span
-            style="color: #02b4ed">2016-02-29</span></div>
+    <div class="col-xs-12 text-center" style="font-size: 1.4rem; color: #666;"><span>套餐试用期至：</span><span id="endTime"
+            style="color: #02b4ed"></span></div>
 
-    <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;font-size: 1.6rem;"><a
-            href="/assets/module/activate/success.html">添加</a></div>
+    <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;font-size: 1.6rem;" onclick="goTo()">添加</div>
 </div>
 
 
@@ -42,6 +40,20 @@
 <script>
     function goBack() {
         window.history.go(-1);
+    }
+    function getUrlParams(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+        var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+        if (r != null) return unescape(decodeURI(r[2]));
+        return null; //返回参数值
+    }
+
+    var endTime=getUrlParams('endTime');
+
+    document.getElementById('endTime').innerHTML=endTime;
+
+    function goTo() {
+        window.location.href='/map.html'
     }
 </script>
 </html>

@@ -26,7 +26,7 @@
 <div class="container">
     <form ng-submit="submit()" name="form">
         <div class="col-xs-12 text-center" style="padding: 2rem 0 1.5rem 0; font-size: 1.4rem; color: #333333;">
-            请向设备管理员(1)索取验证码
+            请向设备管理员({{admintelephone}})索取验证码
         </div>
         <div class="col-xs-12 app-white-input" style="line-height: 3rem">
             <div class="col-xs-2"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
@@ -80,6 +80,23 @@
         };
 
 
+        function getUrlParams(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(decodeURI(r[2]));
+            return null; //返回参数值
+        }
+
+
+        $scope.admintelephone=getUrlParams('admintelephone');
+
+        $scope.deviceid=getUrlParams('deviceid');
+
+        $scope.mdtid=getUrlParams('mdtid');
+
+        $scope.telephone=getUrlParams('telephone');
+
+
         $scope.text = '获取验证码';
         $scope.verifyStatus = true;
         $scope.getCode = function () {
@@ -91,8 +108,8 @@
             $scope.getVerifyCodeReq = generateSMSCodeService.generateSMSCode().save({
                 token: localStorage.token,
                 telephone: $scope.telephone,
-                admintelephone: $scope.telephone,
-                module: $scope.module,
+                admintelephone: $scope.admintelephone,
+                module: 'scandevice',
                 mdtid: $scope.mdtid
             });
             $scope.getVerifyCodeReq.$promise.then(function (res) {
@@ -127,10 +144,10 @@
                 token:localStorage.token,
                 admintelephone:$scope.admintelephone,
                 smscode:$scope.smscode,
-                deviceid:$scope. deviceid
+                deviceid:$scope.deviceid
             }).$promise.then(function (res) {
                 if(res.code== 10080){
-                    window.location.href='/assets/module/activate/success.html'
+                    window.location.href='/map.html'
                 }else{
                     Toast(res.msg,3000);
                 }
