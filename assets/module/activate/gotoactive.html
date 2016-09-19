@@ -97,11 +97,11 @@
                 telephone: $scope.telephone,
                 studentname: $scope.studentname,
                 teachertel: $scope.teachertel,
-                token: localStorage.token
+                token: localStorage.appToken
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code==10150){
-                    $scope.endTime=res.enttime;
+                    $scope.endTime=res.data.endtime;
                     window.location.href='/assets/module/activate/success.html?endTime='+$scope.endTime+''
                 }else{
                     Toast(res.msg,'3000');

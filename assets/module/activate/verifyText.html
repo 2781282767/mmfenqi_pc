@@ -30,7 +30,7 @@
         </div>
         <div class="col-xs-12 app-white-input" style="line-height: 3rem">
             <div class="col-xs-2"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
-            <div class="col-xs-6"><input id="number" type="text" placeholder="2376" required
+            <div class="col-xs-6"><input id="number" type="text" placeholder="2376" required ng-model="smscode"
                                          style="width: 100%; vertical-align: middle;"></div>
             <div class="col-xs-4 app-blue-radius-button text-center" ng-click="getCode()">{{text}}</div>
         </div>
@@ -67,7 +67,7 @@
                 addGuardian: function () {
                     return $resource('/app/user/addGuardian', {}, {
                         save: {
-                            method: 'POST', params: {}
+                            method: 'GET', params: {}
                         }
                     })
                 }
@@ -106,7 +106,7 @@
             $scope.verifyStatus = false;
 
             $scope.getVerifyCodeReq = generateSMSCodeService.generateSMSCode().save({
-                token: localStorage.token,
+                token: localStorage.appToken,
                 telephone: $scope.telephone,
                 admintelephone: $scope.admintelephone,
                 module: 'scandevice',
@@ -141,11 +141,12 @@
 
         $scope.submit=function () {
             $scope.addGuardian=generateSMSCodeService.addGuardian().save({
-                token:localStorage.token,
+                token:localStorage.appToken,
                 admintelephone:$scope.admintelephone,
                 smscode:$scope.smscode,
                 deviceid:$scope.deviceid
             }).$promise.then(function (res) {
+                console.log(res);
                 if(res.code== 10080){
                     window.location.href='/map.html'
                 }else{
