@@ -42,7 +42,7 @@ function getDeviceList(token){
 }
 
 function getDevice(token,babyid){
-    return getJsonValue("/router/device?token=" + token+"&babyid="+babyid);
+    return getJsonValue("/app/object/getBaby?token=" + token+"&babyid="+babyid);
 }
 
 function getTrack(token,babyid){
@@ -50,7 +50,7 @@ function getTrack(token,babyid){
 }
 
 function getHomes(token,babyid){
-    return getJsonValue("/router/homes?token=" + token+"&babyid="+babyid)
+    return getJsonValue("/app/object/getGuardians?token=" + token+"&babyid="+babyid)
 }
 
 

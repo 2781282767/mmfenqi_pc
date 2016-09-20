@@ -148,7 +148,7 @@
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code== 10080){
-                    window.location.href='/map.html'
+                    window.location.href='/map.html?isopen=true'
                 }else{
                     Toast(res.msg,3000);
                 }

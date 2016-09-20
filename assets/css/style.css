@@ -271,7 +271,7 @@ ul li .pull-right{
     position:absolute;
     right:10px;
     bottom:120px;
-    z-index:1001;
+    z-index:3;
     background:#fff;
     color: #1fb5eb;
     text-align: center;
