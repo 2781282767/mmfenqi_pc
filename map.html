@@ -46,12 +46,12 @@
 
 
     .layer_content .header{
-        height:10%;
+        padding: 1rem 0;
         background-color: #ffffff;
         text-align: center;
         color: #333;
         font-size: 1.4rem;
-        line-height: 100%;
+        /*line-height: 100%;*/
         /*padding: 2rem 0;*/
         border-top-left-radius: 5px;
         border-top-right-radius: 5px;
@@ -140,7 +140,7 @@
             <div class="tooltips-device-name" ng-repeat="x in deviceList"
                  ng-click="changeBabyName(x.babyname,x.babyid,x.babytelephone)">
 
-                <img ng-src="{{x.headimg}}">
+                <img ng-src="media{{x.headimg}}" style="width: 30px; height: 30px; vertical-align: middle;">
                 <span>{{x.babyname}}</span>
 
             </div>
@@ -150,10 +150,14 @@
 
     <a class="btn-battery">
         <!--<i class="fa fa-battery-2"></i>-->
-        <img src="/assets/images/dian1.png" style="width: 36px; height: 36px;" alt="">
+        <img src="/assets/images/dian.png" style="width: 36px; height: 36px;" ng-if="powervalue==0">
+        <img src="/assets/images/dian1.png" style="width: 36px; height: 36px;" ng-if="powervalue==1">
+        <img src="/assets/images/dian2.png" style="width: 36px; height: 36px;" ng-if="powervalue==2">
+        <img src="/assets/images/dian3.png" style="width: 36px; height: 36px;" ng-if="powervalue==3">
+        <img src="/assets/images/dian4.png" style="width: 36px; height: 36px;" ng-if="powervalue==4">
     </a>
 
-    <a class="btn-phone" id="btnCall" tel="{{babytelephone}}">
+    <a class="btn-phone" id="btnCall">
         <!--<i class="fa fa-volume-control-phone"></i>-->
         <i class="fa fa-volume-control-phone"></i>
         <p>通话</p>
@@ -164,11 +168,42 @@
         <p>定位</p>
     </a>
 
-    <abcd config="config" isopen="isopen" sure="sure()"></abcd>
+    <div ng-if="isopen">
+        <div class="_z"></div>
+        <div class="layer_content">
+            <div class="header">
+                <div class="title">{{config.title}}</div>
+                <div class="cancel" ng-click="cancel()" ng-if="config.no"><img src="modules/bill/img/X.png"></div>
+            </div>
+            <div class="layer_content2" style="{{config.style}}">
+                <div style=" margin: 0 1rem; background: #eeeeee; padding: 1rem 0; overflow: hidden;margin-bottom: 1rem;" ng-repeat="x in list" ng-click='changeAge(x.familystatus,x.ds)'>
+
+                    <div style="float: left; width: 40%; text-align: center">
+
+                        <img ng-src="{{x.img1}}"  style="width: 5.5rem; vertical-align: middle;"  ng-if="x.check==true">
+
+                        <img ng-src="{{x.img}}"  style="width: 5.5rem; vertical-align: middle;"  ng-if="x.check==false">
+
+                    </div>
+
+                    <div style="float: left; padding: 1.5rem 0;">
+                        <div style="color: #333333; font-size: 1.7rem; height: 1.5rem;" ng-if="x.title!='家庭'">我是{{x.familystatus}}</div>
+                        <div style="color: #333333; font-size: 1.7rem; height: 1.5rem;" ng-if="x.title=='家庭'">{{x.familystatus}}</div>
+                        <div style="color: #333333; font-size: 1rem;">{{x.ds}}</div>
+                    </div>
+
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
 
 </div>
 
-<script language="javascript" src="assets/js/common.js"></script>
+<script language="javascript" src="/assets/js/common.js"></script>
+<script language="javascript" src="/assets/js/toast.js"></script>
 <script language="javascript" src="/assets/js/angular-resource/angular-resource.js"></script>
 
 
@@ -182,106 +217,93 @@
         function ($resource) {
             return {
                 doLogin: function () {
-                    return $resource('/router/login', {}, {
+                    return $resource('/apph5/user/login', {}, {
                         query: {
                             method: 'GET', params: {}
                         }
                     })
                 },
                 getDeviceList: function () {
-                    return $resource('/router/devices', {}, {
+                    return $resource('/app/object/getBabys', {}, {
                         query: {
                             method: 'GET', params: {}
                         }
                     })
                 },
                 getTrack: function () {
-                    return $resource('/router/track', {}, {
+                    return $resource('/app/map/getCurrentTrack', {}, {
                         query: {
                             method: 'GET', params: {}
                         }
                     })
-                }
+                },
+                getGuardians: function () {
+                    return $resource('/app/object/getGuardians', {}, {
+                        query: {
+                            method: 'GET', params: {}
+                        }
+                    })
+                },
+                saveGuardians: function () {
+                    return $resource('/app/object/saveGuardian', {}, {
+                        query: {
+                            method: 'GET', params: {}
+                        }
+                    })
+                },
+                getCurrentPower: function () {
+                    return $resource('/app/alarm/getCurrentPower', {}, {
+                        query: {
+                            method: 'GET', params: {}
+                        }
+                    })
+                },
+
             }
         }]);
 
 
-    app.directive('abcd',function () {
-        return{
-            restrict:'EA',
-            template:`
-                       <div ng-if="isopen">
-                            <div class="_z" ng-click="cancel()"></div>
-                            <div class="layer_content">
-                                <div class="header">
-                                    <div class="title">{{config.title}}</div>
-                                    <div class="cancel" ng-click="cancel()" ng-if="config.no"><img src="modules/bill/img/X.png"></div>
-                                </div>
-                                <div class="layer_content2" style="{{config.style}}">
-                                    <div style="border: 1px solid red; margin: 0 1rem; background: #eeeeee; padding: 1rem 0; overflow: hidden;margin-bottom: 1rem;" ng-repeat="x in list">
-
-                                            <div style="float: left; width: 40%; text-align: center">
-
-                                            <img src="/assets/images/bind/ye.png" alt="" style="width: 5.5rem; vertical-align: middle; ">
-
-                                            </div>
-
-                                             <div style="float: left; padding: 1.5rem 0;">
-                                                 <div style="color: #333333; font-size: 1.7rem; height: 1.5rem;">{{x.title}}</div>
-                                                 <div style="color: #333333; font-size: 1rem;">此称呼对应为设备按键</div>
-                                             </div>
-
-                                    </div>
 
 
 
-                                </div>
-                                <div class="t_foot" ng-if="{{config.Btn}}">
-                                    <div class="btn cancel_btn" style="{{config.styleBtn}}" ng-click="sure()">{{config.btn1}}</div>
-                                    <div ng-if="config.btn2" class="btn sure_btn" ng-click="cancel()">{{config.btn2}}</div>
-                                </div>
-                            </div>
-                        </div>
-`,
-            replace:false,
-            scope:{
-                isopen:'=isopen',
-                config:'=config',
-                sure:'&'
-
-            },
-            link:function (scope, element, attrs, controller) {
-
-                scope.list=[
-                    {img:'/assets/images/bind/ye.png',title:'爸爸',ds:'sss'},
-                    {img:'/assets/images/bind/ye.png',title:'爸爸',ds:'sss'},
-                    {img:'/assets/images/bind/ye.png',title:'爸爸',ds:'sss'},
-                    {img:'/assets/images/bind/ye.png',title:'爸爸',ds:'sss'}
-                ];
-                scope.$watch('isOpen', function() {
-
-                });
-                element.bind('click',function () {
-
-                });
-
-                scope.cancel=function () {
-                    scope.isopen=false;
-                }
-
-
-            }
-        }
-    });
     app.controller("mapCtrl", ['$scope','$interval','mapService',function ($scope,$interval,mapService) {
 
 
         /*弹框*/
 
-        $scope.isopen=true;
+
+        $scope.list=[
+            {id:0,img:'/assets/images/bind/baba.png',img1:'/assets/images/bind/baba1.png',familystatus:'爸爸',ds:'此称呼对应为设备按键'},
+            {id:1,img:'/assets/images/bind/ma.png',img1:'/assets/images/bind/ma1.png',familystatus:'妈妈',ds:'此称呼对应为设备按键'},
+            {id:2,img:'/assets/images/bind/family.png',img1:'/assets/images/bind/family1.png',familystatus:'家庭',ds:'此称呼对应为设备按键'},
+            {id:3,img:'/assets/images/bind/gege.png',img1:'/assets/images/bind/gege1.png',familystatus:'哥哥',ds:'此称呼对应为家庭成员'},
+            {id:4,img:'/assets/images/bind/jiejie.png',familystatus:'姐姐',img1:'/assets/images/bind/jiejie1.png',ds:'此称呼对应为家庭成员'},
+            {img:'/assets/images/bind/tr.png',img1:'/assets/images/bind/tr1.png',familystatus:'班主任',ds:'仅作为添加班主任时使用'},
+            {img:'/assets/images/bind/shu.png',img1:'/assets/images/bind/shu1.png',familystatus:'叔叔',ds:'此称呼对应为家庭成员'},
+            {img:'/assets/images/bind/ye.png',img1:'/assets/images/bind/ye1.png',familystatus:'爷爷',ds:'此称呼对应为家庭成员'},
+            {img:'/assets/images/bind/nai.png',img1:'/assets/images/bind/nai1.png',familystatus:'奶奶',ds:'此称呼对应为家庭成员'},
+            {img:'/assets/images/bind/wai.png',img1:'/assets/images/bind/wai1.png',familystatus:'外公',ds:'此称呼对应为家庭成员'},
+            {img:'/assets/images/bind/waipo.png',img1:'/assets/images/bind/waipo1.png',familystatus:'外婆',ds:'此称呼对应为家庭成员'}
+        ];
+
+        $scope.getUrlParam=function(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg);  //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        };
+
+        if(!getUrlParam('isopen')){
+            $scope.isopen=true;
+        }else{
+            $scope.isopen=true;
+        }
+
+        $scope.checked=false;
+
+
 
         $scope.config={
-            title:'提示',
+            title:'选择成员关系',
             content:'身份证反面可以查看该时间',
             btn1:'我知道了',
             no:false,
@@ -300,6 +322,7 @@
 
 
 
+
         $scope.isOpen = false;
         $scope.changeBabyName = function (name, babyid,babytelephone) {
             $scope.babyName = name;
@@ -307,7 +330,14 @@
             $scope.babytelephone=babytelephone;
             $scope.isOpen=false;
 
-            $scope.getTrack()
+            $scope.getTrack(function () {
+                $scope.getCurrentPower(function () {
+                    $scope.getGuardians(function () {
+
+
+                    });
+                })
+            })
         };
 
         $scope.open = function () {
@@ -323,8 +353,10 @@
         var lat = 0;
         var lng = 0;
         //var sid = getUrlParam("sid") || 'gfJFBeDje5UN3yd_euMoB2BYMLQhczzBpug7kts0B_WaAsGMt7VcGofQLPpsizM86uOXppUN6u6jS-d2uaJ0buOOlfnYCSptSNw-j0J8mIz0lSb9eI8ZB0JdajTTE6mTYEQF5uypLZLAlNsrzIsR8Q';
-        var sid='5RTnpUAfXuSDN3WjLtVfPDn82MBGdazZX_RZzIzVDNkEXa5j525aNB625j2gATTMZZDrHFuSAmlHTGqEqykgR-lMUFqTpMH8-k2DOxY4LseqhOA2GhjClGQftMIbMuWW8D-SIbaxza6schAi_axIpw';
+        //var sid='5RTnpUAfXuSDN3WjLtVfPDn82MBGdazZX_RZzIzVDNkEXa5j525aNB625j2gATTMZZDrHFuSAmlHTGqEqykgR-lMUFqTpMH8-k2DOxY4LseqhOA2GhjClGQftMIbMuWW8D-SIbaxza6schAi_axIpw';
         //var sid='gfJFBeDje5UN3yd_euMoB2BYMLQhczzBpug7kts0B_WaAsGMt7VcGofQLPpsizM86uOXppUN6u6jS-d2uaJ0buOOlfnYCSptSNw-j0J8mIz0lSb9eI8ZB0JdajTTE6mTYEQF5uypLZLAlNsrzIsR8Q';
+
+        var sid='O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
 
 
         $scope.doLogin=function (success) {
@@ -360,7 +392,35 @@
             })
         };
 
-        $scope.getTrack=function () {
+        $scope.getCurrentPower=function (success) {
+            mapService.getCurrentPower().query({
+                token:$scope.token,
+                babyid:$scope.babyid
+            }).$promise.then(function (res) {
+
+                console.log(res);
+
+                if(res.code==10011){
+                    $scope.powervalue=0;
+                }else{
+
+                    $scope.powervalue=res.data.powerValue;
+
+
+                    console.log($scope.powervalue);
+                }
+
+                return success();
+
+            })
+
+        };
+
+
+
+
+
+        $scope.getTrack=function (success) {
             mapService.getTrack().query({
                 token:$scope.token,
                 babyid:$scope.babyid
@@ -376,25 +436,159 @@
                     map.centerAndZoom(point, 15);
                     marker.setPosition(point);  // 创建标注
                     map.addOverlay(marker);    // 将标注添加到地图中
-                    //return success();
                 }
-                //$("#btnCall").attr("href", "tel:" + $scope.devices[0].babytelephone);
+                $("#btnCall").attr("href", "tel:" + $scope.babytelephone);
+                return success();
 
             })
+        };
+
+
+        $scope.getGuardians=function (success) {
+            mapService.getGuardians().query({
+                token:$scope.token,
+                babyid:$scope.babyid
+
+            }).$promise.then(function (res) {
+                console.log(res);
+
+                if(res.code==10068){
+                    $scope.guardiansList=res.data;
+                    console.log($scope.guardiansList);
+                    console.log($scope.list);
+                    var _arry=[];
+
+                    for(var y in $scope.list){
+
+                        var status='check';
+                        var id='id';
+
+                        $scope.list[y][status] = false;
+                        for(var x in $scope.guardiansList){
+
+                            //console.log($scope.guardiansList[x].familystatus)
+                            if($scope.guardiansList[x].familystatus==$scope.list[y].familystatus){
+
+
+                                $scope.list[y][status] = true;
+
+                                $scope.list[y][id]=$scope.guardiansList[x].guardianid;
+                                console.log($scope.list);
+
+                                //$scope.arrPush($scope.list,$scope.guardiansList);
+
+                                break;
+                            }
+
+
+                            //console.log(_arry);
+
+                        }
+
+
+                    }
+
+
+
+
+//                    for(var x in $scope.guardiansList){
+//                        for(var y in $scope.list){
+//                            $scope.list[y][status] = false;
+//                            if($scope.guardiansList[x].familystatus==$scope.list[y].familystatus){
+//
+//                                $scope.list[y][status] = true;
+//
+//                                console.log($scope.list);
+//                                //_arry.push($.extend($scope.list[x],$scope.guardiansList[y]));
+//
+//                                $scope.arrPush($scope.list[x],$scope.guardiansList[y]);
+//                                break;
+//                            }
+//                        }
+//
+//                    }
+                }else{
+                    $scope.guardianid='';
+                }
+
+
+                return success();
+
+            });
+        };
+
+
+        var _arry=[];
+
+
+        $scope.arrPush = function(valueX,valueY){
+            var a = valueX;
+            var b = valueY;
+            _arry.push(a,b)
+
+            console.log(_arry);
+        }
+
+
+
+
+
+
+        $scope.saveGuardians=function () {
+            mapService.saveGuardians().query({
+                guardianid:$scope.guardianid,
+                familystatus:$scope.title,
+                telephone:$scope.babytelephone,
+                babyid:$scope.babyid,
+                token:$scope.token,
+            }).$promise.then(function (res) {
+                console.log(res);
+
+                if(res.code==10064){
+                    $scope.isopen=false;
+
+                }else{
+                    Toast(res.msg,3000);
+                }
+
+            })
+        };
+
+        $scope.changeAge=function (title,ds) {
+
+            $scope.title=title;
+            $scope.saveGuardians();
+
+
         };
 
 
         $scope.showPoint=function () {
 
-            $scope.getTrack();
+            $scope.getTrack(function () {
+                $scope.getCurrentPower(function () {
+                    $scope.getGuardians(function () {
+
+
+                    });
+                })
+            });
         };
 
 
         $scope.doLogin(function () {
             $scope.getDeviceList(function () {
-                $scope.getTrack();
+                $scope.getTrack(function () {
+                    $scope.getCurrentPower(function () {
+                        $scope.getGuardians(function () {
+
+
+                        });
+                    })
+
+                });
             })
-            
+
         });
 
         $interval($scope.showPoint,5550000);
@@ -405,6 +599,8 @@
             }
         }
         }]);
+
+
 
 </script>
 <script language="javascript" src="/assets/js/app.js"></script>
