@@ -19,8 +19,8 @@
 <body style="height:100%;background-color: #eee;" ng-app="app" ng-controller="mapCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" ng-click="goBack()"><i class="fa fa-arrow-left"></i></div>
-        <div class="col-xs-4 text-center">填写验证码</div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><img src="/assets/images/back.png" style="width: 1.7rem; height: 1.6rem;"></div>
+        <div class="col-xs-8 text-left title-size">填写验证码</div>
     </div>
 </div>
 <div class="container">
@@ -29,10 +29,12 @@
             请向设备管理员({{admintelephone}})索取验证码
         </div>
         <div class="col-xs-12 app-white-input" style="line-height: 3rem">
-            <div class="col-xs-2"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
-            <div class="col-xs-6"><input id="number" type="text" placeholder="2376" required ng-model="smscode"
+            <div class="col-xs-1" style="margin-right: 10px; padding-left: 0;"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
+            <div class="col-xs-6" style="padding-left:  0; margin-right: 10px;"><input id="number" type="text" placeholder="验证码" required ng-model="smscode"
                                          style="width: 100%; vertical-align: middle;"></div>
-            <div class="col-xs-4 app-blue-radius-button text-center" ng-click="getCode()">{{text}}</div>
+            <div class="col-xs-4 text-right" style="padding: 0 ;" ng-click="getCode()">
+                <div class="app-blue-radius-button" style="text-align: center;">{{verifyText}}</div>
+            </div>
         </div>
 
         <label style="display: block">
@@ -60,7 +62,7 @@
                 generateSMSCode: function () {
                     return $resource('/app/device/generateSMSCode', {}, {
                         save: {
-                            method: 'POST', params: {}
+                            method: 'GET', params: {}
                         }
                     })
                 },
@@ -97,7 +99,7 @@
         $scope.telephone=getUrlParams('telephone');
 
 
-        $scope.text = '获取验证码';
+        $scope.verifyText = '获取验证码';
         $scope.verifyStatus = true;
         $scope.getCode = function () {
 
@@ -113,16 +115,16 @@
                 mdtid: $scope.mdtid
             });
             $scope.getVerifyCodeReq.$promise.then(function (res) {
-                if (res.result == 10004) {
+                if (res.code== 10004) {
                     Toast('发送成功');
-                    $scope.counter = 60;
+                    $scope.counter = 120;
                     $scope.verifyStatus = false;
                     var interval = $interval(function () {
                         $scope.verifyText = $scope.counter + 's后可再发送';
                         if ($scope.counter < 1) {
                             $interval.cancel(interval);
                             $scope.verifyStatus = true;
-                            $scope.verifyText = '发送验证码'
+                            $scope.verifyText = '获取验证码'
                         }
                         $scope.counter--;
                     }, 1000)
@@ -148,7 +150,7 @@
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code== 10080){
-                    window.location.href='/map.html?isopen=true'
+                    window.location.href='/map.html?isopen=true&telephone='+$scope.telephone+''
                 }else{
                     Toast(res.msg,3000);
                 }

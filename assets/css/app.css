@@ -67,6 +67,10 @@ td {
     width: 100%;
 }
 
+.app-white-input input{
+    width: 60%;
+}
+
 .margin-one{
     margin: 1rem 0;
 }
@@ -74,17 +78,17 @@ td {
 .app-pink-radius-button {
     background-color: #1eb5eb;
     color: #FFFFFF;
-    border-radius: 0;
     font-size: 1.4rem;
     padding: 1rem 0;
+    border-radius: 3px;
 }
 
 .app-blue-radius-button{
     background-color: #1eb5eb;
     color: #FFFFFF;
-    border-radius: 0;
+    border-radius: 3px;
     font-size: 1rem;
-    padding: 0 1rem;
+    min-width: 7rem;
 }
 
 .app-little-pink-radius-button {
@@ -121,4 +125,8 @@ td {
     width: 33%;
     text-align: right;
     margin-right: 1rem;
+}
+
+.title-size{
+    font-size: 1.7rem;
 }
