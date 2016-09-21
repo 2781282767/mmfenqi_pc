@@ -5,14 +5,16 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>随寻</title>
+    <title></title>
     <link type="text/css" rel="stylesheet" href="assets/css/style.css">
     <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/assets/bower_components/bootstrap/dist/css/bootstrap.css">
     <script type="text/javascript"
             src="http://api.map.baidu.com/api?v=2.0&ak=Rs3MsZBDNuaSFqlhGuN2qcgpEEwurbEK"></script>
     <script language="javascript" src="/assets/js/angular.min.js"></script>
     <script language="javascript" src="/assets/lib/js/jquery-2.2.4.min.js"></script>
+
 </head>
 <style>
     ._z{
@@ -37,8 +39,8 @@
         height: auto;
         left: 0;
         right: 0;
-        top: 20%;
-        bottom: 20%;
+        top: 10%;
+        bottom: 10%;
         margin: auto;
         border-radius: 10%;
         z-index: 100;
@@ -77,6 +79,9 @@
         border-bottom: 1px solid #dddddd;
         font-size: 1.2rem;
         overflow-y: scroll;
+        border-bottom-left-radius: 5px;
+        border-bottom-right-radius: 5px;
+
 
 
     }
@@ -116,18 +121,30 @@
 
     }
 </style>
-<body>
+<body ng-app="app" ng-controller="mapCtrl">
 
-<div class="container" ng-app="app" ng-controller="mapCtrl">
-    <div class="position-bar">
-        <h4 id="lblPosition">
-            <div ng-click="open()"><span id="babyName">{{babyName}} <i ng-hide="isOpen" class="fa fa-caret-up"></i><i
-                    ng-show="isOpen" class="fa fa-caret-down"></i></span></div>
+<div>
+    <!--<div class="position-bar">-->
+        <!--<div id="lblPosition">-->
+            <!--<div ng-click="open()"><span id="babyName" style="font-size: 1.7rem;">{{babyName}} <i ng-hide="isOpen" class="fa fa-caret-down"></i><i-->
+                    <!--ng-show="isOpen" class="fa fa-caret-up"></i></span></div>-->
 
-            <a class="btn-account" href="#" ng-click="viewInfo()">
-                <i class="fa fa-user"></i>
-            </a>
-        </h4>
+            <!--<a class="btn-account" href="#" ng-click="viewInfo()">-->
+                <!--<i class="fa fa-user"></i>-->
+            <!--</a>-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <div class="container" style="background-color: #ffffff;">
+        <div class="row" style="padding: 1rem 0;">
+            <div class="col-xs-4 text-left" ng-click="goBack()"></div>
+            <div class="col-xs-4 text-center title-size" ng-click="open()"><span id="babyName" style="font-size: 1.7rem;">{{babyName}} <i ng-hide="isOpen" class="fa fa-caret-down"></i><i
+                    ng-show="isOpen" class="fa fa-caret-up"></i></span></div>
+            
+            <div class="col-xs-4 text-right" ng-click="viewInfo()">
+                <img src="/assets/images/user.png" style="width: 2.2rem" >
+            </div>
+        </div>
     </div>
     <div class="content" ng-click="open()">
         <div class="map-container" id="allmap">
@@ -140,8 +157,8 @@
             <div class="tooltips-device-name" ng-repeat="x in deviceList"
                  ng-click="changeBabyName(x.babyname,x.babyid,x.babytelephone)">
 
-                <img ng-src="media{{x.headimg}}" style="width: 30px; height: 30px; vertical-align: middle;">
-                <span>{{x.babyname}}</span>
+                <div style="width: 40%; float: left; text-align: right;"><img ng-src="media{{x.headimg}}" style="width: 3rem; height: 3rem; border-radius: 50%; vertical-align: middle;"></div>
+                <div style="width: 60%; float:left; text-align: left;"><span style="font-size: 1.4rem; margin-left: 1rem;">{{x.babyname}}</span></div>
 
             </div>
         </div>
@@ -150,29 +167,31 @@
 
     <a class="btn-battery">
         <!--<i class="fa fa-battery-2"></i>-->
-        <img src="/assets/images/dian.png" style="width: 36px; height: 36px;" ng-if="powervalue==0">
-        <img src="/assets/images/dian1.png" style="width: 36px; height: 36px;" ng-if="powervalue==1">
-        <img src="/assets/images/dian2.png" style="width: 36px; height: 36px;" ng-if="powervalue==2">
-        <img src="/assets/images/dian3.png" style="width: 36px; height: 36px;" ng-if="powervalue==3">
-        <img src="/assets/images/dian4.png" style="width: 36px; height: 36px;" ng-if="powervalue==4">
+        <img src="/assets/images/dian.png" style="width: 2.2rem; height: 2.2rem;" ng-if="powervalue==0">
+        <img src="/assets/images/dian1.png" style="width: 2.2rem; height: 2.2rem;" ng-if="powervalue==1">
+        <img src="/assets/images/dian2.png" style="width: 2.2rem; height: 2.2rem;" ng-if="powervalue==2">
+        <img src="/assets/images/dian3.png" style="width: 2.2rem; height: 2.2rem;" ng-if="powervalue==3">
+        <img src="/assets/images/dian4.png" style="width: 2.2rem; height: 2.2rem;" ng-if="powervalue==4">
     </a>
 
-    <a class="btn-phone" id="btnCall">
-        <!--<i class="fa fa-volume-control-phone"></i>-->
-        <i class="fa fa-volume-control-phone"></i>
-        <p>通话</p>
-    </a>
+    <div class="btn-phone">
+        <a id="btnCall" href="tel:{{babytelephone}}">
+            <!--<i class="fa fa-volume-control-phone"></i>-->
+            <img src="/assets/images/phone.png"  style="width: 2.8rem;">
+            <div>通话</div>
+        </a>
+    </div>
 
-    <a class="btn-location" href="#" ng-click="showPoint()">
-        <i class="fa fa-map-marker"></i>
-        <p>定位</p>
-    </a>
+    <div class="btn-location"  ng-click="showPoint()">
+        <img src="/assets/images/dingwei.png"  style="width: 2.8rem;">
+        <div>定位</div>
+    </div>
 
     <div ng-if="isopen">
         <div class="_z"></div>
         <div class="layer_content">
             <div class="header">
-                <div class="title">{{config.title}}</div>
+                <div class="title" style="font-size: 1.7rem; color: #01b4ee;">{{config.title}}</div>
                 <div class="cancel" ng-click="cancel()" ng-if="config.no"><img src="modules/bill/img/X.png"></div>
             </div>
             <div class="layer_content2" style="{{config.style}}">
@@ -186,9 +205,9 @@
 
                     </div>
 
-                    <div style="float: left; padding: 1.5rem 0;">
-                        <div style="color: #333333; font-size: 1.7rem; height: 1.5rem;" ng-if="x.title!='家庭'">我是{{x.familystatus}}</div>
-                        <div style="color: #333333; font-size: 1.7rem; height: 1.5rem;" ng-if="x.title=='家庭'">{{x.familystatus}}</div>
+                    <div style="float: left; padding: 1rem 0;">
+                        <div style="color: #333333; font-size: 1.6rem;" ng-if="x.title!='家庭'">我是{{x.familystatus}}</div>
+                        <div style="color: #333333; font-size: 1.6rem;" ng-if="x.title=='家庭'">{{x.familystatus}}</div>
                         <div style="color: #333333; font-size: 1rem;">{{x.ds}}</div>
                     </div>
 
@@ -251,6 +270,15 @@
                         }
                     })
                 },
+                saveBaby: function () {
+                    return $resource('/app/object/saveBaby', {}, {
+                        query: {
+                            method: 'GET', params: {}
+                        }
+                    })
+                },
+
+
                 getCurrentPower: function () {
                     return $resource('/app/alarm/getCurrentPower', {}, {
                         query: {
@@ -267,24 +295,8 @@
 
 
     app.controller("mapCtrl", ['$scope','$interval','mapService',function ($scope,$interval,mapService) {
-
-
         /*弹框*/
 
-
-        $scope.list=[
-            {id:0,img:'/assets/images/bind/baba.png',img1:'/assets/images/bind/baba1.png',familystatus:'爸爸',ds:'此称呼对应为设备按键'},
-            {id:1,img:'/assets/images/bind/ma.png',img1:'/assets/images/bind/ma1.png',familystatus:'妈妈',ds:'此称呼对应为设备按键'},
-            {id:2,img:'/assets/images/bind/family.png',img1:'/assets/images/bind/family1.png',familystatus:'家庭',ds:'此称呼对应为设备按键'},
-            {id:3,img:'/assets/images/bind/gege.png',img1:'/assets/images/bind/gege1.png',familystatus:'哥哥',ds:'此称呼对应为家庭成员'},
-            {id:4,img:'/assets/images/bind/jiejie.png',familystatus:'姐姐',img1:'/assets/images/bind/jiejie1.png',ds:'此称呼对应为家庭成员'},
-            {img:'/assets/images/bind/tr.png',img1:'/assets/images/bind/tr1.png',familystatus:'班主任',ds:'仅作为添加班主任时使用'},
-            {img:'/assets/images/bind/shu.png',img1:'/assets/images/bind/shu1.png',familystatus:'叔叔',ds:'此称呼对应为家庭成员'},
-            {img:'/assets/images/bind/ye.png',img1:'/assets/images/bind/ye1.png',familystatus:'爷爷',ds:'此称呼对应为家庭成员'},
-            {img:'/assets/images/bind/nai.png',img1:'/assets/images/bind/nai1.png',familystatus:'奶奶',ds:'此称呼对应为家庭成员'},
-            {img:'/assets/images/bind/wai.png',img1:'/assets/images/bind/wai1.png',familystatus:'外公',ds:'此称呼对应为家庭成员'},
-            {img:'/assets/images/bind/waipo.png',img1:'/assets/images/bind/waipo1.png',familystatus:'外婆',ds:'此称呼对应为家庭成员'}
-        ];
 
         $scope.getUrlParam=function(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
@@ -292,15 +304,9 @@
             if (r != null) return unescape(r[2]); return null; //返回参数值
         };
 
-        if(!getUrlParam('isopen')){
-            $scope.isopen=true;
-        }else{
-            $scope.isopen=true;
-        }
-
-        $scope.checked=false;
 
 
+        //$scope.checked=false;
 
         $scope.config={
             title:'选择成员关系',
@@ -311,13 +317,6 @@
             styleBtn:'width:6rem',
             Btn:false
 
-        };
-        $scope.openCt=function () {
-            $scope.isopen=true;
-        };
-
-        $scope.sure=function () {
-            $scope.isopen=false;
         };
 
 
@@ -330,10 +329,17 @@
             $scope.babytelephone=babytelephone;
             $scope.isOpen=false;
 
+
+            window.localStorage.babyName=$scope.babyName;
+            window.localStorage.babyid=$scope.babyid;
+
+            window.localStorage.babytelephone=$scope.babytelephone;
+
+
+
             $scope.getTrack(function () {
                 $scope.getCurrentPower(function () {
                     $scope.getGuardians(function () {
-
 
                     });
                 })
@@ -348,7 +354,6 @@
             $scope.isOpen = true;
 
         };
-
 
         var lat = 0;
         var lng = 0;
@@ -366,8 +371,8 @@
                 console.log(res);
 
                 if ("30010" == res.code) {
-                    $scope.token = res.data.token;
                     window.localStorage.appToken = res.data.token;
+                    console.log(localStorage.appToken);
                     return success()
                 }
             })
@@ -375,26 +380,34 @@
 
         $scope.getDeviceList=function (success) {
             mapService.getDeviceList().query({
-                token:$scope.token
+                token:localStorage.appToken
             }).$promise.then(function (res) {
 
                 $scope.deviceList=res.data;
 
                 $scope.devices=res.data;
                 console.log($scope.devices);
-                if ($scope.devices.length > 0) {
-                    $scope.babyid = $scope.devices[0].babyid;
-                    $scope.babyName = $scope.devices[0].babyname;
-                    $scope.babytelephone=$scope.devices[0].babytelephone;
-                    return success()
+
+                if(!!localStorage.babyName){
+                    return success();
+                }else{
+                    if ($scope.devices.length > 0) {
+                        $scope.babyid = $scope.devices[0].babyid;
+                        $scope.babyName = $scope.devices[0].babyname;
+                        $scope.babytelephone=$scope.devices[0].babytelephone;
+                        return success()
+                    }else{
+                        window.location.href = "/nobind.html";
+                    }
                 }
+
 
             })
         };
 
         $scope.getCurrentPower=function (success) {
             mapService.getCurrentPower().query({
-                token:$scope.token,
+                token:localStorage.appToken,
                 babyid:$scope.babyid
             }).$promise.then(function (res) {
 
@@ -415,14 +428,9 @@
             })
 
         };
-
-
-
-
-
         $scope.getTrack=function (success) {
             mapService.getTrack().query({
-                token:$scope.token,
+                token:localStorage.appToken,
                 babyid:$scope.babyid
             }).$promise.then(function (res) {
                 $scope.latlng=res;
@@ -436,8 +444,15 @@
                     map.centerAndZoom(point, 15);
                     marker.setPosition(point);  // 创建标注
                     map.addOverlay(marker);    // 将标注添加到地图中
+                }else{
+                    lng='';
+                    lat='';
+
+                    var map = new BMap.Map("allmap");
+                    var point = new BMap.Point(lng, lat);
+                    var marker = new BMap.Marker();
                 }
-                $("#btnCall").attr("href", "tel:" + $scope.babytelephone);
+                //$("#btnCall").attr("href", "tel:" + $scope.babytelephone);
                 return success();
 
             })
@@ -446,107 +461,92 @@
 
         $scope.getGuardians=function (success) {
             mapService.getGuardians().query({
-                token:$scope.token,
+                token:localStorage.appToken,
                 babyid:$scope.babyid
-
             }).$promise.then(function (res) {
                 console.log(res);
+                $scope.guardiansList=res.data;
+                console.log($scope.guardiansList);
+
+                $scope.list=[
+                    {img:'/assets/images/bind/baba.png',img1:'/assets/images/bind/baba1.png',familystatus:'爸爸',ds:'此称呼对应为设备按键'},
+                    {img:'/assets/images/bind/ma.png',img1:'/assets/images/bind/ma1.png',familystatus:'妈妈',ds:'此称呼对应为设备按键'},
+                    {img:'/assets/images/bind/family.png',img1:'/assets/images/bind/family1.png',familystatus:'家庭',ds:'此称呼对应为设备按键'},
+                    {img:'/assets/images/bind/gege.png',img1:'/assets/images/bind/gege1.png',familystatus:'哥哥',ds:'此称呼对应为家庭成员'},
+                    {img:'/assets/images/bind/jiejie.png',familystatus:'姐姐',img1:'/assets/images/bind/jiejie1.png',ds:'此称呼对应为家庭成员'},
+                    {img:'/assets/images/bind/tr.png',img1:'/assets/images/bind/tr1.png',familystatus:'班主任',ds:'仅作为添加班主任时使用'},
+                    {img:'/assets/images/bind/shu.png',img1:'/assets/images/bind/shu1.png',familystatus:'叔叔',ds:'此称呼对应为家庭成员'},
+                    {img:'/assets/images/bind/ye.png',img1:'/assets/images/bind/ye1.png',familystatus:'爷爷',ds:'此称呼对应为家庭成员'},
+                    {img:'/assets/images/bind/nai.png',img1:'/assets/images/bind/nai1.png',familystatus:'奶奶',ds:'此称呼对应为家庭成员'},
+                    {img:'/assets/images/bind/wai.png',img1:'/assets/images/bind/wai1.png',familystatus:'外公',ds:'此称呼对应为家庭成员'},
+                    {img:'/assets/images/bind/waipo.png',img1:'/assets/images/bind/waipo1.png',familystatus:'外婆',ds:'此称呼对应为家庭成员'}
+                ];
+
 
                 if(res.code==10068){
+
                     $scope.guardiansList=res.data;
-                    console.log($scope.guardiansList);
-                    console.log($scope.list);
-                    var _arry=[];
 
+                    for(var a in $scope.guardiansList){
+                        if($scope.guardiansList[a].familystatus=='家长'){
+                            $scope.guardianid=$scope.guardiansList[a].guardianid;
+
+                                $scope.isopen=true;
+
+                            break;
+                        }else{
+                            $scope.isopen=false;
+                        }
+                    }
                     for(var y in $scope.list){
-
                         var status='check';
-                        var id='id';
-
+                        var id='guardianid';
                         $scope.list[y][status] = false;
+                        $scope.list[y][id]='';
                         for(var x in $scope.guardiansList){
 
-                            //console.log($scope.guardiansList[x].familystatus)
+
                             if($scope.guardiansList[x].familystatus==$scope.list[y].familystatus){
-
-
                                 $scope.list[y][status] = true;
-
                                 $scope.list[y][id]=$scope.guardiansList[x].guardianid;
                                 console.log($scope.list);
-
-                                //$scope.arrPush($scope.list,$scope.guardiansList);
-
                                 break;
                             }
-
-
-                            //console.log(_arry);
-
                         }
-
-
                     }
-
-
-
-
-//                    for(var x in $scope.guardiansList){
-//                        for(var y in $scope.list){
-//                            $scope.list[y][status] = false;
-//                            if($scope.guardiansList[x].familystatus==$scope.list[y].familystatus){
-//
-//                                $scope.list[y][status] = true;
-//
-//                                console.log($scope.list);
-//                                //_arry.push($.extend($scope.list[x],$scope.guardiansList[y]));
-//
-//                                $scope.arrPush($scope.list[x],$scope.guardiansList[y]);
-//                                break;
-//                            }
-//                        }
-//
-//                    }
                 }else{
-                    $scope.guardianid='';
+                   // $scope.guardianid='';
                 }
-
-
                 return success();
-
             });
         };
-
-
-        var _arry=[];
-
-
-        $scope.arrPush = function(valueX,valueY){
-            var a = valueX;
-            var b = valueY;
-            _arry.push(a,b)
-
-            console.log(_arry);
-        }
-
-
-
-
-
-
         $scope.saveGuardians=function () {
             mapService.saveGuardians().query({
                 guardianid:$scope.guardianid,
                 familystatus:$scope.title,
-                telephone:$scope.babytelephone,
+                telephone:getUrlParam('telephone'),
                 babyid:$scope.babyid,
-                token:$scope.token,
+                token:localStorage.appToken,
             }).$promise.then(function (res) {
                 console.log(res);
-
-                if(res.code==10064){
+                if(res.code==10066){
                     $scope.isopen=false;
+                    Toast(res.msg,3000);
+                }else{
+                    Toast(res.msg,3000);
+                }
+            })
+        };
 
+        $scope.saveBaby=function () {
+            mapService.saveBaby().query({
+                familystatus:$scope.title,
+                babyid:$scope.babyid,
+                token:localStorage.appToken,
+            }).$promise.then(function (res) {
+                console.log(res);
+                if(res.code==10042){
+                    $scope.isopen=false;
                 }else{
                     Toast(res.msg,3000);
                 }
@@ -555,16 +555,11 @@
         };
 
         $scope.changeAge=function (title,ds) {
-
             $scope.title=title;
-            $scope.saveGuardians();
-
-
+            $scope.saveBaby();
         };
 
-
         $scope.showPoint=function () {
-
             $scope.getTrack(function () {
                 $scope.getCurrentPower(function () {
                     $scope.getGuardians(function () {
@@ -575,33 +570,58 @@
             });
         };
 
+        console.log(window.localStorage.babyName);
 
-        $scope.doLogin(function () {
+        if(!!window.localStorage.babyName){
+
+            console.log(localStorage.appToken);
+
+            $scope.babyid=localStorage.getItem('babyid');
+            $scope.babytelephone=localStorage.getItem('babytelephone');
+            $scope.babyName=localStorage.getItem('babyName');
             $scope.getDeviceList(function () {
                 $scope.getTrack(function () {
                     $scope.getCurrentPower(function () {
                         $scope.getGuardians(function () {
 
-
+                            console.log('来了');
                         });
                     })
 
                 });
             })
+        }else{
+            $scope.doLogin(function () {
 
-        });
+                $scope.getDeviceList(function () {
+                    $scope.getTrack(function () {
+                        $scope.getCurrentPower(function () {
+                            $scope.getGuardians(function () {
+
+                                console.log(localStorage.appToken);
+                            });
+                        })
+
+                    });
+                })
+
+            });
+        }
+
+
+        //localStorage.clear();
+
+
+
+
 
         $interval($scope.showPoint,5550000);
-
         $scope.viewInfo = function () {
-            if ($scope.token != "" && $scope.babyid != "") {
-                window.location.href = "/index.html?token=" + $scope.token + "&babyid=" + $scope.babyid;
+            if (localStorage.appToken != "" && $scope.babyid != "") {
+                window.location.href = "/index.html?token=" + localStorage.appToken + "&babyid=" + $scope.babyid;
             }
         }
         }]);
-
-
-
 </script>
 <script language="javascript" src="/assets/js/app.js"></script>
 <script language="JavaScript" src="/assets/js/auto-set-rem.js"></script>
