@@ -20,8 +20,8 @@
 <body style="height: 100%;background-color: #eee;" ng-app="app" ng-controller="mapCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" ng-click="goBack()"><i class="fa fa-arrow-left"></i></div>
-        <div class="col-xs-4 text-center">输入IMEI号</div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><img src="/assets/images/back.png" style="width: 1.7rem; height: 1.6rem;"></div>
+        <div class="col-xs-8 text-left title-size">输入IMEI号</div>
     </div>
 </div>
 
@@ -30,11 +30,11 @@
 
     <form ng-submit="submit()" name="form">
         <div class="col-xs-12 app-white-input margin-one">
-            <input type="text" ng-model="mdtcode" placeholder="请输入设备的IMEI号" style="width: 100%;" required>
+            <input type="number" ng-model="mdtcode" placeholder="请输入设备的IMEI号" style="width: 100%;" required>
         </div>
 
         <label style="display: block">
-            <div class="col-xs-12 app-pink-radius-button text-center">激活设备</div>
+            <div class="col-xs-12  text-center" ng-class="{false:'app-little-pink-radius-button',true:'app-pink-radius-button'}[!!mdtcode]">激活设备</div>
             <button type="submit" style="display: none"></button>
         </label>
 
@@ -70,20 +70,24 @@
         }]);
     app.controller("mapCtrl", ['$scope', '$interval', 'scanDeviceService', function ($scope, $interval, scanDeviceService) {
 
+        $scope.goBack=function () {
+            window.history.go(-1);
+        };
+
         $scope.submit = function () {
             scanDeviceService.scanDeviceInfo().query({
                 mdtcode: $scope.mdtcode, mdtid: $scope.mdtcode, token: localStorage.appToken
             }).$promise.then(function (res) {
                 console.log(res);
-                if (res.code == 10078) {
-                    $scope.telephone = res.telephone || 12334444;
-                    $scope.mdtid2 = res.mdtid || 11222;
+                if (res.code == 100783) {
+                    $scope.telephone = res.data.telephone;
+                    $scope.mdtid2 = res.data.mdtid;
                     window.location.href = '/assets/module/activate/gotoactive.html?telephone=' + $scope.telephone + '&mdtid=' + $scope.mdtid2 + '';
-                } else if (res.code == 100783) {
-                    $scope.admintelephone = res.admintelephone || 12334444;
-                    $scope.mdtid = res.mdtid || 11222;
-                    $scope.deviceid=res.deviceid;
-                    $scope.telephone=res.telephone;
+                } else if (res.code == 10078) {
+                    $scope.admintelephone = res.data.admintelephone;
+                    $scope.mdtid = res.data.mdtid ;
+                    $scope.deviceid=res.data.deviceid;
+                    $scope.telephone=res.data.telephone;
                     window.location.href = '/assets/module/activate/verifyText.html?admintelephone=' + $scope.admintelephone + '&mdtid=' + $scope.mdtid + '&deviceid='+$scope.deviceid+'&telephone='+$scope.telephone+'';
                 } else {
                     Toast(res.msg, 3000);

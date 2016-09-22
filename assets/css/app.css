@@ -67,33 +67,53 @@ td {
     width: 100%;
 }
 
+.app-white-input input{
+    width: 60%;
+}
+
 .margin-one{
     margin: 1rem 0;
 }
 
 .app-pink-radius-button {
-    background-color: #1eb5eb;
+    background-color: #00b4ed;
     color: #FFFFFF;
-    border-radius: 0;
     font-size: 1.4rem;
     padding: 1rem 0;
+    border-radius: 3px;
 }
+.app-little-pink-radius-button{
+    background-color: #4ccaf2;
+    color: #FFFFFF;
+    font-size: 1.4rem;
+    padding: 1rem 0;
+    border-radius: 3px;
+}
+
+.app-blue-radius-check-button{
+    background-color: #999999;
+    color: #FFFFFF;
+    border-radius: 3px;
+    font-size: 1rem;
+    min-width: 7rem;
+}
+
 
 .app-blue-radius-button{
-    background-color: #1eb5eb;
+    background-color: #00b4ed;
     color: #FFFFFF;
-    border-radius: 0;
+    border-radius: 3px;
     font-size: 1rem;
-    padding: 0 1rem;
+    min-width: 7rem;
 }
 
-.app-little-pink-radius-button {
-    background-color: #F2AACF;
-    color: #FFFFFF;
-    margin-top: 1.7rem;
-    border-radius: 0.5rem;
-    font-size: 1.4rem;
-}
+/*.app-little-pink-radius-button {*/
+    /*background-color: #F2AACF;*/
+    /*color: #FFFFFF;*/
+    /*margin-top: 1.7rem;*/
+    /*border-radius: 0.5rem;*/
+    /*font-size: 1.4rem;*/
+/*}*/
 
 
 .font-color-blue{
@@ -121,4 +141,8 @@ td {
     width: 33%;
     text-align: right;
     margin-right: 1rem;
+}
+
+.title-size{
+    font-size: 1.7rem;
 }

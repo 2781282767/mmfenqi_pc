@@ -19,8 +19,8 @@
 <body style="height: 100%;background-color: #eee;" ng-app="app" ng-controller="activeCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" ng-click="goBack()"><i class="fa fa-arrow-left"></i></div>
-        <div class="col-xs-4 text-center">激活设备</div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><img src="/assets/images/back.png" style="width: 1.7rem; height: 1.6rem; vertical-align: middle;"></div>
+        <div class="col-xs-8 text-left title-size">激活设备</div>
     </div>
 </div>
 <div class="container">
@@ -43,13 +43,13 @@
         <hr class="app-bootstrap-hr">
         <div class="col-xs-12 app-white-input">
             <label for="number4" class="app-white-input-label">班主任手机号</label>
-            <input id="number4" type="text" placeholder="请输入班主任手机号码" ng-model="teachertel" required>
+            <input id="number4" type="text" ng-pattern="/^[1]\d{10}$/" placeholder="请输入班主任手机号码" ng-model="teachertel" required>
         </div>
 
 
         <label style="display: block">
 
-            <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;">激活设备</div>
+            <div class="col-xs-12 text-center" ng-class="{false:'app-little-pink-radius-button',true:'app-pink-radius-button'}[!!teachertel]" style="margin-top: 1.5rem;">激活设备</div>
             <button type="submit" style="display: none"></button>
         </label>
 
@@ -92,17 +92,22 @@
 
         $scope.submit = function () {
 
+            if ($scope.teachertel == undefined) {
+                Toast('请输入正确的手机号');
+                return
+            }
+
             $scope.guardianActives = guardianActiveService.guardianActive().query({
                 mdtid: $scope.mdtid,
                 telephone: $scope.telephone,
                 studentname: $scope.studentname,
                 teachertel: $scope.teachertel,
-                token: localStorage.token
+                token: localStorage.appToken
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code==10150){
-                    $scope.endTime=res.enttime;
-                    window.location.href='/assets/module/activate/success.html?endTime='+$scope.endTime+''
+                    $scope.endTime=res.data.endtime;
+                    window.location.href='/assets/module/activate/success.html?endTime='+$scope.endTime+'&telephone='+$scope.telephone+''
                 }else{
                     Toast(res.msg,'3000');
                 }
