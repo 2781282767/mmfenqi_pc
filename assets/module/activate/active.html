@@ -30,11 +30,11 @@
 
     <form ng-submit="submit()" name="form">
         <div class="col-xs-12 app-white-input margin-one">
-            <input type="text" ng-model="mdtcode" placeholder="请输入设备的IMEI号" style="width: 100%;" required>
+            <input type="number" ng-model="mdtcode" placeholder="请输入设备的IMEI号" style="width: 100%;" required>
         </div>
 
         <label style="display: block">
-            <div class="col-xs-12 app-pink-radius-button text-center">激活设备</div>
+            <div class="col-xs-12  text-center" ng-class="{false:'app-little-pink-radius-button',true:'app-pink-radius-button'}[!!mdtcode]">激活设备</div>
             <button type="submit" style="display: none"></button>
         </label>
 

@@ -395,6 +395,10 @@
                         $scope.babyid = $scope.devices[0].babyid;
                         $scope.babyName = $scope.devices[0].babyname;
                         $scope.babytelephone=$scope.devices[0].babytelephone;
+                        window.localStorage.babyName=$scope.babyName;
+                        window.localStorage.babyid=$scope.babyid;
+
+                        window.localStorage.babytelephone=$scope.babytelephone;
                         return success()
                     }else{
                         window.location.href = "/nobind.html";

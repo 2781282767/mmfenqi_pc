@@ -43,13 +43,13 @@
         <hr class="app-bootstrap-hr">
         <div class="col-xs-12 app-white-input">
             <label for="number4" class="app-white-input-label">班主任手机号</label>
-            <input id="number4" type="text" placeholder="请输入班主任手机号码" ng-model="teachertel" required>
+            <input id="number4" type="text" ng-pattern="/^[1]\d{10}$/" placeholder="请输入班主任手机号码" ng-model="teachertel" required>
         </div>
 
 
         <label style="display: block">
 
-            <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;">激活设备</div>
+            <div class="col-xs-12 text-center" ng-class="{false:'app-little-pink-radius-button',true:'app-pink-radius-button'}[!!teachertel]" style="margin-top: 1.5rem;">激活设备</div>
             <button type="submit" style="display: none"></button>
         </label>
 
@@ -91,6 +91,11 @@
         $scope.telephone=getUrlParams('telephone');
 
         $scope.submit = function () {
+
+            if ($scope.teachertel == undefined) {
+                Toast('请输入正确的手机号');
+                return
+            }
 
             $scope.guardianActives = guardianActiveService.guardianActive().query({
                 mdtid: $scope.mdtid,
