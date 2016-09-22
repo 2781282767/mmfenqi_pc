@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="297dp"
+    android:layout_height="wrap_content"
+    android:background="@drawable/hint_dialogbg"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/hint"
+        android:layout_width="297dp"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:text="提示"
+        android:textColor="@color/pink_color"
+        android:textSize="16sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/pink_color" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <TextView
+            android:id="@+id/tvHintMessage"
+            android:layout_width="297dp"
+            android:layout_height="40dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp"
+            android:gravity="center_vertical"
+            android:text="你确认退出美眉分期?"
+            android:textColor="@color/pink_color"
+            android:textSize="16sp" 
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:layout_width="297dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvHintMessage"
+            android:gravity="center_horizontal" >
+
+            <Button
+                android:id="@+id/btCancel"
+                android:layout_width="133dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="13dp"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/hint_dialog_btnbg"
+                android:gravity="center"
+                android:text="取消"
+                android:textColor="@color/hintbtn_textcolor"
+                android:textSize="16sp" />
+            
+            <Button
+                android:id="@+id/btOK"
+                android:layout_width="133dp"
+                android:layout_height="36dp"
+                android:layout_marginBottom="13dp"
+                android:background="@drawable/hint_dialog_btnbg"
+                android:gravity="center"
+                android:text="确定"
+                android:textColor="@color/hintbtn_textcolor"
+                android:textSize="16sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+</LinearLayout>

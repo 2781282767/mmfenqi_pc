@@ -1,0 +1,36 @@
+{
+  "name": "react-slick",
+  "main": "dist/react-slick.min.js",
+  "version": "0.11.1",
+  "homepage": "https://github.com/akiran/react-slick",
+  "authors": [
+    "Kiran Abburi"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "slick-carousel": "~1.3.15"
+  },
+  "devDependencies": {
+    "react": "~0.12.1",
+    "jquery": "~2.1.1",
+    "should": "~4.3.0",
+    "foundation-apps": "~1.0.2"
+  },
+  "_release": "0.11.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "0.11.1",
+    "commit": "1b84c1cb15e6a8069580411e3995b9f97237bfcd"
+  },
+  "_source": "https://github.com/akiran/react-slick.git",
+  "_target": "^0.11.1",
+  "_originalSource": "react-slick",
+  "_direct": true
+}

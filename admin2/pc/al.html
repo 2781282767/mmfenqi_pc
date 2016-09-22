@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+        /*font-family: "Heiti SC","simsun",Arial,sans-serif,"Microsoft Yahei","黑体";*/
+    }
+    .wrap-content .wrap-content-right{
+        width: 960px;
+    }
+
+    .wrap-content .wrap-content-right > div{
+        margin: 32px 0 0 2px;
+        border: 1px solid #e8e8e8;
+        padding: 0 22px;
+
+    }
+    .wrap-content .wrap-content-right .top{
+        overflow: hidden;
+        border-bottom: 1px solid #e6e6e6;
+        padding: 22px 0;
+    }
+    .wrap-content .wrap-content-right .top ul{
+        margin: 0;
+        padding: 0;
+    }
+    .wrap-content .wrap-content-right .top ul li{
+        list-style: none;
+        float: left;
+        margin-right: 20px;
+        font-size: 14px;
+        font-weight: bolder;
+
+    }
+
+    .top ul li:first-child{
+        color: #fd657a;
+    }
+
+    .wrap-content .wrap-content-right .top-content{
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    .wrap-content .wrap-content-right .top-content table{
+        width: 100%;
+    }
+    .wrap-content .wrap-content-right .top-content table tr th{
+        padding: 22px 0 10px 0;
+        text-align: center;
+        color: #999999;
+        font-weight: normal;
+        font-size: 14px;
+    }
+    table tr td{
+        text-align: center;
+        padding: 20px 0;
+    }
+    table tr td li{
+        list-style: none;
+        color: #666666;
+        font-size: 12px;
+    }
+
+    table tr td >li{
+        margin: 10px 0;
+    }
+
+    table ._order{
+        text-align: left;
+        color: #999999;
+        padding-top:20px;
+        padding-bottom: 10px;
+    }
+
+    table .order-no{
+        width: 150px;
+        text-align: center;
+    }
+
+    table .bg_bd{
+        background-color: #fafafa;
+        border: #e8e8e8;
+    }
+    table .goods-info{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .goods-info .goods-info-left{
+        width: 110px;
+        padding: 0 20px;
+        height: 110px;
+        float: left;
+    }
+
+    .goods-info .goods-info-right{
+        width: 172px;
+        float: left;
+        padding-right: 22px;
+    }
+    .goods-info .goods-info-right li{
+        text-align: left;
+    }
+
+    .goods-info .goods-info-right li:first-child{
+        font-size: 14px;
+        font-weight: bold;
+
+    }
+
+    .goods-info .goods-info-right li:nth-child(2){
+        margin: 17px 0;
+        color: #999999;
+    }
+
+    .goods-info-right .order-detail{
+        color: #999999 !important;
+    }
+
+    table li .pay{
+        padding: 5px 10px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        background: #fd657a;
+        width: 54px;
+        border-radius:5px ;
+        color: #ffffff;
+
+    }
+
+    table .color_999{
+        color: #999999;
+        cursor: pointer;
+
+    }
+
+
+
+</style>
+<body>
+    <div class="wrap-content">
+
+        <div class="wrap-content-right">
+            <div>
+                <div class="top">
+                    <ul>
+                        <li>所有订单</li>
+                        <li>待支付(2)</li>
+                        <li>已支付(2)</li>
+                        <li>已完成</li>
+                        <li>已消费</li>
+                        <li>退款/售后</li>
+                    </ul>
+                </div>
+                <div class="top-content">
+                    <div id="tab1">
+                        <table cellspacing="0" cellpadding="0" width="100%" border="0">
+                            <tr>
+                                <th style="width: 346px;">商品</th>
+                                <th style="width: 108px;">首付金额(元)</th>
+                                <th style="width: 80px;">分期数</th>
+                                <th style="width: 128px;">信用支付(元)</th>
+                                <th style="width: 123px;">订单状态</th>
+                                <th style="width: 133px;">操作</th>
+                            </tr>
+                            <tr>
+                                <td collapse="6" class="_order">
+                                    <div class="order-no">订单号:56545354</div>
+                                </td>
+                            </tr>
+                            <tr class="bg_bd">
+                                <td>
+                                    <div class="goods-info">
+                                        <div class="goods-info-left"><img src="img/1.jpg" width="100%" height="100%"></div>
+                                        <div class="goods-info-right">
+                                            <li>杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州</li>
+                                            <li>杭州杭州杭州杭州</li>
+                                            <li>单价:￥4444</li>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <li>122</li>
+                                </td>
+                                <td>
+                                    <li>122</li>
+                                </td>
+                                <td>
+                                    <li>122</li>
+                                </td>
+                                <td>
+                                    <li>待付款</li>
+                                    <li class="color_999">订单详情</li>
+                                </td>
+                                <td>
+                                    <li><a class="pay">去支付</a></li>
+                                    <li class="color_999">取消订单</li>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td collapse="6" class="_order">
+                                    <div class="order-no">订单号:56545354</div>
+                                </td>
+                            </tr>
+                            <tr class="bg_bd">
+                                <td>
+                                    <div class="goods-info">
+                                        <div class="goods-info-left"><img src="img/1.jpg" width="100%" height="100%"></div>
+                                        <div class="goods-info-right">
+                                            <li>杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州</li>
+                                            <li>杭州杭州杭州杭州</li>
+                                            <li>单价:￥4444</li>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td>
+                                    <li>122</li>
+                                </td>
+                                <td>
+                                    <li>122</li>
+                                </td>
+                                <td>
+                                    <li>122</li>
+                                </td>
+                                <td>
+                                    <li>待付款</li>
+                                    <li class="color_999">订单详情</li>
+                                </td>
+                                <td>
+                                    <li><a class="pay">上传知情同意书</a></li>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>
+</html>

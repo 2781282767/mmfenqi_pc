@@ -1,0 +1,46 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+* build.xml
+* proguard-project.txt
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+* AndroidManifest.xml => shareSDK_V263\src\main\AndroidManifest.xml
+* assets\ => shareSDK_V263\src\main\assets
+* libs\MobLogCollector.jar => shareSDK_V263\libs\MobLogCollector.jar
+* libs\MobTools.jar => shareSDK_V263\libs\MobTools.jar
+* libs\ShareSDK-Core-2.6.3.jar => shareSDK_V263\libs\ShareSDK-Core-2.6.3.jar
+* libs\ShareSDK-QQ-2.6.3.jar => shareSDK_V263\libs\ShareSDK-QQ-2.6.3.jar
+* libs\ShareSDK-QZone-2.6.3.jar => shareSDK_V263\libs\ShareSDK-QZone-2.6.3.jar
+* libs\ShareSDK-SinaWeibo-2.6.3.jar => shareSDK_V263\libs\ShareSDK-SinaWeibo-2.6.3.jar
+* libs\ShareSDK-Wechat-2.6.3.jar => shareSDK_V263\libs\ShareSDK-Wechat-2.6.3.jar
+* libs\ShareSDK-Wechat-Core-2.6.3.jar => shareSDK_V263\libs\ShareSDK-Wechat-Core-2.6.3.jar
+* libs\ShareSDK-Wechat-Favorite-2.6.3.jar => shareSDK_V263\libs\ShareSDK-Wechat-Favorite-2.6.3.jar
+* libs\ShareSDK-Wechat-Moments-2.6.3.jar => shareSDK_V263\libs\ShareSDK-Wechat-Moments-2.6.3.jar
+* res\ => shareSDK_V263\src\main\res\
+* src\ => shareSDK_V263\src\main\java
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

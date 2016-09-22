@@ -1,0 +1,45 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+          <RelativeLayout
+            android:id="@+id/webTitle"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@color/pink_color"
+            android:layout_alignParentTop="true">
+            <TextView
+                android:id="@+id/webBack"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="返回"
+                android:textColor="@color/white"
+                android:scaleType="centerInside"
+                android:padding="10dp"/>
+                <TextView
+                    android:id="@+id/webviewTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:textColor="@color/white"
+                    android:singleLine="true"
+                    android:maxEms="6"
+                    android:textSize="18sp" />
+        </RelativeLayout>
+         <View
+            android:id="@+id/webline"
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@color/dark"
+            android:layout_alignBottom="@+id/webTitle" />
+
+
+        <WebView
+            android:id="@+id/interaction_web"
+            android:layout_below="@id/webTitle"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"/>
+
+</RelativeLayout>

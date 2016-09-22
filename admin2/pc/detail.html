@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<style>
+    body{
+        padding: 0;
+        margin: 0;
+        /*font-family: "Heiti SC","simsun",Arial,sans-serif,"Microsoft Yahei","黑体";*/
+    }
+
+    .wrap-content .wrap-content-right{
+        width: 960px;
+    }
+
+    .wrap-content .wrap-content-right .top{
+        overflow: hidden;
+        border-bottom: 1px solid #e6e6e6;
+        padding: 22px 0;
+    }
+    .wrap-content .wrap-content-right .top ul{
+        margin: 0;
+        padding: 0;
+    }
+    .wrap-content .wrap-content-right .top ul li{
+        list-style: none;
+        float: left;
+        margin-right: 20px;
+        font-size: 14px;
+        font-weight: bolder;
+
+    }
+
+    .wrap-content .wrap-content-right > div{
+        margin: 32px 0 0 2px;
+        border: 1px solid #e8e8e8;
+        padding: 0 22px;
+
+    }
+
+    .wrap-content .order-info,.project-info,.information{
+        padding-top: 20px;
+        padding-bottom: 10px;
+        color: #999999;
+        font-size: 14px;
+    }
+    .wrap-content .order-info-content{
+        border: 1px solid #e8e8e8;
+        padding: 20px 10px;
+        overflow: hidden;
+        font-size: 12px;
+        color: #666666;
+    }
+
+    .order-info-content ul li{
+        list-style: none;
+        display: inline-block;
+        /*padding: ;*/
+    }
+
+    .order-info-content a{
+        padding: 10px 20px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        background: #fd657a;
+        width: 54px;
+        border-radius:3px ;
+        color: #ffffff;
+    }
+
+
+    .order-info-content div{
+        padding-top: 25px;
+    }
+    .wrap-content .wrap-content-right .top-content{
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    .wrap-content .wrap-content-right .top-content table{
+        width: 100%;
+    }
+
+
+    .wrap-content .wrap-content-right .top-content table tr th{
+        padding: 10px 0;
+        text-align: center;
+        color: #666666;
+        font-weight: normal;
+        font-size: 14px;
+        background: #f2f2f2;
+        font-weight: bold;
+        border: 1px solid #e8e8e8;
+    }
+    table .width-20{
+        width: 20%;
+    }
+    table tr td{
+        text-align: center;
+        padding: 20px 0;
+    }
+    table tr td li{
+        list-style: none;
+        color: #666666;
+        font-size: 12px;
+    }
+
+    table tr td >li{
+        margin: 10px 0;
+    }
+
+    table ._order{
+        text-align: left;
+        color: #999999;
+        padding-top:20px;
+        padding-bottom: 10px;
+    }
+
+    table .order-no{
+        width: 150px;
+        text-align: center;
+    }
+
+    table .bg_bd{
+        background-color: #fafafa;
+        border:1px solid #e8e8e8;
+    }
+    table .goods-info{
+        width: 100%;
+        height: auto;
+        overflow: hidden;
+    }
+
+    .goods-info .goods-info-left{
+        width: 110px;
+        padding: 0 20px;
+        height: 110px;
+        float: left;
+    }
+
+    .goods-info .goods-info-right{
+        width: 172px;
+        float: left;
+        padding-right: 22px;
+    }
+    .goods-info .goods-info-right li{
+        text-align: left;
+    }
+
+    .goods-info .goods-info-right li:first-child{
+        font-size: 14px;
+        font-weight: bold;
+
+    }
+
+    .goods-info .goods-info-right li:nth-child(2){
+        margin: 17px 0;
+        color: #999999;
+    }
+
+    .goods-info-right .order-detail{
+        color: #999999 !important;
+    }
+
+    table li .pay{
+        padding: 5px 10px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        background: #fd657a;
+        width: 54px;
+        border-radius:5px ;
+        color: #ffffff;
+
+    }
+    table .color_999{
+        color: #999999;
+        cursor: pointer;
+    }
+
+
+
+</style>
+<body>
+<div class="wrap-content">
+
+    <div class="wrap-content-right">
+        <div>
+            <div class="top">
+                <ul>
+                    <li>订单详情</li>
+                </ul>
+            </div>
+            <div class="top-content">
+
+                <div class="order-info">
+                    订单信息
+                </div>
+                <div class="order-info-content">
+                    <ul style="padding: 0; margin: 0;   ">
+                        <li>订单状态:</li>
+                        <li>订单号:</li>
+                        <li>下单时间:</li>
+                    </ul>
+                    <div>
+                        1.你已消费完成，可以选择评价，让更多人了解该项目效果
+                        <a href="#">去评价</a>
+                    </div>
+                    <div>
+                        2.你还可以购买该项目
+                        <a href="#">去购买</a>
+                    </div>
+                </div>
+
+                <div class="project-info">项目信息</div>
+                <div>
+                    <table cellspacing="0" cellpadding="0" width="100%">
+                        <tr>
+                            <th style="width: 350px;">项目名称</th>
+                            <th style="width: 230px;">价格</th>
+                            <th style="width: 150px;">数量</th>
+                            <th style=" width: 185px;">总价(元)</th>
+                        </tr>
+                        <tr class="bg_bd">
+                            <td>
+                                <div class="goods-info">
+                                <div class="goods-info-left"><img src="img/1.jpg" width="100%" height="100%"></div>
+                                <div class="goods-info-right">
+                                <li>杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州</li>
+                                <li>杭州杭州杭州杭州</li>
+                                </div>
+                                </div>
+                            </td>
+                            <td>
+                                <li>58</li>
+                                <li style="color: #999999;">不含54</li>
+                            </td>
+                            <td>
+                                <li>12</li>
+                            </td>
+                            <td>
+                                <li style="color: #fc657a; font-size: 20px;">12</li>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="information">分期信息</div>
+                <div>
+                    <table cellspacing="0" cellpadding="0" width="100%">
+                        <tr>
+                            <th class="width-20">首付比例</th>
+                            <th class="width-20">首付金额</th>
+                            <th class="width-20">信用支付</th>
+                            <th class="width-20">分期数</th>
+                            <th class="width-20">月供</th>
+                        </tr>
+                        <tr class="bg_bd">
+                            <td>
+                                <li>56464</li>
+                            </td>
+                            <td>
+                                <li>56464</li>
+                            </td>
+                            <td>
+                                <li>58</li>
+                            </td>
+                            <td>
+                                <li>12</li>
+                            </td>
+                            <td>
+                                <li style="color: #fc657a;font-size: 20px;">9999.99</li>
+                                <li style="color: #999999;">(包含)</li>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

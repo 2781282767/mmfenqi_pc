@@ -285,7 +285,7 @@
                             method: 'GET', params: {}
                         }
                     })
-                },
+                }
 
             }
         }]);
@@ -530,7 +530,7 @@
                 familystatus:$scope.title,
                 telephone:getUrlParam('telephone'),
                 babyid:$scope.babyid,
-                token:localStorage.appToken,
+                token:localStorage.appToken
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code==10066){
@@ -546,7 +546,7 @@
             mapService.saveBaby().query({
                 familystatus:$scope.title,
                 babyid:$scope.babyid,
-                token:localStorage.appToken,
+                token:localStorage.appToken
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code==10042){

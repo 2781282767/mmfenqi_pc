@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">美眉分期</string>
+    <string name="action_settings">Settings</string>
+    <string name="home">主页</string>
+    <string name="doctor">医生</string>
+    <string name="mine">个人</string>
+    <string name="indiana">夺宝</string>
+    <string name="service">客服</string>
+
+    <string name="text_jingdong"><Data><![CDATA[请输入您在<font color="#FC3EA8">%1$s</font>的用户名和密码]]></Data></string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="zmxy_introduce">芝麻信用是蚂蚁金服旗下独立的第三方信用评估及信用管理机构。授权美眉分期查询您的芝麻信用分之后，我们将根据您的芝麻信用分为您授予相应的信用额度。</string>
+    <string name="zmxy_knows">授权前，请确认您拥有支付宝账号并完成了支付宝实名认证</string>
+    <string name="zmxy_question">授权过程中若遇到问题，请致电支付宝客服: 95188</string>
+
+    <string name="title_activity_take_phote">TakePhoteActivity</string>
+    <string name="title_activity_show_croppered">ShowCropperedActivity</string>
+
+</resources>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/rl_top"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="48dp"
+        android:gravity="center_vertical"
+        android:background="@color/pink_color">
+        <TextView
+            android:id="@+id/tv_adress"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:text=""
+            android:textColor="@color/white"
+            android:drawableRight="@mipmap/icon_arrow_up"
+            android:drawablePadding="3dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"/>
+        <EditText
+            android:id="@+id/edt_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/tv_adress"
+            android:background="@mipmap/ic_search_bg"
+            android:layout_centerVertical="true"
+            android:hint="请输入商品名称"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:paddingLeft="45dp"
+            android:textCursorDrawable="@color/white"
+            android:cursorVisible="true"
+            />
+        <TextView
+            android:id="@+id/tv_search"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="搜索"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:padding="10dp"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+
+
+        <WebView
+            android:id="@+id/wbv_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/rl_top"/>
+
+</RelativeLayout>

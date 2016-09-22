@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+   <!-- <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+    </android.support.design.widget.AppBarLayout>-->
+
+    <!--<include
+        android:id="@+id/content_layout"
+        layout="@layout/content_home"/>-->
+
+    <!--<android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:src="@android:drawable/ic_dialog_email" />-->
+    <FrameLayout
+        android:id="@+id/fl_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/line">
+
+    </FrameLayout>
+    <View
+        android:id="@+id/line"
+        android:layout_above="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/gray"/>
+    <LinearLayout
+        android:id="@+id/ll_bottom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        >
+        <!--<TextView
+            android:id="@+id/tv_home"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="主页"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:drawableTop="@drawable/home_bottom_selector"/>
+        <TextView
+            android:id="@+id/tv_doctor"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="医生"
+            android:drawableTop="@drawable/doctor_bottom_selector"/>
+        <TextView
+            android:id="@+id/tv_mine"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingTop="5dp"
+            android:paddingBottom="5dp"
+            android:text="个人"
+            android:drawableTop="@drawable/mine_bottom_selector"/>-->
+
+        <RadioGroup
+            android:id="@+id/rgBottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="horizontal" >
+
+            <RadioButton
+                android:id="@+id/rbHome"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/home_bottom_selector"
+                android:text="@string/home"
+                android:checked="false" />
+
+            <RadioButton
+                android:id="@+id/rbDoctor"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/doctor_bottom_selector"
+                android:text="@string/doctor"
+                android:checked="false" />
+            <RadioButton
+                android:id="@+id/rbIndiana"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/indiana_bottom_selector"
+                android:text="@string/indiana"
+                android:checked="false" />
+            <!--<RadioButton-->
+                <!--android:id="@+id/rbService"-->
+                <!--style="@style/TabStyle"-->
+                <!--android:drawableTop="@drawable/doctor_bottom_selector"-->
+                <!--android:text="@string/service"-->
+                <!--android:checked="false" />-->
+
+            <RadioButton
+                android:id="@+id/rbMine"
+                style="@style/TabStyle"
+                android:drawableTop="@drawable/mine_bottom_selector"
+                android:text="@string/mine" />
+
+        </RadioGroup>
+    </LinearLayout>
+</RelativeLayout>

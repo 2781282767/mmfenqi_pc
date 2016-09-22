@@ -1,0 +1,1 @@
+"use strict";function onLoad(){ReactDOM.render(React.createElement("div",{style:{height:"100%",position:"flex",flexDirection:"column",display:"flex"}},React.createElement(R_LoginHeader,null),React.createElement(R_LoginLogo,{login:"1"}),React.createElement(R_Register,{phone_regex:/^[1]\d{10}$/,pwd_regex:/^.{6,16}$/})),document.getElementById("content"))}
