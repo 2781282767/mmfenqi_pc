@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=0,minimal-ui">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>aa</title>
+    <title></title>
     <link type="text/css" rel="stylesheet" href="assets/css/style.css">
     <link href="assets/fonts/font-awesome.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
@@ -16,125 +16,8 @@
     <script language="javascript" src="/assets/lib/js/jquery-2.2.4.min.js"></script>
 
 </head>
-<style>
-    ._z{
-        position: absolute;
-        width: 100%;
-        height:100%;
-        z-index: 7;
-        top: 0;
-        left:0;
-        background-color: #000000;
-        opacity: 0.3;
-
-    }
-    .layer_content{
-        position: absolute;
-
-        /* margin-left: -135rem; */
-        /* left: 50%; */
-        /* top: 50%; */
-        /* margin-top: -79.5rem; */
-        width: 80%;
-        height: auto;
-        left: 0;
-        right: 0;
-        top: 10%;
-        bottom: 10%;
-        margin: auto;
-        border-radius: 10%;
-        z-index: 100;
-    }
-
-
-    .layer_content .header{
-        padding: 1rem 0;
-        background-color: #ffffff;
-        text-align: center;
-        color: #333;
-        font-size: 1.4rem;
-        /*line-height: 100%;*/
-        /*padding: 2rem 0;*/
-        border-top-left-radius: 5px;
-        border-top-right-radius: 5px;
-
-    }
-
-    .layer_content .header div{
-        display: inline-block;
-    }
-
-    .layer_content .header .cancel{
-        position: absolute;
-        right: 1rem;
-        top: 1rem;
-        cursor: pointer;
-        font-size: 1rem;
-
-    }
-    .layer_content2{
-        background-color: #FFFFff;
-        height:90%;
-        text-align: left;
-        border-bottom: 1px solid #dddddd;
-        font-size: 1.2rem;
-        overflow-y: scroll;
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-
-
-
-    }
-
-    .configContent{
-        padding: 0 1rem; line-height: 1.2rem;
-    }
-
-
-    .t_foot{
-        height: 30%;
-        line-height: 100%;
-        text-align: center;
-        background-color: #FFFFff;
-        /*padding: 1.5rem 0;*/
-        border-bottom-left-radius: 5px;
-        border-bottom-right-radius: 5px;
-    }
-    .t_foot .btn{
-        display: inline-block;
-        font-weight: 400;
-        text-align: center;
-        cursor: pointer;
-        width: 5rem;
-        margin: 0 2.5rem;
-    }
-
-    .t_foot .cancel_btn{
-        color: #FB1787;
-        font-size: 1.4rem;
-
-    }
-
-    .t_foot .sure_btn{
-        color: #e9e9e9;
-        font-size: 1.4rem;
-
-    }
-</style>
 <body ng-app="app" ng-controller="mapCtrl">
-
 <div>
-    <!--<div class="position-bar">-->
-        <!--<div id="lblPosition">-->
-            <!--<div ng-click="open()"><span id="babyName" style="font-size: 1.7rem;">{{babyName}} <i ng-hide="isOpen" class="fa fa-caret-down"></i><i-->
-                    <!--ng-show="isOpen" class="fa fa-caret-up"></i></span></div>-->
-
-            <!--<a class="btn-account" href="#" ng-click="viewInfo()">-->
-                <!--<i class="fa fa-user"></i>-->
-            <!--</a>-->
-        <!--</div>-->
-    <!--</div>-->
-
     <div class="container" style="background-color: #ffffff;">
         <div class="row" style="padding: 1rem 0;">
             <div class="col-xs-4 text-left" ng-click="goBack()"></div>
@@ -146,7 +29,7 @@
             </div>
         </div>
     </div>
-    <div class="content" ng-click="open()">
+    <div class="content">
         <div class="map-container" id="allmap">
         </div>
     </div>
@@ -187,12 +70,11 @@
         <div>定位</div>
     </div>
 
-    <div ng-if="isopen">
+    <div ng-if="checked">
         <div class="_z"></div>
         <div class="layer_content">
             <div class="header">
                 <div class="title" style="font-size: 1.7rem; color: #01b4ee;">{{config.title}}</div>
-                <div class="cancel" ng-click="cancel()" ng-if="config.no"><img src="modules/bill/img/X.png"></div>
             </div>
             <div class="layer_content2" style="{{config.style}}">
                 <div style=" margin: 0 1rem; background: #eeeeee; padding: 1rem 0; overflow: hidden;margin-bottom: 1rem;" ng-repeat="x in list" ng-click='changeAge(x.familystatus,x.ds)'>
@@ -210,23 +92,56 @@
                         <div style="color: #333333; font-size: 1.6rem;" ng-if="x.title=='家庭'">{{x.familystatus}}</div>
                         <div style="color: #333333; font-size: 1rem;">{{x.ds}}</div>
                     </div>
-
                 </div>
-
-
-
             </div>
         </div>
     </div>
-
 </div>
-
 <script language="javascript" src="/assets/js/common.js"></script>
 <script language="javascript" src="/assets/js/toast.js"></script>
 <script language="javascript" src="/assets/js/angular-resource/angular-resource.js"></script>
-
-
 <script>
+
+
+    (function() { // 闭包
+        function load_script(xyUrl, callback) {
+            var head = document.getElementsByTagName('head')[0];
+            var script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = xyUrl;
+            // 借鉴了jQuery的script跨域方法
+            script.onload = script.onreadystatechange = function() {
+                if ((!this.readyState || this.readyState === "loaded" || this.readyState === "complete")) {
+                    callback && callback();
+                    // Handle memory leak in IE
+                    script.onload = script.onreadystatechange = null;
+                    if (head && script.parentNode) {
+                        head.removeChild(script);
+                    }
+                }
+            };
+            // Use insertBefore instead of appendChild to circumvent an IE6 bug.
+            head.insertBefore(script, head.firstChild);
+        }
+        function translate(point, type, callback) {
+            var callbackName = 'cbk_' + Math.round(Math.random() * 10000); // 随机函数名
+            var xyUrl = "http://api.map.baidu.com/ag/coord/convert?from=" + type
+                    + "&to=4&x=" + point.lng + "&y=" + point.lat
+                    + "&callback=BMap.Convertor." + callbackName;
+            // 动态创建script标签
+            load_script(xyUrl);
+            BMap.Convertor[callbackName] = function(xyResult) {
+                delete BMap.Convertor[callbackName]; // 调用完需要删除改函数
+                var point = new BMap.Point(xyResult.x, xyResult.y);
+                callback && callback(point);
+            }
+        }
+
+        window.BMap = window.BMap || {};
+        BMap.Convertor = {};
+        BMap.Convertor.translate = translate;
+    })();
+
 
 
     var isMap = true;
@@ -291,9 +206,6 @@
         }]);
 
 
-
-
-
     app.controller("mapCtrl", ['$scope','$interval','mapService',function ($scope,$interval,mapService) {
         /*弹框*/
 
@@ -303,8 +215,6 @@
             var r = window.location.search.substr(1).match(reg);  //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         };
-
-
 
         //$scope.checked=false;
 
@@ -328,8 +238,6 @@
             $scope.babyid = babyid;
             $scope.babytelephone=babytelephone;
             $scope.isOpen=false;
-
-
             window.localStorage.babyName=$scope.babyName;
             window.localStorage.babyid=$scope.babyid;
 
@@ -357,13 +265,7 @@
 
         var lat = 0;
         var lng = 0;
-        //var sid = getUrlParam("sid") || 'gfJFBeDje5UN3yd_euMoB2BYMLQhczzBpug7kts0B_WaAsGMt7VcGofQLPpsizM86uOXppUN6u6jS-d2uaJ0buOOlfnYCSptSNw-j0J8mIz0lSb9eI8ZB0JdajTTE6mTYEQF5uypLZLAlNsrzIsR8Q';
-        //var sid='5RTnpUAfXuSDN3WjLtVfPDn82MBGdazZX_RZzIzVDNkEXa5j525aNB625j2gATTMZZDrHFuSAmlHTGqEqykgR-lMUFqTpMH8-k2DOxY4LseqhOA2GhjClGQftMIbMuWW8D-SIbaxza6schAi_axIpw';
-        //var sid='gfJFBeDje5UN3yd_euMoB2BYMLQhczzBpug7kts0B_WaAsGMt7VcGofQLPpsizM86uOXppUN6u6jS-d2uaJ0buOOlfnYCSptSNw-j0J8mIz0lSb9eI8ZB0JdajTTE6mTYEQF5uypLZLAlNsrzIsR8Q';
-
-        var sid='O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
-
-
+        var sid=getUrlParam("sid")||'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
         $scope.doLogin=function (success) {
             mapService.doLogin().query({
                 sid:sid
@@ -395,10 +297,7 @@
                         $scope.babyid = $scope.devices[0].babyid;
                         $scope.babyName = $scope.devices[0].babyname;
                         $scope.babytelephone=$scope.devices[0].babytelephone;
-                        window.localStorage.babyName=$scope.babyName;
-                        window.localStorage.babyid=$scope.babyid;
-
-                        window.localStorage.babytelephone=$scope.babytelephone;
+//
                         return success()
                     }else{
                         window.location.href = "/nobind.html";
@@ -449,12 +348,43 @@
                     marker.setPosition(point);  // 创建标注
                     map.addOverlay(marker);    // 将标注添加到地图中
                 }else{
-                    lng='';
-                    lat='';
+//                    lng='';
+//                    lat='';
+//
+//                    var map = new BMap.Map("allmap");
+//                    var point = new BMap.Point(lng, lat);
+//                    var marker = new BMap.Marker();
 
-                    var map = new BMap.Map("allmap");
-                    var point = new BMap.Point(lng, lat);
-                    var marker = new BMap.Marker();
+
+                    if (window.navigator.geolocation) {
+                        var options = {
+                            enableHighAccuracy: true
+                        };
+                        window.navigator.geolocation.getCurrentPosition(handleSuccess, handleError, options);
+                    } else {
+                        alert("浏览器不支持html5来获取地理位置信息");
+                    }
+
+                    function handleSuccess(position){
+
+                        console.log('进来了');
+                        // 获取到当前位置经纬度  本例中是chrome浏览器取到的是google地图中的经纬度
+                         lng = position.coords.longitude;
+                         lat = position.coords.latitude;
+                        // 调用百度地图api显示
+                        var map = new BMap.Map("allmap");
+                        var ggPoint = new BMap.Point(lng, lat);
+                        // 将google地图中的经纬度转化为百度地图的经纬度
+                        BMap.Convertor.translate(ggPoint, 2, function(point){
+                            var marker = new BMap.Marker(point);
+                            map.addOverlay(marker);
+                            map.centerAndZoom(point, 15);
+                        });
+                    }
+
+                    function handleError(error){
+
+                    }
                 }
                 //$("#btnCall").attr("href", "tel:" + $scope.babytelephone);
                 return success();
@@ -495,11 +425,11 @@
                         if($scope.guardiansList[a].familystatus=='家长'){
                             $scope.guardianid=$scope.guardiansList[a].guardianid;
 
-                                $scope.isopen=true;
+                                $scope.checked=true;
 
                             break;
                         }else{
-                            $scope.isopen=false;
+                            $scope.checked=false;
                         }
                     }
                     for(var y in $scope.list){
@@ -534,7 +464,7 @@
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code==10066){
-                    $scope.isopen=false;
+                    $scope.checked=false;
                     Toast(res.msg,3000);
                 }else{
                     Toast(res.msg,3000);
@@ -550,7 +480,7 @@
             }).$promise.then(function (res) {
                 console.log(res);
                 if(res.code==10042){
-                    $scope.isopen=false;
+                    $scope.checked=false;
                 }else{
                     Toast(res.msg,3000);
                 }

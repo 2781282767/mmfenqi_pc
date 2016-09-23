@@ -16,23 +16,6 @@
     <link rel="stylesheet" href="/assets/css/app.css">
     <script language="javascript" src="/assets/js/angular.min.js"></script>
 </head>
-<style>
-    .app-bootstrap-input{
-        border-bottom: 1px solid #e2e6e9;margin:0 1rem; padding: 1rem 0;
-        overflow: hidden;
-    }
-    .app-white-code-text{
-        width: 50%;
-        padding-left: 1rem;
-        font-size: 1.2rem;
-    }
-    .app-bootstrap-padding-zero {
-        padding: 0;
-    }
-
-
-
-</style>
 <body style="height:100%;background-color: #eee;" ng-app="app" ng-controller="mapCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
@@ -46,8 +29,8 @@
             请向设备管理员({{admintelephone}})索取验证码
         </div>
         <div class="col-xs-12 app-white-input" style="line-height: 3rem">
-            <div class="col-xs-2" style=" padding-left: 0;"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
-            <div class="col-xs-6" style="padding-left:  0; "><input id="number" type="number" class="app-white-code-text" placeholder="请输入验证码" required ng-model="smscode"
+            <div class="col-xs-2 text-right" style=" padding-left: 0;"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
+            <div class="col-xs-6" style="padding-left:  0; "><input id="number" type="text"  placeholder="请输入验证码" required ng-model="smscode"
                                          style="width: 100%; vertical-align: middle;"></div>
             <div class="col-xs-4 text-right" style="padding: 0 ;" ng-click="getCode()">
                 <div ng-class="{false:'app-blue-radius-button',true:'app-blue-radius-check-button'}[!verifyStatus]" style="text-align: center;">{{verifyText}}</div>
@@ -73,7 +56,6 @@
 
 </body>
 <script language="JavaScript" src="/assets/js/auto-set-rem.js"></script>
-<script language="javascript" src="/assets/js/httpserver.js"></script>
 <script language="javascript" src="/assets/js/toast.js"></script>
 <script language="javascript" src="/assets/js/angular-resource/angular-resource.js"></script>
 <script>
@@ -92,7 +74,7 @@
                     })
                 },
                 addGuardian: function () {
-                    return $resource('/app/user/addGuardian', {}, {
+                    return $resource('/app/device/addGuardian', {}, {
                         save: {
                             method: 'GET', params: {}
                         }
@@ -119,6 +101,8 @@
         $scope.admintelephone=$scope.admintelephone.substr(0, 3) + '****' + $scope.admintelephone.substr(7, 11);
         $scope.deviceid=getUrlParams('deviceid');
 
+        $scope._admintelephone=getUrlParams('admintelephone');
+
         $scope.mdtid=getUrlParams('mdtid');
 
         $scope.telephone=getUrlParams('telephone');
@@ -135,7 +119,7 @@
             $scope.getVerifyCodeReq = generateSMSCodeService.generateSMSCode().save({
                 token: localStorage.appToken,
                 telephone: $scope.telephone,
-                admintelephone: $scope.admintelephone,
+                admintelephone: $scope._admintelephone,
                 module: 'scandevice',
                 mdtid: $scope.mdtid
             });
@@ -169,7 +153,7 @@
         $scope.submit=function () {
             $scope.addGuardian=generateSMSCodeService.addGuardian().save({
                 token:localStorage.appToken,
-                admintelephone:$scope.admintelephone,
+                admintelephone:$scope._admintelephone,
                 smscode:$scope.smscode,
                 deviceid:$scope.deviceid
             }).$promise.then(function (res) {
