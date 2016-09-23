@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en" style="height: 100%;">
 <head>
-    <meta http-equiv="content-type" content="text/html"; charset="utf-8" />
+    <meta http-equiv="content-type" content="text/html" ; charset="utf-8"/>
     <meta name="viewport"
           content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
     <title></title>
@@ -15,7 +15,8 @@
 
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" onclick="goBack()"><img src="/assets/images/back.png" style="width: 1.7rem; height: 1.6rem;"></div>
+        <div class="col-xs-4 text-left" onclick="goBack()"><img src="/assets/images/back.png"
+                                                                style="width: 1.7rem; height: 1.6rem;"></div>
         <div class="col-xs-8 text-left" style="font-size: 1.7rem;">个人中心</div>
     </div>
 </div>
@@ -44,17 +45,17 @@
 <script language="javascript" src="assets/js/common.js"></script>
 <script>
     var isMap = false;
-    var token= getUrlParam('token');
-    var babyid= getUrlParam('babyid');
+    var token = getUrlParam('token');
+    var babyid = getUrlParam('babyid');
     var device = getDevice(token, babyid);
-    if(device.code=="10038"){
+    if (device.code == "10038") {
         $("#accountInfo").html(device.data.babyname);
         $("#endTime").html(device.data.endtime);
         $("#babyPhone").html(device.data.telephone);
         var homes = getHomes(token, babyid);
-        if(homes.code=="10068"){
-            for(var i=0;i<homes.data.length;i++){
-                $("#homes").append('<li>'+homes.data[i].familystatus+' <span class="pull-right">'+homes.data[i].telephone+'</span></li>');
+        if (homes.code == "10068") {
+            for (var i = 0; i < homes.data.length; i++) {
+                $("#homes").append('<li>' + homes.data[i].familystatus + ' <span class="pull-right">' + homes.data[i].telephone + '</span></li>');
             }
         }
     }

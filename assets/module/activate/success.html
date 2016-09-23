@@ -29,9 +29,12 @@
          style="padding-top: 1.5rem; padding-bottom: 2rem; font-size: 1.7rem; color: #333;">激活成功！
     </div>
     <div class="col-xs-12 text-center" style="font-size: 1.4rem; color: #666;"><span>套餐试用期至：</span><span id="endTime"
-            style="color: #02b4ed"></span></div>
+                                                                                                         style="color: #02b4ed"></span>
+    </div>
 
-    <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;font-size: 1.6rem;" onclick="goTo()">下一步</div>
+    <div class="col-xs-12 app-pink-radius-button text-center" style="margin-top: 1.5rem;font-size: 1.6rem;"
+         onclick="goTo()">下一步
+    </div>
 </div>
 
 
@@ -48,13 +51,13 @@
         return null; //返回参数值
     }
 
-    var endTime=getUrlParams('endTime');
-    var telephone=getUrlParams('telephone');
+    var endTime = getUrlParams('endTime');
+    var telephone = getUrlParams('telephone');
 
-    document.getElementById('endTime').innerHTML=endTime;
+    document.getElementById('endTime').innerHTML = endTime;
 
     function goTo() {
-        window.location.href='/map.html'
+        window.location.href = '/map.html'
     }
 </script>
 </html>

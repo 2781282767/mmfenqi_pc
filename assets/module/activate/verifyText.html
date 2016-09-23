@@ -19,7 +19,8 @@
 <body style="height:100%;background-color: #eee;" ng-app="app" ng-controller="mapCtrl">
 <div class="container" style="background-color: #ffffff;">
     <div class="row" style="padding: 1rem 0;">
-        <div class="col-xs-4 text-left" ng-click="goBack()"><img src="/assets/images/back.png" style="width: 1.7rem; height: 1.6rem;"></div>
+        <div class="col-xs-4 text-left" ng-click="goBack()"><img src="/assets/images/back.png"
+                                                                 style="width: 1.7rem; height: 1.6rem;"></div>
         <div class="col-xs-8 text-left title-size">填写验证码</div>
     </div>
 </div>
@@ -29,25 +30,31 @@
             请向设备管理员({{admintelephone}})索取验证码
         </div>
         <div class="col-xs-12 app-white-input" style="line-height: 3rem">
-            <div class="col-xs-2 text-right" style=" padding-left: 0;"><img src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
-            <div class="col-xs-6" style="padding-left:  0; "><input id="number" type="text"  placeholder="请输入验证码" required ng-model="smscode"
-                                         style="width: 100%; vertical-align: middle;"></div>
+            <div class="col-xs-2 text-right" style=" padding-left: 0;"><img
+                    src="/assets/module/activate/images/code.png" style="width: 2.2rem;"></div>
+            <div class="col-xs-6" style="padding-left:  0; "><input id="number" type="text" placeholder="请输入验证码"
+                                                                    required ng-model="smscode"
+                                                                    style="width: 100%; vertical-align: middle;"></div>
             <div class="col-xs-4 text-right" style="padding: 0 ;" ng-click="getCode()">
-                <div ng-class="{false:'app-blue-radius-button',true:'app-blue-radius-check-button'}[!verifyStatus]" style="text-align: center;">{{verifyText}}</div>
+                <div ng-class="{false:'app-blue-radius-button',true:'app-blue-radius-check-button'}[!verifyStatus]"
+                     style="text-align: center;">{{verifyText}}
+                </div>
             </div>
 
             <!--<div style="padding: 0.3rem 0; border: 0;">-->
-                <!--<div class="app-bootstrap-padding-zero app-white-input-label text-left" style="display: inline-block; width: 25%; margin-right: -3px;">验证码</div>-->
-                <!--<input type="number"  class="app-white-code-text" placeholder="请输入收到的验证码" ng-model="verifyCode" required style="width: 30%;">-->
-                <!--<div ng-class="{false:'_bg_bd',true:'bg_bd'}[verifyStatus]"  style="display: inline-block;  width: 40%;">-->
-                    <!--<div class="text-center" ng-click="getCode()">{{verifyText}}</div>-->
-                <!--</div>-->
+            <!--<div class="app-bootstrap-padding-zero app-white-input-label text-left" style="display: inline-block; width: 25%; margin-right: -3px;">验证码</div>-->
+            <!--<input type="number"  class="app-white-code-text" placeholder="请输入收到的验证码" ng-model="verifyCode" required style="width: 30%;">-->
+            <!--<div ng-class="{false:'_bg_bd',true:'bg_bd'}[verifyStatus]"  style="display: inline-block;  width: 40%;">-->
+            <!--<div class="text-center" ng-click="getCode()">{{verifyText}}</div>-->
+            <!--</div>-->
             <!--</div>-->
         </div>
 
         <label style="display: block">
 
-            <div class="col-xs-12  text-center" ng-class="{false:'app-little-pink-radius-button',true:'app-pink-radius-button'}[!!smscode]" style="margin-top: 1.5rem;font-size: 1.6rem;">添加
+            <div class="col-xs-12  text-center"
+                 ng-class="{false:'app-little-pink-radius-button',true:'app-pink-radius-button'}[!!smscode]"
+                 style="margin-top: 1.5rem;font-size: 1.6rem;">添加
             </div>
             <button type="submit" style="display: none"></button>
         </label>
@@ -97,15 +104,15 @@
         }
 
 
-        $scope.admintelephone=getUrlParams('admintelephone');
-        $scope.admintelephone=$scope.admintelephone.substr(0, 3) + '****' + $scope.admintelephone.substr(7, 11);
-        $scope.deviceid=getUrlParams('deviceid');
+        $scope.admintelephone = getUrlParams('admintelephone');
+        $scope.admintelephone = $scope.admintelephone.substr(0, 3) + '****' + $scope.admintelephone.substr(7, 11);
+        $scope.deviceid = getUrlParams('deviceid');
 
-        $scope._admintelephone=getUrlParams('admintelephone');
+        $scope._admintelephone = getUrlParams('admintelephone');
 
-        $scope.mdtid=getUrlParams('mdtid');
+        $scope.mdtid = getUrlParams('mdtid');
 
-        $scope.telephone=getUrlParams('telephone');
+        $scope.telephone = getUrlParams('telephone');
 
 
         $scope.verifyText = '获取验证码';
@@ -114,7 +121,7 @@
 
 
             if (!$scope.verifyStatus) return;
-         //   $scope.verifyStatus = false;
+            //   $scope.verifyStatus = false;
 
             $scope.getVerifyCodeReq = generateSMSCodeService.generateSMSCode().save({
                 token: localStorage.appToken,
@@ -124,7 +131,7 @@
                 mdtid: $scope.mdtid
             });
             $scope.getVerifyCodeReq.$promise.then(function (res) {
-                if (res.code== 10004) {
+                if (res.code == 10004) {
                     Toast('发送成功');
                     $scope.counter = 120;
                     $scope.verifyStatus = false;
@@ -150,18 +157,18 @@
             })
         };
 
-        $scope.submit=function () {
-            $scope.addGuardian=generateSMSCodeService.addGuardian().save({
-                token:localStorage.appToken,
-                admintelephone:$scope._admintelephone,
-                smscode:$scope.smscode,
-                deviceid:$scope.deviceid
+        $scope.submit = function () {
+            $scope.addGuardian = generateSMSCodeService.addGuardian().save({
+                token: localStorage.appToken,
+                admintelephone: $scope._admintelephone,
+                smscode: $scope.smscode,
+                deviceid: $scope.deviceid
             }).$promise.then(function (res) {
                 console.log(res);
-                if(res.code== 10080){
-                    window.location.href='/map.html'
-                }else{
-                    Toast(res.msg,3000);
+                if (res.code == 10080) {
+                    window.location.href = '/map.html'
+                } else {
+                    Toast(res.msg, 3000);
                 }
             })
         }
