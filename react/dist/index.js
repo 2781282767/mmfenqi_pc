@@ -27397,11 +27397,11 @@ webpackJsonp([0,1],[
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _Http = __webpack_require__(255);
+	var _Http = __webpack_require__(238);
 	
 	var _Http2 = _interopRequireDefault(_Http);
 	
-	var _Tool = __webpack_require__(238);
+	var _Tool = __webpack_require__(239);
 	
 	var _Tool2 = _interopRequireDefault(_Tool);
 	
@@ -27554,6 +27554,107 @@ webpackJsonp([0,1],[
 
 /***/ },
 /* 238 */
+/***/ function(module, exports) {
+
+	'use strict';
+	'usr strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var HttpService = function () {
+	    function HttpService() {
+	        _classCallCheck(this, HttpService);
+	    }
+	
+	    _createClass(HttpService, null, [{
+	        key: 'query',
+	        value: function query(config) {
+	            console.log();
+	            config = config || {};
+	            var params = HttpService.formatParams(config.data);
+	
+	            var request = new XMLHttpRequest();
+	            request.onreadystatechange = function () {
+	                if (request.readyState == 4) {
+	                    var status = request.status;
+	                    if (status >= 200 && status < 300) {
+	                        var res = JSON.parse(request.responseText);
+	
+	                        if (res) {
+	                            config.success && config.success(res);
+	                        }
+	                        // if (res.result == 0) {
+	                        //     config.success && config.success(res.data);
+	                        // } else if (res.result == 1013) {
+	                        //     window.localStorage.referer = window.location.href;
+	                        //     window.location.href = 'login.html'
+	                        // } else {
+	                        //     return config.error && config.error(res.result, res.msg)
+	                        // }
+	                    } else {
+	                        return config.fail && config.fail(status);
+	                    }
+	                }
+	            };
+	            request.open('GET', config.url + "?" + params, true);
+	            request.send(null);
+	        }
+	    }, {
+	        key: 'save',
+	        value: function save(config) {
+	            config = config || {};
+	
+	            var params = HttpService.formatParams(config.data);
+	
+	            var request = new XMLHttpRequest();
+	            request.onreadystatechange = function () {
+	                if (request.readyState == 4) {
+	                    var status = request.status;
+	                    if (status >= 200 && status < 300) {
+	                        var res = JSON.parse(request.responseText);
+	                        toast.toaster(res.msg);
+	                        if (res.result == 0) {
+	                            config.success && config.success(res.data);
+	                        } else if (res.result == 1013) {
+	                            window.localStorage.referer = window.location.href;
+	                            window.location.href = 'login.html';
+	                        } else {
+	                            config.error && config.error(res.result, res.msg);
+	                        }
+	                    } else {
+	                        config.fail && config.fail(status);
+	                    }
+	                }
+	            };
+	            request.open("POST", config.url, true);
+	            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	            request.send(params);
+	        }
+	    }, {
+	        key: 'formatParams',
+	        value: function formatParams(data) {
+	            var arr = [];
+	            for (var name in data) {
+	                arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+	            }
+	            arr.push(("v=" + Math.random()).replace(".", ""));
+	            return arr.join("&");
+	        }
+	    }]);
+	
+	    return HttpService;
+	}();
+	
+	exports.default = HttpService;
+
+/***/ },
+/* 239 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -27752,7 +27853,6 @@ webpackJsonp([0,1],[
 	exports.config = config;
 
 /***/ },
-/* 239 */,
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27784,7 +27884,7 @@ webpackJsonp([0,1],[
 	
 	var _reactRouter = __webpack_require__(173);
 	
-	var _Tool = __webpack_require__(238);
+	var _Tool = __webpack_require__(239);
 	
 	var _Tool2 = _interopRequireDefault(_Tool);
 	
@@ -28315,107 +28415,6 @@ webpackJsonp([0,1],[
 	    if (!clientWidth) return;
 	    docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
 	})();
-
-/***/ },
-/* 255 */
-/***/ function(module, exports) {
-
-	'use strict';
-	'usr strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-	    value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	var HttpService = function () {
-	    function HttpService() {
-	        _classCallCheck(this, HttpService);
-	    }
-	
-	    _createClass(HttpService, null, [{
-	        key: 'query',
-	        value: function query(config) {
-	            console.log();
-	            config = config || {};
-	            var params = HttpService.formatParams(config.data);
-	
-	            var request = new XMLHttpRequest();
-	            request.onreadystatechange = function () {
-	                if (request.readyState == 4) {
-	                    var status = request.status;
-	                    if (status >= 200 && status < 300) {
-	                        var res = JSON.parse(request.responseText);
-	
-	                        if (res) {
-	                            config.success && config.success(res);
-	                        }
-	                        // if (res.result == 0) {
-	                        //     config.success && config.success(res.data);
-	                        // } else if (res.result == 1013) {
-	                        //     window.localStorage.referer = window.location.href;
-	                        //     window.location.href = 'login.html'
-	                        // } else {
-	                        //     return config.error && config.error(res.result, res.msg)
-	                        // }
-	                    } else {
-	                        return config.fail && config.fail(status);
-	                    }
-	                }
-	            };
-	            request.open('GET', config.url + "?" + params, true);
-	            request.send(null);
-	        }
-	    }, {
-	        key: 'save',
-	        value: function save(config) {
-	            config = config || {};
-	
-	            var params = HttpService.formatParams(config.data);
-	
-	            var request = new XMLHttpRequest();
-	            request.onreadystatechange = function () {
-	                if (request.readyState == 4) {
-	                    var status = request.status;
-	                    if (status >= 200 && status < 300) {
-	                        var res = JSON.parse(request.responseText);
-	                        toast.toaster(res.msg);
-	                        if (res.result == 0) {
-	                            config.success && config.success(res.data);
-	                        } else if (res.result == 1013) {
-	                            window.localStorage.referer = window.location.href;
-	                            window.location.href = 'login.html';
-	                        } else {
-	                            config.error && config.error(res.result, res.msg);
-	                        }
-	                    } else {
-	                        config.fail && config.fail(status);
-	                    }
-	                }
-	            };
-	            request.open("POST", config.url, true);
-	            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-	            request.send(params);
-	        }
-	    }, {
-	        key: 'formatParams',
-	        value: function formatParams(data) {
-	            var arr = [];
-	            for (var name in data) {
-	                arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
-	            }
-	            arr.push(("v=" + Math.random()).replace(".", ""));
-	            return arr.join("&");
-	        }
-	    }]);
-	
-	    return HttpService;
-	}();
-	
-	exports.default = HttpService;
 
 /***/ }
 ]);
