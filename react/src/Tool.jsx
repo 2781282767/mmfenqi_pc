@@ -1,4 +1,3 @@
-import merged from 'obj-merged';
 import * as config from './Config/Config';
 
 const {target} = config;
@@ -59,20 +58,12 @@ Tool.ajax = function (mySetting) {
             var response = xhr.responseText;
             //将服务器返回的数据，转换成json
 
-
-
             if (/application\/json/.test(head) || setting.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
                 response = JSON.parse(response);
-
-
-
             }
 
             if (xhr.status == 200) {
                 setting.success(response, setting, xhr);
-
-
-
             } else {
                 setting.error(setting, xhr);
             }
@@ -185,4 +176,4 @@ Tool.removeLocalItem = function (key) {
     return localStorage.removeItem();
 }
 
-export {Tool, merged, config}
+export {Tool, config}

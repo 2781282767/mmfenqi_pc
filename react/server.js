@@ -12,9 +12,9 @@ var proxy = [{
     host:'222.46.27.218:8800'
 },
     {
-        path: '/api/*',
-        target: 'https://cnodejs.org',
-        host: 'cnodejs.org'
+        path: '/app/*',
+        target:'http://222.46.27.218:8800',
+        host:'222.46.27.218:8800'
     }
 ];
 

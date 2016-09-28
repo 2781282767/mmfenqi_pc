@@ -24,6 +24,13 @@ DataLoad.defaultProps = {
     loadMsg: '正在加载中'
 };
 
+
+export  class R_header extends Component{
+    render(){
+
+    }
+}
+
 /**
  * 公共头部
  *
@@ -31,6 +38,9 @@ DataLoad.defaultProps = {
  * @class Header
  * @extends {Component}
  */
+
+
+
 export class Header extends Component {
     render() {
         let {title, leftTo, leftIcon, rightTo, rightIcon, rightClick } = this.props;

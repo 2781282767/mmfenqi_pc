@@ -27397,7 +27397,9 @@ webpackJsonp([0,1],[
 	
 	var _reactDom2 = _interopRequireDefault(_reactDom);
 	
-	var _reactRouter = __webpack_require__(173);
+	var _Http = __webpack_require__(255);
+	
+	var _Http2 = _interopRequireDefault(_Http);
 	
 	var _Tool = __webpack_require__(238);
 	
@@ -27425,16 +27427,61 @@ webpackJsonp([0,1],[
 	
 	        _this.state = {
 	            lng: '120.153576',
-	            lat: '30.287459'
+	            lat: '30.287459',
+	            babyid: '',
+	            token: '',
+	            babyName: '',
+	            babytelephone: '',
+	            isOpen: false
 	
 	        };
 	        return _this;
 	    }
 	
 	    _createClass(MapIndex, [{
+	        key: 'doLogin',
+	        value: function doLogin(_success) {
+	            var _this2 = this;
+	
+	            _Http2.default.query({
+	                url: '/apph5/user/login',
+	                data: { sid: 'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg' },
+	                success: function success(res) {
+	                    console.log(res);
+	                    if (res.code == '30010') {
+	                        _this2.setState({
+	                            token: res.data.token
+	                        });
+	
+	                        return _success();
+	                    }
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'getDeviceList',
+	        value: function getDeviceList() {
+	            _Http2.default.query({
+	                url: '/app/object/getBabys',
+	                data: { token: this.state.token },
+	                success: function success(res) {
+	                    console.log(res);
+	                }
+	            });
+	        }
+	    }, {
+	        key: 'getCurrentPower',
+	        value: function getCurrentPower() {}
+	    }, {
+	        key: 'componentWillMount',
+	        value: function componentWillMount() {
+	            this.doLogin(function () {
+	                this.getDeviceList();
+	            }.bind(this));
+	        }
+	    }, {
 	        key: 'componentDidMount',
 	        value: function componentDidMount() {
-	
 	            this.init();
 	        }
 	    }, {
@@ -27442,21 +27489,20 @@ webpackJsonp([0,1],[
 	        value: function render() {
 	            var lng = this.state.lng;
 	            var lat = this.state.lat;
+	            var isOpen = this.state.isOpen;
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement('div', { id: 'container', style: { width: '100%', height: '30rem' } }),
 	                _react2.default.createElement(
-	                    'a',
-	                    { href: 'tel:13657086451' },
-	                    '电话'
+	                    'div',
+	                    { id: 'container', style: { width: '100%', height: '40rem' } },
+	                    _react2.default.createElement(
+	                        'button',
+	                        { onClick: this.isOpen.bind(this) },
+	                        '展开'
+	                    )
 	                ),
-	                _react2.default.createElement(
-	                    'button',
-	                    { className: 'demo', onClick: this.getLocation.bind(this, lng, lat) },
-	                    '定位'
-	                ),
-	                _react2.default.createElement(_index.FooterInit, { index: '0' })
+	                isOpen == true ? _react2.default.createElement('div', null) : _react2.default.createElement(_index.FooterInit, { index: '0' })
 	            );
 	        }
 	    }, {
@@ -27468,6 +27514,20 @@ webpackJsonp([0,1],[
 	                lat: lat
 	            });
 	            this.init();
+	        }
+	    }, {
+	        key: 'isOpen',
+	        value: function isOpen() {
+	
+	            if (this.state.isOpen) {
+	                this.setState({
+	                    isOpen: false
+	                });
+	                return;
+	            }
+	            this.setState({
+	                isOpen: true
+	            });
 	        }
 	    }, {
 	        key: 'init',
@@ -27501,19 +27561,13 @@ webpackJsonp([0,1],[
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.config = exports.merged = exports.Tool = undefined;
-	
-	var _objMerged = __webpack_require__(239);
-	
-	var _objMerged2 = _interopRequireDefault(_objMerged);
+	exports.config = exports.Tool = undefined;
 	
 	var _Config = __webpack_require__(240);
 	
 	var config = _interopRequireWildcard(_Config);
 	
 	function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	var target = config.target;
 	
@@ -27574,7 +27628,6 @@ webpackJsonp([0,1],[
 	            var head = xhr.getAllResponseHeaders();
 	            var response = xhr.responseText;
 	            //将服务器返回的数据，转换成json
-	
 	
 	            if (/application\/json/.test(head) || setting.dataType === 'json' && /^(\{|\[)([\s\S])*?(\]|\})$/.test(response)) {
 	                response = JSON.parse(response);
@@ -27696,90 +27749,10 @@ webpackJsonp([0,1],[
 	};
 	
 	exports.Tool = Tool;
-	exports.merged = _objMerged2.default;
 	exports.config = config;
 
 /***/ },
-/* 239 */
-/***/ function(module, exports, __webpack_require__) {
-
-	var __WEBPACK_AMD_DEFINE_FACTORY__, __WEBPACK_AMD_DEFINE_RESULT__;!function (merged) {
-	    'use strict';
-	
-	    if (true) {
-	        !(__WEBPACK_AMD_DEFINE_FACTORY__ = (merged), __WEBPACK_AMD_DEFINE_RESULT__ = (typeof __WEBPACK_AMD_DEFINE_FACTORY__ === 'function' ? (__WEBPACK_AMD_DEFINE_FACTORY__.call(exports, __webpack_require__, exports, module)) : __WEBPACK_AMD_DEFINE_FACTORY__), __WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
-	    } else if (typeof module !== 'undefined' && module.exports) {
-	        exports = module.exports = merged();
-	    } else {
-	        window.merged = merged();
-	    }
-	}(function () {
-	    'use strict';
-	
-	    /**
-	     * (复制对象)
-	     * 
-	     * @returns (返回复制的对象)
-	     */
-	
-	    function merged() {
-	        for (var len = arguments.length, arg = Array(len), key = 0; key < len; key++) {
-	            arg[key] = arguments[key];
-	        }
-	
-	        var obj = {};
-	        for (var i = 0; i < arg.length; i++) {
-	            for (var key in arg[i]) {
-	                var curObj = arg[i][key];
-	                if (isJson(curObj)) {
-	                    if (isJson(obj[key])) {
-	                        obj[key] = merged(obj[key], curObj); // obj 此属性已经是对象，则和该对象原来的属性合并
-	                    } else {
-	                        obj[key] = merged(curObj); // obj 此属性不是对象，则和该对象原来的属性合并
-	                    }
-	                } else if (isArray(curObj)) {
-	                    //此对象是数组
-	                    obj[key] = mergedArr(curObj);
-	                } else {
-	                    obj[key] = curObj; //属性不是obj
-	                }
-	            }
-	        }
-	        return obj;
-	    };
-	
-	    /**
-	     * (复制数组)
-	     * 
-	     * @param arr (description)
-	     */
-	    function mergedArr(arr) {
-	        var arr2 = [];
-	
-	        for (var i = 0; i < arr.length; i++) {
-	            var curObj = arr[i];
-	            if (isJson(curObj)) {
-	                arr2[i] = merged(curObj); // 复制对象
-	            } else if (isArray(curObj)) {
-	                //复制数组
-	                arr2[i] = mergedArr(curObj);
-	            } else {
-	                arr2[i] = curObj; //属性不是obj
-	            }
-	        }
-	        return arr2;
-	    }
-	
-	    function isJson(obj) {
-	        return (typeof obj === 'undefined' ? 'undefined' : typeof obj) == 'object' && Object.prototype.toString.call(obj).toLowerCase() === '[object object]' && !obj.length; //true 是 false不是
-	    };
-	    function isArray(arr) {
-	        return Object.prototype.toString.call(arr).toLowerCase() === '[object array]'; //true 是 false不是
-	    }
-	    return merged;
-	});
-
-/***/ },
+/* 239 */,
 /* 240 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -27801,7 +27774,7 @@ webpackJsonp([0,1],[
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
 	});
-	exports.TabIcon = exports.UserHeadImg = exports.TipMsgSignin = exports.Footer = exports.FooterInit = exports.DataNull = exports.Header = exports.DataLoad = undefined;
+	exports.TabIcon = exports.UserHeadImg = exports.TipMsgSignin = exports.Footer = exports.FooterInit = exports.DataNull = exports.Header = exports.R_header = exports.DataLoad = undefined;
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -27865,6 +27838,23 @@ webpackJsonp([0,1],[
 	    loadMsg: '正在加载中'
 	};
 	
+	var R_header = exports.R_header = function (_Component2) {
+	    _inherits(R_header, _Component2);
+	
+	    function R_header() {
+	        _classCallCheck(this, R_header);
+	
+	        return _possibleConstructorReturn(this, (R_header.__proto__ || Object.getPrototypeOf(R_header)).apply(this, arguments));
+	    }
+	
+	    _createClass(R_header, [{
+	        key: 'render',
+	        value: function render() {}
+	    }]);
+	
+	    return R_header;
+	}(_react.Component);
+	
 	/**
 	 * 公共头部
 	 *
@@ -27873,8 +27863,8 @@ webpackJsonp([0,1],[
 	 * @extends {Component}
 	 */
 	
-	var Header = exports.Header = function (_Component2) {
-	    _inherits(Header, _Component2);
+	var Header = exports.Header = function (_Component3) {
+	    _inherits(Header, _Component3);
 	
 	    function Header() {
 	        _classCallCheck(this, Header);
@@ -27961,8 +27951,8 @@ webpackJsonp([0,1],[
 	 * @extends {Component}
 	 */
 	
-	var DataNull = exports.DataNull = function (_Component3) {
-	    _inherits(DataNull, _Component3);
+	var DataNull = exports.DataNull = function (_Component4) {
+	    _inherits(DataNull, _Component4);
 	
 	    function DataNull() {
 	        _classCallCheck(this, DataNull);
@@ -27993,29 +27983,29 @@ webpackJsonp([0,1],[
 	 */
 	
 	
-	var FooterInit = exports.FooterInit = function (_Component4) {
-	    _inherits(FooterInit, _Component4);
+	var FooterInit = exports.FooterInit = function (_Component5) {
+	    _inherits(FooterInit, _Component5);
 	
 	    function FooterInit(props) {
 	        _classCallCheck(this, FooterInit);
 	
-	        var _this4 = _possibleConstructorReturn(this, (FooterInit.__proto__ || Object.getPrototypeOf(FooterInit)).call(this, props));
+	        var _this5 = _possibleConstructorReturn(this, (FooterInit.__proto__ || Object.getPrototypeOf(FooterInit)).call(this, props));
 	
-	        _this4.state = {
+	        _this5.state = {
 	            messageCount: 0
 	        };
 	
-	        _this4.getMessageCount = function () {
-	            var accesstoken = _this4.props.User ? _this4.props.User.accesstoken : '';
+	        _this5.getMessageCount = function () {
+	            var accesstoken = _this5.props.User ? _this5.props.User.accesstoken : '';
 	            if (accesstoken) {
 	                _Tool2.default.get('/api/v1/message/count', { accesstoken: accesstoken }, function (res) {
-	                    _this4.setState({
+	                    _this5.setState({
 	                        messageCount: res.data
 	                    });
 	                });
 	            }
 	        };
-	        return _this4;
+	        return _this5;
 	    }
 	
 	    _createClass(FooterInit, [{
@@ -28114,8 +28104,8 @@ webpackJsonp([0,1],[
 	 * @extends {Component}
 	 */
 	
-	var TipMsgSignin = exports.TipMsgSignin = function (_Component5) {
-	    _inherits(TipMsgSignin, _Component5);
+	var TipMsgSignin = exports.TipMsgSignin = function (_Component6) {
+	    _inherits(TipMsgSignin, _Component6);
 	
 	    function TipMsgSignin() {
 	        _classCallCheck(this, TipMsgSignin);
@@ -28151,8 +28141,8 @@ webpackJsonp([0,1],[
 	 */
 	
 	
-	var UserHeadImg = exports.UserHeadImg = function (_Component6) {
-	    _inherits(UserHeadImg, _Component6);
+	var UserHeadImg = exports.UserHeadImg = function (_Component7) {
+	    _inherits(UserHeadImg, _Component7);
 	
 	    function UserHeadImg() {
 	        _classCallCheck(this, UserHeadImg);
@@ -28179,8 +28169,8 @@ webpackJsonp([0,1],[
 	 */
 	
 	
-	var TabIcon = exports.TabIcon = function (_Component7) {
-	    _inherits(TabIcon, _Component7);
+	var TabIcon = exports.TabIcon = function (_Component8) {
+	    _inherits(TabIcon, _Component8);
 	
 	    function TabIcon() {
 	        _classCallCheck(this, TabIcon);
@@ -28325,6 +28315,107 @@ webpackJsonp([0,1],[
 	    if (!clientWidth) return;
 	    docEl.style.fontSize = 20 * (clientWidth / 640) + 'px';
 	})();
+
+/***/ },
+/* 255 */
+/***/ function(module, exports) {
+
+	'use strict';
+	'usr strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	var HttpService = function () {
+	    function HttpService() {
+	        _classCallCheck(this, HttpService);
+	    }
+	
+	    _createClass(HttpService, null, [{
+	        key: 'query',
+	        value: function query(config) {
+	            console.log();
+	            config = config || {};
+	            var params = HttpService.formatParams(config.data);
+	
+	            var request = new XMLHttpRequest();
+	            request.onreadystatechange = function () {
+	                if (request.readyState == 4) {
+	                    var status = request.status;
+	                    if (status >= 200 && status < 300) {
+	                        var res = JSON.parse(request.responseText);
+	
+	                        if (res) {
+	                            config.success && config.success(res);
+	                        }
+	                        // if (res.result == 0) {
+	                        //     config.success && config.success(res.data);
+	                        // } else if (res.result == 1013) {
+	                        //     window.localStorage.referer = window.location.href;
+	                        //     window.location.href = 'login.html'
+	                        // } else {
+	                        //     return config.error && config.error(res.result, res.msg)
+	                        // }
+	                    } else {
+	                        return config.fail && config.fail(status);
+	                    }
+	                }
+	            };
+	            request.open('GET', config.url + "?" + params, true);
+	            request.send(null);
+	        }
+	    }, {
+	        key: 'save',
+	        value: function save(config) {
+	            config = config || {};
+	
+	            var params = HttpService.formatParams(config.data);
+	
+	            var request = new XMLHttpRequest();
+	            request.onreadystatechange = function () {
+	                if (request.readyState == 4) {
+	                    var status = request.status;
+	                    if (status >= 200 && status < 300) {
+	                        var res = JSON.parse(request.responseText);
+	                        toast.toaster(res.msg);
+	                        if (res.result == 0) {
+	                            config.success && config.success(res.data);
+	                        } else if (res.result == 1013) {
+	                            window.localStorage.referer = window.location.href;
+	                            window.location.href = 'login.html';
+	                        } else {
+	                            config.error && config.error(res.result, res.msg);
+	                        }
+	                    } else {
+	                        config.fail && config.fail(status);
+	                    }
+	                }
+	            };
+	            request.open("POST", config.url, true);
+	            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+	            request.send(params);
+	        }
+	    }, {
+	        key: 'formatParams',
+	        value: function formatParams(data) {
+	            var arr = [];
+	            for (var name in data) {
+	                arr.push(encodeURIComponent(name) + "=" + encodeURIComponent(data[name]));
+	            }
+	            arr.push(("v=" + Math.random()).replace(".", ""));
+	            return arr.join("&");
+	        }
+	    }]);
+	
+	    return HttpService;
+	}();
+	
+	exports.default = HttpService;
 
 /***/ }
 ]);
