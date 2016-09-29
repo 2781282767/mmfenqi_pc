@@ -4,6 +4,7 @@ import {Router, Route, IndexRoute, browserHistory, hashHistory} from 'react-rout
 import MapIndex from './Component/map'; //首页
 
 import About from  './Component/about'
+import DeviceList from  './Component/DeviceList'
 
 
 /**
@@ -26,6 +27,7 @@ const RouteConfig = (
         <Route path="/" component={Roots}>
             <IndexRoute component={MapIndex} />
             <Route path="about" component={About} />
+            <Route path="/deviceList" component={DeviceList} />
         </Route>
     </Router>
 );

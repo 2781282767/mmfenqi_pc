@@ -7,9 +7,8 @@ import ReactDOM, {render} from 'react-dom';
 import {Router,hashHistory} from 'react-router';
 
 import routes from './Route'; //路由配置
+import '../src/less/style.less'
 
-import './less/style.less'
-import  'flex.css'
 import './auto-set-rem'
 
 render(<Router routes={routes} history={hashHistory} />

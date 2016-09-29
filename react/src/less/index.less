@@ -1,19 +1,212 @@
-div{
-  .abc{
-    color:red;
-    font-size:50px;
+body, ul, li, a, p, h2, h3, textarea, button, input, select {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  text-decoration: none;
+  border: none;
+  &:focus {
+    outline: none;
+  }
+}
 
-    .cs{
-      font-size: 30px;
-      color: blue;
-      display: flex;
+
+html body {
+  height: 100%;
+  font-family: "Microsoft JhengHei","Adobe Fan Heiti Std B";
+}
+
+body {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -khtml-user-select: none;
+  user-select: none;
+  -webkit-user-drag: none;
+  font-size: 1rem;
+}
+
+a{
+  color:#666;
+}
+
+html,
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+header,
+p,
+blockquote,
+pre,
+address,
+img,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+input,
+tfoot,
+thead,
+tr,
+th,
+td {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-weight: normal;
+  font-variant: normal;
+  font-style: normal;
+}
+//.box{
+//  display: flex;
+//  height: 10rem;
+//  .userImg{
+//    flex: 1;
+//    border: 1px solid red;
+//    border-radius: 50%;
+//  }
+//  .info{
+//    display: flex;
+//    flex: 2;
+//    height: 100%;
+//
+//
+//    align-items: center;
+//
+//    justify-content: center;
+//  }
+//  .other{
+//    flex: 1;
+//  }
+//}
+
+
+.container{
+
+}
+
+.box{
+  width: 100%;
+  position: fixed;
+  z-index: 100;
+  padding: 5px 0;
+  top: 0;
+  right:0;
+  background: #fff;
+  border-bottom: 1px solid #cccccc;
+
+
+  .box1{
+
+    display: inline-block;
+    padding:0 1rem;
+
+  }
+  .box2{
+    display: inline-block;
+    width:70%;
+
+
+    .babyName{
+
+      .row1{
+        font-size: 1.5rem;
+        color: #333;
+
+      }
+      .row2{
+        font-size: 1.2rem;
+        color: #666666;
+      }
+
+      img{
+        vertical-align: middle;
+      }
+    }
+
+
+    .addr{
+      font-size: 1.2rem;
+      color: #666666;
+
     }
   }
 
-  font-size: 29px;
+  .box3{
+    display: inline-block;
 
-  .demo{
-    font-size: 30px;
-    color: red;
+
+  }
+}
+
+.little-menu{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+
+  >div {
+    width: 33.33%;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    a{
+      width: 100%;
+      display: flex;
+      align-items:center;
+      justify-content:center;
+      >div{
+        font-size: 1.2rem;
+        padding-left: 5px;
+        color: #666666;
+      }
+    }
+    >div{
+      font-size: 1.2rem;
+      padding-left: 5px;
+      color: #666666;
+    }
+  }
+}
+
+.menu{
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction:row;
+  .shouqi{
+    display: flex;
+    flex:100%;
+    align-items:center;
+    justify-content:center;
+    padding: 10px 0;
+    >div{
+      padding-left: 10px;
+      font-size: 1.2rem;
+      color: #666;
+    }
+  }
+  .option{
+    width: 25%;
+    text-align: center;
+    padding-top:10px;
+    >div{
+      text-align: center;
+      width: 100%;
+      font-size: 1.2rem;
+      color: #666;
+
+
+    }
   }
 }

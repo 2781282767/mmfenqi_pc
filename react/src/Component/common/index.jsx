@@ -26,10 +26,31 @@ DataLoad.defaultProps = {
 
 
 export  class R_header extends Component{
+
     render(){
+        let {title} = this.props;
+        let left = null;
+        let right = null;
+
+
+        return (
+            <header style={{display:'flex',height:'2.5rem'}}>
+                <div style={{display:'flex',flex:1}} onClick={this.context.router.goBack}>
+
+                </div>
+                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
+                <div style={{display:'flex',flex:1}}>
+
+                </div>
+            </header>
+        )
 
     }
 }
+
+R_header.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 
 /**
  * 公共头部
