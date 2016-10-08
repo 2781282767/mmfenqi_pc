@@ -15,6 +15,11 @@ var proxy = [{
         path: '/app/*',
         target:'http://222.46.27.218:8800',
         host:'222.46.27.218:8800'
+    },
+    {
+        path: '/media/*',
+        target:'http://222.46.27.218:8800',
+        host:'222.46.27.218:8800'
     }
 ];
 
@@ -29,4 +34,4 @@ server.app.get('*', function (req,res) {
     res.sendFile(__dirname + '/index.html')
 });
 
-server.listen(8001,'192.198.0.34');
+server.listen(8003);

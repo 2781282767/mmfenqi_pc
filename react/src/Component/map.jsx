@@ -5,21 +5,31 @@ import ReactDOM, {render} from 'react-dom';
 
 import HttpService from'../Http';
 
-import Tool from '../Tool';
+import {doLogin,getCurrentPower,change} from '../action/index'
 
-import {DataLoad, Footer, UserHeadImg,FooterInit, TabIcon, GetNextPage} from './common/index';
+
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+
 
 import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
 
 import '../less/index.less'
 
+import '../less/deviceList.less'
+
 import usrimg from '../../src/img/user.png'
 
 import qiehuan from '../../src/img/qiehuan.png'
 
-import dian1 from '../../src/img/dianliang1.png'
+import dian2 from '../../src/img/dianliang1.png'
+import dian3 from '../../src/img/dianliang2.png'
+import dian4 from '../../src/img/dianliang3.png'
+import dian1 from '../../src/img/didianliang.png'
+import dian from '../../src/img/lixian.png'
 
 import wifi from '../../src/img/wifi.png'
+
 import touxiang from '../../src/img/touxiang.png'
 
 import shouqi from '../../src/img/shouqi.png'
@@ -47,76 +57,75 @@ import  genghuan from '../../src/img/genghuan.png'
 
 import  jiebang from '../../src/img/jiebang.png'
 
-export default class MapIndex extends React.Component{
+ class MapIndex extends React.Component{
     constructor(props){
         super(props);
 
         this.state={
             lng:'120.153576',
             lat:'30.287459',
-            babyid:'',
-            token:'',
-            babyName:'',
-            babytelephone:'',
             isOpen:false,
             mapHeight:'100%',
-            mapBottom:'13.5rem'
+            mapBottom:'13.5rem',
+            checked:false,
+            babyname:'',
+            babyid:''
         };
     }
 
-    doLogin(success){
-        HttpService.query({
-            url: '/apph5/user/login',
-            data: {sid: 'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg'},
-            success: (res=> {
-                console.log(res);
-                if(res.code=='30010'){
-                    this.setState({
-                        token:res.data.token
-                    });
-                    return success()
-
-                }
-            })
-        });
-    }
-
-    getDeviceList(){
-        HttpService.query({
-            url:'/app/object/getBabys',
-            data:{token:this.state.token},
-            success:(res=>{
-                console.log(res);
-                if(res.code==10020){
-                    this.setState({
-                        babyName:res.data[0].babyname,
-                        babyid:res.data[0].babyid,
-                        babytelephone:res.data[0].babytelephone
-                    })
-                }
-            })
-        })
-    }
-
-    getCurrentPower(){
-
-    }
-
-
     componentWillMount(){
-        this.doLogin(
-            function () {
-                this.getDeviceList()
-            }.bind(this)
-        );
+
+        this.props.doLogin();
+
+
+       // this.props.getCurrentPower(this.props.babyid);
 
     }
 
     componentDidMount(){
         this.init();
+
+
     }
 
+     componentWillReceiveProps(){
+
+
+     }
+
+     _change(babyname,babyid,headimg,babytelephone,e){
+         e.preventDefault();
+
+         this.setState({
+             checked:false,
+         });
+
+         const data={
+             babyname:babyname,
+             babyid:babyid,
+             babytelephone:babytelephone,
+             headimg:headimg,
+         };
+
+
+         this.props.change(data);
+
+
+
+     }
+
+     more(){
+         this.setState({
+             checked:true
+         })
+     }
+
     render(){
+
+
+        const {babyName,babytelephone,list,babyid,headimg,value}=this.props;
+
+
         const lng=this.state.lng;
         const lat=this.state.lat;
         var isOpen=this.state.isOpen;
@@ -124,11 +133,45 @@ export default class MapIndex extends React.Component{
         var mapHeight=this.state.mapHeight;
         const mapBottom=this.state.mapBottom;
 
-        const babyName=this.state.babyName;
-        const babyid=this.state.babyid;
-        const babytelephone=this.state.babytelephone;
+
+        const checked=this.state.checked;
+
+
         return (
             <div className="container">
+
+                {
+                    checked==true?
+                        <div>
+                            <div className="_z"></div>
+                            <div className="layer_content">
+                                <div className="header">
+                                    <div className="title">李</div>
+                                </div>
+                                <div className="layer_content2">
+                                    {
+                                        list.map((json,index)=>{
+                                            return (
+                                                <div className="device-info" key={index} onClick={this._change.bind(this,json.babyname,json.babyid,json.headimg,json.babytelephone)}>
+                                                    <div className="headimg"><img src={"/media"+json.headimg} style={{width:'3.4rem',height:'3.4rem'}} /></div>
+                                                    <div className="info">
+                                                        <div className="name">{json.babyname}</div>
+                                                        <div className="time">{json.starttime}</div>
+                                                    </div>
+
+                                                </div>
+                                            )
+                                        })
+                                    }
+
+                                </div>
+                            </div>
+                        </div>
+                        :
+                        null
+                }
+
+
 
                 {/*<div className="box">*/}
                     {/*<div className="userImg"></div>*/}
@@ -141,7 +184,7 @@ export default class MapIndex extends React.Component{
 
                 <div className="box">
                     <div className="box1">
-                        <img src={touxiang} style={{width:'3.4rem',height:'3.4rem'}}/>
+                        <img src={"/media"+headimg} style={{width:'3.4rem',height:'3.4rem'}}/>
                     </div>
                     <div className="box2">
                         <div className="babyName">
@@ -149,7 +192,33 @@ export default class MapIndex extends React.Component{
                             <span className="row2">【上报时间】</span>
                             <span className="row3"></span>
                             <img src={wifi} style={{width:'1.2rem',height:'1.2rem'}}/>&nbsp;
-                            <img src={dian1} style={{width:'1.8rem',height:'1.1rem'}}/>
+
+                            {
+                                value=='0'?
+                                    <img src={dian} style={{width:'1.8rem',height:'1.1rem'}}/>
+                                        :
+                                        value=='1'?
+                                            <img src={dian1} style={{width:'1.8rem',height:'1.1rem'}}/>
+                                            :
+                                            value=='2'?
+                                                <img src={dian2} style={{width:'1.8rem',height:'1.1rem'}}/>
+                                                :
+                                                value=='3'?
+                                                    <img src={dian3} style={{width:'1.8rem',height:'1.1rem'}}/>
+                                                    :
+                                                    value=='4'?
+                                                        <img src={dian4} style={{width:'1.8rem',height:'1.1rem'}}/>
+                                                        :
+                                                        null
+                            }
+
+                            <img src={dian} style={{width:'1.8rem',height:'1.1rem',display:value=='0'?'inlineBlock':'none'}}/>
+                            <img src={dian1} style={{width:'1.8rem',height:'1.1rem',display:value=='1'?'inlineBlock':'none'}}/>
+                            <img src={dian2} style={{width:'1.8rem',height:'1.1rem',display:value=='2'?'inlineBlock':'none'}}/>
+                            <img src={dian3} style={{width:'1.8rem',height:'1.1rem',display:value=='3'?'inlineBlock':'none'}}/>
+                            <img src={dian4} style={{width:'1.8rem',height:'1.1rem',display:value=='4'?'inlineBlock':'none'}}/>
+
+
                         </div>
                         <div className="addr">
                             13:12 杭仍要三lkhtk要
@@ -157,8 +226,8 @@ export default class MapIndex extends React.Component{
 
                     </div>
                     
-                    <div className="box3">
-                        <Link to="/deviceList"><img src={qiehuan} style={{width:'2.2rem',height:'3rem'}}/></Link>
+                    <div className="box3" onClick={this.more.bind(this)}>
+                        <img src={qiehuan} style={{width:'2.2rem',height:'3rem'}}/>
                     </div>
                 </div>
                 <div id="container" style={{width:'100%',height:'100%',position:'absolute',bottom:mapBottom,overflow:'hidden',margin:'0'}}>
@@ -192,8 +261,10 @@ export default class MapIndex extends React.Component{
                                     <div>定位</div>
                                 </div>
                                 <div className="option">
-                                    <img src={tonghua} style={{width:'2.3rem',height:'2.3rem'}}/>
-                                    <div>通话</div>
+                                    <a href={"tel:"+babytelephone}>
+                                        <img src={tonghua} style={{width:'2.3rem',height:'2.3rem'}}/>
+                                        <div>通话</div>
+                                    </a>
                                 </div>
                                 <div className="option">
                                     <Link to="/about">
@@ -234,7 +305,6 @@ export default class MapIndex extends React.Component{
                         </div>
                 }
 
-
             </div>
         )
     }
@@ -266,8 +336,6 @@ export default class MapIndex extends React.Component{
             });
         }
 
-
-
     }
 
 
@@ -286,8 +354,26 @@ export default class MapIndex extends React.Component{
         });
         marker.setMap(mapObj);
     }
-
-
 }
+
+
+const mapStateToProps = state => {
+    return {
+        list:state.login.list,
+        babyName:state.login.babyName,
+        babyid:state.login.babyid,
+        babytelephone:state.login.babytelephone,
+        headimg:state.login.headimg,
+        value:state.login.value
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        doLogin:doLogin,
+        change:change
+       // getCurrentPower:getCurrentPower
+    },dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);
 
 

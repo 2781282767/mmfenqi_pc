@@ -36,7 +36,6 @@ export  class R_header extends Component{
         return (
             <header style={{display:'flex',height:'2.5rem'}}>
                 <div style={{display:'flex',flex:1}} onClick={this.context.router.goBack}>
-
                 </div>
                 <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
                 <div style={{display:'flex',flex:1}}>
