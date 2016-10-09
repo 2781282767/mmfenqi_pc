@@ -2,14 +2,6 @@
  * Created by ChinaHp on 2016/8/28.
  */
 'use strict';
-//定义一个change方法，将来把它绑定到props上
-// export function change(value){
-//     return{
-//         type:"change",
-//         value:value
-//     }
-// }
-
 
 import HttpService from'../Http';
 
@@ -91,6 +83,13 @@ function Change(res) {
     }
 }
 
+function GetCurrentTrack(res) {
+    return{
+        type:types.GetCurrentTrack,
+        res
+    }
+}
+
 
 
 
@@ -107,19 +106,14 @@ export function change(res) {
 
     return (dispatch,getState)=>{
         dispatch(Change(data));
-
-        dispatch(getCurrentPower(data.babyid))
-
+        dispatch(getCurrentPower(data.babyid));
+        dispatch(getCurrentTrack(data.babyid));
     }
 }
 
 export function getUsers() {
     return function (dispatch) {
-        // return fetchUsers().then((ret) => {
-        //     if(ret.status === 200) {
-        //         dispatch(setUsers(ret.data));
-        //     }
-        // });
+
         dispatch(setUsers(fetchUsers()));
     };
 }
@@ -150,7 +144,8 @@ export function doLogin() {
     }
 
 }
- function getDeviceList() {
+//获取设备list
+ export function getDeviceList() {
 
     return function (dispatch) {
         return HttpService.query({
@@ -160,15 +155,18 @@ export function doLogin() {
                 if(res.code==10020){
                     dispatch(GetDeviceList(res.data));
 
-                    dispatch(getCurrentPower(res.data[0].babyid))
+                    dispatch(getCurrentPower(res.data[0].babyid));
 
+
+
+                    dispatch(getCurrentTrack(res.data[0].babyid));
                 }
             })
         })
     }
     
 }
-
+//获取设备电量
  function getCurrentPower(babyid) {
     return function (dispatch) {
 
@@ -189,5 +187,54 @@ export function doLogin() {
 
     }
 
+}
 
+
+//获取设备坐标
+function getCurrentTrack(babyid) {
+    return function(dispatch){
+        return HttpService.query({
+            url:'/app/map/getCurrentTrack',
+
+            data:{token:localStorage.appToken,babyid:babyid},
+
+            success:(res=>{
+
+                console.log(res);
+                if(res.code=='10059'){
+
+                    const data={
+                        lng:0,
+                        lat:0
+                    };
+                    dispatch(GetCurrentTrack(data));
+                    init(data.lng,data.lat);
+
+
+                }else{
+                    dispatch(GetCurrentTrack(res.data));
+                    //dispatch(init(res.data.lng,res.data.lat))
+                    init(res.data.lng,res.data.lat);
+                }
+            })
+
+        })
+    }
+}
+
+
+ function init(lng,lat) {
+    // console.log('2222');
+    var mapObj,marker;
+    mapObj = new AMap.Map('container',{
+        zoom: 15,
+        center: [lng,lat],
+        resizeEnable:true,
+    });
+
+
+    marker = new AMap.Marker({
+        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+    });
+    marker.setMap(mapObj);
 }

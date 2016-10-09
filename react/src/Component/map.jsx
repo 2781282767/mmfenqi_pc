@@ -78,12 +78,9 @@ import  jiebang from '../../src/img/jiebang.png'
         this.props.doLogin();
 
 
-       // this.props.getCurrentPower(this.props.babyid);
-
     }
 
     componentDidMount(){
-        this.init();
 
 
     }
@@ -123,30 +120,28 @@ import  jiebang from '../../src/img/jiebang.png'
     render(){
 
 
-        const {babyName,babytelephone,list,babyid,headimg,value}=this.props;
+        const {babyName,babytelephone,list,babyid,headimg,value,lng,lat,gpstime}=this.props;
 
 
-        const lng=this.state.lng;
-        const lat=this.state.lat;
+        console.log(gpstime);
+
+
         var isOpen=this.state.isOpen;
-
         var mapHeight=this.state.mapHeight;
         const mapBottom=this.state.mapBottom;
-
-
         const checked=this.state.checked;
 
 
-        return (
-            <div className="container">
 
+        return (
+            <div>
                 {
                     checked==true?
                         <div>
                             <div className="_z"></div>
                             <div className="layer_content">
                                 <div className="header">
-                                    <div className="title">李</div>
+                                    <div className="title">我的设备</div>
                                 </div>
                                 <div className="layer_content2">
                                     {
@@ -156,7 +151,7 @@ import  jiebang from '../../src/img/jiebang.png'
                                                     <div className="headimg"><img src={"/media"+json.headimg} style={{width:'3.4rem',height:'3.4rem'}} /></div>
                                                     <div className="info">
                                                         <div className="name">{json.babyname}</div>
-                                                        <div className="time">{json.starttime}</div>
+                                                        <div className="time">设备有效日期{json.starttime}</div>
                                                     </div>
 
                                                 </div>
@@ -189,13 +184,13 @@ import  jiebang from '../../src/img/jiebang.png'
                     <div className="box2">
                         <div className="babyName">
                             <span className="row1">{babyName}</span>
-                            <span className="row2">【上报时间】</span>
+                            <span className="row2">[上报时间]</span>
                             <span className="row3"></span>
                             <img src={wifi} style={{width:'1.2rem',height:'1.2rem'}}/>&nbsp;
 
                             {
                                 value=='0'?
-                                    <img src={dian} style={{width:'1.8rem',height:'1.1rem'}}/>
+                                    <img src={dian} style={{width:'1.3rem',height:'1.1rem'}}/>
                                         :
                                         value=='1'?
                                             <img src={dian1} style={{width:'1.8rem',height:'1.1rem'}}/>
@@ -212,7 +207,7 @@ import  jiebang from '../../src/img/jiebang.png'
                                                         null
                             }
 
-                            <img src={dian} style={{width:'1.8rem',height:'1.1rem',display:value=='0'?'inlineBlock':'none'}}/>
+                            <img src={dian} style={{width:'1.3rem',height:'1.1rem',display:value=='0'?'inlineBlock':'none'}}/>
                             <img src={dian1} style={{width:'1.8rem',height:'1.1rem',display:value=='1'?'inlineBlock':'none'}}/>
                             <img src={dian2} style={{width:'1.8rem',height:'1.1rem',display:value=='2'?'inlineBlock':'none'}}/>
                             <img src={dian3} style={{width:'1.8rem',height:'1.1rem',display:value=='3'?'inlineBlock':'none'}}/>
@@ -229,6 +224,9 @@ import  jiebang from '../../src/img/jiebang.png'
                     <div className="box3" onClick={this.more.bind(this)}>
                         <img src={qiehuan} style={{width:'2.2rem',height:'3rem'}}/>
                     </div>
+                    {/*<div className="box3">*/}
+                        {/*<Link to="/deviceList"><img src={qiehuan} style={{width:'2.2rem',height:'3rem'}}/></Link>*/}
+                    {/*</div>*/}
                 </div>
                 <div id="container" style={{width:'100%',height:'100%',position:'absolute',bottom:mapBottom,overflow:'hidden',margin:'0'}}>
 
@@ -279,8 +277,10 @@ import  jiebang from '../../src/img/jiebang.png'
                                     <div>安全区域</div>
                                 </div>
                             <div className="option">
+                                <Link to="/AddDevice">
                                 <img src={tianjia} style={{width:'2.3rem',height:'2.3rem'}}/>
                                 <div>添加设备</div>
+                                    </Link>
                             </div>
                             <div className="option">
                                 <img src={genghuan} style={{width:'2.3rem',height:'2.3rem'}}/>
@@ -311,11 +311,7 @@ import  jiebang from '../../src/img/jiebang.png'
 
     getLocation(lng,lat){
 
-        this.setState({
-            lag:lng,
-            lat:lat
-        });
-       this.init();
+       this.init(lng,lat);
     }
 
 
@@ -338,19 +334,17 @@ import  jiebang from '../../src/img/jiebang.png'
 
     }
 
-
-    init(){
+    init(lng,lat){
         var mapObj,marker;
         mapObj = new AMap.Map('container',{
             zoom: 15,
-            center: [this.state.lng,this.state.lat],
+            center: [lng,lat],
             resizeEnable:true,
         });
 
 
         marker = new AMap.Marker({
             icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-            position: [120.153576, 30.287459]
         });
         marker.setMap(mapObj);
     }
@@ -364,7 +358,10 @@ const mapStateToProps = state => {
         babyid:state.login.babyid,
         babytelephone:state.login.babytelephone,
         headimg:state.login.headimg,
-        value:state.login.value
+        value:state.login.value,
+        lng:state.login.lng,
+        lat:state.login.lat,
+        gpstime:state.login.gpstime
     };
 };
 const mapDispatchToProps = (dispatch) => {

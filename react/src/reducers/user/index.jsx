@@ -11,7 +11,10 @@ const initialState = {
     babyid:'',
     babytelephone:'',
     headimg:'',
-    value:''
+    value:'',
+    lng:'',
+    lat:'',
+
 
 };
 export default function login (state = initialState, action) {
@@ -47,7 +50,12 @@ export default function login (state = initialState, action) {
                 value:action.res
             });
 
-
+        case types.GetCurrentTrack:
+            return Object.assign({},state,{
+                lng:action.res.lng,
+                lat:action.res.lat,
+                gpstime:action.res.gpstime
+            });
 
         // case types.ADD_USER :
         //     return Object.assign({},state,{

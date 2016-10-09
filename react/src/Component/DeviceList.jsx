@@ -6,9 +6,10 @@ import ReactDOM, {render} from 'react-dom';
 import {R_header} from './common/index';
 
 import { connect } from 'react-redux';
+
 import { bindActionCreators } from 'redux';
 
-import {doLogin} from '../action/index'
+import {doLogin,getDeviceList,change} from '../action/index'
 
 import '../less/deviceList.less'
 
@@ -18,11 +19,28 @@ class DeviceList extends React.Component{
     }
 
     componentWillMount(){
-        this.props.doLogin();
+        this.props.getDeviceList();
     }
 
-    change(babyname){
-        alert(babyname)
+    _change(babyname,babyid,headimg,babytelephone,e){
+        e.preventDefault();
+
+        this.setState({
+            checked:false,
+        });
+
+        const data={
+            babyname:babyname,
+            babyid:babyid,
+            babytelephone:babytelephone,
+            headimg:headimg,
+        };
+
+
+        this.props.change(data);
+
+
+
     }
 
 
@@ -33,13 +51,20 @@ class DeviceList extends React.Component{
         console.log(list);
         return (
             <div>
-                <R_header title="我的设备"/>
+                <header style={{display:'flex',height:'2.5rem'}}>
+                    <div style={{display:'flex',flex:1}}>
+                    </div>
+                    <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>我的设备</div>
+                    <div style={{display:'flex',flex:1}}>
+
+                    </div>
+                </header>
 
 
                 {
                     list.map((json,index)=>{
                         return (
-                            <div className="device-info" key={index} onClick={this.change.bind(this,json.babyname)}>
+                            <div className="device-info" key={index} onClick={this._change.bind(this,json.babyname,json.babyid,json.headimg,json.babytelephone)}>
                                 <div className="headimg"><img src={"/media"+json.headimg} style={{width:'3.4rem',height:'3.4rem'}} /></div>
                                 <div className="info">
                                     <div className="name">{json.babyname}</div>
@@ -68,7 +93,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        doLogin:doLogin,
+        getDeviceList:getDeviceList,
+        change:change
     },dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DeviceList);

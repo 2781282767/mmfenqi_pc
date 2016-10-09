@@ -2,6 +2,17 @@
 import React, {Component, PropTypes} from 'react';
 import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
 
+import back from '../../img/back.png'
+
+
+
+
+
+
+
+
+
+
 import Tool from '../../Tool'
 /**
  * (加载动画)
@@ -27,6 +38,8 @@ DataLoad.defaultProps = {
 
 export  class R_header extends Component{
 
+
+
     render(){
         let {title} = this.props;
         let left = null;
@@ -34,12 +47,12 @@ export  class R_header extends Component{
 
 
         return (
-            <header style={{display:'flex',height:'2.5rem'}}>
-                <div style={{display:'flex',flex:1}} onClick={this.context.router.goBack}>
+            <header style={{display:'flex',padding:'1rem 15px'}}>
+                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'left'}} onClick={browserHistory.goBack}>
+                    <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
                 </div>
                 <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
                 <div style={{display:'flex',flex:1}}>
-
                 </div>
             </header>
         )
@@ -47,9 +60,7 @@ export  class R_header extends Component{
     }
 }
 
-R_header.contextTypes = {
-    router: React.PropTypes.object.isRequired
-};
+
 
 /**
  * 公共头部

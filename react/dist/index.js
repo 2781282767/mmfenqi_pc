@@ -31,9 +31,9 @@ webpackJsonp([0,1],[
 	
 	var _Route2 = _interopRequireDefault(_Route);
 	
-	__webpack_require__(297);
+	__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"../src/less/style.less\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
 	
-	__webpack_require__(299);
+	__webpack_require__(300);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -28933,7 +28933,9 @@ webpackJsonp([0,1],[
 	    babyid: '',
 	    babytelephone: '',
 	    headimg: '',
-	    value: ''
+	    value: '',
+	    lng: '',
+	    lat: ''
 	
 	};
 	function login() {
@@ -28972,6 +28974,12 @@ webpackJsonp([0,1],[
 	                value: action.res
 	            });
 	
+	        case types.GetCurrentTrack:
+	            return Object.assign({}, state, {
+	                lng: action.res.lng,
+	                lat: action.res.lat
+	            });
+	
 	        // case types.ADD_USER :
 	        //     return Object.assign({},state,{
 	        //         users: [
@@ -29006,12 +29014,13 @@ webpackJsonp([0,1],[
 	var GetDeviceList = exports.GetDeviceList = 'GetDeviceList';
 	var GetCurrentPower = exports.GetCurrentPower = 'GetCurrentPower';
 	var Change = exports.Change = 'Change';
+	var GetCurrentTrack = exports.GetCurrentTrack = 'GetCurrentTrack';
 
 /***/ },
 /* 262 */
 /***/ function(module, exports, __webpack_require__) {
 
-	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -29036,6 +29045,10 @@ webpackJsonp([0,1],[
 	var _DeviceList = __webpack_require__(296);
 	
 	var _DeviceList2 = _interopRequireDefault(_DeviceList);
+	
+	var _AddDevice = __webpack_require__(297);
+	
+	var _AddDevice2 = _interopRequireDefault(_AddDevice);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -29074,7 +29087,7 @@ webpackJsonp([0,1],[
 	    return Roots;
 	}(_react.Component);
 	
-	var history = process.env.NODE_ENV !== 'production' ? _reactRouter.browserHistory : _reactRouter.hashHistory;
+	var history = _reactRouter.browserHistory;
 	
 	var RouteConfig = _react2.default.createElement(
 	    _reactRouter.Router,
@@ -29084,12 +29097,14 @@ webpackJsonp([0,1],[
 	        { path: '/', component: Roots },
 	        _react2.default.createElement(_reactRouter.IndexRoute, { component: _map2.default }),
 	        _react2.default.createElement(_reactRouter.Route, { path: 'about', component: _about2.default }),
-	        _react2.default.createElement(_reactRouter.Route, { path: '/deviceList', component: _DeviceList2.default })
+	        _react2.default.createElement(_reactRouter.Route, { path: '/deviceList', component: _DeviceList2.default }),
+	        _react2.default.createElement(_reactRouter.Route, { path: '/addDevice', component: _AddDevice2.default })
 	    )
 	);
 	
 	exports.default = RouteConfig;
-	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(4)))
+	
+	// var history = process.env.NODE_ENV !== 'production' ? browserHistory : hashHistory;
 
 /***/ },
 /* 263 */
@@ -29242,14 +29257,10 @@ webpackJsonp([0,1],[
 	        value: function componentWillMount() {
 	
 	            this.props.doLogin();
-	
-	            // this.props.getCurrentPower(this.props.babyid);
 	        }
 	    }, {
 	        key: 'componentDidMount',
-	        value: function componentDidMount() {
-	            this.init();
-	        }
+	        value: function componentDidMount() {}
 	    }, {
 	        key: 'componentWillReceiveProps',
 	        value: function componentWillReceiveProps() {}
@@ -29290,20 +29301,20 @@ webpackJsonp([0,1],[
 	            var babyid = _props.babyid;
 	            var headimg = _props.headimg;
 	            var value = _props.value;
+	            var lng = _props.lng;
+	            var lat = _props.lat;
 	
 	
-	            var lng = this.state.lng;
-	            var lat = this.state.lat;
+	            console.log(list);
+	
 	            var isOpen = this.state.isOpen;
-	
 	            var mapHeight = this.state.mapHeight;
 	            var mapBottom = this.state.mapBottom;
-	
 	            var checked = this.state.checked;
 	
 	            return _react2.default.createElement(
 	                'div',
-	                { className: 'container' },
+	                null,
 	                checked == true ? _react2.default.createElement(
 	                    'div',
 	                    null,
@@ -29317,7 +29328,7 @@ webpackJsonp([0,1],[
 	                            _react2.default.createElement(
 	                                'div',
 	                                { className: 'title' },
-	                                '李'
+	                                '我的设备'
 	                            )
 	                        ),
 	                        _react2.default.createElement(
@@ -29343,6 +29354,7 @@ webpackJsonp([0,1],[
 	                                        _react2.default.createElement(
 	                                            'div',
 	                                            { className: 'time' },
+	                                            '设备有效日期',
 	                                            json.starttime
 	                                        )
 	                                    )
@@ -29373,13 +29385,13 @@ webpackJsonp([0,1],[
 	                            _react2.default.createElement(
 	                                'span',
 	                                { className: 'row2' },
-	                                '【上报时间】'
+	                                '[上报时间]'
 	                            ),
 	                            _react2.default.createElement('span', { className: 'row3' }),
 	                            _react2.default.createElement('img', { src: _wifi2.default, style: { width: '1.2rem', height: '1.2rem' } }),
 	                            ' ',
-	                            value == '0' ? _react2.default.createElement('img', { src: _lixian2.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '1' ? _react2.default.createElement('img', { src: _didianliang2.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '2' ? _react2.default.createElement('img', { src: _dianliang2.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '3' ? _react2.default.createElement('img', { src: _dianliang4.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '4' ? _react2.default.createElement('img', { src: _dianliang6.default, style: { width: '1.8rem', height: '1.1rem' } }) : null,
-	                            _react2.default.createElement('img', { src: _lixian2.default, style: { width: '1.8rem', height: '1.1rem', display: value == '0' ? 'inlineBlock' : 'none' } }),
+	                            value == '0' ? _react2.default.createElement('img', { src: _lixian2.default, style: { width: '1.3rem', height: '1.1rem' } }) : value == '1' ? _react2.default.createElement('img', { src: _didianliang2.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '2' ? _react2.default.createElement('img', { src: _dianliang2.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '3' ? _react2.default.createElement('img', { src: _dianliang4.default, style: { width: '1.8rem', height: '1.1rem' } }) : value == '4' ? _react2.default.createElement('img', { src: _dianliang6.default, style: { width: '1.8rem', height: '1.1rem' } }) : null,
+	                            _react2.default.createElement('img', { src: _lixian2.default, style: { width: '1.3rem', height: '1.1rem', display: value == '0' ? 'inlineBlock' : 'none' } }),
 	                            _react2.default.createElement('img', { src: _didianliang2.default, style: { width: '1.8rem', height: '1.1rem', display: value == '1' ? 'inlineBlock' : 'none' } }),
 	                            _react2.default.createElement('img', { src: _dianliang2.default, style: { width: '1.8rem', height: '1.1rem', display: value == '2' ? 'inlineBlock' : 'none' } }),
 	                            _react2.default.createElement('img', { src: _dianliang4.default, style: { width: '1.8rem', height: '1.1rem', display: value == '3' ? 'inlineBlock' : 'none' } }),
@@ -29489,11 +29501,15 @@ webpackJsonp([0,1],[
 	                    _react2.default.createElement(
 	                        'div',
 	                        { className: 'option' },
-	                        _react2.default.createElement('img', { src: _tianjia2.default, style: { width: '2.3rem', height: '2.3rem' } }),
 	                        _react2.default.createElement(
-	                            'div',
-	                            null,
-	                            '添加设备'
+	                            _reactRouter.Link,
+	                            { to: '/AddDevice' },
+	                            _react2.default.createElement('img', { src: _tianjia2.default, style: { width: '2.3rem', height: '2.3rem' } }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                null,
+	                                '添加设备'
+	                            )
 	                        )
 	                    ),
 	                    _react2.default.createElement(
@@ -29543,11 +29559,7 @@ webpackJsonp([0,1],[
 	        key: 'getLocation',
 	        value: function getLocation(lng, lat) {
 	
-	            this.setState({
-	                lag: lng,
-	                lat: lat
-	            });
-	            this.init();
+	            this.init(lng, lat);
 	        }
 	    }, {
 	        key: 'isOpen',
@@ -29569,17 +29581,16 @@ webpackJsonp([0,1],[
 	        }
 	    }, {
 	        key: 'init',
-	        value: function init() {
+	        value: function init(lng, lat) {
 	            var mapObj, marker;
 	            mapObj = new AMap.Map('container', {
 	                zoom: 15,
-	                center: [this.state.lng, this.state.lat],
+	                center: [lng, lat],
 	                resizeEnable: true
 	            });
 	
 	            marker = new AMap.Marker({
-	                icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-	                position: [120.153576, 30.287459]
+	                icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png"
 	            });
 	            marker.setMap(mapObj);
 	        }
@@ -29595,7 +29606,9 @@ webpackJsonp([0,1],[
 	        babyid: state.login.babyid,
 	        babytelephone: state.login.babytelephone,
 	        headimg: state.login.headimg,
-	        value: state.login.value
+	        value: state.login.value,
+	        lng: state.login.lng,
+	        lat: state.login.lat
 	    };
 	};
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
@@ -29716,14 +29729,6 @@ webpackJsonp([0,1],[
 	 * Created by ChinaHp on 2016/8/28.
 	 */
 	'use strict';
-	//定义一个change方法，将来把它绑定到props上
-	// export function change(value){
-	//     return{
-	//         type:"change",
-	//         value:value
-	//     }
-	// }
-	
 	
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -29732,6 +29737,7 @@ webpackJsonp([0,1],[
 	exports.getUsers = getUsers;
 	exports.setSnackbar = setSnackbar;
 	exports.doLogin = doLogin;
+	exports.getDeviceList = getDeviceList;
 	
 	var _Http = __webpack_require__(264);
 	
@@ -29812,6 +29818,13 @@ webpackJsonp([0,1],[
 	    };
 	}
 	
+	function GetCurrentTrack(res) {
+	    return {
+	        type: types.GetCurrentTrack,
+	        res: res
+	    };
+	}
+	
 	function change(res) {
 	
 	    var data = {
@@ -29824,18 +29837,14 @@ webpackJsonp([0,1],[
 	
 	    return function (dispatch, getState) {
 	        dispatch(Change(data));
-	
 	        dispatch(getCurrentPower(data.babyid));
+	        dispatch(getCurrentTrack(data.babyid));
 	    };
 	}
 	
 	function getUsers() {
 	    return function (dispatch) {
-	        // return fetchUsers().then((ret) => {
-	        //     if(ret.status === 200) {
-	        //         dispatch(setUsers(ret.data));
-	        //     }
-	        // });
+	
 	        dispatch(setUsers(fetchUsers()));
 	    };
 	}
@@ -29862,6 +29871,7 @@ webpackJsonp([0,1],[
 	        });
 	    };
 	}
+	//获取设备list
 	function getDeviceList() {
 	
 	    return function (dispatch) {
@@ -29873,12 +29883,14 @@ webpackJsonp([0,1],[
 	                    dispatch(GetDeviceList(res.data));
 	
 	                    dispatch(getCurrentPower(res.data[0].babyid));
+	
+	                    dispatch(getCurrentTrack(res.data[0].babyid));
 	                }
 	            }
 	        });
 	    };
 	}
-	
+	//获取设备电量
 	function getCurrentPower(babyid) {
 	    return function (dispatch) {
 	
@@ -29897,6 +29909,51 @@ webpackJsonp([0,1],[
 	            }
 	        });
 	    };
+	}
+	
+	//获取设备坐标
+	function getCurrentTrack(babyid) {
+	    return function (dispatch) {
+	        return _Http2.default.query({
+	            url: '/app/map/getCurrentTrack',
+	
+	            data: { token: localStorage.appToken, babyid: babyid },
+	
+	            success: function success(res) {
+	
+	                console.log(res);
+	                if (res.code == '10059') {
+	
+	                    var data = {
+	                        lng: 0,
+	                        lat: 0
+	                    };
+	                    dispatch(GetCurrentTrack(data));
+	                    init(data.lng, data.lat);
+	                } else {
+	                    dispatch(GetCurrentTrack(res.data));
+	                    //dispatch(init(res.data.lng,res.data.lat))
+	                    init(res.data.lng, res.data.lat);
+	                }
+	            }
+	
+	        });
+	    };
+	}
+	
+	function init(lng, lat) {
+	    // console.log('2222');
+	    var mapObj, marker;
+	    mapObj = new AMap.Map('container', {
+	        zoom: 15,
+	        center: [lng, lat],
+	        resizeEnable: true
+	    });
+	
+	    marker = new AMap.Marker({
+	        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png"
+	    });
+	    marker.setMap(mapObj);
 	}
 
 /***/ },
@@ -30190,7 +30247,7 @@ webpackJsonp([0,1],[
 	            return _react2.default.createElement(
 	                'header',
 	                { style: { display: 'flex', height: '2.5rem' } },
-	                _react2.default.createElement('div', { style: { display: 'flex', flex: 1 }, onClick: this.context.router.goBack }),
+	                _react2.default.createElement('div', { style: { display: 'flex', flex: 1 }, onClick: _reactRouter.browserHistory.goBack }),
 	                _react2.default.createElement(
 	                    'div',
 	                    { style: { display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' } },
@@ -30203,10 +30260,6 @@ webpackJsonp([0,1],[
 	
 	    return R_header;
 	}(_react.Component);
-	
-	R_header.contextTypes = {
-	    router: _react2.default.PropTypes.object.isRequired
-	};
 	
 	/**
 	 * 公共头部
@@ -30815,12 +30868,25 @@ webpackJsonp([0,1],[
 	    _createClass(DeviceList, [{
 	        key: 'componentWillMount',
 	        value: function componentWillMount() {
-	            this.props.doLogin();
+	            this.props.getDeviceList();
 	        }
 	    }, {
-	        key: 'change',
-	        value: function change(babyname) {
-	            alert(babyname);
+	        key: '_change',
+	        value: function _change(babyname, babyid, headimg, babytelephone, e) {
+	            e.preventDefault();
+	
+	            this.setState({
+	                checked: false
+	            });
+	
+	            var data = {
+	                babyname: babyname,
+	                babyid: babyid,
+	                babytelephone: babytelephone,
+	                headimg: headimg
+	            };
+	
+	            this.props.change(data);
 	        }
 	    }, {
 	        key: 'render',
@@ -30833,11 +30899,21 @@ webpackJsonp([0,1],[
 	            return _react2.default.createElement(
 	                'div',
 	                null,
-	                _react2.default.createElement(_index.R_header, { title: '我的设备' }),
+	                _react2.default.createElement(
+	                    'header',
+	                    { style: { display: 'flex', height: '2.5rem' } },
+	                    _react2.default.createElement('div', { style: { display: 'flex', flex: 1 } }),
+	                    _react2.default.createElement(
+	                        'div',
+	                        { style: { display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center' } },
+	                        '我的设备'
+	                    ),
+	                    _react2.default.createElement('div', { style: { display: 'flex', flex: 1 } })
+	                ),
 	                list.map(function (json, index) {
 	                    return _react2.default.createElement(
 	                        'div',
-	                        { className: 'device-info', key: index, onClick: _this2.change.bind(_this2, json.babyname) },
+	                        { className: 'device-info', key: index, onClick: _this2._change.bind(_this2, json.babyname, json.babyid, json.headimg, json.babytelephone) },
 	                        _react2.default.createElement(
 	                            'div',
 	                            { className: 'headimg' },
@@ -30875,20 +30951,117 @@ webpackJsonp([0,1],[
 	};
 	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
 	    return (0, _redux.bindActionCreators)({
-	        doLogin: _index2.doLogin
+	        getDeviceList: _index2.getDeviceList,
+	        change: _index2.change
 	    }, dispatch);
 	};
 	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(DeviceList);
 
 /***/ },
 /* 297 */
+/***/ function(module, exports, __webpack_require__) {
+
+	'use strict';
+	'usr strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+	    value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(2);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _reactDom = __webpack_require__(35);
+	
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+	
+	var _reactRedux = __webpack_require__(236);
+	
+	var _redux = __webpack_require__(243);
+	
+	var _index = __webpack_require__(293);
+	
+	__webpack_require__(298);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var AddDevice = function (_React$Component) {
+	    _inherits(AddDevice, _React$Component);
+	
+	    function AddDevice() {
+	        _classCallCheck(this, AddDevice);
+	
+	        return _possibleConstructorReturn(this, (AddDevice.__proto__ || Object.getPrototypeOf(AddDevice)).apply(this, arguments));
+	    }
+	
+	    _createClass(AddDevice, [{
+	        key: 'render',
+	        value: function render() {
+	            return _react2.default.createElement(
+	                'div',
+	                { style: { backgroundColor: '#eee', height: '100%' } },
+	                _react2.default.createElement(_index.R_header, { title: '消息' }),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'container' },
+	                    _react2.default.createElement(
+	                        'form',
+	                        { name: 'form' },
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-12 app-white-input margin-one' },
+	                            _react2.default.createElement('input', { type: 'number', placeholder: '请输入设备的IMEI号', style: { width: '100%' }, required: true })
+	                        ),
+	                        _react2.default.createElement(
+	                            'label',
+	                            { style: { dispaly: 'block' } },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'col-xs-12  text-center app-pink-radius-button' },
+	                                '激活设备'
+	                            ),
+	                            _react2.default.createElement('button', { type: 'submit', style: { dispaly: 'none' } })
+	                        ),
+	                        _react2.default.createElement(
+	                            'div',
+	                            { className: 'col-xs-12', style: { marginTop: '1rem' } },
+	                            '注：请输入设备背面、包装或说明书上的IMEI号的前14位数字、最后一位数字为核验码，不用输入！'
+	                        )
+	                    )
+	                )
+	            );
+	        }
+	    }]);
+	
+	    return AddDevice;
+	}(_react2.default.Component);
+	
+	var mapStateToProps = function mapStateToProps(state) {
+	    return {};
+	};
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	    return (0, _redux.bindActionCreators)({}, dispatch);
+	};
+	exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(AddDevice);
+
+/***/ },
+/* 298 */
 /***/ function(module, exports) {
 
 	// removed by extract-text-webpack-plugin
 
 /***/ },
-/* 298 */,
-/* 299 */
+/* 299 */,
+/* 300 */
 /***/ function(module, exports) {
 
 	'use strict';
