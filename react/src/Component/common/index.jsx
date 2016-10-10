@@ -1,6 +1,6 @@
 'usr strict';
 import React, {Component, PropTypes} from 'react';
-import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
+import {Router, Route, IndexRoute, hashHistory,browserHistory, Link} from 'react-router';
 
 import back from '../../img/back.png'
 
@@ -38,21 +38,35 @@ DataLoad.defaultProps = {
 
 export  class R_header extends Component{
 
-
-
     render(){
-        let {title} = this.props;
-        let left = null;
-        let right = null;
+        const {title,left,right} = this.props;
+
 
 
         return (
             <header style={{display:'flex',padding:'1rem 15px'}}>
-                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'left'}} onClick={browserHistory.goBack}>
-                    <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
-                </div>
+                {
+                    left==1?
+                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={hashHistory.goBack}>
+                            <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                        </div>:
+                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} >
+
+                        </div>
+                }
                 <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
                 <div style={{display:'flex',flex:1}}>
+
+                    {
+                        right==1?
+                            <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} onClick={hashHistory.goBack}>
+                                <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                            </div>:
+                            <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} >
+
+                            </div>
+                    }
+
                 </div>
             </header>
         )

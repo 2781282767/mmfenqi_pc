@@ -4,12 +4,12 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM, {render} from 'react-dom';
 
 import {R_header} from './common/index';
-
+import {Router, Route, IndexRoute, hashHistory,browserHistory, Link} from 'react-router';
 import { connect } from 'react-redux';
 
 import { bindActionCreators } from 'redux';
 
-import {doLogin,getDeviceList,change} from '../action/index'
+import {getDeviceList,change} from '../action/index'
 
 import '../less/deviceList.less'
 
@@ -38,11 +38,11 @@ class DeviceList extends React.Component{
 
 
         this.props.change(data);
+        hashHistory.goBack()
 
 
 
     }
-
 
 
     render(){
@@ -51,14 +51,7 @@ class DeviceList extends React.Component{
         console.log(list);
         return (
             <div>
-                <header style={{display:'flex',height:'2.5rem'}}>
-                    <div style={{display:'flex',flex:1}}>
-                    </div>
-                    <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>我的设备</div>
-                    <div style={{display:'flex',flex:1}}>
-
-                    </div>
-                </header>
+                <R_header title="我的设备" left="0" right="1"/>
 
 
                 {
@@ -87,7 +80,11 @@ class DeviceList extends React.Component{
 const mapStateToProps = state => {
     return {
 
-        list:state.login.list,
+        list:state.change.list,
+        babyName: state.change.babyName,
+        babyid: state.change.babyid,
+        babytelephone: state.change.babytelephone,
+        headimg: state.change.headimg,
 
     };
 };

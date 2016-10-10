@@ -5,9 +5,10 @@
 
 import { combineReducers } from 'redux';
 import login from './user';
+import change from './changeDevice';
 
 
 const rootReducer = combineReducers({
-    login,
+    login,change
 });
 export default rootReducer;

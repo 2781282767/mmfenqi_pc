@@ -9,6 +9,8 @@ import DeviceList from  './Component/DeviceList'
 import AddDevice from './Component/AddDevice'
 
 import Gotoactive from './Component/gotoactive'
+import VerifyText from './Component/verifyText'
+import Success from './Component/success'
 
 
 /**
@@ -26,16 +28,19 @@ class Roots extends Component {
 }
 
 
-var history = browserHistory;
+var history = hashHistory;
 
 const RouteConfig = (
     <Router history={history}>
         <Route path="/" component={Roots}>
-            <IndexRoute component={MapIndex} />
-            <Route path="about" component={About} />
+
+            <Route path="/about" component={About} />
+            <Route path="/map/:sid" component={MapIndex} />
             <Route path="/deviceList" component={DeviceList} />
             <Route path="/addDevice" component={AddDevice} />
-            <Route path="/Gotoactive" component={Gotoactive} />
+            <Route path="/Gotoactive/:telephone/:mdtid" component={Gotoactive} />
+            <Route path="/VerifyText/:admintelephone/:mdtid/:deviceid/:telephone" component={VerifyText} />
+            <Route path="/Success/:time" component={Success} />
         </Route>
     </Router>
 );

@@ -13,3 +13,7 @@ export const GetDeviceList='GetDeviceList';
 export const GetCurrentPower='GetCurrentPower';
 export const Change='Change';
 export const GetCurrentTrack='GetCurrentTrack';
+export const AddDevice='AddDevice';
+export const GetGuardians='GetGuardians';
+export const GetChecked='GetChecked';
+export const ChangeDevice='ChangeDevice';

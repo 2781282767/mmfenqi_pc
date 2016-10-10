@@ -21,7 +21,7 @@ render(
 
     <Provider store={store}>
 
-    <Router routes={routes} history={browserHistory} />
+    <Router routes={routes} history={hashHistory} />
 
     </Provider>
     ,document.getElementById('content'));
