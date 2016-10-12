@@ -11,6 +11,7 @@ import AddDevice from './Component/AddDevice'
 import Gotoactive from './Component/gotoactive'
 import VerifyText from './Component/verifyText'
 import Success from './Component/success'
+import App from './Component/kaoqin'
 
 
 /**
@@ -34,13 +35,14 @@ const RouteConfig = (
     <Router history={history}>
         <Route path="/" component={Roots}>
 
-            <Route path="/about" component={About} />
+            <Route path="/about/:babyid/:lng/:lat" component={About} />
             <Route path="/map/:sid" component={MapIndex} />
             <Route path="/deviceList" component={DeviceList} />
             <Route path="/addDevice" component={AddDevice} />
             <Route path="/Gotoactive/:telephone/:mdtid" component={Gotoactive} />
             <Route path="/VerifyText/:admintelephone/:mdtid/:deviceid/:telephone" component={VerifyText} />
             <Route path="/Success/:time" component={Success} />
+            <Route path="/App/:babyid" component={App} />
         </Route>
     </Router>
 );

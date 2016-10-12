@@ -11,6 +11,8 @@ import {R_header} from './common/index'
 
 import success from '../img/success.png'
 
+import {Link} from 'react-router';
+
 
 import {HttpService ,Toast}  from'../Http';
 
@@ -27,6 +29,10 @@ export default class Success extends React.Component{
     }
 
     render(){
+
+
+        const sid=localStorage.sid;
+
         return (
 
             <div>
@@ -42,7 +48,7 @@ export default class Success extends React.Component{
                     <div className="col-xs-12 text-center" style={{fontSize: '1.4re', color: '#666'}}><span>套餐试用期至：</span><span style={{color: '#02b4ed'}}>{this.props.params.time}</span>
                     </div>
 
-                    <div className="col-xs-12 app-pink-radius-button text-center" style={{marginTop: '1.5rem',fontSize: '1.6rem'}} onClick={this.goto}>下一步</div>
+                    <Link to={'/map/'+sid}><div className="col-xs-12 app-pink-radius-button text-center" style={{marginTop: '1.5rem',fontSize: '1.6rem'}}>成功</div></Link>
                 </div>
             </div>
 

@@ -44,10 +44,11 @@ export  class R_header extends Component{
 
 
         return (
-            <header style={{display:'flex',padding:'1rem 15px'}}>
+            <header style={{display:'flex',padding:'1rem 15px',zIndex: '100',
+                position: 'relative'}}>
                 {
                     left==1?
-                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={hashHistory.goBack}>
+                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={this.context.router.goBack}>
                             <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
                         </div>:
                         <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} >
@@ -74,7 +75,9 @@ export  class R_header extends Component{
     }
 }
 
-
+R_header.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 
 /**
  * 公共头部

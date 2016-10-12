@@ -7,6 +7,8 @@ import {HttpService, Toast}  from'../Http';
 
 import * as types from '../constants/ActionTypes';
 
+import dian from '../../src/img/dian.png'
+
 
 var list = [
     {
@@ -177,9 +179,52 @@ function ChangeDevice(res) {
     }
 }
 
+ function GetAddr(msg) {
+    return{
+        type:types.GetAddr,
+        msg
+    }
+}
+
+export function getMap(babyid) {
+    return function (dispatch) {
+        return HttpService.query({
+            url: '/app/map/getCurrentTrack',
+
+            data: {token: localStorage.appToken, babyid: babyid},
+
+            success: (res=> {
+
+                console.log(res);
+                if (res.code == '10059') {
+
+                    const data = {
+                        lng: 0,
+                        lat: 0
+                    };
+                   // dispatch(GetCurrentTrack(data));
+                    init(data.lng, data.lat);
+                  //  dispatch(getAddree(data.lng, data.lat));
+
+
+                } else {
+                   // dispatch(GetCurrentTrack(res.data));
+                    //dispatch(init(res.data.lng,res.data.lat))
+                    init(res.data.lng, res.data.lat);
+                    dispatch(getAddree(data.lng, data.lat));
+                }
+            })
+
+        })
+    }
+}
+
 
 export function change(res) {
 
+
+
+    window.localStorage.babyid = res.babyid;
 
     const data = {
         babyName: res.babyname,
@@ -213,6 +258,13 @@ export function setSnackbar(message) {
 export function getChecked(msg) {
     return {
         type: types.GetChecked,
+        msg
+    }
+}
+
+export function A(msg) {
+    return {
+        type: types.aaa,
         msg
     }
 }
@@ -252,15 +304,29 @@ export function getDeviceList() {
             success: (res=> {
 
                 console.log(res);
+
+
                 if (res.code == 10020) {
+
+                    //dispatch(getChecked('false'));
 
 
                     dispatch(GetDeviceList(res.data));
 
                     dispatch(getCurrentPower(res.data[0].babyid));
 
+                    //window.localStorage.babyid = res.data[0].babyid;
+
+                    //alert(localStorage.babyid)
+
+                    dispatch(getChecked('false'));
+
 
                     dispatch(getCurrentTrack(res.data[0].babyid));
+
+                 //   dispatch(getA(res.data[0].babyid));
+
+
                 } else {
 
                     dispatch(getChecked('true'));
@@ -286,6 +352,7 @@ function getCurrentPower(babyid) {
                 console.log(res);
 
                 dispatch(getGuardians(babyid));
+
                 if (res.code == 10011) {
                     //$scope.powervalue = 0;
                     dispatch(GetCurrentPower('0'));
@@ -297,6 +364,41 @@ function getCurrentPower(babyid) {
 
     }
 
+}
+
+function getA(babyid) {
+    return function (dispatch) {
+      return  HttpService.query({
+            url: '/app/object/getGuardians',
+            data: {
+                token: localStorage.appToken,
+                babyid: babyid
+            },
+            success: (res=> {
+                console.log(res);
+
+                if (res.code == '10068') {
+
+                    console.log(res.data);
+
+
+                    var getGuardiansList = res.data;
+
+                    for (var a in getGuardiansList) {
+                        if (getGuardiansList[a].familystatus == '家长') {
+                            dispatch(A('true'));
+
+                            break;
+                        } else {
+                            dispatch(A('false'))
+                        }
+                    }
+
+                }
+
+            })
+        })
+    }
 }
 
 
@@ -321,17 +423,17 @@ function getGuardians(babyid) {
 
                     var getGuardiansList = res.data;
 
-                    for (var a in getGuardiansList) {
-                        if (getGuardiansList[a].familystatus == '家长') {
-                            // guardianid = getGuardiansList[a].guardianid;
-
-                            checked = true;
-
-                            break;
-                        } else {
-                            checked = false;
-                        }
-                    }
+                    // for (var a in getGuardiansList) {
+                    //     if (getGuardiansList[a].familystatus == '家长') {
+                    //         // guardianid = getGuardiansList[a].guardianid;
+                    //
+                    //         checked = true;
+                    //
+                    //         break;
+                    //     } else {
+                    //         checked = false;
+                    //     }
+                    // }
 
 
                     console.log('++' + list);
@@ -350,7 +452,6 @@ function getGuardians(babyid) {
                             if (getGuardiansList[x].familystatus == list[y].familystatus) {
                                 list[y][status] = true;
                                 list[y][id] = getGuardiansList[x].guardianid;
-                                list[y][ab] = checked;
                                 console.log(list);
 
                                 break;
@@ -389,11 +490,14 @@ function getCurrentTrack(babyid) {
                     dispatch(GetCurrentTrack(data));
                     init(data.lng, data.lat);
 
+                  //  dispatch(getAddree(data.lng, data.lat));
+
 
                 } else {
                     dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
                     init(res.data.lng, res.data.lat);
+                    dispatch(getAddree(res.data.lng, res.data.lat))
                 }
             })
 
@@ -402,21 +506,113 @@ function getCurrentTrack(babyid) {
 }
 
 
+function getAddree(lng,lat) {
+    return function (dispatch) {
+        console.log(lng);
+
+        var lnglatXY = [lng, lat]; //已知点坐标
+
+
+        var geocoder = new AMap.Geocoder(
+            {
+                radius: 1000,
+                extensions: "all"
+            }
+        );
+        geocoder.getAddress(lnglatXY, function(status, result) {
+            if (status === 'complete' && result.info === 'OK') {
+
+                 console.log(result)
+
+                var address = result.regeocode.formattedAddress; //返回地址描述
+                dispatch(GetAddr(address))
+            }
+        });
+    }
+}
+
+
+
 function init(lng, lat) {
-    // console.log('2222');
-    var mapObj, marker;
-    mapObj = new AMap.Map('container', {
+
+    var map, marker;
+    map = new AMap.Map('container', {
         zoom: 15,
         center: [lng, lat],
         resizeEnable: true,
     });
 
+    if(lng==0&&lat==0){
+        return;
+    }
+
+
+
+
+    //
+    // map.setFitView();
+
+
+
+
 
     marker = new AMap.Marker({
-        icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
+        map: map,
+        icon:dian,
+        position: [lng, lat],
+        imageOffset: new AMap.Pixel(0, -60)
     });
-    marker.setMap(mapObj);
+
+
+    marker.setMap(map);
+
+
+
+    var circle = new AMap.Circle({
+        center: new AMap.LngLat(lng,lat),// 圆心位置
+        radius: 100, //半径
+        strokeColor: "#00b4ed", //线颜色
+        strokeOpacity: 0.1, //线透明度
+        fillColor: "#00b4ed", //填充颜色
+        fillOpacity: 0.1//填充透明度
+    });
+    circle.setMap(map);
+
+
+
+
+
+
+
 }
+
+var add;
+
+
+function geocoder_CallBack(data,cb) {
+  var  address= data.regeocode.formattedAddress; //返回地址描述
+    console.log(address);
+
+    add=address;
+
+    getAddr(add);
+
+    return cb()
+
+}
+
+ function getAddr(address) {
+
+     // return (dispatch, getState)=> {
+     //     //dispatch(ChangeDevice(data));
+     //     dispatch(Addr(address));
+     // }
+     return function (dispatch,address) {
+         console.log('日日')
+     }
+}
+
+
 
 
 export function scanDevice(mdtcode) {

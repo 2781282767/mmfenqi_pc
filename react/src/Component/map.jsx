@@ -5,7 +5,7 @@ import ReactDOM, {render} from 'react-dom';
 
 import {HttpService, Toast} from'../Http';
 
-import {doLogin, change} from '../action/index'
+import {doLogin, change,getMap} from '../action/index'
 
 
 import {connect} from 'react-redux';
@@ -61,6 +61,10 @@ import  genghuan from '../../src/img/genghuan.png'
 
 import  jiebang from '../../src/img/jiebang.png'
 
+import kaoqin from '../../src/img/kaoqin.png'
+
+
+
 class MapIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -75,7 +79,9 @@ class MapIndex extends React.Component {
             babyname: '',
             babyid: '',
 
-            _isopen: true,
+            _isopen: false,
+
+            bbb:false,
 
             list: [
                 {
@@ -146,26 +152,149 @@ class MapIndex extends React.Component {
                 }
             ]
         };
+
+
     }
+
 
     componentWillMount() {
 
-        console.log(this.props);
+
 
         window.localStorage.sid = this.props.params.sid;
 
 
+        console.log(this.props.lng=='');
 
-        if(this.props.values==''){
-            this.props.doLogin(this.props.params.sid);
+
+
+        if(!this.props.babyid){
+         //   alert('没值')
+
+        }else{
+          //  alert('进来了');
+//
+            this.props.getMap(this.props.babyid);
 
         }
 
+
+                if(this.props.values==''){
+
+
+                    this.props.doLogin(this.props.params.sid);
+                }else{
+
+
+                }
+
+
+
+                // if(!this.props.babyid){
+                //     alert('存在')
+                // }
 
 
 
 
     }
+
+
+
+
+    componentDidMount(){
+
+
+
+
+    }
+
+    getBabyid(){
+        HttpService.query({
+            url: '/app/object/getBabys',
+            data: {token: localStorage.appToken},
+            success: (res=> {
+
+                console.log(res);
+
+
+                if (res.code == 10020) {
+                    this.getA(res.data[0].babyid)
+                }
+            })
+
+        })
+
+
+    }
+     getA(babyid) {
+         HttpService.query({
+             url: '/app/object/getGuardians',
+             data: {
+                 token: localStorage.appToken,
+                 babyid: babyid
+             },
+             success: (res=> {
+                 console.log(res);
+
+                 if (res.code == '10068') {
+
+                     console.log(res.data);
+
+
+                     var getGuardiansList = res.data;
+
+                     for (var a in getGuardiansList) {
+                         if (getGuardiansList[a].familystatus == '家长') {
+                             this.setState({
+                                 bbb:true
+                             });
+
+                             break;
+
+                         } else {
+                             this.setState({
+                                 bbb:false
+                             })
+                         }
+                     }
+
+                 }
+
+             })
+         })
+     }
+
+
+    // init(lng, lat) {
+    //     var map = new AMap.Map("container", {
+    //         resizeEnable: true,
+    //         center: [116.397428, 39.90923],
+    //         zoom: 13
+    //     });
+    //     //获取用户所在城市信息
+    //
+    //         //实例化城市查询类
+    //         var citysearch = new AMap.CitySearch();
+    //         //自动获取用户IP，返回当前城市
+    //         citysearch.getLocalCity(function(status, result) {
+    //             if (status === 'complete' && result.info === 'OK') {
+    //                 if (result && result.city && result.bounds) {
+    //                     var cityinfo = result.city;
+    //                     var citybounds = result.bounds;
+    //                  //   document.getElementById('tip').innerHTML = '您当前所在城市：'+cityinfo;
+    //                     //地图显示当前城市
+    //                     map.setBounds(citybounds);
+    //
+    //                     console.log(cityinfo);
+    //                 }
+    //             } else {
+    //                // document.getElementById('tip').innerHTML = result.info;
+    //             }
+    //         });
+    //
+    //     }
+    // }
 
 
     _change(babyname, babyid, headimg, babytelephone, e) {
@@ -207,8 +336,14 @@ class MapIndex extends React.Component {
 
                 if (res.code == '10042') {
                     this.setState({
-                        _isopen: false,
-                    })
+                        bbb: false,
+                    });
+
+
+
+                   // this.props.doLogin(this.props.params.sid);
+
+
                 } else {
                     Toast.toast(res.msg, 3000);
                 }
@@ -218,12 +353,44 @@ class MapIndex extends React.Component {
 
     }
 
+    getLocation() {
+
+         this.props.getMap(this.props.babyid);
+
+       // this.init(116.397428, 39.90923)
+    }
+
+
+    isOpen() {
+
+        console.log(this.state.isOpen);
+
+        if (!this.state.isOpen) {
+            this.setState({
+                isOpen: true,
+                mapBottom: '4.5rem'
+            });
+
+        } else {
+            this.setState({
+                isOpen: false,
+                mapBottom: '13.5rem'
+            });
+        }
+
+    }
+
     render() {
 
 
-        const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked}=this.props;
+        const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked,aaa,address}=this.props;
+
+        console.log(address)
 
 
+
+
+        console.log(this.props);
 
         var isOpen = this.state.isOpen;
         var mapHeight = this.state.mapHeight;
@@ -233,7 +400,11 @@ class MapIndex extends React.Component {
 
         return (
             <div>
+
+
+                {/*更换设备*/}
                 {
+
                     checked == true ?
                         <div>
                             <div className="_z"></div>
@@ -268,6 +439,8 @@ class MapIndex extends React.Component {
                         null
                 }
 
+                {/*是否为0*/}
+
                 {
                     _checked == 'true' ?
                         <div>
@@ -298,12 +471,12 @@ class MapIndex extends React.Component {
                 }
 
                 {
-                    getGuardiansList.isOpen == true && this.state._isopen == true ?
+                      this.state.bbb?
 
                         <div>
                             <div className="_zz"></div>
                             <div className="layer_content3">
-                                <div className="header">
+                                <div className="header">f
                                     <div className="title">选择成员关系</div>
                                 </div>
                                 <div className="layer_content4">
@@ -360,7 +533,7 @@ class MapIndex extends React.Component {
                         <div className="babyName">
                             <span className="row1">{babyName}</span>
                             <span className="row2">[上报时间]</span>
-                            <span className="row3">{}</span>
+                            <span className="row3"></span>
                             <img src={wifi} style={{width: '1.2rem', height: '1.2rem'}}/>&nbsp;
 
                             {
@@ -388,6 +561,10 @@ class MapIndex extends React.Component {
                             {gpstime}
                         </div>
 
+                        <div className="address">
+                            <div className="ss">{address}</div>
+                        </div>
+
                     </div>
 
                     <div className="box3" onClick={this.more.bind(this)}>
@@ -406,8 +583,18 @@ class MapIndex extends React.Component {
                     margin: '0'
                 }}>
 
+
                     {/*<div style={{position:'absolute',bottom:'5rem',left:'2rem',zIndex:'3'}} onClick={this.isOpen.bind(this)}>开始</div>*/}
                 </div>
+                <div id="container2" style={{
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    bottom: mapBottom,
+                    overflow: 'hidden',
+                    margin: '0'
+                }}>
+                    </div>
 
                 {
                     isOpen == true ?
@@ -418,12 +605,12 @@ class MapIndex extends React.Component {
                             position: 'absolute',
                             bottom: '0'
                         }}>
-                            <div onClick={this.getLocation.bind(this, lng, lat)}>
+                            <div onClick={this.getLocation.bind(this)}>
                                 <img src={dingweixiao} style={{width: '2.1rem', height: '2.1rem'}}/>
                                 <div>定位</div>
                             </div>
                             <div onClick={this.isOpen.bind(this)}>
-                                <img src={zhankai} style={{width: '2.3rem', height: '2.3rem'}}/>
+                                <img src={zhankai} style={{width: '2rem', height: '2rem'}}/>
                                 <div>展开</div>
                             </div>
                             <div>
@@ -453,16 +640,18 @@ class MapIndex extends React.Component {
                                 </a>
                             </div>
                             <div className="option">
-                                <Link to="/about">
+                                <Link to={'/about/'+babyid+'/'+lng+'/'+lat+''}>
                                     <img src={jianhuchengyuan} style={{width: '2.3rem', height: '2.3rem'}}/>
 
                                     <div>监护成员</div>
                                 </Link>
                             </div >
                             <div className="option">
-                                <img src={anquan} style={{width: '2.3rem', height: '2.3rem'}}/>
+                                <Link to={'/App/'+babyid+''}>
+                                <img src={kaoqin} style={{width: '2.3rem', height: '2.3rem'}}/>
 
-                                <div>安全区域</div>
+                                <div>考勤</div>
+                                    </Link>
                             </div>
                             <div className="option">
                                 <Link to="/AddDevice">
@@ -479,13 +668,15 @@ class MapIndex extends React.Component {
                                 <div>解绑设备</div>
                             </div>
                             <div className="option">
+                                <Link to="/App">
                                 <img src={more} style={{width: '2.3rem', height: '2.3rem'}}/>
                                 <div>更多</div>
+                                </Link>
                             </div>
 
 
                             <div className="shouqi" onClick={this.isOpen.bind(this)}>
-                                <img src={shouqi} style={{width: '2.1rem', height: '2.1rem'}}/>
+                                <img src={shouqi} style={{width: '2rem', height: '2rem'}}/>
                                 <div>收起</div>
                             </div>
 
@@ -497,45 +688,9 @@ class MapIndex extends React.Component {
         )
     }
 
-    getLocation(lng, lat) {
-
-        this.init(lng, lat);
-    }
 
 
-    isOpen() {
 
-        console.log(this.state.isOpen);
-
-        if (!this.state.isOpen) {
-            this.setState({
-                isOpen: true,
-                mapBottom: '4.5rem'
-            });
-
-        } else {
-            this.setState({
-                isOpen: false,
-                mapBottom: '13.5rem'
-            });
-        }
-
-    }
-
-    init(lng, lat) {
-        var mapObj, marker;
-        mapObj = new AMap.Map('container', {
-            zoom: 15,
-            center: [lng, lat],
-            resizeEnable: true,
-        });
-
-
-        marker = new AMap.Marker({
-            icon: "http://webapi.amap.com/theme/v1.3/markers/n/mark_b.png",
-        });
-        marker.setMap(mapObj);
-    }
 }
 
 
@@ -551,13 +706,16 @@ const mapStateToProps = state => {
         lat: state.login.lat,
         gpstime: state.login.gpstime,
         getGuardiansList: state.login.getGuardiansList,
-        _checked: state.login.checked
+        _checked: state.login.checked,
+        aaa:state.login.abc,
+        address:state.login.addr
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         doLogin: doLogin,
-        change: change
+        change: change,
+        getMap:getMap
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);

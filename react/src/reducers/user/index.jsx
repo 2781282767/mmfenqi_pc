@@ -15,8 +15,14 @@ const initialState = {
     lng:'',
     lat:'',
     getGuardiansList:[],
+
+    gpstime:'',
+
     checked:'false',
-    gpstime:''
+
+
+    abc:'false',
+    addr:'李建彬'
 
 
 };
@@ -39,27 +45,33 @@ export default function login (state = initialState, action) {
                 babyid:action.res[0].babyid,
                 babytelephone:action.res[0].babytelephone,
                 headimg:action.res[0].headimg,
-                getGuardiansList:[]
+                getGuardiansList:[],
+                addr:''
 
             };
 
         case types.GetChecked:
-            return{
-                checked:action.msg,
-                getGuardiansList:[]
-            };
+
+            return Object.assign({},state, {
+                checked: action.msg,
+                getGuardiansList: [],
+                addr:''
+
+            });
         case  types.Change:
             return Object.assign({},state,{
                 babyName:action.res.babyName,
                 babyid:action.res.babyid,
                 babytelephone:action.res.babytelephone,
                 headimg:action.res.headimg,
-                getGuardiansList:[]
+                getGuardiansList:[],
+                addr:''
             });
         case types.GetCurrentPower:
             return Object.assign({},state,{
                 values:action.res,
-                getGuardiansList:[]
+                getGuardiansList:[],
+                addr:''
             });
 
 
@@ -76,13 +88,22 @@ export default function login (state = initialState, action) {
             return Object.assign({},state,{
                 lng:action.res.lng,
                 lat:action.res.lat,
-                gpstime:action.res.gpstime
+                gpstime:action.res.gpstime,
+                addr:''
             });
 
         case types.AddDevice:
             return {
 
             };
+        case types.GetAddr:
+            return Object.assign({},state,{
+                addr:action.msg
+            });
+        case types.aaa:
+            return Object.assign({},state,{
+                abc:action.msg
+            });
 
 
 

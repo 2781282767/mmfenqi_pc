@@ -38,7 +38,7 @@ class AddDevice extends React.Component{
 
     render(){
         return (
-            <div>
+            <div style={{background:'#eee',   minHeight: '100%'}}>
                 <R_header title="输入IMEI号" left="1" />
 
 

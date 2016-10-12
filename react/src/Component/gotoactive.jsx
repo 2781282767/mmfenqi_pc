@@ -82,9 +82,9 @@ class Gotoactive extends React.Component{
     render(){
         return (
 
-            <div>
+            <div style={{background:'#eee'}}>
 
-                <R_header title="激活设备"/>
+                <R_header title="激活设备" left="1"/>
 
             <div className="container">
                 <form onSubmit={this.next.bind(this,this.state.studentname,this.state.teachertel)} name="form">

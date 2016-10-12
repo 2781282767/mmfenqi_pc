@@ -17,3 +17,5 @@ export const AddDevice='AddDevice';
 export const GetGuardians='GetGuardians';
 export const GetChecked='GetChecked';
 export const ChangeDevice='ChangeDevice';
+export const aaa='aaa';
+export const GetAddr='GetAddr';
