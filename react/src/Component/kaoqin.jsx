@@ -97,7 +97,15 @@ export default class App extends React.Component{
 
 
 
+
+
     render(){
+
+        const comparetime=this.timeStamp2String(0);
+        const value=this.state.value;
+        console.log(comparetime);
+        console.log(value);
+
         return <div className="kaoqing">
 
             <R_header title="考勤" left="1"/>
@@ -125,14 +133,29 @@ export default class App extends React.Component{
             <div className="kaoqinginfo">
                 <div className="info">
                     <div className="left"><img src={kaoqin} style={{width:'2.2rem',height:'2.2rem'}}/></div>
-                    <div className="right">{this.timeStamp2String(0)}</div>
+                    <div className="right">
+
+                        {
+                            value == null||value==comparetime ?
+                                <spna>今日考勤</spna> :
+                                <span>{value}</span>
+                        }
+
+                    </div>
                 </div>
 
                 {
                     this.state.list.map((json,index)=>{
                         return (
                             <div className="detail" key={index}>
-                                <div className="img"><img src={xiandian} style={{width:'0.6rem',height:'3.1rem'}} /></div>
+                                <div className="img">
+
+
+
+
+                                        <img src={xiandian} style={{width:'0.6rem',height:'3.1rem'}} />
+
+                                </div>
                                 <div className="time">
 
                                     {
@@ -177,13 +200,6 @@ export default class App extends React.Component{
                 }
 
             </div>
-
-
-
-
-
-
-
 
 
 

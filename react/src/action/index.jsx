@@ -186,6 +186,15 @@ function ChangeDevice(res) {
     }
 }
 
+
+function isLong(msg) {
+    return {
+        type:types.isLogin,
+        msg
+    }
+}
+
+
 export function getMap(babyid) {
     return function (dispatch) {
         return HttpService.query({
@@ -203,7 +212,7 @@ export function getMap(babyid) {
                         lat: 0
                     };
                    // dispatch(GetCurrentTrack(data));
-                    init(data.lng, data.lat);
+                    init(116.397428, 39.90923);
                   //  dispatch(getAddree(data.lng, data.lat));
 
 
@@ -211,7 +220,7 @@ export function getMap(babyid) {
                    // dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
                     init(res.data.lng, res.data.lat);
-                    dispatch(getAddree(data.lng, data.lat));
+                    dispatch(getAddree(res.data.lng, res.data.lat));
                 }
             })
 
@@ -287,6 +296,8 @@ export function doLogin(sid) {
                     window.localStorage.appToken = res.data.token;
                     dispatch(getDeviceList())
 
+                }else{
+                    dispatch(isLong(false))
                 }
             })
         });
@@ -488,7 +499,7 @@ function getCurrentTrack(babyid) {
                         lat: 0
                     };
                     dispatch(GetCurrentTrack(data));
-                    init(data.lng, data.lat);
+                    init(116.397428, 39.90923);
 
                   //  dispatch(getAddree(data.lng, data.lat));
 
@@ -542,7 +553,7 @@ function init(lng, lat) {
         resizeEnable: true,
     });
 
-    if(lng==0&&lat==0){
+    if(lng==116.397428 &&lat==39.90923){
         return;
     }
 
@@ -559,8 +570,12 @@ function init(lng, lat) {
     marker = new AMap.Marker({
         map: map,
         icon:dian,
+        // icon: new AMap.Icon({  //复杂图标
+        //     // size: new AMap.Size(27, 36),//图标大小
+        //     //  image: '../../src/img/dian.png', //大图地址
+        //   //  imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
+        // }),
         position: [lng, lat],
-        imageOffset: new AMap.Pixel(0, -60)
     });
 
 
@@ -570,12 +585,23 @@ function init(lng, lat) {
 
     var circle = new AMap.Circle({
         center: new AMap.LngLat(lng,lat),// 圆心位置
-        radius: 100, //半径
+        radius: 200, //半径
         strokeColor: "#00b4ed", //线颜色
-        strokeOpacity: 0.1, //线透明度
+        strokeOpacity: 1, //线透明度
         fillColor: "#00b4ed", //填充颜色
-        fillOpacity: 0.1//填充透明度
+        strokeWeight: 1,    //线宽
+        fillOpacity: 0.2//填充透明度
     });
+
+    // var circle = new AMap.Circle({
+    //     center: [116.433322, 39.900255],// 圆心位置
+    //     radius: 100, //半径
+    //     strokeColor: "#F33", //线颜色
+    //     strokeOpacity: 1, //线透明度
+    //     strokeWeight: 3, //线粗细度
+    //     fillColor: "#ee2200", //填充颜色
+    //     fillOpacity: 0.35//填充透明度
+    // });
     circle.setMap(map);
 
 

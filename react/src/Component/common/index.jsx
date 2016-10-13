@@ -44,7 +44,7 @@ export  class R_header extends Component{
 
 
         return (
-            <header style={{display:'flex',padding:'1rem 15px',zIndex: '100',
+            <header style={{display:'flex',padding:'1rem 15px',zIndex: '100', fontSize:'1.6rem', borderBottom: '1px solid #eee',
                 position: 'relative'}}>
                 {
                     left==1?

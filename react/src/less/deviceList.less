@@ -2,7 +2,10 @@
 .device-info{
   width: 100%;
   overflow: hidden;
-  padding: 8px 0;
+
+  height: 5rem;
+  border-bottom: 1px solid #EEEEEE;
+
 
 
   .headimg{
@@ -13,6 +16,10 @@
     text-align: center;
     float: left;
     width: 20%;
+    position: relative;
+    top: 50%;
+    -webkit-transform: translateY(-50%);
+    transform: translateY(-50%);
     img{
       border-radius: 50%;
     }
@@ -21,12 +28,17 @@
   .info{
     float: left;
     width: 80%;
+
+    position: relative;
+    top: 50%;
+
+    transform: translateY(-50%);
     //position: relative;
     //top: 50%;
     //transform: translateY(-50%);
     //float: left;
-    padding:2px 0;
-    border-bottom: 1px solid #DDDDDD;
+
+
     .name{
       font-size: 1.5rem;
       color: #333333;
@@ -274,16 +286,38 @@
   /*line-height: 100%;*/
   /*padding: 2rem 0;*/
 
+  padding-right: 10px;
+
 
 }
 
-.layer_content .header div{
+.layer_content .header .left{
 
   display: flex;
 
   flex: 1;
   align-items:center;
   justify-content:center;
+
+}
+
+.layer_content .header .title{
+
+  display: flex;
+
+  flex: 5;
+  align-items:center;
+  justify-content:center;
+
+}
+
+.layer_content .header .guanbi{
+
+  display: flex;
+
+  flex: 1;
+  align-items:center;
+  justify-content:flex-end;
 
 }
 

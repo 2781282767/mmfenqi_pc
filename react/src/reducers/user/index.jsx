@@ -22,7 +22,8 @@ const initialState = {
 
 
     abc:'false',
-    addr:'李建彬'
+    addr:'',
+    isLong:[]
 
 
 };
@@ -103,6 +104,10 @@ export default function login (state = initialState, action) {
         case types.aaa:
             return Object.assign({},state,{
                 abc:action.msg
+            });
+        case types.isLogin:
+            return Object.assign({},state,{
+                isLogin:action.msg
             });
 
 

@@ -105,10 +105,10 @@ header{
   border-bottom: 1px solid #cccccc;
   overflow: hidden;
   height: 5rem;
+  padding-right: 10px;
+  padding-left: 10px;
   .box1{
     float: left;
-    padding:0 1rem;
-
     img{
       border-radius: 50%;
     }
@@ -122,10 +122,11 @@ header{
     top: 50%;
     transform: translateY(-50%);
     float: left;
-    width:70%;
+    width:75%;
+    padding-left: 1rem;
 
     .babyName{
-      line-height: 1;
+      line-height: 1.5;
 
       .row1{
         font-size: 1.5rem;
@@ -139,6 +140,7 @@ header{
 
       img{
         vertical-align: middle;
+        margin-left: 6px;
       }
     }
 
@@ -151,7 +153,7 @@ header{
 
     .address{
      // overflow: hidden;
-      line-height: 1;
+      line-height: 1.5;
 
 
      // width: 103%;
@@ -170,7 +172,8 @@ header{
 
        //overflow: hidden;
        //overflow-x: scroll;
-       width: 120%;
+       width: 200%;
+       color: #666666;
        //height: 103%;
      }
     }
@@ -180,7 +183,7 @@ header{
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-    float: left;
+    float: right;
 
 
   }
@@ -388,6 +391,10 @@ header{
   width: 100px;
   padding: 10px;
   border-radius: 6px;
+  a{
+    text-decoration: none;
+    color: #FFFFff!important;
+  }
 }
 
 
@@ -398,7 +405,8 @@ header{
   .kaoqinginfo{
     background-color: #FFFFff;
     .info{
-      height: 3rem;
+      font-size: 1.2rem;
+      height: 4rem;
       border-bottom: 1px solid #EEEEEE;
 
       .left{
@@ -407,12 +415,14 @@ header{
         top: 50%;
         transform: translateY(-50%);
         padding-right:10px;
+        padding-left:10px;
       }
       .right{
         float: left;
         position: relative;
         top: 50%;
         transform: translateY(-50%);
+        color: #333333;
       }
     }
 
@@ -431,6 +441,8 @@ header{
         align-items:flex-end;
         justify-content:flex-start;
         line-height: 1rem;
+        font-size:1.2rem;
+        color:#666;
 
           span{
             padding-right: 10px;
@@ -449,8 +461,32 @@ header{
     img{
       width: 1.6rem;
       height: 1.6rem;
+      top: 1.6rem !important;
+    }
+  }
+}
+
+#abc{
+  .amap-icon{
+    img{
+      width: 1.7rem;
+      height: 3.1rem;
+      top: 3.1rem;
     }
   }
 }
 
 
+.cde{
+  position: relative;
+  z-index: 33;
+  li{
+    //margin-top: -14px;
+  }
+}
+
+.abc{
+  li{
+    margin-top: -14px;
+  }
+}
