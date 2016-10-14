@@ -23,7 +23,8 @@ const initialState = {
 
     abc:'false',
     addr:'',
-    isLong:[]
+    isLong:[],
+    datasource:[]
 
 
 };
@@ -90,7 +91,9 @@ export default function login (state = initialState, action) {
                 lng:action.res.lng,
                 lat:action.res.lat,
                 gpstime:action.res.gpstime,
-                addr:''
+                addr:'',
+                datasource:action.res.datasource
+
             });
 
         case types.AddDevice:

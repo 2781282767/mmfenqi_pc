@@ -75,6 +75,8 @@ export default class App extends React.Component{
                     this.setState({
                         list:res.data
                     })
+
+                    console.log(res.data)
                 }
 
             })

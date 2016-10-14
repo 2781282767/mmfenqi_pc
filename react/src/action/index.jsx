@@ -219,8 +219,8 @@ export function getMap(babyid) {
                 } else {
                    // dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
-                    init(res.data.lng, res.data.lat);
-                    dispatch(getAddree(res.data.lng, res.data.lat));
+                    init(res.data.lng-0.0065, res.data.lat-0.0060);
+                    dispatch(getAddree(res.data.lng-0.0065, res.data.lat-0.0060));
                 }
             })
 
@@ -507,8 +507,8 @@ function getCurrentTrack(babyid) {
                 } else {
                     dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
-                    init(res.data.lng, res.data.lat);
-                    dispatch(getAddree(res.data.lng, res.data.lat))
+                    init(res.data.lng-0.0065, res.data.lat-0.0060);
+                    dispatch(getAddree(res.data.lng-0.0065, res.data.lat-0.0060))
                 }
             })
 
@@ -533,7 +533,7 @@ function getAddree(lng,lat) {
         geocoder.getAddress(lnglatXY, function(status, result) {
             if (status === 'complete' && result.info === 'OK') {
 
-                 console.log(result)
+                 console.log(result);
 
                 var address = result.regeocode.formattedAddress; //返回地址描述
                 dispatch(GetAddr(address))
@@ -545,6 +545,8 @@ function getAddree(lng,lat) {
 
 
 function init(lng, lat) {
+
+
 
     var map, marker;
     map = new AMap.Map('container', {
@@ -562,6 +564,17 @@ function init(lng, lat) {
 
     //
     // map.setFitView();
+
+    // map.plugin('AMap.Geolocation', function() {
+    //     geolocation = new AMap.Geolocation({
+    //         enableHighAccuracy: true,//是否使用高精度定位，默认:true
+    //         timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+    //         buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+    //         zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+    //         buttonPosition: 'RB'
+    //     });
+    //     map.addControl(geolocation);
+    // });
 
 
 

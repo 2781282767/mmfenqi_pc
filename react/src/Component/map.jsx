@@ -32,9 +32,13 @@ import dian from '../../src/img/lixian.png'
 
 import lishiguiji from '../../src/img/lishiguiji.png'
 
-import add from '../../src/img/add.png'
+import addDevice from '../../src/img/addDevice.png'
 
 import wifi from '../../src/img/wifi.png'
+import lbs from '../../src/img/lbs.png'
+import gbs from '../../src/img/gps.png'
+
+
 
 import touxiang from '../../src/img/touxiang.png'
 
@@ -58,6 +62,8 @@ import tianjia from '../../src/img/tianjia.png'
 
 import more from '../../src/img/more.png'
 
+import guanbi from '../../src/img/guanbi.png'
+
 
 import jianhuchengyuan  from '../../src/img/jianhuchengyuan.png'
 
@@ -67,7 +73,7 @@ import  genghuan from '../../src/img/genghuan.png'
 import  jiebang from '../../src/img/jiebang.png'
 
 import kaoqin from '../../src/img/kaoqin.png'
-import yichang from '../../src/img/yichange.png'
+import yichange from '../../src/img/yichange.png'
 
 
 
@@ -199,7 +205,6 @@ class MapIndex extends React.Component {
                 // if(!this.props.babyid){
                 //     alert('存在')
                 // }
-
 
 
 
@@ -397,8 +402,7 @@ class MapIndex extends React.Component {
         const getCurrenttime=GetCurrentDate.time();
 
 
-        const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked,aaa,address,isLogin}=this.props;
-
+        const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked,aaa,address,isLogin,datasource}=this.props;
 
 
 
@@ -434,7 +438,7 @@ class MapIndex extends React.Component {
                                 <div className="header">
                                     <div className="left"></div>
                                     <div className="title">我的设备</div>
-                                    <div className="guanbi"><img src="../../src/img/guanbi.png" style={{width:'2.2rem',height:'2.2rem'}} onClick={this.guanbi.bind(this)}/></div>
+                                    <div className="guanbi"><img src={guanbi} style={{width:'2.2rem',height:'2.2rem'}} onClick={this.guanbi.bind(this)}/></div>
                                 </div>
                                 <div className="layer_content2">
                                     {
@@ -488,7 +492,7 @@ class MapIndex extends React.Component {
                                 <div className="content">
                                     <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
 
-                                        <img src={add} style={{width: '20rem', height: '25rem'}}/>
+                                        <img src={addDevice} style={{width: '20rem', height: '25rem'}}/>
 
                                         <Link to="/AddDevice">
                                             <div className="_btn btn_btn">添加设备</div>
@@ -518,7 +522,7 @@ class MapIndex extends React.Component {
                                 <div className="content">
                                     <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
 
-                                        <img src={yichang} style={{width: '20rem', height: '25rem'}}/>
+                                        <img src={yichange} style={{width: '20rem', height: '25rem'}}/>
 
                                         {/*<Link to="/AddDevice">*/}
                                             <div className="_btn btn_btn" style={{bottom:'3rem'}}><a href="tel:400-655-3588">电话咨询</a></div>
@@ -612,9 +616,21 @@ class MapIndex extends React.Component {
                     <div className="box2">
                         <div className="babyName">
                             <span className="row1">{babyName}</span>
-                            <span className="row2">[最后上报时间]</span>
-                            <span className="row3"></span>
-                            <img src={wifi} style={{width: '1.2rem', height: '1.2rem'}}/>&nbsp;
+                            <span className="row2">[最后上报时间]&nbsp;</span>
+
+
+                            {
+                                datasource=='1'?
+                                <img src={gbs} style={{width: '1.2rem', height: '1.2rem'}}/>:
+
+                                    datasource=='2'?
+                                        <img src={wifi} style={{width: '1.2rem', height: '1.2rem'}}/>:
+                                        datasource=='3'?
+                                            <img src={lbs} style={{width: '1.2rem', height: '1.2rem'}}/>:
+                                                null
+
+                            }
+
 
                             {
                                 values == '0' ?
@@ -826,6 +842,7 @@ const mapStateToProps = state => {
         _checked: state.login.checked,
         aaa:state.login.abc,
         address:state.login.addr,
+        datasource:state.login.datasource,
         isLogin:state.login.isLogin
     };
 };
