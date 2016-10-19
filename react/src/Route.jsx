@@ -12,6 +12,9 @@ import Gotoactive from './Component/gotoactive'
 import VerifyText from './Component/verifyText'
 import Success from './Component/success'
 import App from './Component/kaoqin'
+import Safetyarea from './Component/Safetyarea'
+import Addarea from './Component/Addarea'
+import Demo from './Component/demo'
 
 
 /**
@@ -34,7 +37,6 @@ var history = hashHistory;
 const RouteConfig = (
     <Router history={history}>
         <Route path="/" component={Roots}>
-
             <Route path="/about/:babyid/:lng/:lat" component={About} />
             <Route path="/map/:sid" component={MapIndex} />
             <Route path="/deviceList" component={DeviceList} />
@@ -43,6 +45,9 @@ const RouteConfig = (
             <Route path="/VerifyText/:admintelephone/:mdtid/:deviceid/:telephone" component={VerifyText} />
             <Route path="/Success/:time" component={Success} />
             <Route path="/App/:babyid" component={App} />
+            <Route path="/Safetyarea/:babyid" component={Safetyarea}/>
+            <Route path="/Addarea/:regionid/:radius/:centerlng/:centerlat/:name" component={Addarea}/>
+            <Route path="/demo" component={Demo}/>
         </Route>
     </Router>
 );

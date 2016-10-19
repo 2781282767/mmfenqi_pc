@@ -74,7 +74,7 @@ export default class App extends React.Component{
                 if(res.code==10144){
                     this.setState({
                         list:res.data
-                    })
+                    });
 
                     console.log(res.data)
                 }

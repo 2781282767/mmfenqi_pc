@@ -38,6 +38,24 @@ DataLoad.defaultProps = {
 
 export  class R_header extends Component{
 
+    constructor(props){
+        super(props);
+        this.state={
+            search:true
+        }
+    }
+
+    handlesearch(){
+
+        this.props.handlesearch(this.state.search)
+
+
+
+
+
+
+    }
+
     render(){
         const {title,left,right} = this.props;
 
@@ -48,7 +66,7 @@ export  class R_header extends Component{
                 position: 'relative'}}>
                 {
                     left==1?
-                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={this.context.router.goBack}>
+                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={hashHistory.goBack}>
                             <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
                         </div>:
                         <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} >
@@ -60,8 +78,49 @@ export  class R_header extends Component{
 
                     {
                         right==1?
-                            <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} onClick={hashHistory.goBack}>
-                                <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                            <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}}>
+                                <Link to="/Addarea/null/null/null/null/null/">添加</Link>
+                            </div>:
+                            right==2?
+                                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} onClick={this.handlesearch.bind(this)}>
+                                    搜索
+                                </div>:
+                                null
+                    }
+
+                </div>
+            </header>
+        )
+
+    }
+}
+
+export  class R_header_fixed extends Component{
+
+    render(){
+        const {title,left,right} = this.props;
+
+
+
+        return (
+            <header style={{display:'flex',padding:'0 15px',zIndex: '200', fontSize:'1.6rem', borderBottom: '1px solid #eee',
+                position: 'fixed',width:'100%',top:'0',height:'4rem'}}>
+                {
+                    left==1?
+                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={hashHistory.goBack}>
+                            <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                        </div>:
+                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} >
+
+                        </div>
+                }
+                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
+                <div style={{display:'flex',flex:1}}>
+
+                    {
+                        right==1?
+                            <div style={{display:'flex', fontSize:'1.4rem',  flex:1,alignItems:'center',justifyContent:'flex-end'}}>
+                                <Link style={{color:'#00b4ed'}}  to="/Addarea/null/null/null/null/null/">添加</Link>
                             </div>:
                             <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} >
 

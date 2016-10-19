@@ -41,12 +41,11 @@ class AddDevice extends React.Component{
             <div style={{background:'#eee',minHeight: '100%'}}>
                 <R_header title="输入IMEI号" left="1" />
 
-
-                <div className="container">
+                <div className="container" >
 
                     <form onSubmit={this.next.bind(this,this.state.val)} name="form">
                         <div className="col-xs-12 app-white-input margin-one">
-                            <input type="number"  placeholder="请输入设备的IMEI号" style={{width:'100%'}} onChange={this.change.bind(this)} required/>
+                            <input type="number" defaultValue={8698840200595}  placeholder="请输入设备的IMEI号" style={{width:'100%'}} onChange={this.change.bind(this)} required/>
                         </div>
 
                         <label style={{display:'block'}}>

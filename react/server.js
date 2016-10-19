@@ -34,4 +34,7 @@ server.app.get('*', function (req,res) {
     res.sendFile(__dirname + '/index.html')
 });
 
-server.listen(6007,'192.198.0.134');
+server.listen(8011,'192.198.0.154');
+
+
+

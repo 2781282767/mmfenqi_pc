@@ -25,7 +25,8 @@ export default class Success extends React.Component{
 
     goto(){
 
-        window.location.href = '/#/map/'+localStorage.sid+'';
+
+        window.location.href = '/#/map/'+localStorage.sid1+'';
     }
 
     render(){
@@ -48,7 +49,7 @@ export default class Success extends React.Component{
                     <div className="col-xs-12 text-center" style={{fontSize: '1.4re', color: '#666'}}><span>套餐试用期至：</span><span style={{color: '#02b4ed'}}>{this.props.params.time}</span>
                     </div>
 
-                    <Link to={'/map/'+sid}><div className="col-xs-12 app-pink-radius-button text-center" style={{marginTop: '1.5rem',fontSize: '1.6rem'}}>成功</div></Link>
+                   <div className="col-xs-12 app-pink-radius-button text-center" onClick={this.goto} style={{marginTop: '1.5rem',fontSize: '1.6rem'}}>成功</div>
                 </div>
             </div>
 

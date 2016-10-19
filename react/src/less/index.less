@@ -1,11 +1,14 @@
 html body {
   height: 100%;
-  position: relative;
   font-family: "Arial","Microsoft JhengHei","Adobe Fan Heiti Std B";
 
 
   //background-color: #eee;
 
+}
+
+html{
+  position: relative;
 }
 
 body {
@@ -18,10 +21,12 @@ body {
   font-size: 1rem;
 
 
+
+
   //background-color: #eee;
 }
 
-#content>div{
+#content,#content>div{
   height: 100%;
 }
 
@@ -88,13 +93,7 @@ td {
 //  }
 //}
 
-a{
-  color: #666666 !important;
-}
 
-a:hover{
-  text-decoration: none !important;
-}
 header{
   background-color: #FFFFff;
 }
@@ -150,6 +149,7 @@ header{
     .addr{
       font-size: 1.2rem;
       color: #666666;
+
 
     }
 
@@ -217,6 +217,14 @@ header{
       color: #666666;
     }
   }
+
+  a{
+    color: #666666 !important;
+  }
+
+  a:hover{
+    text-decoration: none !important;
+  }
 }
 
 .menu{
@@ -247,6 +255,14 @@ header{
 
 
     }
+  }
+
+  a{
+    color: #666666 !important;
+  }
+
+  a:hover{
+    text-decoration: none !important;
   }
 }
 
@@ -491,4 +507,238 @@ header{
   li{
     margin-top: -14px;
   }
+}
+
+
+.safetyarea{
+
+
+
+  background-color: #EEEEEE;
+  min-height: 100%;
+  padding-top: 4rem;
+
+  a:hover{
+    text-decoration: none !important;
+  }
+  .safetyarea-content {
+    padding: 1rem;
+
+    > div {
+      margin-bottom: 1rem;
+    }
+
+    > div:last-child {
+      margin-bottom: 0 !important;
+    }
+
+    .content {
+
+      border: 2px solid #FFFFff;
+      border-radius: 6px;
+
+      position: relative;
+
+    }
+
+    .address {
+      background-color: #FFFFff;
+      padding: 0.6rem 0;
+      font-size: 1.2rem;
+      overflow: hidden;
+      width: 100%;
+      display: flex;
+      .name {
+        color: #00b4ed;
+        float: left;
+         display: flex;
+        width: auto;
+        min-width: 10%;
+
+      }
+      .addr {
+        color: #333;
+        float: left;
+        display: flex;
+        flex: 2;
+        overflow: hidden;
+
+        -o-text-overflow: ellipsis;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        list-style: disc inside none;
+      }
+    }
+  }
+}
+
+//#safetyarea .amap-marker,.amap-marker-content{
+//  position: fixed !important;
+//  top: 50% !important;
+//  left: 50%!important;
+//
+//}
+
+
+
+.addSafetyarea{
+  width: 100%;
+  height: auto;
+  position: relative;
+  z-index: 1;
+  background-color: #FFFFff;
+
+
+  .fixed{
+    position: fixed;
+    top:50%;
+    left: 50%;
+    margin-left: -5.6rem;
+    margin-top: -5rem;
+
+
+    //top: 50%;
+    //
+    //transform: translateY(-50%);
+    //display: flex;
+
+
+
+    .radio-content{
+      width: 11.2rem;
+      height: 6.8rem;
+      text-align: center;
+      line-height: 6.8rem;
+      position: relative;
+
+      .radio-input{
+        position: absolute !important;
+        top: 0;
+        height: 2.5rem;
+        line-height: 2.5rem;
+        width: 11.2rem;
+        color: #FFFFff;
+
+
+
+      }
+
+    }
+
+
+  }
+
+  .search{
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 200;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: 0.1;
+    //overflow: hidden;
+  }
+
+  .search-content{
+    position: fixed;
+    top:0;
+    left: 0;
+    z-index: 201;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    padding-left: 1rem;
+    background-color: #FFFFff;
+    display: flex;
+    .img{
+      display: flex;
+      width: 1.3rem;
+      height: 40px;
+      align-items: center;
+
+      justify-content: center;
+
+
+      img{
+        width: 1.3rem;
+        height: 1.3rem;
+
+      }
+    }
+    input{
+      display: flex;
+      flex: 2;
+      //height: 40px;
+      line-height: 1.5;
+      border: 0;
+      padding-left: 10px;
+    }
+    .cancle{
+      width: 70px;
+      height: 40px;
+      line-height: 40px;
+      display: inline-block;
+      //padding: 0 1rem;
+      font-size: 1.4rem;
+      color: #00b4ed;
+      text-align: center;
+      background-color: #EEEEEE;
+
+    }
+  }
+
+  .content{
+
+    width: 100%;
+    height: auto;
+    .name{
+
+      overflow: hidden;
+      width: 100%;
+
+      .left{
+        float: left;
+        width:15% ;
+        height: 4rem;
+        line-height: 4rem;
+        padding: 0 1rem;
+
+        img{
+          width: 2rem;
+          height: 2rem;
+        }
+
+      }
+
+      .right{
+        float: left;
+        width: 85%;
+
+        height: 4rem;
+        line-height: 4rem;
+
+        border-bottom: 1px solid #DDDDDD;
+
+
+        input{
+          font-size: 1.2rem;
+          color: #999999;
+          line-height: 1.2;
+
+        }
+      }
+    }
+
+
+  }
+}
+
+.amap-logo {
+  right: 0 !important;
+  left: auto !important;
+  display: none;
+}
+.amap-copyright{
+  display: none !important;
 }

@@ -5,10 +5,10 @@
 
 import { combineReducers } from 'redux';
 import login from './user';
-import change from './changeDevice';
+import safe from './safetyarea';
 
 
 const rootReducer = combineReducers({
-    login,change
+    login,safe
 });
 export default rootReducer;

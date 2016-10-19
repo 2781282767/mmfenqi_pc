@@ -82,7 +82,7 @@ class Gotoactive extends React.Component{
     render(){
         return (
 
-            <div style={{background:'#eee'}}>
+            <div style={{background:'#eee',minHeight: '100%'}}>
 
                 <R_header title="激活设备" left="1"/>
 

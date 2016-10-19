@@ -5,7 +5,7 @@ import ReactDOM, {render} from 'react-dom';
 
 import {HttpService, Toast,GetCurrentDate} from'../Http';
 
-import {doLogin, change,getMap} from '../action/index'
+import {doLogin, change,getMap,changeSaveBabyStatus} from '../action/index'
 
 
 import {connect} from 'react-redux';
@@ -173,15 +173,20 @@ class MapIndex extends React.Component {
 
 
 
-        window.localStorage.sid = this.props.params.sid;
 
 
-        console.log(this.props.lng=='');
+
+        //
+        window.localStorage.sid1=this.props.params.sid.replace("+","%2B").replace(" ","%20").replace(/\//g,"%2F");
+
+
 
 
 
         if(!this.props.babyid){
          //   alert('没值')
+
+            this.props.doLogin(this.props.params.sid);
 
         }else{
           //  alert('进来了');
@@ -191,14 +196,14 @@ class MapIndex extends React.Component {
         }
 
 
-                if(this.props.values==''){
-
-
-                    this.props.doLogin(this.props.params.sid);
-                }else{
-
-
-                }
+                // if(this.props.values==''){
+                //
+                //
+                //     this.props.doLogin(this.props.params.sid);
+                // }else{
+                //
+                //
+                // }
 
 
 
@@ -226,7 +231,6 @@ class MapIndex extends React.Component {
             data: {token: localStorage.appToken},
             success: (res=> {
 
-                console.log(res);
 
 
                 if (res.code == 10020) {
@@ -246,11 +250,11 @@ class MapIndex extends React.Component {
                  babyid: babyid
              },
              success: (res=> {
-                 console.log(res);
+
 
                  if (res.code == '10068') {
 
-                     console.log(res.data);
+
 
 
                      var getGuardiansList = res.data;
@@ -340,6 +344,9 @@ class MapIndex extends React.Component {
         })
     }
 
+
+
+
     changeAge(f) {
         HttpService.query({
             url: '/app/object/saveBaby',
@@ -349,12 +356,14 @@ class MapIndex extends React.Component {
                 token: localStorage.appToken
             },
             success: (res=> {
-                console.log(res);
+
 
                 if (res.code == '10042') {
-                    this.setState({
-                        bbb: false,
-                    });
+                    // this.setState({
+                    //     bbb: false,
+                    // });
+
+                    this.props.changeSaveBabyStatus('false');
 
 
 
@@ -362,7 +371,7 @@ class MapIndex extends React.Component {
 
 
                 } else {
-                    Toast.toast(res.msg, 3000);
+                     Toast.toast(res.msg, 3000);
                 }
             })
         })
@@ -380,7 +389,7 @@ class MapIndex extends React.Component {
 
     isOpen() {
 
-        console.log(this.state.isOpen);
+
 
         if (!this.state.isOpen) {
             this.setState({
@@ -404,19 +413,9 @@ class MapIndex extends React.Component {
 
         const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked,aaa,address,isLogin,datasource}=this.props;
 
-
-
-
-
-
-
-
-
-
-
-
-
         console.log(this.props);
+
+
 
         var isOpen = this.state.isOpen;
         var mapHeight = this.state.mapHeight;
@@ -541,12 +540,12 @@ class MapIndex extends React.Component {
                 }
 
                 {
-                      this.state.bbb?
+                      aaa=='true'?
 
                         <div>
                             <div className="_zz"></div>
                             <div className="layer_content3">
-                                <div className="header">f
+                                <div className="header">
                                     <div className="title">选择成员关系</div>
                                 </div>
                                 <div className="layer_content4">
@@ -770,25 +769,17 @@ class MapIndex extends React.Component {
                                     <div>历史轨迹</div>
                                 </Link>
                             </div >
-
-
-
-
                             <div className="option">
-
+                                <Link to="/AddDevice">
                                     <img src={tianjia} style={{width: '2.3rem', height: '2.3rem'}}/>
                                     <div>添加设备</div>
-
+                                </Link>
                             </div>
-                            {/*<div className="option">*/}
-                                {/*<Link to="/AddDevice">*/}
-                                    {/*<img src={tianjia} style={{width: '2.3rem', height: '2.3rem'}}/>*/}
-                                    {/*<div>添加设备</div>*/}
-                                {/*</Link>*/}
-                            {/*</div>*/}
                             <div className="option">
-                                <img src={anquan} style={{width: '2.3rem', height: '2.3rem'}}/>
-                                <div>安全区域</div>
+                                <Link to={'/Safetyarea/'+babyid}>
+                                    <img src={anquan} style={{width: '2.3rem', height: '2.3rem'}}/>
+                                    <div>安全区域</div>
+                                </Link>
                             </div>
 
 
@@ -850,7 +841,8 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         doLogin: doLogin,
         change: change,
-        getMap:getMap
+        getMap:getMap,
+        changeSaveBabyStatus:changeSaveBabyStatus
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);
