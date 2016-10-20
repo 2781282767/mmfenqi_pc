@@ -34,7 +34,8 @@ export default class Addarea extends React.Component {
             radius:[],
             centerlng:[],
             centerlat:[],
-            search:false
+            search:false,
+            map:{}
 
 
         };
@@ -76,39 +77,68 @@ export default class Addarea extends React.Component {
 
 
 
-
-
-        var map,geolocation;
+        var map, geolocation,map2;
         if(this.state.centerlng!='null'){
 
+            document.getElementById('safetyarea2').style.display='block';
+            document.getElementById('safetyarea').style.display='none';
 
-            map = new AMap.Map('safetyarea', {
+
+
+
+            map2 = new AMap.Map('safetyarea2', {
                 resizeEnable: true,
                 zoom:15,
                 center: [this.state.centerlng,this.state.centerlat]
             });
+
+
+
+
+
             self.getAddr(this.state.centerlng,this.state.centerlat);
-            map.on('touchend', function(e) {
+            map2.on('moveend', function(e) {
 
 
-                self.getAddr(map.getCenter().getLng(),map.getCenter().getLat());
+                self.getAddr(map2.getCenter().getLng(),map2.getCenter().getLat());
 
                 self.setState({
-                    centerlng:map.getCenter().getLng(),
-                    centerlat:map.getCenter().getLat(),
+                    centerlng:map2.getCenter().getLng(),
+                    centerlat:map2.getCenter().getLat(),
                     isPickerShow:false
 
                 })
 
             });
 
+
+
+
+            this.setState({
+                map:map2
+            });
+
+            this.changeName(map2)
+
+
         }else{
+
+
+
+            document.getElementById('safetyarea2').style.display='none';
+            document.getElementById('safetyarea').style.display='block';
+
+
+
+
+
 
 
 
             map = new AMap.Map('safetyarea', {
                 resizeEnable: true,
             });
+
             map.plugin('AMap.Geolocation', function() {
 
             geolocation = new AMap.Geolocation({
@@ -131,56 +161,11 @@ export default class Addarea extends React.Component {
                 self.getAddr(data.position.getLng(),data.position.getLat());
 
 
-
-                map = new AMap.Map('safetyarea', {
-                    resizeEnable: true,
-                    zoom:15,
-
-                    center: [data.position.getLng(),data.position.getLat()]
-                });
+                //
 
 
-                //
-                // var lnglatXY = [data.position.getLng(), data.position.getLat()]; //已知点坐标
-                //
-                //
-                // var geocoder = new AMap.Geocoder(
-                //     {
-                //         radius: 1000,
-                //         extensions: "all"
-                //     }
-                // );
-                // geocoder.getAddress(lnglatXY, function(status, result) {
-                //     if (status === 'complete' && result.info === 'OK') {
-                //
-                //         console.log(result);
-                //
-                //         var address = result.regeocode.formattedAddress; //返回地址描述
-                //
-                //         console.log(address);
-                //         self.setState({
-                //             address:address,
-                //             centerlng:data.position.getLng(),
-                //             centerlat:data.position.getLat(),
-                //         })
-                //
-                //
-                //
-                //     }
-                // });
-
-                // var map=new AMap.Map('safetyarea', {
-                //     resizeEnable: true,
-                //     zoom:15,
-                //     center: [data.position.getLng(), data.position.getLat()]
-                // });
 
                 map.on('touchend', function(e) {
-
-
-
-
-
                     self.getAddr(map.getCenter().getLng(),map.getCenter().getLat());
 
                     self.setState({
@@ -191,13 +176,110 @@ export default class Addarea extends React.Component {
                     })
 
                 });
+
+
+                // map = new AMap.Map('safetyarea', {
+                //     resizeEnable: true,
+                //     zoom:15,
+                //
+                //     center: [data.position.getLng(),data.position.getLat()]
+                // });
+            }
+
+
+
+            this.setState({
+                map:map
+            });
+
+
+            this.changeName(map)
+
             }
 
 
 
 
-            }
+
+
+
     }
+
+    changeName(map){
+        var self3=this;
+        //输入提示
+        var autoOptions = {
+            input: "tipinput"
+        };
+        var auto = new AMap.Autocomplete(autoOptions);
+
+
+        var placeSearch = new AMap.PlaceSearch({
+
+            pageSize: 1,
+            pageIndex: 1,
+
+            map: map,
+        });  //构造地点查询类
+
+
+
+
+        AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+
+
+        function select(e) {
+
+            console.log(e)
+
+            placeSearch.setCity(e.poi.adcode);
+
+
+
+
+
+            placeSearch.search(e.poi.name);
+
+
+
+
+            placeSearch.search(e.poi.name,function (status, result) {
+
+                console.log(status);
+
+                if (status === 'complete' && result.info === 'OK') {
+
+                   // document.getElementsByClassName('amap-sug-result').style.display='hidden'
+
+                }
+
+                console.log(result.poiList.pois[0].id);
+
+                placeSearch.getDetails(result.poiList.pois[0].id, function(status, result) {
+                    if (status === 'complete' && result.info === 'OK') {
+
+                        console.log(result);
+
+                        // console.log(result)
+
+
+                        //placeSearch_CallBack(result);
+
+                        self3.getAddr(e.poi.location.lng,e.poi.location.lat);
+
+                        self3.setState({
+                            search:false
+                        })
+                    }
+                });
+
+
+
+            });  //关键字查询查询
+        }
+    }
+
+
 
 
 
@@ -321,49 +403,7 @@ export default class Addarea extends React.Component {
 
           });
 
-          //输入提示
-          var autoOptions = {
-              input: "tipinput"
-          };
-          var auto = new AMap.Autocomplete(autoOptions);
 
-
-        var placeSearch = new AMap.PlaceSearch({
-            map:map
-        });  //构造地点查询类
-
-
-
-
-        AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
-
-
-        function select(e) {
-
-
-        placeSearch.setCity(e.poi.adcode);
-         placeSearch.search(e.poi.name,function (status, result) {
-
-             console.log(status);
-
-             if (status === 'complete' && result.info === 'OK') {
-
-             }
-
-             console.log(result.poiList.pois[0].id);
-
-             placeSearch.getDetails(result.poiList.pois[0].id, function(status, result) {
-                 if (status === 'complete' && result.info === 'OK') {
-                     //placeSearch_CallBack(result);
-
-                     // self3.setState({
-                     //     search:false
-                     // })
-                 }
-             });
-
-         });  //关键字查询查询
-        }
 
     }
 
@@ -376,7 +416,7 @@ export default class Addarea extends React.Component {
             event.preventDefault();
         }, false);
 
-      //  this.aa()
+
 
 
 
@@ -429,6 +469,17 @@ export default class Addarea extends React.Component {
                     zIndex:'1'
                 }}></div>
 
+                <div  id='safetyarea2' style={{
+                    width: '100%',
+                    height: '100%',
+                    position: 'absolute',
+                    bottom: '0',
+
+                    overflow: 'hidden',
+                    margin: '0',
+                    zIndex:'1'
+                }}></div>
+
             <div className="addSafetyarea">
 
                 <div className="fixed" >
@@ -445,14 +496,14 @@ export default class Addarea extends React.Component {
                 {/*<div className="search"></div><div className="search-content"><input type="text" ref="names" defaultValue='wwww' /></div>*/}
                 
 
-                        <div style={{visibility : this.state.search==true ? 'visible':'hidden'}}>
+                        <div style={{display : this.state.search==true ? 'block':'none'}}>
                             <div className="search" id="search"></div>
                             <div className="search-content">
 
                                 <div className="img"><img src={sousu} /></div>
 
-                                <input type="text" id="tipinput" ref="names" placeholder="搜索" />
-                                <span className="cancle" onClick={this.cancel.bind(this)}>退出</span>
+                                <input type="text" id="tipinput"  ref="names" placeholder="搜索" />
+                                <span className="cancle" onClick={this.cancel.bind(this)}>取消</span>
                             </div>
                         </div>
 

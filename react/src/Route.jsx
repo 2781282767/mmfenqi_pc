@@ -15,6 +15,7 @@ import App from './Component/kaoqin'
 import Safetyarea from './Component/Safetyarea'
 import Addarea from './Component/Addarea'
 import Demo from './Component/demo'
+import Demo2 from './Component/demo2'
 
 
 /**
@@ -48,6 +49,7 @@ const RouteConfig = (
             <Route path="/Safetyarea/:babyid" component={Safetyarea}/>
             <Route path="/Addarea/:regionid/:radius/:centerlng/:centerlat/:name" component={Addarea}/>
             <Route path="/demo" component={Demo}/>
+            <Route path="/demo2" component={Demo2}/>
         </Route>
     </Router>
 );

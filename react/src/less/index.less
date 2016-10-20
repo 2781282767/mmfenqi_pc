@@ -510,6 +510,9 @@ header{
 }
 
 
+
+
+
 .safetyarea{
 
 
@@ -580,6 +583,30 @@ header{
 //}
 
 
+#safetyarea,#safetyarea2{
+  display: none;
+}
+#safetyarea .amap-marker-content{
+  opacity: 0 !important;
+}#safetyarea2  .amap-marker-content{
+  opacity: 0 !important;
+}
+
+#safetyarea .amap-marker{
+  display: none !important;
+}#safetyarea2 .amap-marker{
+  display: none !important;
+}
+
+#safetyarea {
+  .amap-layers{
+    color: red;
+    >canvas:nth-child(4){
+      display: none;
+    }
+  }
+}
+
 
 .addSafetyarea{
   width: 100%;
@@ -587,6 +614,7 @@ header{
   position: relative;
   z-index: 1;
   background-color: #FFFFff;
+
 
 
   .fixed{
