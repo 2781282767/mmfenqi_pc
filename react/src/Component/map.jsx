@@ -171,12 +171,6 @@ class MapIndex extends React.Component {
 
     componentWillMount() {
 
-
-
-
-
-
-        //
         window.localStorage.sid1=this.props.params.sid.replace("+","%2B").replace(" ","%20").replace(/\//g,"%2F");
 
 
@@ -196,20 +190,10 @@ class MapIndex extends React.Component {
         }
 
 
-                // if(this.props.values==''){
-                //
-                //
-                //     this.props.doLogin(this.props.params.sid);
-                // }else{
-                //
-                //
-                // }
+    if(this.state.isOpen==false){
+        this.isOpen()
+        }
 
-
-
-                // if(!this.props.babyid){
-                //     alert('存在')
-                // }
 
 
 
@@ -220,96 +204,8 @@ class MapIndex extends React.Component {
 
     componentDidMount(){
 
-
-
-
     }
 
-    getBabyid(){
-        HttpService.query({
-            url: '/app/object/getBabys',
-            data: {token: localStorage.appToken},
-            success: (res=> {
-
-
-
-                if (res.code == 10020) {
-                    this.getA(res.data[0].babyid)
-                }
-            })
-
-        })
-
-
-    }
-     getA(babyid) {
-         HttpService.query({
-             url: '/app/object/getGuardians',
-             data: {
-                 token: localStorage.appToken,
-                 babyid: babyid
-             },
-             success: (res=> {
-
-
-                 if (res.code == '10068') {
-
-
-
-
-                     var getGuardiansList = res.data;
-
-                     for (var a in getGuardiansList) {
-                         if (getGuardiansList[a].familystatus == '家长') {
-                             this.setState({
-                                 bbb:true
-                             });
-
-                             break;
-
-                         } else {
-                             this.setState({
-                                 bbb:false
-                             })
-                         }
-                     }
-
-                 }
-
-             })
-         })
-     }
-
-
-    // init(lng, lat) {
-    //     var map = new AMap.Map("container", {
-    //         resizeEnable: true,
-    //         center: [116.397428, 39.90923],
-    //         zoom: 13
-    //     });
-    //     //获取用户所在城市信息
-    //
-    //         //实例化城市查询类
-    //         var citysearch = new AMap.CitySearch();
-    //         //自动获取用户IP，返回当前城市
-    //         citysearch.getLocalCity(function(status, result) {
-    //             if (status === 'complete' && result.info === 'OK') {
-    //                 if (result && result.city && result.bounds) {
-    //                     var cityinfo = result.city;
-    //                     var citybounds = result.bounds;
-    //                  //   document.getElementById('tip').innerHTML = '您当前所在城市：'+cityinfo;
-    //                     //地图显示当前城市
-    //                     map.setBounds(citybounds);
-    //
-    //                     console.log(cityinfo);
-    //                 }
-    //             } else {
-    //                // document.getElementById('tip').innerHTML = result.info;
-    //             }
-    //         });
-    //
-    //     }
-    // }
 
 
     _change(babyname, babyid, headimg, babytelephone, e) {
@@ -359,16 +255,7 @@ class MapIndex extends React.Component {
 
 
                 if (res.code == '10042') {
-                    // this.setState({
-                    //     bbb: false,
-                    // });
-
                     this.props.changeSaveBabyStatus('false');
-
-
-
-                   // this.props.doLogin(this.props.params.sid);
-
 
                 } else {
                      Toast.toast(res.msg, 3000);
@@ -391,6 +278,9 @@ class MapIndex extends React.Component {
 
 
 
+
+
+
         if (!this.state.isOpen) {
             this.setState({
                 isOpen: true,
@@ -410,12 +300,7 @@ class MapIndex extends React.Component {
 
         const getCurrenttime=GetCurrentDate.time();
 
-
         const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked,aaa,address,isLogin,datasource}=this.props;
-
-        console.log(this.props);
-
-
 
         var isOpen = this.state.isOpen;
         var mapHeight = this.state.mapHeight;
@@ -427,7 +312,7 @@ class MapIndex extends React.Component {
             <div>
 
 
-                {/*更换设备*/}
+                {/*我的设备*/}
                 {
 
                     checked == true ?
@@ -697,19 +582,8 @@ class MapIndex extends React.Component {
                     overflow: 'hidden',
                     margin: '0'
                 }}>
-
-
-                    {/*<div style={{position:'absolute',bottom:'5rem',left:'2rem',zIndex:'3'}} onClick={this.isOpen.bind(this)}>开始</div>*/}
                 </div>
-                {/*<div id="container2" style={{*/}
-                    {/*width: '100%',*/}
-                    {/*height: '100%',*/}
-                    {/*position: 'absolute',*/}
-                    {/*bottom: mapBottom,*/}
-                    {/*overflow: 'hidden',*/}
-                    {/*margin: '0'*/}
-                {/*}}>*/}
-                    {/*</div>*/}
+
 
                 {
                     isOpen == false ?
@@ -785,8 +659,10 @@ class MapIndex extends React.Component {
 
 
                             <div className="option">
-                                <img src={tongzhi} style={{width: '2.3rem', height: '2.3rem'}}/>
-                                <div>学校通知</div>
+                                <Link to={'/Guardian/'+babyid}>
+                                    <img src={tongzhi} style={{width: '2.3rem', height: '2.3rem'}}/>
+                                    <div>监护成员</div>
+                                </Link>
                             </div>
 
 

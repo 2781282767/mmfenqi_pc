@@ -304,6 +304,10 @@ export function doLogin(sid) {
                 if (res.code == '30010') {
                     //dispatch(getToken(res.data));
                     window.localStorage.appToken = res.data.token;
+                    window.localStorage.userid = res.data.userid;
+
+
+
                     dispatch(getDeviceList())
 
                 }else{

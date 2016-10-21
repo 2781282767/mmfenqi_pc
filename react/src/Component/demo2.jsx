@@ -20,14 +20,15 @@ export default class Demo2 extends Component {
                 width:'100%',
                 height:'40px',
                 border:'1px solid red',
-                float:'left'
+                float:'left',
             },
             class2:{
                 width:'0',
                 height:'40px',
                 border:'1px solid blue',
                 float:'left',
-                textAlign:'center'
+                textAlign:'center',
+
             }
         }
     }
@@ -50,6 +51,8 @@ export default class Demo2 extends Component {
             var touchobj = e.changedTouches[0] // reference first touch point (ie: first finger)
             startx = parseInt(touchobj.clientX) // get x position of touch point relative to left edge of browser
             statusdiv.innerHTML = 'Status: touchstart<br> ClientX: ' + startx + 'px'
+
+            console.log(startx)
             e.preventDefault()
         }, false)
 
@@ -67,111 +70,61 @@ export default class Demo2 extends Component {
 
 if(dist<0){
 
-
-
-
-
-
-        var leftWidth = contentwidth + dist;
-        self.setState({
-            class1: {
-                width: leftWidth,
-                height: '40px',
-                border: '1px solid red',
-                float: 'left'
-            },
-            class2: {
-                width: parseInt(-dist),
-                height: '40px',
-                border: '1px solid blue',
-                float: 'left',
-                textAlign: 'center'
-
-            }
-        });
-
     if(parseInt(-dist)>parseInt(contentwidth/4)||parseInt(-dist)==parseInt(contentwidth/4)) {
 
-        console.log('来了');
+        var leftWidth = contentwidth + dist;
+
+
 
         self.setState({
             class1: {
-                width: '237px',
+                width: contentwidth-79,
                 height: '40px',
                 border: '1px solid red',
-                float: 'left'
+                float: 'left',
+                transition:'width 1s',
+                transitionTimingFunction:'ease-in'
             },
             class2: {
                 width: '79px',
                 height: '40px',
                 border: '1px solid blue',
                 float: 'left',
-                textAlign: 'center'
+                textAlign: 'center',
+                transition:'width 1s',
+                transitionTimingFunction:'ease-in'
 
             }
         });
 
-    }else{
+    }else if(parseInt(-dist)<30){
 
-        // console.log(22)
-        // self.setState({
-        //     class1: {
-        //         width: '100%',
-        //         height: '40px',
-        //         border: '1px solid red',
-        //         float: 'left'
-        //     },
-        //     class2: {
-        //         width: '0',
-        //         height: '40px',
-        //         border: '1px solid blue',
-        //         float: 'left',
-        //         textAlign: 'center'
-        //
-        //     }
-        // });
-    }
-}else{
+            var leftWidth = contentwidth + dist;
 
 
+            self.setState({
+                class1: {
+                    width: leftWidth,
+                    height: '40px',
+                    border: '1px solid red',
+                    float: 'left',
+                    transitionTimingFunction:'ease-out'
+                },
+                class2: {
+                    width: parseInt(-dist),
+                    height: '40px',
+                    border: '1px solid blue',
+                    float: 'left',
+                    textAlign: 'center',
+                    transitionTimingFunction:'ease-out'
+
+                }
+            });
+
+        }
 
 
-
-
-    if(parseInt(dist)==parseInt(contentwidth/4)) {
-
-
-
-
-
-
-
-
-        var leftWidth = contentwidth + dist;
-
-
-        console.log('leftWidth'+leftWidth);
-
-
-        self.setState({
-            class1: {
-                width: leftWidth,
-                height: '40px',
-                border: '1px solid red',
-                float: 'left'
-            },
-            class2: {
-                width: parseInt(-dist),
-                height: '40px',
-                border: '1px solid blue',
-                float: 'left',
-                textAlign: 'center'
-
-            }
-        })
-    }
 }
-
 
 
 
@@ -183,6 +136,53 @@ if(dist<0){
         _box1.addEventListener('touchend', function(e){
             var touchobj = e.changedTouches[0] // reference first touch point for this event
             statusdiv.innerHTML = 'Status: touchend<br> Resting x coordinate: ' + touchobj.clientX + 'px';
+
+                console.log('end'+startx-touchobj.clientX)
+
+                if(startx-touchobj.clientX<30) {
+
+                    console.log('end');
+                    self.setState({
+                        class1: {
+                            width: contentwidth,
+                            height: '40px',
+                            border: '1px solid red',
+                            float: 'left',
+                            transition:'width 1s',
+                            transitionTimingFunction: 'ease-out'
+                        },
+                        class2: {
+                            width: '0',
+                            height: '40px',
+                            border: '1px solid blue',
+                            float: 'left',
+                            textAlign: 'center',
+                            transition:'width 1s',
+                            transitionTimingFunction: 'ease-out'
+
+                        }
+                    });
+                }else{
+                    self.setState({
+                        class1: {
+                            width: contentwidth-79,
+                            height: '40px',
+                            border: '1px solid red',
+                            float: 'left',
+                            transitionTimingFunction: 'ease-in'
+                        },
+                        class2: {
+                            width: '79px',
+                            height: '40px',
+                            border: '1px solid blue',
+                            float: 'left',
+                            textAlign: 'center',
+                            transitionTimingFunction: 'ease-in'
+
+                        }
+                    });
+                }
+
 
             e.preventDefault()
         }, false)
