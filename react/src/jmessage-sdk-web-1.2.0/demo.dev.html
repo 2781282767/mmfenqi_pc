@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title> im demo </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/main.css">
+  </head>
+  <body ng-app="app">
+    <div class="head">
+      <h1 class="text-center">JMessage SDK API Demo</h1>
+      <p class="text-center page-header">使用说明：点击右侧操作按钮可以在左侧看到数据交互</p>
+    </div>
+    <div class="container" ng-controller="demoCtrl">
+      <div class="left">
+        <p>数据交互</p>
+        <div class="console col-md-12">
+          <pre id="console-pre">
+          </pre>
+        </div>
+      </div>
+      <div class="right">
+        <h4>操作按钮</h4>
+      <div class="btn-class">
+        <p>注册/登陆:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='register()'>注册</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='login()'>登陆</button>
+      </div>
+      <div class="btn-class">
+        <p>用户信息:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getUserInfo()'>获取用户个人信息</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getAcrossUserInfo()'>跨应用获取用户个人信息</button>
+      </div>
+      <div class="btn-class">
+        <p>发送信息:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='sendSingleMsg()'>发送单聊信息</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='sendAcrossSingleMsg()'>发送跨应用单聊信息</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='sendGroupMsg()'>发送群聊信息</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='sendMsgWithBuilder()'>使用MsgBuilder发送自定义消息</button>
+      </div>
+      <div class="btn-class">
+        <p>发送图片信息:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getUploadToken()'>获取图片上传Token</button>
+        <form class="form-inline fff">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon ut">选择文件</div>
+              <input class="form-control" id="imgCtnSingle" type="file">
+              <input type="input" class="form-control" id="singleImgName">
+            </div>
+            <button type="button" class="btn btn-default btn-lg" id='upSingleImg'>发送单聊图片</button>
+          </div>
+        </form>
+        <form class="form-inline fff">
+          <div class="form-group">
+            <div class="input-group">
+              <div class="input-group-addon ut">选择文件</div>
+              <input class="form-control" id="imgCtnGroup" type="file">
+              <input type="input" class="form-control" id="groupImgName">
+            </div>
+            <button type="button" class="btn btn-default btn-lg" id='upGroupImg'>发送群聊图片</button>
+          </div>
+        </form>
+      </div>
+      <div class="btn-class">
+        <p>群组维护:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='createGroup()'>创建群组</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getGroupList()'>获取群组列表</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='addAcrossGroupMember()'>添加群组成员</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='delAcrossGroupMember()'>删除群组成员</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getGroupMembers()'>获取群组成员列表</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='updateGroupInfo()'>更新群组信息</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='exitGroup()'>退出群组</button>
+      </div>
+      <div class="btn-class">
+        <p>会话相关:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getConversations()'>获取会话列表</button>
+      </div>
+      <div class="btn-class">
+        <p>免打扰:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getNoDisturb()'>获取免打扰列表</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='addSingleNoDisturb()'>添加单聊免打扰</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='deleteSingleNoDisturb()'>删除单聊免打扰</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='addGroupNoDisturb()'>添加群聊免打扰</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='deleteGroupNoDisturb()'>删除群聊免打扰</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='addGlobalNoDisturb()'>添加全局免打扰</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='deleteGlobalNoDisturb()'>删除全局免打扰</button>
+      </div>
+      <div class="btn-class">
+        <p>黑名单:</p>
+        <button type="button" class="btn btn-default btn-lg" ng-click='getBlackList()'>获取黑名单</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='addBlackList()'>添加黑名单</button>
+        <button type="button" class="btn btn-default btn-lg" ng-click='delBlackList()'>删除黑名单</button>
+      </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.bootcss.com/socket.io/1.4.5/socket.io.min.js"></script>
+    <script src="http://cdn.bootcss.com/angular.js/1.5.7/angular.min.js"></script>
+
+    <!-- 本地调试 -->
+    <script src='./js/jmessage-sdk-web.js'></script>
+    <script src='./js/demo.js'></script>
+    <!-- 本地调试 -->
+
+    <!-- 生产 -->
+    <!--<script src='./jmessage-sdk-web.min.js'></script>-->
+    <!--<script src='./demo.min.js'></script>-->
+    <!-- 生产 -->
+
+  </body>
+
+</html>

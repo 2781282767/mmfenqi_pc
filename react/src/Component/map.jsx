@@ -20,6 +20,8 @@ import '../less/deviceList.less'
 
 import '../less/my.bootstrap.min.css'
 
+import '../jmessage-sdk-web-1.2.0/js/jmessage-sdk-web.min'
+
 import usrimg from '../../src/img/user.png'
 
 import qiehuan from '../../src/img/qiehuan.png'
@@ -95,74 +97,6 @@ class MapIndex extends React.Component {
 
             bbb:false,
 
-            list: [
-                {
-                    img: '../../src/img/bind/baba.png',
-                    img1: '../../src/img/bind/baba1.png',
-                    familystatus: '爸爸',
-                    ds: '此称呼对应为设备按键'
-                },
-                {
-                    img: '../../src/img/bind/ma.png',
-                    img1: '../../src/img/bind/ma1.png',
-                    familystatus: '妈妈',
-                    ds: '此称呼对应为设备按键'
-                },
-                {
-                    img: '../../src/img/bind/family.png',
-                    img1: '../../src/img/bind/family1.png',
-                    familystatus: '家庭',
-                    ds: '此称呼对应为设备按键'
-                },
-                {
-                    img: '../../src/img/bind/gege.png',
-                    img1: '../../src/img/bind/gege1.png',
-                    familystatus: '哥哥',
-                    ds: '此称呼对应为家庭成员'
-                },
-                {
-                    img: '../../src/img/bind/jiejie.png',
-                    familystatus: '姐姐',
-                    img1: '../../src/img/bind/jiejie1.png',
-                    ds: '此称呼对应为家庭成员'
-                },
-                {
-                    img: '../../src/img/bind/tr.png',
-                    img1: '../../src/img/bind/tr1.png',
-                    familystatus: '班主任',
-                    ds: '仅作为添加班主任时使用'
-                },
-                {
-                    img: '../../src/img/bind/shu.png',
-                    img1: '../../src/img/bind/shu1.png',
-                    familystatus: '叔叔',
-                    ds: '此称呼对应为家庭成员'
-                },
-                {
-                    img: '../../src/img/bind/ye.png',
-                    img1: '../../src/img/bind/ye1.png',
-                    familystatus: '爷爷',
-                    ds: '此称呼对应为家庭成员'
-                },
-                {
-                    img: '../../src/img/bind/nai.png',
-                    img1: '../../src/img/bind/nai1.png',
-                    familystatus: '奶奶',
-                    ds: '此称呼对应为家庭成员'
-                },
-                {
-                    img: '../../src/img/bind/wai.png',
-                    img1: '../../src/img/bind/wai1.png',
-                    familystatus: '外公',
-                    ds: '此称呼对应为家庭成员'
-                },
-                {
-                    img: '../../src/img/bind/waipo.png',
-                    img1: '../../src/img/bind/waipo1.png',
-                    familystatus: '外婆',
-                    ds: '此称呼对应为家庭成员'
-                }
-            ]
         };
 
 

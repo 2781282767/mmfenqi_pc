@@ -97,6 +97,8 @@ export default class Addarea extends React.Component {
 
 
             self.getAddr(this.state.centerlng,this.state.centerlat);
+
+
             map2.on('moveend', function(e) {
 
 
@@ -158,6 +160,12 @@ export default class Addarea extends React.Component {
 
 
             function  onComplete(data) {
+
+                map = new AMap.Map('safetyarea', {
+                    resizeEnable: true,
+                    zoom:15,
+                    center: [data.position.getLng(),data.position.getLat()]
+                });
                 self.getAddr(data.position.getLng(),data.position.getLat());
 
 

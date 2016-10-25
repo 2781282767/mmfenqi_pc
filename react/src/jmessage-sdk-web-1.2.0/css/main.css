@@ -1,0 +1,75 @@
+.bs-example {
+  position: relative;
+  padding: 45px 15px 15px;
+  margin: 0 -15px 15px;
+  border-color: #e5e5e5 #eee #eee;
+  border-style: solid;
+  border-width: 1px 0;
+  -webkit-box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+  box-shadow: inset 0 3px 6px rgba(0,0,0,.05);
+}
+.bs-example>pre {
+  white-space: normal;
+}
+.head {
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  z-index: 20;
+}
+.container {
+  padding-top: 150px;
+}
+.left {
+  position: fixed;
+  width: 550px;
+}
+.right {
+  padding-left: 600px;
+}
+.console {
+  height: 80vh;
+  background-color: #000;
+  border: none;
+  border-radius: 8px;
+}
+.btn-class {
+  margin-bottom: 15px;
+}
+.ut {
+   width: 85px;
+}
+#imgCtnSingle {
+  width: 80px;
+  opacity: 0;
+  left: 0;
+  position: absolute;
+}
+#imgCtnGroup {
+  width: 80px;
+  opacity: 0;
+  left: 0;
+  position: absolute;
+}
+.fff {
+   margin-bottom: 15px;
+}
+.btn-class>button {
+  margin-bottom: 10px;
+}
+#console-pre {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0;
+  overflow: auto;
+  white-space: pre-wrap;
+  background: #000;
+  color: #fff;
+}
+#console-pre>span {
+   display: inline-block;
+   margin-bottom: 10px;
+}

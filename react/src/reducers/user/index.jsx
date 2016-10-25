@@ -15,6 +15,7 @@ const initialState = {
     lng:'',
     lat:'',
     getGuardiansList:[],
+    getGuardiansLists:[],
 
     gpstime:'',
 
@@ -81,6 +82,12 @@ export default function login (state = initialState, action) {
         case types.GetGuardians:
             return Object.assign({},state,{
                 getGuardiansList:action.res
+            });
+
+
+        case types.GetGuardianss:
+            return Object.assign({},state,{
+                getGuardiansLists:action.res
             });
             //     return {
             //         getGuardiansList:action.res

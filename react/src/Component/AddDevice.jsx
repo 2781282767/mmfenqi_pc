@@ -9,6 +9,7 @@ import { bindActionCreators } from 'redux';
 import {R_header} from './common/index'
 
 import {scanDevice} from '../action/index'
+import {Toast} from '../Http'
 
 
 
@@ -17,26 +18,37 @@ class AddDevice extends React.Component{
 
         super(props);
         this.state = {
-            val:''
+            val:'',
+            bg:'app-little-pink-radius-button'
         }
     }
 
 
     change(e){
         let val = e.target.value;
+
+
         this.setState({
-            val:val
+            val:val,
+            bg:'app-pink-radius-button'
         })
 
     }
 
     next(val,e){
         e.preventDefault();
+
+        if(!val){
+            Toast.toast('请输入设备号',3000);
+            return;
+        }
         this.props.scanDevice(val)
     }
 
 
     render(){
+
+        const {bg} =this.state;
         return (
             <div style={{background:'#eee',minHeight: '100%'}}>
                 <R_header title="输入IMEI号" left="1" />
@@ -45,13 +57,11 @@ class AddDevice extends React.Component{
 
                     <form onSubmit={this.next.bind(this,this.state.val)} name="form">
                         <div className="col-xs-12 app-white-input margin-one">
-                            <input type="number" defaultValue={8698840200595}  placeholder="请输入设备的IMEI号" style={{width:'100%'}} onChange={this.change.bind(this)} required/>
+                            <input type="number"   placeholder="请输入设备的IMEI号" style={{width:'100%'}} onChange={this.change.bind(this)} />
                         </div>
 
                         <label style={{display:'block'}}>
-                            <div className="col-xs-12  text-center app-pink-radius-button">
-
-
+                            <div className={"col-xs-12  text-center " + bg} >
                                 激活设备
                             </div>
                             <button type="submit" style={{display:'none'}}></button>

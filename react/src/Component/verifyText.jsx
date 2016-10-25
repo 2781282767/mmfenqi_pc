@@ -22,9 +22,11 @@ export default class VerifyText extends React.Component {
 
             disabled: false,
             text: '获取验证码',
-            timer: 60,
-            val: [],
-            bg: 'app-blue-radius-button'
+            timer: 120,
+            val: '',
+            bg: 'app-blue-radius-button',
+
+            bg2:'app-little-pink-radius-button'
         };
     }
 
@@ -56,8 +58,8 @@ export default class VerifyText extends React.Component {
 
                     this.setState({
                         disabled: true,
-                        text: '59s后重新获取',
-                        timer: 59,
+                        text: '119s后重新获取',
+                        timer: 119,
                         bg: 'app-blue-radius-check-button'
                     });
                     var self = this;
@@ -67,7 +69,7 @@ export default class VerifyText extends React.Component {
                             self.setState({
                                 disabled: false,
                                 text: '获取验证码',
-                                timer: 60,
+                                timer: 120,
                                 bg: 'app-blue-radius-button'
                             });
                             clearInterval(tm);
@@ -96,18 +98,17 @@ export default class VerifyText extends React.Component {
 
         var val = e.target.value;
         this.setState({
-            val: val
+            val: val,
+            bg2:'app-pink-radius-button'
         })
 
     }
-
-
-    // next(smscode, e) {
-    //     e.preventDefault();
-    //
-    //
-    // }
     go(){
+
+        if(!this.state.val){
+            Toast.toast('请先获取验证码',3000);
+            return;
+        }
         HttpService.save({
             url: '/app/device/addGuardian',
             data: {
@@ -134,7 +135,7 @@ export default class VerifyText extends React.Component {
     render() {
 
         const phone = this.props.params.admintelephone.substr(0, 3) + '****' + this.props.params.admintelephone.substr(7, 11);
-
+        const {bg2} =this.state;
 
         return (
             <div className="container" style={{background: '#eee', minHeight: '100%'}}>
@@ -168,7 +169,7 @@ export default class VerifyText extends React.Component {
 
                     <label style={{display: 'block'}}>
 
-                        <div className="col-xs-12  text-center app-pink-radius-button" onClick={this.go.bind(this)}
+                        <div className={"col-xs-12  text-center " + bg2} onClick={this.go.bind(this)}
                              style={{marginTop: '1.5rem', fontSize: '1.6rem'}}>添加
                         </div>
                         <button type="submit" style={{display: 'none'}}></button>

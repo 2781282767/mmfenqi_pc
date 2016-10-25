@@ -171,6 +171,12 @@ function GetGuardians(res) {
         res
     }
 }
+function GetGuardianss(res) {
+    return {
+        type: types.GetGuardianss,
+        res
+    }
+}
 
 function ChangeDevice(res) {
     return{
@@ -260,6 +266,9 @@ export function change(res) {
         dispatch(getCurrentTrack(data.babyid));
     }
 }
+
+
+
 
 export function getUsers() {
     return function (dispatch) {
@@ -454,7 +463,60 @@ function getA(babyid) {
 }
 
 
-function getGuardians(babyid) {
+export function getGuardianss(babyid) {
+    return function (dispatch) {
+        return HttpService.query({
+            url: '/app/object/getGuardians',
+            data: {
+                token: localStorage.appToken,
+                babyid: babyid
+            },
+            success: (res=> {
+                console.log(res);
+
+                if (res.code == '10068') {
+
+                    console.log(res.data);
+
+                    var checked = false;
+
+
+                    var getGuardiansList = res.data;
+
+
+
+                    for (var y in list) {
+
+                        var ab = 'isOpen';
+                        var status = 'check';
+                        var id = 'guardianid';
+                        list[y][status] = false;
+                        list[y][id] = '';
+                        for (var x in getGuardiansList) {
+
+
+                            if (getGuardiansList[x].familystatus == list[y].familystatus) {
+                                list[y][status] = true;
+                                list[y][id] = getGuardiansList[x].guardianid;
+                                console.log(list);
+
+                                break;
+                            }
+                        }
+                    }
+
+                    dispatch(GetGuardianss(list));
+
+
+                }
+            })
+        })
+    }
+}
+
+
+
+ function getGuardians(babyid) {
 
     return function (dispatch) {
         return HttpService.query({

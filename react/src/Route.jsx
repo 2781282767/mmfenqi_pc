@@ -17,6 +17,7 @@ import Addarea from './Component/Addarea'
 import Demo from './Component/demo'
 import Demo2 from './Component/demo2'
 import Guardian from './Component/guardian'
+import AddGuardian from './Component/guardian/addGuardian'
 
 
 /**
@@ -52,6 +53,7 @@ const RouteConfig = (
             <Route path="/demo" component={Demo}/>
             <Route path="/demo2" component={Demo2}/>
             <Route path="/Guardian/:babyid" component={Guardian}/>
+            <Route path="/AddGuardian/:babyid/:guardianid/:familystatus" component={AddGuardian}/>
         </Route>
     </Router>
 );

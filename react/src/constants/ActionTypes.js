@@ -15,6 +15,7 @@ export const Change='Change';
 export const GetCurrentTrack='GetCurrentTrack';
 export const AddDevice='AddDevice';
 export const GetGuardians='GetGuardians';
+export const GetGuardianss='GetGuardianss';
 export const GetChecked='GetChecked';
 export const ChangeDevice='ChangeDevice';
 export const aaa='aaa';

@@ -22,7 +22,8 @@ class Gotoactive extends React.Component{
 
 
             studentname:'',
-            teachertel:''
+            teachertel:'',
+            bg:'app-little-pink-radius-button'
 
         };
     }
@@ -36,22 +37,59 @@ class Gotoactive extends React.Component{
 
     }
 
+    componentDidMount(){
+
+    }
+
     name(e){
         let val = e.target.value;
         this.setState({
             studentname:val
-        })
+        });
+
+        if(!!this.state.studentname&&!!this.state.teachertel){
+            this.setState({
+                bg:'app-pink-radius-button'
+            })
+        }
     }
 
     teachertel(e){
         let val = e.target.value;
         this.setState({
             teachertel:val
-        })
+        });
+
+
+        if(!!this.state.studentname&&!!this.state.teachertel){
+            this.setState({
+                bg:'app-pink-radius-button'
+            })
+        }
     }
 
     next(studentname,teachertel,e){
         e.preventDefault();
+
+            var patt=/^[1]\d{10}$/;
+
+            if(!studentname){
+                Toast.toast('请输入宝贝姓名',3000);
+                return;
+            }else if(!teachertel){
+                Toast.toast('请输入手机号',3000);
+                return;
+            }else if(!patt.test(teachertel)&&!!teachertel){
+                Toast.toast('手机格式不正确',3000);
+                return;
+            }
+
+
+
+
+
+
+
         HttpService.query({
             url:'/app/device/guardianActive',
 
@@ -80,6 +118,8 @@ class Gotoactive extends React.Component{
 
 
     render(){
+
+        const {bg} =this.state;
         return (
 
             <div style={{background:'#eee',minHeight: '100%'}}>
@@ -92,29 +132,28 @@ class Gotoactive extends React.Component{
                     <div className="col-xs-12 app-content-title app-padding-zero">设备信息</div>
                     <div className="col-xs-12 app-white-input">
                         <label  className="app-white-input-label">设备IMEI号</label>
-                        <input id="number" disabled type="text" placeholder="23764761536276"  value={this.props.params.mdtid} required/>
+                        <input id="number" disabled type="text" placeholder="23764761536276"  value={this.props.params.mdtid}/>
                     </div>
                     <hr className="app-bootstrap-hr"/>
                         <div className="col-xs-12 app-white-input">
                             <label  className="app-white-input-label">设备手机号</label>
-                            <input id="number2" type="text" disabled placeholder="请输入设备手机号" value={this.props.params.telephone} required/>
+                            <input id="number2" type="text" disabled placeholder="请输入设备手机号" value={this.props.params.telephone}/>
                         </div>
                         <div className="col-xs-12 app-content-title app-padding-zero">学校监管</div>
                         <div className="col-xs-12 app-white-input">
                             <label  className="app-white-input-label">宝贝姓名</label>
-                            <input id="number3" type="text" placeholder="请输入宝贝姓名" onChange={this.name.bind(this)} required/>
+                            <input id="number3" type="text" placeholder="请输入宝贝姓名" onChange={this.name.bind(this)} />
                         </div>
                         <hr className="app-bootstrap-hr" />
                             <div className="col-xs-12 app-white-input">
                                 <label className="app-white-input-label">班主任手机号</label>
-                                <input id="number4" type="text"  placeholder="请输入班主任手机号码" onChange={this.teachertel.bind(this)}
-                                       required/>
+                                <input id="number4" type="text"  placeholder="请输入班主任手机号码" onChange={this.teachertel.bind(this)}/>
                             </div>
 
 
                             <label style={{display:'block'}}>
 
-                                <div className="col-xs-12 text-center app-pink-radius-button"
+                                <div className={"col-xs-12  text-center " + bg}
                                      style={{marginTop:'1.5rem'}}>激活设备
                                 </div>
                                 <button type="submit" style={{display:'none'}}></button>

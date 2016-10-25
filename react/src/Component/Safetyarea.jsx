@@ -27,44 +27,171 @@ export default class Safetyarea extends React.Component{
         };
 
         this.startx='';
-        this.contentwidth=''
+        this.contentwidth='';
+        this.starty=''
 
     }
 
     componentWillMount(){
-        this.getSafeRegions1()
+        this.getSafeRegions1();
+        window.localStorage.babyid=this.props.params.babyid;
+
+        console.log(localStorage.babyid)
     }
 
 
 
 
 
-    inits(){
+
+
+
+
+
+    TouchStart(index,e){
+
+
+
+
+        var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
+
+         this.startx = parseInt(touchobj.clientX); // get x position of touch point relative to left edge of browser
+         this.starty = parseInt(touchobj.clientY); // get x position of touch point relative to left edge of browser
+
+         this.contentwidth=document.getElementById('contentWidth').offsetWidth-1;
+
+
+
+
+
+
+
+    }
+
+    TouchEnd(index,e){
+
+
+        console.log('222ssss'+this.startx)
+
+
+
+
+        const contentwidth=this.contentwidth
+
+
+
         var self=this;
 
-        var index=0;
-
-        const contentwidth=document.getElementById('item'+index).offsetWidth-1;
+        var touchobj = e.changedTouches[0]; // reference first touch point for this event
 
         const itemstyle=document.getElementById('item'+index).style;
         const deletestyle=document.getElementById('delete'+index).style;
 
-        var _box1 = document.getElementById('item'+index);
-
-        var startx = 0;
-        var dist = 0;
-
-        _box1.addEventListener('touchstart', function(e){
-            var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
-            startx = parseInt(touchobj.clientX); // get x position of touch point relative to left edge of browser
-
-        }, false);
-
-        _box1.addEventListener('touchmove', function(e){
-            var touchobj = e.changedTouches[0]; // reference first touch point for this event
-            var dist = parseInt(touchobj.clientX) - startx;
 
 
+        var numRange = 5;
+        if(this.starty - touchobj.clientY >numRange||this.starty - touchobj.clientY ==numRange){
+            console.log('上')
+
+        }else if(this.starty - touchobj.clientY < -numRange){
+            console.log('下')
+
+        }else{
+            if(this.startx-touchobj.clientX<30) {
+
+                self.setState({
+                    classleft1: {
+                        width: contentwidth,
+
+                        transition:'all 1s ease-out',
+
+                    },
+                    classright1: {
+                        width: '0',
+                        transition:'all 1s ease-out',
+
+
+                    }
+                });
+
+
+                itemstyle.width=contentwidth+'px';
+
+                itemstyle.transition=self.state.classleft1.transition;
+
+
+                deletestyle.width=0+'px';
+                deletestyle.transition=self.state.classright1.transition;
+            }else{
+
+                console.log('来了2');
+
+
+                self.setState({
+                    classleft1: {
+                        width: contentwidth-parseInt(contentwidth/4),
+                        transition: 'ease-in'
+                    },
+                    classright1: {
+                        width: parseInt(contentwidth/4),
+                        transition: 'ease-in'
+
+                    }
+                });
+
+
+
+                console.log('ddeeee'+parseInt(contentwidth/4));
+
+
+                itemstyle.width=contentwidth-parseInt(contentwidth/4)+'px';
+
+                itemstyle.transition=self.state.classleft1.transition;
+
+
+                deletestyle.width=parseInt(contentwidth/4)+'px';
+                deletestyle.transition=self.state.classright1.transition;
+            }
+        }
+
+
+
+
+
+
+
+    }
+
+    TouchMove(index,e){
+
+
+
+
+
+
+
+
+        var self=this;
+        var touchobj = e.changedTouches[0]; // reference first touch point for this event
+
+        var dist = parseInt(touchobj.clientX) - this.startx;
+
+        const itemstyle=document.getElementById('item'+index).style;
+        const deletestyle=document.getElementById('delete'+index).style;
+
+        const contentwidth=this.contentwidth;
+        console.log(touchobj.clientY-this.starty);
+
+        var numRange = 5;
+        if(this.starty - touchobj.clientY >numRange||this.starty - touchobj.clientY ==numRange){
+            console.log('上')
+
+        }else if(this.starty - touchobj.clientY < -numRange){
+            console.log('下')
+
+        }else{
+
+            e.preventDefault();
             if(dist<0){
 
                 if(parseInt(-dist)>parseInt(contentwidth/4)||parseInt(-dist)==parseInt(contentwidth/4)) {
@@ -128,277 +255,18 @@ export default class Safetyarea extends React.Component{
 
 
             }
-
-
-
-
-
-
-
-
-            e.preventDefault()
-
-        }, false);
-
-        _box1.addEventListener('touchend', function(e){
-            var touchobj = e.changedTouches[0]; // reference first touch point for this event
-
-
-
-
-
-
-
-            if(startx-touchobj.clientX<30) {
-
-
-                self.setState({
-                    classleft1: {
-                        width: contentwidth,
-
-                        transition:'all 1s ease-out',
-
-                    },
-                    classright1: {
-                        width: '0',
-                        transition:'all 1s ease-out',
-
-
-                    }
-                });
-
-
-                itemstyle.width=self.state.classleft1.width+'px';
-
-                itemstyle.transition=self.state.classleft1.transition;
-
-
-                deletestyle.width=self.state.classright1.width+'px';
-                deletestyle.transition=self.state.classright1.transition;
-            }else{
-
-                console.log('来了2');
-
-
-
-
-
-                self.setState({
-                    classleft1: {
-                        width: contentwidth-parseInt(contentwidth/4),
-                        transition: 'ease-in'
-                    },
-                    classright1: {
-                        width: parseInt(contentwidth/4),
-                        transition: 'ease-in'
-
-                    }
-                });
-
-
-
-                console.log('ddeeee'+parseInt(contentwidth/4));
-
-
-                itemstyle.width=self.state.classleft1.width+'px';
-
-                itemstyle.transition=self.state.classleft1.transition;
-
-
-                deletestyle.width=self.state.classright1.width+'px';
-                deletestyle.transition=self.state.classright1.transition;
-            }
-
-
-        }, false)
-    }
-
-
-
-
-    TouchStart(index,e){
-
-        console.log('111');
-
-
-
-
-        var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
-
-         this.startx = parseInt(touchobj.clientX); // get x position of touch point relative to left edge of browser
-
-         this.contentwidth=document.getElementById('contentWidth').offsetWidth-1;
-
-
-
-
-
-
-
-    }
-
-    TouchEnd(index,e){
-
-
-        console.log('222ssss'+this.startx)
-
-
-
-
-        const contentwidth=this.contentwidth
-
-
-
-        var self=this;
-
-        var touchobj = e.changedTouches[0]; // reference first touch point for this event
-
-        const itemstyle=document.getElementById('item'+index).style;
-        const deletestyle=document.getElementById('delete'+index).style;
-
-
-
-
-        if(this.startx-touchobj.clientX<30) {
-
-            self.setState({
-                classleft1: {
-                    width: contentwidth,
-
-                    transition:'all 1s ease-out',
-
-                },
-                classright1: {
-                    width: '0',
-                    transition:'all 1s ease-out',
-
-
-                }
-            });
-
-
-            itemstyle.width=contentwidth+'px';
-
-            itemstyle.transition=self.state.classleft1.transition;
-
-
-            deletestyle.width=0+'px';
-            deletestyle.transition=self.state.classright1.transition;
-        }else{
-
-            console.log('来了2');
-
-
-            self.setState({
-                classleft1: {
-                    width: contentwidth-parseInt(contentwidth/4),
-                    transition: 'ease-in'
-                },
-                classright1: {
-                    width: parseInt(contentwidth/4),
-                    transition: 'ease-in'
-
-                }
-            });
-
-
-
-            console.log('ddeeee'+parseInt(contentwidth/4));
-
-
-            itemstyle.width=contentwidth-parseInt(contentwidth/4)+'px';
-
-            itemstyle.transition=self.state.classleft1.transition;
-
-
-            deletestyle.width=parseInt(contentwidth/4)+'px';
-            deletestyle.transition=self.state.classright1.transition;
         }
 
-    }
-
-    TouchMove(index,e){
-
-        e.preventDefault();
-
-
-        var self=this;
-        var touchobj = e.changedTouches[0]; // reference first touch point for this event
-
-        var dist = parseInt(touchobj.clientX) - this.startx;
-
-        const itemstyle=document.getElementById('item'+index).style;
-        const deletestyle=document.getElementById('delete'+index).style;
-
-        const contentwidth=this.contentwidth
-
-
-        console.log('333'+dist)
-
-        if(dist<0){
-
-            if(parseInt(-dist)>parseInt(contentwidth/4)||parseInt(-dist)==parseInt(contentwidth/4)) {
-
-                console.log('业了');
-
-                self.setState({
-                    classleft1: {
-                        width: contentwidth-parseInt(contentwidth/4),
-                        transition:'all 1s ease-in',
-
-                    },
-                    classright1: {
-                        width: parseInt(contentwidth/4),
-                        transition:'all 1s ease-in',
-
-                    }
-                });
-
-                itemstyle.width=self.state.classleft1.width+'px';
-
-
-                itemstyle.transition=self.state.classleft1.transition;
-
-
-                deletestyle.width=self.state.classright1.width+'px';
-                deletestyle.transition=self.state.classright1.transition;
 
 
 
-            }else if(parseInt(-dist)<30){
 
 
-                console.log('ddd'+parseInt(-dist));
-
-                var leftWidth = contentwidth + dist;
 
 
-                self.setState({
-                    classleft1: {
-                        width: leftWidth,
-                        transition:'ease-out'
-                    },
-                    classright1: {
-                        width: parseInt(-dist),
-                        transition:'ease-out'
-
-                    }
-                });
 
 
-                itemstyle.width=self.state.classleft1.width+'px';
-
-                itemstyle.transition=self.state.classleft1.transition;
-
-
-                deletestyle.width=self.state.classright1.width+'px';
-                deletestyle.transition=self.state.classright1.transition;
-
-            }
-
-
-        }
-    }
+     }
 
 
 
@@ -407,7 +275,7 @@ export default class Safetyarea extends React.Component{
     }
 
 
-    deleteSafeRegions(regionid){
+    deleteSafeRegions(regionid,index){
 
         HttpService.query({
             url:'/app/map/deleteSafeRegions',
@@ -417,7 +285,25 @@ export default class Safetyarea extends React.Component{
                 regionid:regionid,
             },
             success:(res=>{
-                console.log(res)
+
+                console.log(res);
+
+                if(res.code!=200){
+                    var node=document.getElementById('item'+index);
+
+                    //console.log(node)
+
+                    node.parentNode.parentNode.remove()
+                }else{
+                    Toast.toast(res.msg,3000);
+                }
+
+
+              //  console.log(document.getElementById('item'+index).parentNode.parentNode.removeChild())
+
+
+
+
             })
         })
     }
@@ -535,7 +421,7 @@ export default class Safetyarea extends React.Component{
                                     {/*`picker-modal${isPickerShow ? ' picker-modal-toggle' : ''}`*/}
 
                                     <div className="delete"  style={{height:'9rem',width:'0',
-                                        float:'left',}}   id={'delete'+index} onClick={this.deleteSafeRegions.bind(this,res.regionid)}>
+                                        float:'left',}}   id={'delete'+index} onClick={this.deleteSafeRegions.bind(this,res.regionid,index)}>
                                         删除
                                     </div>
 
