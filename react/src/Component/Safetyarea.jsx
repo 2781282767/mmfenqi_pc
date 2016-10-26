@@ -16,19 +16,26 @@ export default class Safetyarea extends React.Component{
         this.state={
             list:[],
 
-        };
-        this.state={
+            _delete:false,
+
+            hasDelete:false,
+
+            noDelete:false,
             classleft1:{
                 width:'100%',
             },
             classright1:{
                 width:'0',
             }
+
         };
+
 
         this.startx='';
         this.contentwidth='';
         this.starty=''
+
+
 
     }
 
@@ -51,6 +58,17 @@ export default class Safetyarea extends React.Component{
     TouchStart(index,e){
 
 
+        console.log('1:'+this.state._delete)
+        console.log('2:'+this.state.hasDelete)
+        console.log('3:'+this.state.noDelete)
+
+
+
+
+
+
+
+
 
 
         var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
@@ -58,7 +76,10 @@ export default class Safetyarea extends React.Component{
          this.startx = parseInt(touchobj.clientX); // get x position of touch point relative to left edge of browser
          this.starty = parseInt(touchobj.clientY); // get x position of touch point relative to left edge of browser
 
-         this.contentwidth=document.getElementById('contentWidth').offsetWidth-1;
+         this.contentwidth=document.getElementById('contentWidth'+index).offsetWidth-1;
+
+
+        console.log('start'+this.startx)
 
 
 
@@ -71,18 +92,21 @@ export default class Safetyarea extends React.Component{
     TouchEnd(index,e){
 
 
-        console.log('222ssss'+this.startx)
 
 
 
+        var touchobj = e.changedTouches[0];
 
-        const contentwidth=this.contentwidth
+
+        console.log('end'+touchobj.clientX);
+
+        const contentwidth=this.contentwidth;
 
 
 
         var self=this;
 
-        var touchobj = e.changedTouches[0]; // reference first touch point for this event
+         // reference first touch point for this event
 
         const itemstyle=document.getElementById('item'+index).style;
         const deletestyle=document.getElementById('delete'+index).style;
@@ -96,66 +120,86 @@ export default class Safetyarea extends React.Component{
         }else if(this.starty - touchobj.clientY < -numRange){
             console.log('下')
 
-        }else{
-            if(this.startx-touchobj.clientX<30) {
+        }else {
+            console.log(this.startx)
+            console.log(touchobj.clientX)
+
+
+            if (this.startx < touchobj.clientX ) {
 
                 self.setState({
                     classleft1: {
                         width: contentwidth,
 
-                        transition:'all 1s ease-out',
+                        transition: 'all 0.1s  ease-out',
 
                     },
                     classright1: {
                         width: '0',
-                        transition:'all 1s ease-out',
+                        transition: 'all 0.1s ease-out',
 
 
                     }
                 });
 
 
-                itemstyle.width=contentwidth+'px';
+                self.setState({
+                    hasDelete:false
+                });
 
-                itemstyle.transition=self.state.classleft1.transition;
+
+                itemstyle.width = contentwidth + 'px';
+
+                itemstyle.transition = self.state.classleft1.transition;
 
 
-                deletestyle.width=0+'px';
-                deletestyle.transition=self.state.classright1.transition;
-            }else{
+                deletestyle.width = 0 + 'px';
+                deletestyle.transition = self.state.classright1.transition;
 
-                console.log('来了2');
+
+
+
+
+
+            } else if(this.startx - touchobj.clientX>1) {
+
+
+                if(!!self.state.hasDelete){
+                    return
+                }
+
 
 
                 self.setState({
                     classleft1: {
                         width: contentwidth-parseInt(contentwidth/4),
-                        transition: 'ease-in'
+                        transition:'all 0.1s ease-in',
+
                     },
                     classright1: {
                         width: parseInt(contentwidth/4),
-                        transition: 'ease-in'
+                        transition:'all 0.1s ease-in',
 
                     }
                 });
 
-
-
-                console.log('ddeeee'+parseInt(contentwidth/4));
-
+                self.setState({
+                    hasDelete:true
+                });
 
                 itemstyle.width=contentwidth-parseInt(contentwidth/4)+'px';
+
 
                 itemstyle.transition=self.state.classleft1.transition;
 
 
                 deletestyle.width=parseInt(contentwidth/4)+'px';
                 deletestyle.transition=self.state.classright1.transition;
+
             }
+
+
         }
-
-
-
 
 
 
@@ -165,16 +209,15 @@ export default class Safetyarea extends React.Component{
     TouchMove(index,e){
 
 
-
-
-
-
-
-
         var self=this;
         var touchobj = e.changedTouches[0]; // reference first touch point for this event
 
         var dist = parseInt(touchobj.clientX) - this.startx;
+
+
+        console.log('move'+touchobj.clientX);
+
+        console.log('dist'+parseInt(-dist));
 
         const itemstyle=document.getElementById('item'+index).style;
         const deletestyle=document.getElementById('delete'+index).style;
@@ -192,69 +235,52 @@ export default class Safetyarea extends React.Component{
         }else{
 
             e.preventDefault();
-            if(dist<0){
-
-                if(parseInt(-dist)>parseInt(contentwidth/4)||parseInt(-dist)==parseInt(contentwidth/4)) {
-
-                    console.log('业了');
-
-                    self.setState({
-                        classleft1: {
-                            width: contentwidth-parseInt(contentwidth/4),
-                            transition:'all 1s ease-in',
-
-                        },
-                        classright1: {
-                            width: parseInt(contentwidth/4),
-                            transition:'all 1s ease-in',
-
-                        }
-                    });
-
-                    itemstyle.width=self.state.classleft1.width+'px';
-
-
-                    itemstyle.transition=self.state.classleft1.transition;
-
-
-                    deletestyle.width=self.state.classright1.width+'px';
-                    deletestyle.transition=self.state.classright1.transition;
+            if(parseInt(-dist)>1){
+                    console.log('出来');
 
 
 
-                }else if(parseInt(-dist)<30){
 
-
-                    console.log('ddd'+parseInt(-dist));
-
-                    var leftWidth = contentwidth + dist;
-
-
-                    self.setState({
-                        classleft1: {
-                            width: leftWidth,
-                            transition:'ease-out'
-                        },
-                        classright1: {
-                            width: parseInt(-dist),
-                            transition:'ease-out'
-
-                        }
-                    });
-
-
-                    itemstyle.width=self.state.classleft1.width+'px';
-
-                    itemstyle.transition=self.state.classleft1.transition;
-
-
-                    deletestyle.width=self.state.classright1.width+'px';
-                    deletestyle.transition=self.state.classright1.transition;
-
-                }
-
+                }else{
 
             }
+
+
+
+
+                // else if(parseInt(-dist)<30){
+                //
+                //
+                //
+                //
+                //     var leftWidth = contentwidth + dist;
+                //
+                //
+                //     self.setState({
+                //         classleft1: {
+                //             width: leftWidth,
+                //             transition:'all 1s ease-in'
+                //         },
+                //         classright1: {
+                //             width: parseInt(-dist),
+                //             transition:'all 1s ease-in'
+                //
+                //         }
+                //     });
+                //
+                //
+                //     itemstyle.width=leftWidth+'px';
+                //
+                //     itemstyle.transition=self.state.classleft1.transition;
+                //
+                //
+                //     deletestyle.width=parseInt(-dist)+'px';
+                //     deletestyle.transition=self.state.classright1.transition;
+                //
+                // }
+
+
+
         }
 
 
@@ -282,13 +308,20 @@ export default class Safetyarea extends React.Component{
             data:{
                 token:localStorage.appToken,
                 babyid:this.props.params.babyid,
-                regionid:regionid,
+                regionids:regionid,
             },
             success:(res=>{
 
                 console.log(res);
 
                 if(res.code!=200){
+
+
+                    this.setState({
+                        hasDelete:false
+                    });
+
+
                     var node=document.getElementById('item'+index);
 
                     //console.log(node)
@@ -383,7 +416,7 @@ export default class Safetyarea extends React.Component{
                             return(
 
 
-                                <div id="contentWidth"  style={{height:'9rem',overflow:'hidden'}} key={index}>
+                                <div id={'contentWidth'+index}  style={{height:'9rem',overflow:'hidden'}} key={index}>
 
 
                                         <Link   to={'/Addarea/'+res.regionid+'/'+res.radius+'/'+res.centerlng+'/'+res.centerlat+'/'+res.name}>

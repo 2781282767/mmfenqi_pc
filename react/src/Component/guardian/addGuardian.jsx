@@ -20,6 +20,7 @@ import {bindActionCreators} from 'redux';
 import chengyuan from '../../img/guardian/chengyuan.png'
 import chengyuanguanxi from '../../img/guardian/chengyuanguanxi.png'
 import shoujihao from '../../img/guardian/shoujihao.png'
+import guanbi from '../../img/guardian/guanbi.png'
 
 
 
@@ -95,13 +96,15 @@ class AddGuardian extends Component {
                 babyid: this.props.params.babyid,
                 token: localStorage.appToken,
                 telephone:tel,
-                guardianid:this.props.params.guardianid
+                guardianid:''
             },
             success: (res=> {
 
 
-                if (res.code == '10042') {
+                if (res.code == '10064') {
                     //this.props.changeSaveBabyStatus('false');
+
+                    window.location.href='#/Guardian/'+this.props.params.babyid+''
 
 
 
@@ -126,19 +129,22 @@ class AddGuardian extends Component {
     }
 
 
+    guanbi(){
+        this.setState({
+            open:false
+        });
+    }
+
 
 
 
     add(){
 
-
-
-        if(!!this.state.allow){
             this.setState({
                 open:true
             });
             this.props.getGuardianss(this.props.params.babyid);
-        }
+
     }
 
 
@@ -161,9 +167,9 @@ class AddGuardian extends Component {
                             <div className="layer_content3">
                                 <div className="header">
                                     <div className="title">选择成员关系</div>
+                                    <div className="guanbi" onClick={this.guanbi.bind(this)}><img src={guanbi} style={{width:'100%',height:'100%'}}/></div>
                                 </div>
                                 <div className="layer_content4">
-
 
                                     {
                                         getGuardiansLists.map((json, index)=> {
@@ -226,7 +232,7 @@ class AddGuardian extends Component {
                 </div>
 
 
-                <div className={" text-center " + this.state.bg} onClick={this.next.bind(this,this.state.tel)}>保存</div>
+                <div className={" text-center " + this.state.bg} style={{margin:'1rem'}} onClick={this.next.bind(this,this.state.tel)}>保存</div>
             </div>
         )
     }

@@ -611,13 +611,21 @@ header{
 }
 
 #safetyarea {
-  .amap-layers{
-    color: red;
-    >canvas:nth-child(4){
-      //display: none;
+
+
+  .amap-maps{
+    .amap-layers{
+      color: red;
+      >canvas:nth-child(4){
+        //display: none;
+      }
     }
   }
+
 }
+
+
+
 
 
 .addSafetyarea{
@@ -626,6 +634,7 @@ header{
   position: relative;
   z-index: 1;
   background-color: #FFFFff;
+
 
 
 
@@ -808,7 +817,7 @@ header{
     line-height: 4rem;
     font-size: 1.4rem;
     width: 100%;
-    border-bottom: 1px solid #EEEEEE;
+    border-bottom: 1px solid #EEEEEE !important;
 
 
   }
@@ -819,7 +828,12 @@ header{
   }
 
   .class2{
-    background: #EEEEEE;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1.4rem;
+    width:0;
+    background: #f44c4c;
+    color: #ffffff;
   }
 }
 

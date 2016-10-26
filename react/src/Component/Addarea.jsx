@@ -77,11 +77,12 @@ export default class Addarea extends React.Component {
 
 
 
-        var map, geolocation,map2;
+        var map, geolocation,map2,map3;
         if(this.state.centerlng!='null'){
 
             document.getElementById('safetyarea2').style.display='block';
             document.getElementById('safetyarea').style.display='none';
+
 
 
 
@@ -126,20 +127,10 @@ export default class Addarea extends React.Component {
         }else{
 
 
-
             document.getElementById('safetyarea2').style.display='none';
             document.getElementById('safetyarea').style.display='block';
 
-
-
-
-
-
-
-
-            map = new AMap.Map('safetyarea', {
-                resizeEnable: true,
-            });
+            map = new AMap.Map('safetyarea');
 
             map.plugin('AMap.Geolocation', function() {
 
@@ -161,24 +152,21 @@ export default class Addarea extends React.Component {
 
             function  onComplete(data) {
 
-                map = new AMap.Map('safetyarea', {
+
+
+
+                map3 = new AMap.Map('safetyarea', {
                     resizeEnable: true,
                     zoom:15,
                     center: [data.position.getLng(),data.position.getLat()]
                 });
                 self.getAddr(data.position.getLng(),data.position.getLat());
-
-
-                //
-
-
-
-                map.on('touchend', function(e) {
-                    self.getAddr(map.getCenter().getLng(),map.getCenter().getLat());
+                map3.on('touchend', function(e) {
+                    self.getAddr(map3.getCenter().getLng(),map3.getCenter().getLat());
 
                     self.setState({
-                        centerlng:map.getCenter().getLng(),
-                        centerlat:map.getCenter().getLat(),
+                        centerlng:map3.getCenter().getLng(),
+                        centerlat:map3.getCenter().getLat(),
                         isPickerShow:false
 
                     })
@@ -186,28 +174,11 @@ export default class Addarea extends React.Component {
                 });
 
 
-                // map = new AMap.Map('safetyarea', {
-                //     resizeEnable: true,
-                //     zoom:15,
-                //
-                //     center: [data.position.getLng(),data.position.getLat()]
-                // });
+
+                self.changeName(map3)
             }
 
-
-
-            this.setState({
-                map:map
-            });
-
-
-            this.changeName(map)
-
             }
-
-
-
-
 
 
 
@@ -238,22 +209,16 @@ export default class Addarea extends React.Component {
 
         function select(e) {
 
-            console.log(e)
+            console.log(e);
 
-            placeSearch.setCity(e.poi.adcode);
-
-
-
-
-
-            placeSearch.search(e.poi.name);
-
-
-
+             placeSearch.setCity(e.poi.adcode);
 
             placeSearch.search(e.poi.name,function (status, result) {
 
-                console.log(status);
+                console.log(result.poiList.pois[0].id);
+
+
+
 
                 if (status === 'complete' && result.info === 'OK') {
 
@@ -261,7 +226,6 @@ export default class Addarea extends React.Component {
 
                 }
 
-                console.log(result.poiList.pois[0].id);
 
                 placeSearch.getDetails(result.poiList.pois[0].id, function(status, result) {
                     if (status === 'complete' && result.info === 'OK') {
@@ -387,18 +351,23 @@ export default class Addarea extends React.Component {
             radius:radius
         })
     }
-    handlesearch(search){
 
 
 
 
+    cancel(){
         this.setState({
-            search:search
+            search:false,
+            isPickerShow: false,
         });
 
+    }
+    handlesearch(search){
 
-
-
+        this.setState({
+            search:search,
+            isPickerShow: false
+        });
 
     }
 
@@ -434,12 +403,7 @@ export default class Addarea extends React.Component {
 
     }
 
-    cancel(){
-        this.setState({
-            search:false
-        });
 
-    }
 
 
 
@@ -463,7 +427,7 @@ export default class Addarea extends React.Component {
             <div>
 
 
-                
+
 
 
                 <div  id='safetyarea' style={{
@@ -502,7 +466,7 @@ export default class Addarea extends React.Component {
                 </div>
 
                 {/*<div className="search"></div><div className="search-content"><input type="text" ref="names" defaultValue='wwww' /></div>*/}
-                
+
 
                         <div style={{display : this.state.search==true ? 'block':'none'}}>
                             <div className="search" id="search"></div>
@@ -511,13 +475,16 @@ export default class Addarea extends React.Component {
                                 <div className="img"><img src={sousu} /></div>
 
                                 <input type="text" id="tipinput"  ref="names" placeholder="搜索" />
+
+
+
                                 <span className="cancle" onClick={this.cancel.bind(this)}>取消</span>
                             </div>
                         </div>
 
 
 
-                <R_header left="1" right="2" title="添加" handlesearch={this.handlesearch.bind(this)} search={this.state.search}/>
+                <R_header left="1" right="2" title="添加" handlesearch={this.handlesearch.bind(this)} search={this.state.search} />
                 <div className="content">
                     <div className="name">
                         <div className="left"><img src={dizhi}/></div>
@@ -539,7 +506,7 @@ export default class Addarea extends React.Component {
                 </div>
 
                 <div onClick={this.save.bind(this)} style={{position:'fixed',bottom:'1rem',width:'100%',padding:'0 1rem'}}>
-                    <div className="app-pink-radius-button text-center">激活</div>
+                    <div className="app-pink-radius-button text-center">保存</div>
                 </div>
 
 

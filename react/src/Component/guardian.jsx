@@ -29,6 +29,8 @@ export default class Guardian extends Component {
             allList:[],
             hasJ:false,
 
+            hasDelete:false,
+
             guardianid:'',
 
             classleft1:{
@@ -54,54 +56,56 @@ export default class Guardian extends Component {
 
         this.getGuardianList();
 
+        //
+        //     JIM.init();
+        //     const _appkey="beccc651f7d0cdb713228d17";
+        //     const secret="e7318ff1a9b0389c75672506";
+        //
+        //     const _timestamp="1470042476";
+        //
+        //     const _random_str="022cd9fd995849b58b3ef0e943421ed9";
+        //
+        //
+        //     //const  signature = Md5.MD5(_appkey&_timestamp&_randomStr&_secret);
+        //
+        //     const signature = Md5.MD5(_appkey &  _timestamp &  _random_str &  secret);
+        //
+        //     console.log(signature);
+        //
+        //     JIM.register('15925647870', '000000', {
+        //         "appkey": "beccc651f7d0cdb713228d17",
+        //         "random_str": "022cd9fd995849b58b3ef0e943421ed9",
+        //         "signature": signature,
+        //         "timestamp": "1470042476"
+        //     }, function (data) {
+        //         console.log(data)
+        //     });
+        //
+        //
+        //     JIM.login('15925647870', '000000', {
+        //         "appkey": "beccc651f7d0cdb713228d17",
+        //         "random_str": "022cd9fd995849b58b3ef0e943421ed9",
+        //         "signature": signature,
+        //         "timestamp": "1467967210887"
+        //     },function (data) {
+        //
+        //         console.log(data)
+        //
+        //     },function (ack) {
+        //
+        //
+        //         console.log(ack)
+        //
+        //     },function (timeout) {
+        //
+        //         console.log(timeout)
+        //
+        //     });
+        //
+        // }
 
-        JIM.init();
-        const _appkey="beccc651f7d0cdb713228d17";
-        const secret="e7318ff1a9b0389c75672506";
-
-        const _timestamp="1470042476";
-
-        const _random_str="022cd9fd995849b58b3ef0e943421ed9";
-
-
-        //const  signature = Md5.MD5(_appkey&_timestamp&_randomStr&_secret);
-
-        const signature = Md5.MD5(_appkey &  _timestamp &  _random_str &  secret);
-
-        console.log(signature);
-
-        JIM.register('15925647870', '000000', {
-            "appkey": "beccc651f7d0cdb713228d17",
-            "random_str": "022cd9fd995849b58b3ef0e943421ed9",
-            "signature": signature,
-            "timestamp": "1470042476"
-        }, function (data) {
-            console.log(data)
-        });
-
-
-        JIM.login('15925647870', '000000', {
-            "appkey": "beccc651f7d0cdb713228d17",
-            "random_str": "022cd9fd995849b58b3ef0e943421ed9",
-            "signature": signature,
-            "timestamp": "1467967210887"
-        },function (data) {
-
-            console.log(data)
-
-        },function (ack) {
-
-
-            console.log(ack)
-
-        },function (timeout) {
-
-            console.log(timeout)
-
-        });
 
     }
-
 
 
 
@@ -144,7 +148,7 @@ export default class Guardian extends Component {
 
                     allList=res.data;
 
-                    var temp={
+                    var temp3={
                         familystatus:'家庭',
                         guardianid:'',
                         telephone:''
@@ -159,7 +163,7 @@ export default class Guardian extends Component {
                     };
 
 
-                    var temp3={
+                    var temp={
                         familystatus:'爸爸',
                         guardianid:'',
                         telephone:''
@@ -189,19 +193,19 @@ export default class Guardian extends Component {
                     }
 
 
-
-
                     console.log(allList)
-
-
-
 
 
 
 
                     allList.forEach( (item,index)=> {
 
-                        if(item.familystatus=='家庭'||item.familystatus=='妈妈'||item.familystatus=='爸爸'){
+
+                        console.log(item.familystatus)
+
+
+
+                        if(item.familystatus=='爸爸'||item.familystatus=='妈妈'||item.familystatus=='家庭'){
 
 
                             if(localStorage.userid==item.guardianid){
@@ -229,12 +233,12 @@ export default class Guardian extends Component {
                             }
 
 
-
-
-
                             this.setState({
                                 familyList:familyList
                             });
+
+
+                           // console.log(this.state.familyList[0].item.familystatus)
 
 
                             if(item.Me==true&&item.isadmin==true){
@@ -344,16 +348,13 @@ export default class Guardian extends Component {
     }
 
 
-    TouchStart(index,param1,param2,step,e){
+    TouchStart(index,param1,param2,step,tel,admin,wo,e){
 
 
 
 
 
-        if(!this.state.hasJ){
-            // document.getElementById(step).addEventListener('touchstart', function (event) {
-            //     event.preventDefault();
-            // }, false);
+        if(!this.state.hasJ||tel==''||(!!admin&&!!wo)){
 
             return;
         }
@@ -367,10 +368,13 @@ export default class Guardian extends Component {
 
     }
 
-    TouchMoves(index,param1,param2,step,e){
+    TouchMoves(index,param1,param2,step,tel,admin,wo,e){
 
 
+        if(!this.state.hasJ||tel==''||(!!admin&&!!wo)){
 
+            return;
+        }
 
         const contentwidth=this.contentwidth;
 
@@ -394,83 +398,21 @@ export default class Guardian extends Component {
             console.log('下')
 
         }else{
-            if(dist<0){
-
-                if(parseInt(-dist)>parseInt(contentwidth/4)||parseInt(-dist)==parseInt(contentwidth/4)) {
-
-                    console.log('业了');
-
-                    self.setState({
-                        classleft1: {
-                            width: contentwidth-parseInt(contentwidth/4),
-                            transition:'all 1s ease-in',
-
-                        },
-                        classright1: {
-                            width: parseInt(contentwidth/4),
-                            transition:'all 1s ease-in',
-
-                        }
-                    });
-
-                    itemstyle.width=self.state.classleft1.width+'px';
-
-
-                    itemstyle.transition=self.state.classleft1.transition;
-
-
-                    deletestyle.width=self.state.classright1.width+'px';
-                    deletestyle.transition=self.state.classright1.transition;
-
-
-
-                }else if(parseInt(-dist)<30){
-
-
-                    console.log('ddd'+parseInt(-dist));
-
-                    var leftWidth = contentwidth + dist;
-
-
-                    self.setState({
-                        classleft1: {
-                            width: leftWidth,
-                            transition:'ease-out'
-                        },
-                        classright1: {
-                            width: parseInt(-dist),
-                            transition:'ease-out'
-
-                        }
-                    });
-
-
-                    itemstyle.width=self.state.classleft1.width+'px';
-
-                    itemstyle.transition=self.state.classleft1.transition;
-
-
-                    deletestyle.width=self.state.classright1.width+'px';
-                    deletestyle.transition=self.state.classright1.transition;
-
-                }
-
-
-            }
-
 
             e.preventDefault();
         }
 
 
 
-
-
-
-
     }
 
-    TouchEnd(index,param1,param2,step,e){
+    TouchEnd(index,param1,param2,step,tel,admin,wo,e){
+
+
+        if(!this.state.hasJ||tel==''||(!!admin&&!!wo)){
+
+            return;
+        }
 
 
         const contentwidth=this.contentwidth;
@@ -492,67 +434,85 @@ export default class Guardian extends Component {
             console.log('下')
 
         }else{
-            if(this.startx-touchobj.clientX<30) {
 
+
+            if (this.startx < touchobj.clientX ) {
 
                 self.setState({
                     classleft1: {
                         width: contentwidth,
-
-                        transition:'all 1s ease-out',
+                        transition: 'all 0.1s  ease-out',
 
                     },
                     classright1: {
                         width: '0',
-                        transition:'all 1s ease-out',
+                        transition: 'all 0.1s ease-out',
 
 
                     }
                 });
 
 
-                itemstyle.width=contentwidth+'px';
+                self.setState({
+                    hasDelete:false
+                });
 
-                itemstyle.transition=self.state.classleft1.transition;
+
+                itemstyle.width = contentwidth + 'px';
+
+                itemstyle.transition = self.state.classleft1.transition;
 
 
-                deletestyle.width=0+'px';
-                deletestyle.transition=self.state.classright1.transition;
-            }else{
+                deletestyle.width = 0 + 'px';
+                deletestyle.transition = self.state.classright1.transition;
 
+
+
+
+
+
+            } else if(this.startx - touchobj.clientX>1) {
+
+
+                if(!!self.state.hasDelete){
+                    return
+                }
 
 
 
                 self.setState({
                     classleft1: {
                         width: contentwidth-parseInt(contentwidth/4),
-                        transition: 'ease-in'
+                        transition:'all 0.1s ease-in',
+
                     },
                     classright1: {
                         width: parseInt(contentwidth/4),
-                        transition: 'ease-in'
+                        transition:'all 0.1s ease-in',
 
                     }
                 });
 
-
-
-
+                self.setState({
+                    hasDelete:true
+                });
 
                 itemstyle.width=contentwidth-parseInt(contentwidth/4)+'px';
+
 
                 itemstyle.transition=self.state.classleft1.transition;
 
 
                 deletestyle.width=parseInt(contentwidth/4)+'px';
                 deletestyle.transition=self.state.classright1.transition;
+
             }
         }
 
 
     }
 
-    delete(index,id){
+    delete(index,id,item){
         HttpService.query({
             url:'/app/object/cancelBaby2',
             data:{
@@ -562,11 +522,18 @@ export default class Guardian extends Component {
             },
             success:(res=>{
                 if(res.code=='10112'){
-                    var node=document.getElementById('item'+index);
 
-                    //console.log(node)
+                    console.log(res);
 
-                    node.parentNode.remove()
+                    this.setState({
+                        hasDelete:false,
+                    });
+                    // var node=document.getElementById(item+index);
+                    //
+                    //
+                    //
+                    // node.parentNode.remove();
+                    this.getGuardianList()
                 }else{
                     Toast.toast(res.msg,3000)
                 }
@@ -587,11 +554,6 @@ export default class Guardian extends Component {
     render() {
 
         const {familyList,school,member,guardianid} =this.state;
-
-
-        console.log(guardianid);
-
-
         return (
             <div className="guardian" style={{background: '#eee', minHeight: '100%',paddingTop:'4rem'}}>
                 <R_header_fixed title="监护成员" left="1"/>
@@ -609,11 +571,14 @@ export default class Guardian extends Component {
                                         <div  className="row app-white-inline class1" id={'__item'+index}
 
 
-                                              onTouchStart={this.TouchStart.bind(this,index,'__item','__delete','one')}
+                                              onTouchStart={this.TouchStart.bind(this,index,'__item','__delete','one',json.item.telephone,json.item.isadmin,json.item.Me)}
 
-                                              onTouchMove={this.TouchMoves.bind(this,index,'__item','__delete','one')}
+                                              onTouchMove={this.TouchMoves.bind(this,index,'__item','__delete','one',json.item.telephone,json.item.isadmin,json.item.Me)}
 
-                                              onTouchEnd={this.TouchEnd.bind(this,index,'__item','__delete','one')}
+                                              onTouchEnd={this.TouchEnd.bind(this,index,'__item','__delete','one',json.item.telephone,json.item.isadmin,json.item.Me)}
+
+
+                                              onClick={this.goto.bind(this,this.state.hasJ,json.item.telephone,json.item.familystatus)}
 
                                         >
                                         <div className="col-xs-6 text-left setp1">
@@ -635,16 +600,17 @@ export default class Guardian extends Component {
                                                 json.item.Me==true?
                                                     <img src={wo} style={{width:'1.2rem',height:'1.2rem'}}/>:
                                                     ''
-                                            }
+                                            }&nbsp;
                                         </div>
                                         {
-                                            <div className="col-xs-6 text-right setp2" onClick={this.goto.bind(this,this.state.hasJ,json.item.telephone,json.item.familystatus)}>
+                                            <div className="col-xs-6 text-right setp2" >
                                                 {
                                                     !!json.item.telephone?
                                                         <span>{json.item.telephone.substr(0, 3) + '****' + json.item.telephone.substr(7, 11)}</span>:
                                                         '空'
 
                                                 }
+                                                &nbsp;
 
 
                                                 {
@@ -664,8 +630,8 @@ export default class Guardian extends Component {
                                         }
                                         </div>
 
-                                        <div id={'__delete'+index}  className="row app-white-inline class2">
-                                            <div className="col-xs-12 text-center" onClick={this.delete.bind(this,index,json.item.guardianid)}>解除绑定
+                                        <div id={'__delete'+index}  className="row class2">
+                                            <div className=" text-center" onClick={this.delete.bind(this,index,json.item.guardianid,'__item')}>解除绑定
 
                                             </div>
                                         </div>
@@ -696,11 +662,13 @@ export default class Guardian extends Component {
                                         <div  className="row app-white-inline class1" id={'_item'+index}
 
 
-                                              onTouchStart={this.TouchStart.bind(this,index,'_item','_delete','two')}
+                                              onTouchStart={this.TouchStart.bind(this,index,'_item','_delete','two',json.item.telephone,json.item.isadmin,json.item.Me)}
 
-                                              onTouchMove={this.TouchMoves.bind(this,index,'_item','_delete','two')}
+                                              onTouchMove={this.TouchMoves.bind(this,index,'_item','_delete','two',json.item.telephone,json.item.isadmin,json.item.Me)}
 
-                                              onTouchEnd={this.TouchEnd.bind(this,index,'_item','_delete','two')}
+                                              onTouchEnd={this.TouchEnd.bind(this,index,'_item','_delete','two',json.item.telephone,json.item.isadmin,json.item.Me)}
+
+                                              onClick={this.goto.bind(this,this.state.hasJ,json.item.telephone,json.item.familystatus,json.item.isadmin,json.item.Me)}
 
                                         >
 
@@ -725,7 +693,7 @@ export default class Guardian extends Component {
                                                             ''
                                                     }
                                                 </div>
-                                                <div className="col-xs-6 text-right setp2" onClick={this.goto.bind(this,this.state.hasJ,json.item.telephone,json.item.familystatus)}>
+                                                <div className="col-xs-6 text-right setp2" >
                                                     {
                                                         !!json.item.telephone?
                                                             <span>{json.item.telephone.substr(0, 3) + '****' + json.item.telephone.substr(7, 11)}</span>:
@@ -733,6 +701,8 @@ export default class Guardian extends Component {
                                                                     '空'
 
                                                     }
+
+
 
 
 
@@ -751,8 +721,8 @@ export default class Guardian extends Component {
                                                 </div>
                                             </div>
 
-                                        <div id={'_delete'+index}  className="row app-white-inline class2">
-                                            <div className="col-xs-12 text-center" onClick={this.delete.bind(this,index,json.item.guardianid)}>解除绑定
+                                        <div id={'_delete'+index}  className="row class2">
+                                            <div className=" text-center" onClick={this.delete.bind(this,index,json.item.guardianid,'_item')}>解除绑定
 
                                             </div>
                                         </div>
@@ -774,11 +744,11 @@ export default class Guardian extends Component {
                                         <div  className="row app-white-inline class1" id={'item'+index}
 
 
-                                                onTouchStart={this.TouchStart.bind(this,index,'item','delete','three')}
+                                                onTouchStart={this.TouchStart.bind(this,index,'item','delete','three',json.item.telephone,json.item.isadmin,json.item.Me)}
 
-                                                onTouchMove={this.TouchMoves.bind(this,index,'item','delete','three')}
+                                                onTouchMove={this.TouchMoves.bind(this,index,'item','delete','three',json.item.telephone,json.item.isadmin,json.item.Me)}
 
-                                               onTouchEnd={this.TouchEnd.bind(this,index,'item','delete','three')}
+                                               onTouchEnd={this.TouchEnd.bind(this,index,'item','delete','three',json.item.telephone,json.item.isadmin,json.item.Me)}
 
                                                >
                                             <div className="col-xs-6 text-left setp1">
@@ -830,8 +800,8 @@ export default class Guardian extends Component {
                                             </div>
                                         </div>
 
-                                        <div id={'delete'+index}  className="row app-white-inline class2">
-                                            <div className="col-xs-12 text-center" onClick={this.delete.bind(this,index,json.item.guardianid)}>解除绑定
+                                        <div id={'delete'+index}  className="row class2">
+                                            <div className=" text-center" onClick={this.delete.bind(this,index,json.item.guardianid,'item')}>解除绑定
 
                                             </div>
                                         </div>
