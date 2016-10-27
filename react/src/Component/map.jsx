@@ -3,9 +3,9 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM, {render} from 'react-dom';
 
 
-import {HttpService, Toast,GetCurrentDate} from'../Http';
+import {HttpService, Toast, GetCurrentDate} from'../Http';
 
-import {doLogin, change,getMap,changeSaveBabyStatus} from '../action/index'
+import {doLogin, change, getOneBabyid, changeSaveBabyStatus,getMap} from '../action/index'
 
 
 import {connect} from 'react-redux';
@@ -20,7 +20,6 @@ import '../less/deviceList.less'
 
 import '../less/my.bootstrap.min.css'
 
-import '../jmessage-sdk-web-1.2.0/js/jmessage-sdk-web.min'
 
 import usrimg from '../../src/img/user.png'
 
@@ -41,16 +40,14 @@ import lbs from '../../src/img/lbs.png'
 import gbs from '../../src/img/gps.png'
 
 
-
 import touxiang from '../../src/img/touxiang.png'
 
 import shouqi from '../../src/img/shouqi.png'
 
 
-
 import dingweixiao  from '../../src/img/dingweixiao.png'
 import dingwei  from '../../src/img/dingwei.png'
-import tongzhi  from '../../src/img/tongzhi.png'
+import tongzhi  from '../../src/img/jianhuchengyuan.png'
 
 import tonghuaxiao from '../../src/img/tonghuaxiao.png'
 
@@ -78,7 +75,6 @@ import kaoqin from '../../src/img/kaoqin.png'
 import yichange from '../../src/img/yichange.png'
 
 
-
 class MapIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -95,7 +91,7 @@ class MapIndex extends React.Component {
 
             _isopen: false,
 
-            bbb:false,
+            bbb: false,
 
         };
 
@@ -105,41 +101,45 @@ class MapIndex extends React.Component {
 
     componentWillMount() {
 
-        window.localStorage.sid1=this.props.params.sid.replace("+","%2B").replace(" ","%20").replace(/\//g,"%2F");
+        window.localStorage.sid1 = this.props.params.sid.replace("+", "%2B").replace(" ", "%20").replace(/\//g, "%2F");
 
 
+        console.log(this.props)
 
 
-
-        if(!this.props.babyid){
-         //   alert('没值')
+        if (!this.props.babyid) {
+            //   alert('没值')
 
             this.props.doLogin(this.props.params.sid);
 
-        }else{
-          //  alert('进来了');
-//
+        } else {
+
+
+            if(!this.props.abc){
+                this.props.getOneBabyid();
+            }
+
+
             this.props.getMap(this.props.babyid);
 
         }
 
 
-    if(this.state.isOpen==false){
-        this.isOpen()
+
+
+
+
+        if (this.state.isOpen == false) {
+            this.isOpen()
         }
 
 
-
-
     }
 
 
-
-
-    componentDidMount(){
+    componentDidMount() {
 
     }
-
 
 
     _change(babyname, babyid, headimg, babytelephone, e) {
@@ -168,13 +168,11 @@ class MapIndex extends React.Component {
         })
     }
 
-    guanbi(){
+    guanbi() {
         this.setState({
             checked: false
         })
     }
-
-
 
 
     changeAge(f) {
@@ -189,10 +187,18 @@ class MapIndex extends React.Component {
 
 
                 if (res.code == '10042') {
-                    this.props.changeSaveBabyStatus('false');
+
+                    console.log(res);
+
+
+
+                    this.props.changeSaveBabyStatus(false);
+
+
+                    //window.location.href = '/#/map/' + localStorage.sid1 + '';
 
                 } else {
-                     Toast.toast(res.msg, 3000);
+                    Toast.toast(res.msg, 3000);
                 }
             })
         })
@@ -202,17 +208,13 @@ class MapIndex extends React.Component {
 
     getLocation() {
 
-         this.props.getMap(this.props.babyid);
+        this.props.getMap(this.props.babyid);
 
-       // this.init(116.397428, 39.90923)
+        // this.init(116.397428, 39.90923)
     }
 
 
     isOpen() {
-
-
-
-
 
 
         if (!this.state.isOpen) {
@@ -232,9 +234,11 @@ class MapIndex extends React.Component {
 
     render() {
 
-        const getCurrenttime=GetCurrentDate.time();
+        const getCurrenttime = GetCurrentDate.time();
 
-        const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked,aaa,address,isLogin,datasource}=this.props;
+        const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked, abc, address, isLogin, datasource}=this.props;
+
+
 
         var isOpen = this.state.isOpen;
         var mapHeight = this.state.mapHeight;
@@ -256,7 +260,9 @@ class MapIndex extends React.Component {
                                 <div className="header">
                                     <div className="left"></div>
                                     <div className="title">我的设备</div>
-                                    <div className="guanbi"><img src={guanbi} style={{width:'2.2rem',height:'2.2rem'}} onClick={this.guanbi.bind(this)}/></div>
+                                    <div className="guanbi"><img src={guanbi}
+                                                                 style={{width: '2.2rem', height: '2.2rem'}}
+                                                                 onClick={this.guanbi.bind(this)}/></div>
                                 </div>
                                 <div className="layer_content2">
                                     {
@@ -267,11 +273,11 @@ class MapIndex extends React.Component {
                                                     <div className="headimg">
 
                                                         {
-                                                            !json.headimg?
+                                                            !json.headimg ?
                                                                 <img src={touxiang} style={{
                                                                     width: '3.4rem',
                                                                     height: '3.4rem'
-                                                                }}/>:
+                                                                }}/> :
                                                                 <img src={"/media" + json.headimg} style={{
                                                                     width: '3.4rem',
                                                                     height: '3.4rem'
@@ -343,7 +349,8 @@ class MapIndex extends React.Component {
                                         <img src={yichange} style={{width: '20rem', height: '25rem'}}/>
 
                                         {/*<Link to="/AddDevice">*/}
-                                            <div className="_btn btn_btn" style={{bottom:'3rem'}}><a href="tel:400-655-3588">电话咨询</a></div>
+                                        <div className="_btn btn_btn" style={{bottom: '3rem'}}><a
+                                            href="tel:400-655-3588">电话咨询</a></div>
                                         {/*</Link>*/}
 
                                     </div>
@@ -359,7 +366,7 @@ class MapIndex extends React.Component {
                 }
 
                 {
-                      aaa=='true'?
+                    !!abc?
 
                         <div>
                             <div className="_zz"></div>
@@ -420,11 +427,11 @@ class MapIndex extends React.Component {
                         {/*<img src={"/media" + headimg} style={{width: '3.4rem', height: '3.4rem'}}/>*/}
 
                         {
-                            !headimg?
+                            !headimg ?
                                 <img src={touxiang} style={{
                                     width: '3.4rem',
                                     height: '3.4rem'
-                                }}/>:
+                                }}/> :
                                 <img src={"/media" + headimg} style={{
                                     width: '3.4rem',
                                     height: '3.4rem'
@@ -438,33 +445,36 @@ class MapIndex extends React.Component {
 
 
                             {
-                                datasource=='1'?
-                                <img src={gbs} style={{width: '1.2rem', height: '1.2rem'}}/>:
+                                datasource == '1' ?
+                                    <img src={gbs} style={{width: '1.2rem', height: '1.2rem'}}/> :
 
-                                    datasource=='2'?
-                                        <img src={wifi} style={{width: '1.2rem', height: '1.2rem'}}/>:
-                                        datasource=='3'?
-                                            <img src={lbs} style={{width: '1.2rem', height: '1.2rem'}}/>:
-                                                null
+                                    datasource == '2' ?
+                                        <img src={wifi} style={{width: '1.2rem', height: '1.2rem'}}/> :
+                                        datasource == '3' ?
+                                            <img src={lbs} style={{width: '1.2rem', height: '1.2rem'}}/> :
+                                            null
 
                             }
 
 
                             {
                                 values == '0' ?
-                                    <img src={dian} style={{width: '1.3rem', height: '1.1rem',marginLeft:'0'}}/>
+                                    <img src={dian} style={{width: '1.3rem', height: '1.1rem', marginLeft: '0'}}/>
                                     :
                                     values == '1' ?
-                                        <img src={dian1} style={{width: '1.8rem', height: '1.1rem',marginLeft:'0'}}/>
+                                        <img src={dian1} style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
                                         :
                                         values == '2' ?
-                                            <img src={dian2} style={{width: '1.8rem', height: '1.1rem',marginLeft:'0'}}/>
+                                            <img src={dian2}
+                                                 style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
                                             :
                                             values == '3' ?
-                                                <img src={dian3} style={{width: '1.8rem', height: '1.1rem',marginLeft:'0'}}/>
+                                                <img src={dian3}
+                                                     style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
                                                 :
                                                 values == '4' ?
-                                                    <img src={dian4} style={{width: '1.8rem', height: '1.1rem',marginLeft:'0'}}/>
+                                                    <img src={dian4}
+                                                         style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
                                                     :
                                                     null
                             }
@@ -472,27 +482,27 @@ class MapIndex extends React.Component {
 
                         </div>
                         {/*<div className="addr">*/}
-                            {/*{gpstime}*/}
+                        {/*{gpstime}*/}
                         {/*</div>*/}
 
                         <div className="address">
                             <div className="ss">
 
                                 {
-                                    !gpstime?
-                                        <span>{getCurrenttime}</span>:
+                                    !gpstime ?
+                                        <span>{getCurrenttime}</span> :
 
 
-                                    gpstime.substring(11,16)
+                                        gpstime.substring(11, 16)
                                 }
                                 &nbsp;
 
-                            {
-                                !address?
-                                <span>当前设备未定位!</span>:
-                                <span>{address}</span>
+                                {
+                                    !address ?
+                                        <span>当前设备未定位!</span> :
+                                        <span>{address}</span>
 
-                            }
+                                }
 
                             </div>
 
@@ -563,7 +573,7 @@ class MapIndex extends React.Component {
                                 </a>
                             </div>
                             <div className="option">
-                                <Link to={'/App/'+babyid+''}>
+                                <Link to={'/App/' + babyid + ''}>
                                     <img src={kaoqin} style={{width: '2.3rem', height: '2.3rem'}}/>
 
                                     <div>考勤</div>
@@ -571,7 +581,7 @@ class MapIndex extends React.Component {
                             </div>
 
                             <div className="option">
-                                <Link to={'/about/'+babyid+'/'+lng+'/'+lat+''}>
+                                <Link to={'/about/' + babyid + '/' + lng + '/' + lat + ''}>
                                     <img src={lishiguiji} style={{width: '2.3rem', height: '2.3rem'}}/>
 
                                     <div>历史轨迹</div>
@@ -584,21 +594,19 @@ class MapIndex extends React.Component {
                                 </Link>
                             </div>
                             <div className="option">
-                                <Link to={'/Safetyarea/'+babyid}>
+                                <Link to={'/Safetyarea/' + babyid}>
                                     <img src={anquan} style={{width: '2.3rem', height: '2.3rem'}}/>
                                     <div>安全区域</div>
                                 </Link>
                             </div>
 
 
-
                             <div className="option">
-                                <Link to={'/Guardian/'+babyid}>
+                                <Link to={'/Guardian/' + babyid}>
                                     <img src={tongzhi} style={{width: '2.3rem', height: '2.3rem'}}/>
                                     <div>监护成员</div>
                                 </Link>
                             </div>
-
 
 
                             <div className="option">
@@ -623,8 +631,6 @@ class MapIndex extends React.Component {
     }
 
 
-
-
 }
 
 
@@ -641,18 +647,19 @@ const mapStateToProps = state => {
         gpstime: state.login.gpstime,
         getGuardiansList: state.login.getGuardiansList,
         _checked: state.login.checked,
-        aaa:state.login.abc,
-        address:state.login.addr,
-        datasource:state.login.datasource,
-        isLogin:state.login.isLogin
+        abc: state.login.abc,
+        address: state.login.addr,
+        datasource: state.login.datasource,
+        isLogin: state.login.isLogin
     };
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
         doLogin: doLogin,
         change: change,
-        getMap:getMap,
-        changeSaveBabyStatus:changeSaveBabyStatus
+        getOneBabyid: getOneBabyid,
+        changeSaveBabyStatus: changeSaveBabyStatus,
+        getMap:getMap
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);

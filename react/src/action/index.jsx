@@ -179,15 +179,15 @@ function GetGuardianss(res) {
 }
 
 function ChangeDevice(res) {
-    return{
-        type:types.ChangeDevice,
+    return {
+        type: types.ChangeDevice,
         res
     }
 }
 
- function GetAddr(msg) {
-    return{
-        type:types.GetAddr,
+function GetAddr(msg) {
+    return {
+        type: types.GetAddr,
         msg
     }
 }
@@ -195,46 +195,12 @@ function ChangeDevice(res) {
 
 function isLong(msg) {
     return {
-        type:types.isLogin,
+        type: types.isLogin,
         msg
     }
 }
 
 
-export function getMap(babyid) {
-    return function (dispatch) {
-        return HttpService.query({
-            url: '/app/map/getCurrentTrack',
-
-            data: {token: localStorage.appToken, babyid: babyid},
-
-            success: (res=> {
-
-                console.log(res);
-                if (res.code == '10059') {
-
-                    const data = {
-                        lng: 0,
-                        lat: 0
-                    };
-                   // dispatch(GetCurrentTrack(data));
-                    init(116.397428, 39.90923);
-                   dispatch(getOneBabyid());
-                  //  dispatch(getAddree(data.lng, data.lat));
-
-
-                } else {
-                    dispatch(getOneBabyid());
-                   // dispatch(GetCurrentTrack(res.data));
-                    //dispatch(init(res.data.lng,res.data.lat))
-                    init(res.data.lng-0.0065, res.data.lat-0.0060);
-                    dispatch(getAddree(res.data.lng-0.0065, res.data.lat-0.0060));
-                }
-            })
-
-        })
-    }
-}
 
 
 export function changeSaveBabyStatus(msg) {
@@ -266,8 +232,6 @@ export function change(res) {
         dispatch(getCurrentTrack(data.babyid));
     }
 }
-
-
 
 
 export function getUsers() {
@@ -316,10 +280,9 @@ export function doLogin(sid) {
                     window.localStorage.userid = res.data.userid;
 
 
-
                     dispatch(getDeviceList())
 
-                }else{
+                } else {
                     dispatch(isLong(false))
                 }
             })
@@ -328,6 +291,43 @@ export function doLogin(sid) {
     }
 
 }
+
+
+
+export function getMap(babyid) {
+    return function (dispatch) {
+        return HttpService.query({
+            url: '/app/map/getCurrentTrack',
+
+            data: {token: localStorage.appToken, babyid: babyid},
+
+            success: (res=> {
+
+                console.log(res);
+                if (res.code == '10059') {
+
+                    const data = {
+                        lng: 0,
+                        lat: 0
+                    };
+                     dispatch(GetCurrentTrack(data));
+                    init(116.397428, 39.90923);
+
+                    //  dispatch(getAddree(data.lng, data.lat));
+
+
+                } else {
+                     dispatch(GetCurrentTrack(res.data));
+                    //dispatch(init(res.data.lng,res.data.lat))
+                    init(res.data.lng - 0.0065, res.data.lat - 0.0060);
+                    dispatch(getAddree(res.data.lng - 0.0065, res.data.lat - 0.0060));
+                }
+            })
+
+        })
+    }
+}
+
 
 export function getOneBabyid() {
     return function (dispatch) {
@@ -342,12 +342,16 @@ export function getOneBabyid() {
                 if (res.code == 10020) {
 
 
-                    dispatch(getA(res.data[0].babyid));
+
+
+                     dispatch(getCurrentPower(res.data[0].babyid));
+
+
+                    dispatch(getA(res.data[0].babyid,res.data));
+
 
 
                 } else {
-
-
 
 
                 }
@@ -385,7 +389,7 @@ export function getDeviceList() {
 
                     dispatch(getCurrentTrack(res.data[0].babyid));
 
-                    dispatch(getA(res.data[0].babyid));
+
 
 
                 } else {
@@ -412,7 +416,7 @@ function getCurrentPower(babyid) {
 
                 console.log(res);
 
-                dispatch(getGuardians(babyid));
+                //dispatch(_getGuardians(babyid));
 
                 if (res.code == 10011) {
                     //$scope.powervalue = 0;
@@ -427,9 +431,9 @@ function getCurrentPower(babyid) {
 
 }
 
-function getA(babyid) {
+function getA(babyid,data) {
     return function (dispatch) {
-      return  HttpService.query({
+        return HttpService.query({
             url: '/app/object/getGuardians',
             data: {
                 token: localStorage.appToken,
@@ -440,20 +444,40 @@ function getA(babyid) {
 
                 if (res.code == '10068') {
 
-                    console.log(res.data);
 
+                    dispatch(_getGuardians(babyid))
 
                     var getGuardiansList = res.data;
 
                     for (var a in getGuardiansList) {
                         if (getGuardiansList[a].familystatus == '家长') {
-                            dispatch(A('true'));
+
+                            dispatch(GetDeviceList(data));
+                            dispatch(A(true));
 
                             break;
                         } else {
-                            dispatch(A('false'))
+                            dispatch(A(false))
                         }
                     }
+
+
+
+
+                    // console.log(res.data);
+                    //
+                    //
+                    // var getGuardiansList = res.data;
+                    //
+                    // for (var a in getGuardiansList) {
+                    //     if (getGuardiansList[a].familystatus == '家长') {
+                    //         dispatch(A('true'));
+                    //
+                    //         break;
+                    //     } else {
+                    //         dispatch(A('false'))
+                    //     }
+                    // }
 
                 }
 
@@ -482,7 +506,6 @@ export function getGuardianss(babyid) {
 
 
                     var getGuardiansList = res.data;
-
 
 
                     for (var y in list) {
@@ -515,8 +538,7 @@ export function getGuardianss(babyid) {
 }
 
 
-
- function getGuardians(babyid) {
+function _getGuardians(babyid) {
 
     return function (dispatch) {
         return HttpService.query({
@@ -532,25 +554,11 @@ export function getGuardianss(babyid) {
 
                     console.log(res.data);
 
-                    var checked = false;
+                    console.log('++' + list);
+
 
 
                     var getGuardiansList = res.data;
-
-                    // for (var a in getGuardiansList) {
-                    //     if (getGuardiansList[a].familystatus == '家长') {
-                    //         // guardianid = getGuardiansList[a].guardianid;
-                    //
-                    //         checked = true;
-                    //
-                    //         break;
-                    //     } else {
-                    //         checked = false;
-                    //     }
-                    // }
-
-
-                    console.log('++' + list);
 
 
                     for (var y in list) {
@@ -574,6 +582,7 @@ export function getGuardianss(babyid) {
                     }
 
                     dispatch(GetGuardians(list));
+
 
 
                 }
@@ -604,14 +613,14 @@ function getCurrentTrack(babyid) {
                     dispatch(GetCurrentTrack(data));
                     init(116.397428, 39.90923);
 
-                  //  dispatch(getAddree(data.lng, data.lat));
+                    //  dispatch(getAddree(data.lng, data.lat));
 
 
                 } else {
                     dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
-                    init(res.data.lng-0.0065, res.data.lat-0.0060);
-                    dispatch(getAddree(res.data.lng-0.0065, res.data.lat-0.0060))
+                    init(res.data.lng - 0.0065, res.data.lat - 0.0060);
+                    dispatch(getAddree(res.data.lng - 0.0065, res.data.lat - 0.0060))
                 }
             })
 
@@ -620,7 +629,7 @@ function getCurrentTrack(babyid) {
 }
 
 
-function getAddree(lng,lat) {
+function getAddree(lng, lat) {
     return function (dispatch) {
         console.log(lng);
 
@@ -633,10 +642,10 @@ function getAddree(lng,lat) {
                 extensions: "all"
             }
         );
-        geocoder.getAddress(lnglatXY, function(status, result) {
+        geocoder.getAddress(lnglatXY, function (status, result) {
             if (status === 'complete' && result.info === 'OK') {
 
-                 console.log(result);
+                console.log(result);
 
                 var address = result.regeocode.formattedAddress; //返回地址描述
                 dispatch(GetAddr(address))
@@ -646,9 +655,7 @@ function getAddree(lng,lat) {
 }
 
 
-
 function init(lng, lat) {
-
 
 
     var map, marker;
@@ -658,11 +665,9 @@ function init(lng, lat) {
         resizeEnable: true,
     });
 
-    if(lng==116.397428 &&lat==39.90923){
+    if (lng == 116.397428 && lat == 39.90923) {
         return;
     }
-
-
 
 
     //
@@ -680,12 +685,9 @@ function init(lng, lat) {
     // });
 
 
-
-
-
     marker = new AMap.Marker({
         map: map,
-        icon:dian,
+        icon: dian,
         // icon: new AMap.Icon({  //复杂图标
         //     // size: new AMap.Size(27, 36),//图标大小
         //     //  image: '../../src/img/dian.png', //大图地址
@@ -698,9 +700,8 @@ function init(lng, lat) {
     marker.setMap(map);
 
 
-
     var circle = new AMap.Circle({
-        center: new AMap.LngLat(lng,lat),// 圆心位置
+        center: new AMap.LngLat(lng, lat),// 圆心位置
         radius: 200, //半径
         strokeColor: "#00b4ed", //线颜色
         strokeOpacity: 1, //线透明度
@@ -721,21 +722,16 @@ function init(lng, lat) {
     circle.setMap(map);
 
 
-
-
-
-
-
 }
 
 var add;
 
 
-function geocoder_CallBack(data,cb) {
-  var  address= data.regeocode.formattedAddress; //返回地址描述
+function geocoder_CallBack(data, cb) {
+    var address = data.regeocode.formattedAddress; //返回地址描述
     console.log(address);
 
-    add=address;
+    add = address;
 
     getAddr(add);
 
@@ -743,18 +739,16 @@ function geocoder_CallBack(data,cb) {
 
 }
 
- function getAddr(address) {
+function getAddr(address) {
 
-     // return (dispatch, getState)=> {
-     //     //dispatch(ChangeDevice(data));
-     //     dispatch(Addr(address));
-     // }
-     return function (dispatch,address) {
-         console.log('日日')
-     }
+    // return (dispatch, getState)=> {
+    //     //dispatch(ChangeDevice(data));
+    //     dispatch(Addr(address));
+    // }
+    return function (dispatch, address) {
+        console.log('日日')
+    }
 }
-
-
 
 
 export function scanDevice(mdtcode) {

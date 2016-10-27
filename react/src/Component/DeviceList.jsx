@@ -4,36 +4,36 @@ import React, {Component, PropTypes} from 'react';
 import ReactDOM, {render} from 'react-dom';
 
 import {R_header} from './common/index';
-import {Router, Route, IndexRoute, hashHistory,browserHistory, Link} from 'react-router';
-import { connect } from 'react-redux';
+import {Router, Route, IndexRoute, hashHistory, browserHistory, Link} from 'react-router';
+import {connect} from 'react-redux';
 
-import { bindActionCreators } from 'redux';
+import {bindActionCreators} from 'redux';
 
-import {getDeviceList,change} from '../action/index'
+import {getDeviceList, change} from '../action/index'
 
 import '../less/deviceList.less'
 
-class DeviceList extends React.Component{
-    constructor(props){
+class DeviceList extends React.Component {
+    constructor(props) {
         super(props)
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.props.getDeviceList();
     }
 
-    _change(babyname,babyid,headimg,babytelephone,e){
+    _change(babyname, babyid, headimg, babytelephone, e) {
         e.preventDefault();
 
         this.setState({
-            checked:false,
+            checked: false,
         });
 
-        const data={
-            babyname:babyname,
-            babyid:babyid,
-            babytelephone:babytelephone,
-            headimg:headimg,
+        const data = {
+            babyname: babyname,
+            babyid: babyid,
+            babytelephone: babytelephone,
+            headimg: headimg,
         };
 
 
@@ -41,11 +41,10 @@ class DeviceList extends React.Component{
         hashHistory.goBack()
 
 
-
     }
 
 
-    render(){
+    render() {
 
         const {list} =this.props;
         console.log(list);
@@ -55,10 +54,12 @@ class DeviceList extends React.Component{
 
 
                 {
-                    list.map((json,index)=>{
+                    list.map((json, index)=> {
                         return (
-                            <div className="device-info" key={index} onClick={this._change.bind(this,json.babyname,json.babyid,json.headimg,json.babytelephone)}>
-                                <div className="headimg"><img src={"/media"+json.headimg} style={{width:'3.4rem',height:'3.4rem'}} /></div>
+                            <div className="device-info" key={index}
+                                 onClick={this._change.bind(this, json.babyname, json.babyid, json.headimg, json.babytelephone)}>
+                                <div className="headimg"><img src={"/media" + json.headimg}
+                                                              style={{width: '3.4rem', height: '3.4rem'}}/></div>
                                 <div className="info">
                                     <div className="name">{json.babyname}</div>
                                     <div className="time">{json.starttime}</div>
@@ -70,7 +71,6 @@ class DeviceList extends React.Component{
                 }
 
 
-
             </div>
         )
     }
@@ -80,7 +80,7 @@ class DeviceList extends React.Component{
 const mapStateToProps = state => {
     return {
 
-        list:state.change.list,
+        list: state.change.list,
         babyName: state.change.babyName,
         babyid: state.change.babyid,
         babytelephone: state.change.babytelephone,
@@ -90,8 +90,8 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getDeviceList:getDeviceList,
-        change:change
-    },dispatch);
+        getDeviceList: getDeviceList,
+        change: change
+    }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(DeviceList);

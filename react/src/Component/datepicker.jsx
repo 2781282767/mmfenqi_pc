@@ -26,7 +26,7 @@ var datepicker = React.createClass({
     },
     getInitialState: function getInitialState() {
         var value = this.initDate();
-        return { value: value, showPicker: true };
+        return {value: value, showPicker: true};
     },
     initDate: function initDate() {
         var defaultValue = arguments.length <= 0 || arguments[0] === undefined ? this.props.value : arguments[0];
@@ -44,7 +44,7 @@ var datepicker = React.createClass({
         var begin = _props.begin;
         var end = _props.end;
 
-        return { begin: begin, end: end };
+        return {begin: begin, end: end};
     },
     handleValChange: function handleValChange(value) {
         var onChange = this.props.onChange;
@@ -74,12 +74,14 @@ var datepicker = React.createClass({
         if (showPicker) className += ' _active';
         return React.createElement(
             'div',
-            { className: klassName('datepicker', className) },
+            {className: klassName('datepicker', className)},
             React.createElement(
                 'div',
-                { className: '_picker' },
-                React.createElement(Calender, { begin: begin, end: end,
-                    value: value, onChange: this.handleValChange })
+                {className: '_picker'},
+                React.createElement(Calender, {
+                    begin: begin, end: end,
+                    value: value, onChange: this.handleValChange
+                })
             )
         );
     }

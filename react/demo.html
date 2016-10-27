@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+
+<script>
+
+
+   // var allList=[{familystatus:'家庭'},{familystatus:'爸爸'},{familystatus:'妈妈'}]
+    var allList=[{familystatus:'家庭'},{familystatus:'妈妈'},{familystatus:'爸爸'}]
+   // var allList=[{familystatus:'妈妈'},{familystatus:'家庭'},{familystatus:'爸爸'}]
+    //var allList=[{familystatus:'妈妈'},{familystatus:'爸爸'},{familystatus:'家庭'}]
+
+    //var allList=[{familystatus:'爸爸'},{familystatus:'家庭'},{familystatus:'妈妈'}]
+    //var allList=[{familystatus:'爸爸'},{familystatus:'妈妈'},{familystatus:'家庭'}]
+
+
+
+
+
+    if(allList[1].familystatus=='爸爸'&& allList[0].familystatus=='家庭'){
+        var temp=[];
+
+        var temp2=[];
+
+        temp=allList[1];
+
+        temp2=allList[0]
+
+        allList[1]=allList[2]
+
+
+        allList[0]=temp;
+
+
+
+        allList[2]=temp2
+
+
+
+        console.log(allList)
+    }else if(allList[1].familystatus=='家庭'&& allList[0].familystatus=='妈妈'){
+        var temp=[];
+
+        var temp2=[];
+
+
+        temp=allList[0]
+
+        temp2=allList[2];
+
+
+
+
+        allList[0]=temp2;
+
+        allList[2]=allList[1];
+
+        allList[1]=temp;
+
+
+        console.log(allList)
+
+
+
+
+    }
+    else if(allList[0].familystatus!='爸爸'&& allList[2].familystatus=='家庭'){
+
+
+        console.log('来了')
+        var temp=[];
+        temp=allList[0];
+
+        allList[0]=allList[1];
+        allList[1]=temp;
+
+        console.log(allList)
+
+    }else if(allList[0].familystatus!='爸爸'&& allList[1].familystatus=='妈妈'){
+        console.log('来了')
+        var temp=[];
+        temp=allList[0];
+
+        allList[0]=allList[2];
+        allList[2]=temp;
+
+        console.log(allList)
+    }else if(allList[1].familystatus!='家庭'&& allList[0].familystatus=='爸爸'){
+
+        console.log(allList)
+    }else{
+
+        var temp=[];
+
+        temp=allList[1];
+        allList[1]=allList[2];
+        allList[2]=temp;
+
+
+
+
+        console.log(allList)
+
+    }
+
+
+
+</script>
+</html>

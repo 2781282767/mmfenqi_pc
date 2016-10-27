@@ -19,8 +19,6 @@ import three from '../../src/img/3.png'
 import {DatePicker} from './date'
 
 
-
-
 export default class About extends React.Component {
     constructor(props) {
         super(props);
@@ -54,7 +52,6 @@ export default class About extends React.Component {
     }
 
 
-
     map(map) {
 
         let lng;
@@ -66,13 +63,13 @@ export default class About extends React.Component {
         if (this.props.params.lng == 0) {
             lng = 116.397428;
         } else {
-            lng = this.props.params.lng-0.0065
+            lng = this.props.params.lng - 0.0065
         }
 
         if (this.props.params.lat == 0) {
             lat = 39.90923
         } else {
-            lat = this.props.params.lat-0.0060;
+            lat = this.props.params.lat - 0.0060;
         }
 
 
@@ -148,12 +145,12 @@ export default class About extends React.Component {
 
 
                         if (index == 0) {
-                            _arry.push({lng: item.lng-0.0065, lat: item.lat-0.0060, img: three});
+                            _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0060, img: three});
                         } else if (listLenght == index + 1) {
 
-                            _arry.push({lng: item.lng-0.0065, lat: item.lat-0.0060, img: two});
+                            _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0060, img: two});
                         } else {
-                            _arry.push({lng: item.lng-0.0065, lat: item.lat-0.0065, img: one});
+                            _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0065, img: one});
                         }
 
                     });

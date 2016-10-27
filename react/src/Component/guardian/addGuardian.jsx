@@ -151,8 +151,6 @@ class AddGuardian extends Component {
     render(){
 
         const {getGuardiansLists} =this.props;
-
-        console.log(getGuardiansLists)
         return(
             <div className="addGuardian">
                 <R_header left="1" title="编辑信息"/>
@@ -172,33 +170,35 @@ class AddGuardian extends Component {
                                 <div className="layer_content4">
 
                                     {
-                                        getGuardiansLists.map((json, index)=> {
-                                            return <div className="row" key={index}
-                                                        onClick={this.changeAge.bind(this, json.familystatus)}>
+                                        !!getGuardiansLists?
+                                            getGuardiansLists.map((json, index)=> {
+                                                return <div className="row" key={index}
+                                                            onClick={this.changeAge.bind(this, json.familystatus)}>
 
-                                                <div className="left">
-                                                    {
-                                                        json.check == true ?
-                                                            <img src={json.img1}/> :
-                                                            <img src={json.img}/>
-                                                    }
+                                                    <div className="left">
+                                                        {
+                                                            json.check == true ?
+                                                                <img src={json.img1}/> :
+                                                                <img src={json.img}/>
+                                                        }
 
+                                                    </div>
+                                                    <div className="right">
+
+                                                        {
+                                                            json.title != '家庭' ?
+
+                                                                <div className="one">我是{json.familystatus}</div> :
+                                                                <div className="one">{json.familystatus}</div>
+
+                                                        }
+
+                                                        <div className="two">{json.ds}</div>
+
+                                                    </div>
                                                 </div>
-                                                <div className="right">
-
-                                                    {
-                                                        json.title != '家庭' ?
-
-                                                            <div className="one">我是{json.familystatus}</div> :
-                                                            <div className="one">{json.familystatus}</div>
-
-                                                    }
-
-                                                    <div className="two">{json.ds}</div>
-
-                                                </div>
-                                            </div>
-                                        })
+                                            }):
+                                            ''
                                     }
 
 

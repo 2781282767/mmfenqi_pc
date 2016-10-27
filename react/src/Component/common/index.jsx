@@ -1,16 +1,8 @@
 'usr strict';
 import React, {Component, PropTypes} from 'react';
-import {Router, Route, IndexRoute, hashHistory,browserHistory, Link} from 'react-router';
+import {Router, Route, IndexRoute, hashHistory, browserHistory, Link} from 'react-router';
 
 import back from '../../img/back.png'
-
-
-
-
-
-
-
-
 
 
 import Tool from '../../Tool'
@@ -36,55 +28,59 @@ DataLoad.defaultProps = {
 };
 
 
-export  class R_header extends Component{
+export class R_header extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props);
-        this.state={
-            search:true
+        this.state = {
+            search: true
         }
     }
 
-    handlesearch(){
+    handlesearch() {
 
         this.props.handlesearch(this.state.search)
 
 
-
-
-
-
     }
 
-    render(){
-        const {title,left,right} = this.props;
-
+    render() {
+        const {title, left, right} = this.props;
 
 
         return (
-            <header style={{display:'flex',padding:'1rem 15px',zIndex: '100', fontSize:'1.6rem', borderBottom: '1px solid #eee',
-                position: 'relative'}}>
+            <header style={{
+                display: 'flex',
+                padding: '1rem 15px',
+                zIndex: '100',
+                fontSize: '1.6rem',
+                borderBottom: '1px solid #eee',
+                position: 'relative'
+            }}>
                 {
-                    left==1?
-                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={hashHistory.goBack}>
+                    left == 1 ?
+                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
+                             onClick={this.context.router.goBack}>
                             <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
-                        </div>:
-                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} >
+                        </div> :
+                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
 
                         </div>
                 }
-                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
-                <div style={{display:'flex',flex:1}}>
+                <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center'}}>{title}</div>
+                <div style={{display: 'flex', flex: 1}}>
 
                     {
-                        right==1?
-                            <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}}>
+                        right == 1 ?
+                            <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
                                 <Link to="/Addarea/null/null/null/null/null/">添加</Link>
-                            </div>:
-                            right==2?
-                                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} onClick={this.handlesearch.bind(this)}>
+                            </div> :
+                            right == 2 ?
+                                <div
+                                    style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}
+                                    onClick={this.handlesearch.bind(this)}>
                                     搜索
-                                </div>:
+                                </div> :
                                 null
                     }
 
@@ -95,34 +91,47 @@ export  class R_header extends Component{
     }
 }
 
-export  class R_header_fixed extends Component{
 
-    render(){
-        const {title,left,right} = this.props;
+R_header.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
 
+export class R_header_fixed extends Component {
+
+    render() {
+        const {title, left, right} = this.props;
 
 
         return (
-            <header style={{display:'flex',padding:'0 15px',zIndex: '200', fontSize:'1.6rem', borderBottom: '1px solid #eee',
-                position: 'fixed',width:'100%',top:'0',height:'4rem'}}>
+            <header style={{
+                display: 'flex', padding: '0 15px', zIndex: '200', fontSize: '1.6rem', borderBottom: '1px solid #eee',
+                position: 'fixed', width: '100%', top: '0', height: '4rem'
+            }}>
                 {
-                    left==1?
-                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} onClick={hashHistory.goBack}>
+                    left == 1 ?
+                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
+                             onClick={this.context.router.goBack}>
                             <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
-                        </div>:
-                        <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-start'}} >
+                        </div> :
+                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
 
                         </div>
                 }
-                <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'center'}}>{title}</div>
-                <div style={{display:'flex',flex:1}}>
+                <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center'}}>{title}</div>
+                <div style={{display: 'flex', flex: 1}}>
 
                     {
-                        right==1?
-                            <div style={{display:'flex', fontSize:'1.4rem',  flex:1,alignItems:'center',justifyContent:'flex-end'}}>
-                                <Link style={{color:'#00b4ed'}}  to="/Addarea/null/null/null/null/null/">添加</Link>
-                            </div>:
-                            <div style={{display:'flex',flex:1,alignItems:'center',justifyContent:'flex-end'}} >
+                        right == 1 ?
+                            <div style={{
+                                display: 'flex',
+                                fontSize: '1.4rem',
+                                flex: 1,
+                                alignItems: 'center',
+                                justifyContent: 'flex-end'
+                            }}>
+                                <Link style={{color: '#00b4ed'}} to="/Addarea/null/null/null/null/null/">添加</Link>
+                            </div> :
+                            <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-end'}}>
 
                             </div>
                     }
@@ -134,7 +143,7 @@ export  class R_header_fixed extends Component{
     }
 }
 
-R_header.contextTypes = {
+R_header_fixed.contextTypes = {
     router: React.PropTypes.object.isRequired
 };
 
@@ -147,10 +156,9 @@ R_header.contextTypes = {
  */
 
 
-
 export class Header extends Component {
     render() {
-        let {title, leftTo, leftIcon, rightTo, rightIcon, rightClick } = this.props;
+        let {title, leftTo, leftIcon, rightTo, rightIcon, rightClick} = this.props;
         let left = null;
 
         if (leftTo && leftIcon) {
@@ -232,7 +240,7 @@ export class FooterInit extends Component {
         this.getMessageCount = () => {
             var accesstoken = this.props.User ? this.props.User.accesstoken : '';
             if (accesstoken) {
-                Tool.get('/api/v1/message/count', { accesstoken }, (res) => {
+                Tool.get('/api/v1/message/count', {accesstoken}, (res) => {
                     this.setState({
                         messageCount: res.data
                     });
@@ -240,6 +248,7 @@ export class FooterInit extends Component {
             }
         }
     }
+
     render() {
         var myUrl = this.props.User && this.props.User.loginname ? '/user/' + this.props.User.loginname : '/signin';
         var arr = [];
@@ -260,7 +269,8 @@ export class FooterInit extends Component {
                     </li>
                     <li className={arr[2]}>
                         <Link to="/my/messages">
-                            <i className="iconfont icon-xiaoxi"></i>目录2{this.state.messageCount > 0 ? <em>{this.state.messageCount}</em> : ''}
+                            <i className="iconfont icon-xiaoxi"></i>目录2{this.state.messageCount > 0 ?
+                            <em>{this.state.messageCount}</em> : ''}
                         </Link>
                     </li>
                     <li className={arr[3]}>
@@ -272,12 +282,15 @@ export class FooterInit extends Component {
             </footer>
         );
     }
+
     componentDidMount() {
         this.getMessageCount();
     }
+
     shouldComponentUpdate(np, ns) {
         return this.props.index !== np.index || this.state.messageCount !== ns.messageCount; //防止组件不必要的更新
     }
+
     componentDidUpdate() {
         this.getMessageCount();
     }
@@ -316,7 +329,7 @@ export class TipMsgSignin extends Component {
  */
 export class UserHeadImg extends Component {
     render() {
-        return (<div className="user-headimg"  style={{ backgroundImage: 'url(' + this.props.url + ')' }}></div>)
+        return (<div className="user-headimg" style={{backgroundImage: 'url(' + this.props.url + ')'}}></div>)
     }
 }
 

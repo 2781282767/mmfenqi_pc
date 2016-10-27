@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React, {PropTypes} from 'react';
 import HammerComponent from 'react-hammerjs';
 import omit from 'object.omit';
 import splitObject from './splitObject';
@@ -21,8 +21,10 @@ class Swipeout extends React.Component {
         disabled: false,
         left: [],
         right: [],
-        onOpen() {},
-        onClose() {},
+        onOpen() {
+        },
+        onClose() {
+        },
     };
 
     constructor(props) {
@@ -38,7 +40,7 @@ class Swipeout extends React.Component {
     }
 
     componentDidMount() {
-        const { left, right } = this.props;
+        const {left, right} = this.props;
         const width = this.refs.content.offsetWidth;
 
         this.contentWidth = width;
@@ -132,7 +134,7 @@ class Swipeout extends React.Component {
 
     // set content & actions style
     _setStyle(value) {
-        const { left, right } = this.props;
+        const {left, right} = this.props;
         const limit = value > 0 ? this.btnsLeftWidth : -this.btnsRightWidth;
         const contentLeft = this._getContentEasing(value, limit);
         this.refs.content.style.left = `${contentLeft}px`;
@@ -166,9 +168,8 @@ class Swipeout extends React.Component {
     }
 
 
-
     render() {
-        const [{ prefixCls, left, right, children }, restProps] = splitObject(
+        const [{prefixCls, left, right, children}, restProps] = splitObject(
             this.props,
             ['prefixCls', 'left', 'right', 'children']
         );

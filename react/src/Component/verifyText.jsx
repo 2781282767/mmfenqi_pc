@@ -26,7 +26,7 @@ export default class VerifyText extends React.Component {
             val: '',
             bg: 'app-blue-radius-button',
 
-            bg2:'app-little-pink-radius-button'
+            bg2: 'app-little-pink-radius-button'
         };
     }
 
@@ -99,14 +99,15 @@ export default class VerifyText extends React.Component {
         var val = e.target.value;
         this.setState({
             val: val,
-            bg2:'app-pink-radius-button'
+            bg2: 'app-pink-radius-button'
         })
 
     }
-    go(){
 
-        if(!this.state.val){
-            Toast.toast('请先获取验证码',3000);
+    go() {
+
+        if (!this.state.val) {
+            Toast.toast('请先获取验证码', 3000);
             return;
         }
         HttpService.save({
@@ -140,40 +141,40 @@ export default class VerifyText extends React.Component {
         return (
             <div className="container" style={{background: '#eee', minHeight: '100%'}}>
                 {/*<form onSubmit={this.next.bind(this,)} name="form">*/}
-                    <div className="col-xs-12 text-center"
-                         style={{padding: '2rem 0 1.5rem 0', fontSize: '1.4rem', color: '#333333'}}>
-                        请向设备管理员({phone})索取验证码
+                <div className="col-xs-12 text-center"
+                     style={{padding: '2rem 0 1.5rem 0', fontSize: '1.4rem', color: '#333333'}}>
+                    请向设备管理员({phone})索取验证码
+                </div>
+                <div className="col-xs-12 app-white-input" style={{lineHeight: '3rem'}}>
+                    <div className="col-xs-2 text-right" style={{paddingLeft: 0}}>
+
+                        <img src={codes} style={{width: '2.2rem'}}/>
+
+
                     </div>
-                    <div className="col-xs-12 app-white-input" style={{lineHeight: '3rem'}}>
-                        <div className="col-xs-2 text-right" style={{paddingLeft: 0}}>
-
-                            <img src={codes} style={{width: '2.2rem'}}/>
-
-
-                        </div>
-                        <div className="col-xs-6" style={{paddingLeft: 0}}><input id="number" type="text"
-                                                                                  placeholder="请输入验证码"
-                                                                                  onChange={this.changeValue.bind(this)}
-                                                                                  required
-                                                                                  style={{
-                                                                                      width: '100%',
-                                                                                      verticalAlign: 'middle'
-                                                                                  }}/></div>
-                        <div className="col-xs-4 text-right" style={{padding: '0'}}>
-                            <div className={this.state.bg} style={{textAlign: 'center'}}
-                                 onClick={this.getCode.bind(this)}>
-                                {this.state.text}
-                            </div>
+                    <div className="col-xs-6" style={{paddingLeft: 0}}><input id="number" type="text"
+                                                                              placeholder="请输入验证码"
+                                                                              onChange={this.changeValue.bind(this)}
+                                                                              required
+                                                                              style={{
+                                                                                  width: '100%',
+                                                                                  verticalAlign: 'middle'
+                                                                              }}/></div>
+                    <div className="col-xs-4 text-right" style={{padding: '0'}}>
+                        <div className={this.state.bg} style={{textAlign: 'center'}}
+                             onClick={this.getCode.bind(this)}>
+                            {this.state.text}
                         </div>
                     </div>
+                </div>
 
-                    <label style={{display: 'block'}}>
+                <label style={{display: 'block'}}>
 
-                        <div className={"col-xs-12  text-center " + bg2} onClick={this.go.bind(this)}
-                             style={{marginTop: '1.5rem', fontSize: '1.6rem'}}>添加
-                        </div>
-                        <button type="submit" style={{display: 'none'}}></button>
-                    </label>
+                    <div className={"col-xs-12  text-center " + bg2} onClick={this.go.bind(this)}
+                         style={{marginTop: '1.5rem', fontSize: '1.6rem'}}>添加
+                    </div>
+                    <button type="submit" style={{display: 'none'}}></button>
+                </label>
 
             </div>
         )
