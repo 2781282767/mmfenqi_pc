@@ -418,11 +418,19 @@ function getCurrentPower(babyid) {
 
                 //dispatch(_getGuardians(babyid));
 
+
+
+
+
                 if (res.code == 10011) {
                     //$scope.powervalue = 0;
                     dispatch(GetCurrentPower('0'));
+
+                    window.localStorage.powerValue='0';
                 } else {
                     dispatch(GetCurrentPower(res.data.powerValue));
+
+                    window.localStorage.powerValue=res.data.powerValue;
                 }
             })
         })

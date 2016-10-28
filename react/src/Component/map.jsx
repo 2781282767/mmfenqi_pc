@@ -33,7 +33,7 @@ import dian from '../../src/img/lixian.png'
 
 import lishiguiji from '../../src/img/lishiguiji.png'
 
-import addDevice from '../../src/img/addDevice.png'
+
 
 import wifi from '../../src/img/wifi.png'
 import lbs from '../../src/img/lbs.png'
@@ -72,7 +72,10 @@ import  genghuan from '../../src/img/genghuan.png'
 import  jiebang from '../../src/img/jiebang.png'
 
 import kaoqin from '../../src/img/kaoqin.png'
-import yichange from '../../src/img/yichange.png'
+import sb from '../../src/img/bind/sb.png'
+import lsb from '../../src/img/bind/lsb.png'
+
+
 
 
 class MapIndex extends React.Component {
@@ -316,7 +319,7 @@ class MapIndex extends React.Component {
                                 <div className="content">
                                     <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
 
-                                        <img src={addDevice} style={{width: '20rem', height: '25rem'}}/>
+                                        <img src={sb} style={{width: '20rem', height: '25rem'}}/>
 
                                         <Link to="/AddDevice">
                                             <div className="_btn btn_btn">添加设备</div>
@@ -346,7 +349,7 @@ class MapIndex extends React.Component {
                                 <div className="content">
                                     <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
 
-                                        <img src={yichange} style={{width: '20rem', height: '25rem'}}/>
+                                        <img src={lsb} style={{width: '20rem', height: '25rem'}}/>
 
                                         {/*<Link to="/AddDevice">*/}
                                         <div className="_btn btn_btn" style={{bottom: '3rem'}}><a
@@ -610,9 +613,10 @@ class MapIndex extends React.Component {
 
 
                             <div className="option">
-
-                                <img src={more} style={{width: '2.3rem', height: '2.3rem'}}/>
-                                <div>更多</div>
+                                <Link to={'/More/'+babyid}>
+                                    <img src={more} style={{width: '2.3rem', height: '2.3rem'}}/>
+                                    <div>更多</div>
+                                </Link>
 
                             </div>
 

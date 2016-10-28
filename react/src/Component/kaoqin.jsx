@@ -16,7 +16,7 @@ import xiandian from '../../src/img/xiandian.png'
 
 import DatePanel, {SinglePicker, RangePicker} from 'date-picker-react';
 
-import yichang from '../../src/img/yichang.png'
+import yichang from '../img/yichangss.png'
 import chidao from '../../src/img/chidao.png'
 import zaodui from '../../src/img/zaodui.png'
 import {DatePicker} from 'react-ui-component'

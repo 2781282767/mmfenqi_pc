@@ -518,9 +518,9 @@ header{
 
 
   background-color: #EEEEEE;
-  min-height: 100%;
+  height: 100%;
   padding-top: 4rem;
-  display: flex;
+
 
 
 
@@ -532,6 +532,10 @@ header{
 
     padding: 1rem;
     width: 100%;
+    height: 100%;
+
+
+
 
 
 
@@ -540,7 +544,13 @@ header{
     ._content{
 
       width: 100%;
+
       height: 100%;
+
+      display: flex;
+
+
+
 
 
       >div{
@@ -549,10 +559,12 @@ header{
 
         display: flex;
 
-        flex: 1;
+        flex: 2;
         align-items: center;
 
         justify-content: center;
+
+
       }
 
 
@@ -746,13 +758,16 @@ header{
 
       }
     }
-    input{
+    form{
       display: flex;
       flex: 2;
-      //height: 40px;
-      line-height: 1.5;
-      border: 0;
-      padding-left: 10px;
+      input{
+        //height: 40px;
+        line-height: 1.5;
+        border: 0;
+        padding-left: 10px;
+        outline: none;
+      }
     }
     .cancle{
       width: 70px;
@@ -907,3 +922,166 @@ header{
 
   }
 }
+
+
+.more{
+  width: 100%;
+  .more-content{
+    width: 100%;
+    margin: 0;
+
+    .barcode{
+      text-align: center;
+
+      padding: 2rem 0;
+
+      .mdtid{
+        font-size: 1.2rem;
+        color: #999999;
+        line-height: 20px;
+      }
+    }
+
+    .phone,.endtime{
+
+      padding: 1rem 15px;
+      width: 100%;
+      display: flex;
+      border-bottom: 1px solid #EEEEEE;
+      .img{
+        display: flex;
+        width: 2.2rem;
+        height: 2.2rem;
+
+          img{
+            width: 100%;
+            height: 100%;
+          }
+
+      }
+      .input{
+        display: flex;
+        flex: 1;
+        padding-left: 10px;
+
+        font-size: 1.4rem;
+        color: #333;
+
+        align-items: center;
+
+      }
+      .select{
+        display: flex;
+        min-width: 6.2rem;
+        color: #999;
+        align-items: center;
+        justify-content: flex-end;
+
+      }
+    }
+  }
+
+
+
+}
+
+
+.popup_zindex{
+  position: absolute;
+  width: 100%;
+  height:100%;
+  z-index: 400;
+  top: 0;
+  left:0;
+  background-color: #000000;
+  opacity: 0.5;
+}
+
+
+
+
+
+  .popup_content{
+
+    position: absolute;
+    width: 80%;
+    height: 20%;
+    left: 0;
+    right: 0;
+    top: 40%;
+    bottom: 40%;
+
+    margin: auto;
+    z-index: 402;
+
+
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
+    //flex: 1;
+
+    .header{
+      height: 25%;
+      background-color: #ffffff;
+      text-align: center;
+      color: #333;
+      font-size: 1.4rem;
+      /*line-height: 100%;*/
+      /*padding: 2rem 0;*/
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+
+      position: relative;
+
+      .popup_title{
+
+      }
+    }
+
+    .popup_content2{
+      background-color: #FFFFff;
+      height: 45%;
+      border-bottom: 1px solid #dddddd;
+      font-size: 1.2rem;
+
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      padding: 0 2rem;
+      text-align: center;
+
+    }
+    .foot{
+
+      color:#01b4ee;
+
+      height: 30%;
+      text-align: center;
+      background-color: #FFFFff;
+      /*padding: 1.5rem 0;*/
+      border-bottom-left-radius: 5px;
+      border-bottom-right-radius: 5px;
+      display: flex;
+
+      .cancel_btn{
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+        border-right: 1px solid #EEEEEE;
+      }
+      .sure_btn{
+        display: flex;
+        flex: 1;
+        justify-content: center;
+        align-items: center;
+      }
+    }
+
+  }

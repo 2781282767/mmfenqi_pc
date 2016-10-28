@@ -4,8 +4,12 @@ import React, {Component, PropTypes} from 'react';
 
 import ReactDOM, {render} from 'react-dom';
 
+import Popup  from './common/popup'
 
-import {Router, Route, IndexRoute, browserHistory, Link} from 'react-router';
+import  '../jmessage-sdk-web-1.2.0/js/jmessage-sdk-web.min'
+
+
+import {Router, Route, IndexRoute, hashHistory, browserHistory, Link} from 'react-router';
 
 
 import {HttpService, Toast, Md5}  from'../Http';
@@ -38,12 +42,31 @@ export default class Guardian extends Component {
             },
             classright1: {
                 width: '0',
-            }
+            },
+            syncGuardian:{
+
+            },
         };
 
         this.startx = '';
         this.starty = '';
         this.contentwidth = '';
+
+        this.config = {
+            isSure: false,
+            isCancel: false,
+            yes_cb: ()=> {
+
+                this.syncGuardian();
+
+                this.context.router.goBack()
+
+            },
+            no_cb:()=>{
+                this.context.router.goBack()
+            }
+        };
+
 
 
     }
@@ -52,6 +75,46 @@ export default class Guardian extends Component {
 
         this.getGuardianList();
 
+
+
+
+
+
+
+
+
+            // JIM.register('15925647870', '000000', {
+            //     "appkey": "beccc651f7d0cdb713228d17",
+            //     "random_str": "022cd9fd995849b58b3ef0e943421ed9",
+            //     "signature": signature,
+            //     "timestamp": "1470042476"
+            // }, function (data) {
+            //     console.log(data)
+            // });
+
+
+        //
+
+
+
+
+    }
+
+
+     randomWord(randomFlag, min, max){
+        var str = "",
+            range = min,
+            arr = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
+
+        // 随机产生
+        if(randomFlag){
+            range = Math.round(Math.random() * (max-min)) + min;
+        }
+        for(var i=0; i<range; i++){
+           var pos = Math.round(Math.random() * (arr.length-1));
+            str += arr[pos];
+        }
+        return str;
     }
 
 
@@ -64,6 +127,123 @@ export default class Guardian extends Component {
             },
             success: (res=> {
                 console.log(res);
+
+                if(res.code=='10098'){
+
+
+                    var strtime = '2016-07-22 16:59:00';
+                    var timestamp2 = Date.parse(new Date(strtime));
+
+                    console.log(timestamp2)
+
+                    var mat=this.randomWord(false,36);
+
+
+
+
+
+
+
+                    const a="90a9ec96518bead293bb46d7";
+                    const b="34c6b8e8b2768e75d040ea71";
+
+                    const c=timestamp2;
+
+                    const d=mat;
+
+
+                     // const  signature =JIM.md5(appkey=a & timestamp=c & random_str=d & key=b);
+                    //
+                     const signature = Md5.MD5('appkey='+a+'&timestamp='+c+'&random_str='+d+'&key='+b);
+
+
+
+
+                    console.log('code:'+encodeURI(signature));
+
+
+
+
+                    JIM.init({debug:true});
+
+
+                    // JIM.register('13868113229', '12345678', {
+                    //     "appkey": a,
+                    //     "random_str": d,
+                    //     "signature": signature,
+                    //     "timestamp": c
+                    // }, function(data) {
+                    //     // 注册结果返回处理
+                    //     console.log(data)
+                    // }, function(ack) {
+                    //     // 请求送达JMessage服务器事件处理
+                    // }, function(timeout) {
+                    //     // 请求发送超时事件处理
+                    // });
+
+
+                    JIM.login('13868113229', '12345678', {
+                        "appkey": a,
+                        "random_str": d,
+                        "signature": signature,
+                        "timestamp": c
+                    },function(data){
+
+                        console.log(data)
+
+
+
+
+
+                        JIM.getUserInfo('13868113229', function(data) {
+                            // 返回处理
+                        }, function(ack) {
+                            // 请求送达JMessage服务器事件处理
+                        }, function(timeout) {
+                            // 请求发送超时事件处理
+                        });
+
+
+
+                        JIM.getConversations(function(data) {
+
+                            console.log(data)
+                            // 返回处理
+                        }, function(ack) {
+                            // 请求送达JMessage服务器事件处理
+
+                            console.log(ack)
+                        }, function(timeout) {
+                            // 请求发送超时事件处理
+
+                            consoel.log(timeout)
+                        });
+
+                    },function (ack) {
+
+                        console.log(ack)
+
+                    },function (timeout) {
+
+                        console.log(timeout)
+
+                    });
+
+
+
+
+
+
+
+
+                    this.setState({
+                        syncGuardian:{
+                            flag:true,
+                            _flag:true,
+                        }
+                    });
+                    Toast.toast(res.msg,3000)
+                }
 
                 //JIM.getConversations(this.ack, this.timeout);
             })
@@ -579,12 +759,24 @@ export default class Guardian extends Component {
         }
     }
 
+
+    onChildChanged(newState){
+        this.setState({
+            syncGuardian: {
+                flag:newState
+            }
+        });
+    }
+
     render() {
 
-        const {familyList, school, member, guardianid} =this.state;
+        const {familyList, school, member, guardianid,syncGuardian} =this.state;
         return (
             <div className="guardian" style={{background: '#eee', minHeight: '100%', paddingTop: '4rem'}}>
-                <R_header_fixed title="监护成员" left="1"/>
+
+
+                <Popup config={this.config} blockOrNone={syncGuardian.flag} _flag={syncGuardian._flag}/>
+                <R_header_fixed title="监护成员" left="1" syncGuardian={syncGuardian.flag}   callbackParent={this.onChildChanged.bind(this)}/>
                 <div className="container" style={{padding: 0}}>
                     <div className="row" style={{margin: '0'}}>
                         <div className="col-xs-12 text-left title">家庭成员</div>
@@ -877,3 +1069,8 @@ export default class Guardian extends Component {
         )
     }
 }
+
+
+Guardian.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

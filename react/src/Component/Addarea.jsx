@@ -162,6 +162,9 @@ export default class Addarea extends React.Component {
 
     }
 
+
+
+
     changeName(map) {
         var self3 = this;
         //输入提示
@@ -173,11 +176,14 @@ export default class Addarea extends React.Component {
 
         var placeSearch = new AMap.PlaceSearch({
 
-            pageSize: 1,
-            pageIndex: 1,
+
 
             map: map,
         });  //构造地点查询类
+
+
+
+        // AMap.event.addListener(auto, "change", select);
 
 
         AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
@@ -189,7 +195,11 @@ export default class Addarea extends React.Component {
 
             placeSearch.setCity(e.poi.adcode);
 
-            placeSearch.search(e.poi.name, function (status, result) {
+            var name=e.poi.name;
+
+            name.replace(name,name+' ');
+
+            placeSearch.search(name, function (status, result) {
 
                 console.log(result.poiList.pois[0].id);
 
@@ -260,6 +270,13 @@ export default class Addarea extends React.Component {
     save() {
 
 
+
+        if(!this.refs.name.value)  {
+            Toast.toast('请输入安全区域名称',3000);
+            return
+        }
+
+
         if (this.props.params.regionid == 'null') {
             const data = {
                 token: localStorage.appToken,
@@ -295,7 +312,6 @@ export default class Addarea extends React.Component {
             data: data,
             success: (res=> {
                 console.log(res);
-
                 if (res.code = '10044') {
                     window.location.href = '#/Safetyarea/' + localStorage.babyid + ''
                 }
@@ -359,6 +375,10 @@ export default class Addarea extends React.Component {
 
     }
 
+    change(){
+
+    }
+
 
     render() {
 
@@ -417,9 +437,11 @@ export default class Addarea extends React.Component {
 
                             <div className="img"><img src={sousu}/></div>
 
-                            <input type="text" id="tipinput" ref="names" placeholder="搜索"/>
+                            <form>
 
+                                <input onChange={this.change} name="search" type="search" id="tipinput" ref="names" placeholder="搜索"/>
 
+                            </form>
                             <span className="cancle" onClick={this.cancel.bind(this)}>取消</span>
                         </div>
                     </div>

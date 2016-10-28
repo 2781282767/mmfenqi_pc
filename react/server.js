@@ -15,6 +15,12 @@ var proxy = [{
         target: 'http://222.46.27.218:8800',
         host: '222.46.27.218:8800'
     },
+
+    {
+        path: '/operationapp/*',
+        target: 'http://222.46.27.218:8800',
+        host: '222.46.27.218:8800'
+    },
     {
         path: '/media/*',
         target: 'http://222.46.27.218:8800',

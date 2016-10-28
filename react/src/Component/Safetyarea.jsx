@@ -325,7 +325,7 @@ export default class Safetyarea extends React.Component {
         return (
             <div className="safetyarea">
 
-                <R_header_fixed left="1" right="1" title="安全区域"/>
+                <R_header_fixed left="1" right="1" title="安全区域" syncGuardian="true" />
 
 
                 <div className="safetyarea-content">

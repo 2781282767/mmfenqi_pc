@@ -18,6 +18,7 @@ import Demo from './Component/demo'
 import Demo2 from './Component/demo2'
 import Guardian from './Component/guardian'
 import AddGuardian from './Component/guardian/addGuardian'
+import More from './Component/More'
 
 
 /**
@@ -54,6 +55,7 @@ const RouteConfig = (
             <Route path="/demo2" component={Demo2}/>
             <Route path="/Guardian/:babyid" component={Guardian}/>
             <Route path="/AddGuardian/:babyid/:guardianid/:familystatus" component={AddGuardian}/>
+            <Route path="/More/:babyid" component={More}/>
         </Route>
     </Router>
 );
