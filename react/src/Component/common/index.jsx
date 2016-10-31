@@ -86,24 +86,51 @@ export class R_header_fixed extends Component {
     constructor(props){
         super(props)
         this.state={
-            flag:false
+            flag:false,
+            _flag:false,
         }
+
     }
 
 
-    componentWillMount(){
-        console.log(!this.props.syncGuardian)
+    // componentWillMount(){
+    //
+    //
+    //     console.log('=++++++++'+!this.props.syncGuardian)
+    // }
+
+
+    componentWillReceiveProps(){
+
+
+        setTimeout( function () {
+
+            // console.log('index+-----'+this.props.syncGuardian);
+            // console.log('index2+-----'+this.props._flag);
+
+
+            // this.setState({
+            //     flag:this.props.blockOrNone,
+            //     _flag:this.props._flag
+            // })
+        }.bind(this),0)
+
     }
 
     compare(){
 
-        var newState = !this.state.flag;
+       // var newState = !this.state.flag;
+
+        console.log('index+-----'+this.props.syncGuardian);
+        console.log('index2+-----'+this.props._flag);
+
+
+
         this.setState({
-            flag:newState
+            flag:this.props.syncGuardian,
+            _flag:this.props._flag
         });
-
-
-        this.props.callbackParent(newState);
+        this.props.callbackParent(this.props.syncGuardian,this.props._flag);
     }
 
 
@@ -111,7 +138,10 @@ export class R_header_fixed extends Component {
 
 
     render() {
-        const {title, left, right,syncGuardian} = this.props;
+        const {title, left, right,syncGuardian,_flag} = this.props;
+
+
+        console.log(syncGuardian);
 
         //true
         return (
@@ -120,16 +150,20 @@ export class R_header_fixed extends Component {
                 position: 'fixed', width: '100%', top: '0', height: '4rem'
             }}>
                 {
-                    left == 1&& !!syncGuardian ?
-                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
-                             onClick={this.context.router.goBack}>
-                            <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
-                        </div> :
-                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
-                             onClick={this.compare.bind(this)}
-                        >
-                            <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
-                        </div>
+                    left == 1 &&!!syncGuardian&&!!_flag?
+
+
+                    <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
+
+                         onClick={this.compare.bind(this)}
+                    >
+                        <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                    </div>
+                        :<div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
+                              onClick={this.context.router.goBack}>
+                        <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                    </div>
+
                 }
                 <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'center'}}>{title}</div>
                 <div style={{display: 'flex', flex: 1}}>

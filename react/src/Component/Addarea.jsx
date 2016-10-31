@@ -168,30 +168,66 @@ export default class Addarea extends React.Component {
     changeName(map) {
         var self3 = this;
         //输入提示
-        var autoOptions = {
-            input: "tipinput"
-        };
-        var auto = new AMap.Autocomplete(autoOptions);
+
+        map.plugin(["AMap.Autocomplete"], function () {
+            //判断是否IE浏览器
+            if (navigator.userAgent.indexOf("MSIE") > 0) {
+                document.getElementById("tipinput").onpropertychange = autoSearch;
+            }
+            else {
+
+                document.getElementById("tipinput").oninput = autoSearch;
+            }
+        });
+        document.getElementById("tipinput").addEventListener('blur',function () {
+            document.getElementById('tipinput').focus()
+        });
 
 
-        var placeSearch = new AMap.PlaceSearch({
+        function autoSearch() {
+            var keywords = document.getElementById("tipinput").value;
+            var auto;
+            var autoOptions = {
+                input: "tipinput"
+            };
+
+
+            auto = new AMap.Autocomplete(autoOptions);
+            //查询成功时返回查询结果
+            AMap.event.addListener(auto, "select", select);
+            auto.search(keywords);
+        }
 
 
 
-            map: map,
-        });  //构造地点查询类
+
+        // var autoOptions = {
+        //     input: "tipinput"
+        // };
+        // var auto = new AMap.Autocomplete(autoOptions);
+        //
+        //
+        // var placeSearch = new AMap.PlaceSearch({
+        //
+        //
+        //
+        //     map: map,
+        // });  //构造地点查询类
 
 
 
         // AMap.event.addListener(auto, "change", select);
 
 
-        AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
+      //  AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
 
 
         function select(e) {
 
             console.log(e);
+
+            var placeSearch = new AMap.PlaceSearch();
+
 
             placeSearch.setCity(e.poi.adcode);
 
@@ -437,9 +473,9 @@ export default class Addarea extends React.Component {
 
                             <div className="img"><img src={sousu}/></div>
 
-                            <form>
+                            <form action="#">
 
-                                <input onChange={this.change} name="search" type="search" id="tipinput" ref="names" placeholder="搜索"/>
+                                <input onChange={this.change} name="search" autocomplete="off" type='search' id="tipinput" ref="names" placeholder="搜索"/>
 
                             </form>
                             <span className="cancle" onClick={this.cancel.bind(this)}>取消</span>

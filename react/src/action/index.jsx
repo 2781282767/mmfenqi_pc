@@ -303,6 +303,7 @@ export function getMap(babyid) {
 
             success: (res=> {
 
+
                 console.log(res);
                 if (res.code == '10059') {
 
@@ -344,7 +345,7 @@ export function getOneBabyid() {
 
 
 
-                     dispatch(getCurrentPower(res.data[0].babyid));
+                     //dispatch(getCurrentPower(res.data[0].babyid));
 
 
                     dispatch(getA(res.data[0].babyid,res.data));
@@ -361,6 +362,7 @@ export function getOneBabyid() {
 }
 //获取设备list
 export function getDeviceList() {
+
 
     return function (dispatch) {
         return HttpService.query({
@@ -406,7 +408,7 @@ export function getDeviceList() {
 
 
 //获取设备电量
-function getCurrentPower(babyid) {
+export function getCurrentPower(babyid) {
     return function (dispatch) {
 
         return HttpService.query({
@@ -428,6 +430,7 @@ function getCurrentPower(babyid) {
 
                     window.localStorage.powerValue='0';
                 } else {
+
                     dispatch(GetCurrentPower(res.data.powerValue));
 
                     window.localStorage.powerValue=res.data.powerValue;

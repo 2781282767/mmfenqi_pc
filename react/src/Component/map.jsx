@@ -5,7 +5,7 @@ import ReactDOM, {render} from 'react-dom';
 
 import {HttpService, Toast, GetCurrentDate} from'../Http';
 
-import {doLogin, change, getOneBabyid, changeSaveBabyStatus,getMap} from '../action/index'
+import {doLogin, change, getOneBabyid, changeSaveBabyStatus,getMap,getCurrentPower} from '../action/index'
 
 
 import {connect} from 'react-redux';
@@ -118,9 +118,9 @@ class MapIndex extends React.Component {
         } else {
 
 
-            if(!this.props.abc){
-                this.props.getOneBabyid();
-            }
+
+
+            this.props.getOneBabyid();
 
 
             this.props.getMap(this.props.babyid);
@@ -663,7 +663,8 @@ const mapDispatchToProps = (dispatch) => {
         change: change,
         getOneBabyid: getOneBabyid,
         changeSaveBabyStatus: changeSaveBabyStatus,
-        getMap:getMap
+        getMap:getMap,
+        getCurrentPower:getCurrentPower
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);

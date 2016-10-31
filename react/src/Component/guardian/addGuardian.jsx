@@ -59,8 +59,6 @@ class AddGuardian extends Component {
 
     changeAge(familystatus){
 
-
-
         this.setState({
             familystatus:familystatus,
             open:false
@@ -104,7 +102,9 @@ class AddGuardian extends Component {
                 if (res.code == '10064') {
                     //this.props.changeSaveBabyStatus('false');
 
-                    window.location.href='#/Guardian/'+this.props.params.babyid+''
+                    // window.location.href='#/Guardian/'+this.props.params.babyid+'';
+                    this.context.router.goBack();
+                    window.localStorage._update=true;
 
 
 
@@ -253,3 +253,8 @@ const mapDispatchToProps = (dispatch) => {
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(AddGuardian);
+
+
+AddGuardian.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

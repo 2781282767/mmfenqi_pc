@@ -150,8 +150,10 @@ export default class About extends React.Component {
 
                             _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0060, img: two});
                         } else {
-                            _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0065, img: one});
+                            _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0060, img: one});
                         }
+
+
 
                     });
                     this.map(_arry);

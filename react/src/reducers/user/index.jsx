@@ -70,12 +70,7 @@ export default function login(state = initialState, action) {
                 getGuardiansList: [],
                 addr: ''
             });
-        case types.GetCurrentPower:
-            return Object.assign({}, state, {
-                values: action.res,
-                getGuardiansList: [],
-                addr: ''
-            });
+
 
 
         case types.GetGuardians:
@@ -101,9 +96,6 @@ export default function login(state = initialState, action) {
                 datasource: action.res.datasource
 
             });
-
-        case types.AddDevice:
-            return {};
         case types.GetAddr:
             return Object.assign({}, state, {
                 addr: action.msg
@@ -115,6 +107,14 @@ export default function login(state = initialState, action) {
         case types.isLogin:
             return Object.assign({}, state, {
                 isLogin: action.msg
+            });
+
+
+        case types.GetCurrentPower:
+            return Object.assign({}, state, {
+                values: action.res,
+                getGuardiansList: [],
+                addr: ''
             });
 
 

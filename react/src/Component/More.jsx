@@ -10,7 +10,7 @@ import endtime from '../img/more/endtime.png'
 import phone from '../img/more/phone.png'
 import deletes from '../img/more/delete.png'
 
-
+import Popup  from './common/popup'
 
 
 export default class More extends React.Component {
@@ -20,8 +20,34 @@ export default class More extends React.Component {
         super(props);
 
         this.state={
-            info:{}
+            info:{},
+            admin:{
+
+            }
         }
+
+        this.config = {
+            isSure: false,
+            isCancel: false,
+            no:'返回',
+            yes:'确定',
+            yes_cb: ()=> {
+
+
+                if(!!this.state.info.isadmin){
+                    this.delDevice2()
+                }else{
+                    this.delDevice()
+                }
+
+
+            },
+            no_cb:()=>{
+                 this.context.router.goBack()
+            }
+        };
+
+
     }
 
     componentWillMount(){
@@ -42,7 +68,8 @@ export default class More extends React.Component {
                             mdtid:res.data.mdtid,
                             telephone:res.data.telephone,
                             endTime:res.data.endtime,
-                            userid:res.data.userid
+                            userid:res.data.userid,
+                            isadmin:res.data.isadmin
                         }
                     })
                 }
@@ -53,27 +80,86 @@ export default class More extends React.Component {
 
 
     deviceCancel(){
+
+        this.setState({
+            admin:{
+                flag:true
+            }
+        });
+
+
+        console.log(this.state.info.isadmin);
+
+
+        if(!this.state.info.isadmin){
+
+            var b={
+                content:'解绑设备，确定要解除绑定吗？',
+            }
+
+            this.config= Object.assign({},this.config, b);
+
+        }else{
+            var a = {
+
+                content:'解绑设备，解除管理员绑定后，其他监护成员将一同解除，且设备恢复出厂设置，只保留激活状态及设备有效期',
+
+            };
+
+
+            this.config= Object.assign({},this.config, a);
+
+
+        }
+
+
+    }
+
+    delDevice2(){
         HttpService.query({
             url:'/app/object/cancelBaby2',
             data:{
                 token: localStorage.appToken,
                 babyid: this.props.params.babyid,
-                guardianid:this.state.info.userid
             },
 
             success:(res=>{
                 console.log(res)
+                if(res.code=='10112'){
+                    this.context.router.goBack()
+                }
             })
 
         });
+    }
 
+
+    delDevice(){
+        HttpService.query({
+            url:'/app/object/cancelBaby',
+            data:{
+                token: localStorage.appToken,
+                babyid: this.props.params.babyid,
+            },
+
+            success:(res=>{
+                console.log(res);
+                if(res.code=='10112'){
+                    this.context.router.goBack()
+                }
+
+            })
+
+        });
     }
 
     render(){
 
-        const {info} =this.state;
+        const {info,admin} =this.state;
         return(
             <div className="more">
+
+                <Popup config={this.config} blockOrNone={admin.flag} />
                 <R_header left="1" title="更多"/>
                 
 
@@ -115,20 +201,20 @@ export default class More extends React.Component {
                     </div>
 
 
-                    {/*<div className="endtime" onClick={this.deviceCancel.bind(this)}>*/}
-                        {/*<div className="img">*/}
-                            {/*<img src={deletes} alt=""/>*/}
-                        {/*</div>*/}
+                    <div className="endtime" onClick={this.deviceCancel.bind(this)}>
+                        <div className="img">
+                            <img src={deletes} alt=""/>
+                        </div>
 
-                        {/*<div className="input">解绑设备</div>*/}
+                        <div className="input">解绑设备</div>
 
-                        {/*<div className="select">*/}
+                        <div className="select">
 
 
 
-                        {/*</div>*/}
+                        </div>
 
-                    {/*</div>*/}
+                    </div>
 
 
 
@@ -142,3 +228,7 @@ export default class More extends React.Component {
 
 
 }
+
+More.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
