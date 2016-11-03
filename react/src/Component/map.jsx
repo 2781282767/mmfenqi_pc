@@ -102,22 +102,12 @@ class MapIndex extends React.Component {
     }
 
 
-    getDefaultProps() {
-        return {
-            GetSafeRegions: [],
-        };
-    }
-
 
     componentWillMount() {
 
        // window.localStorage.delDevice=false;//是否解绑过设备
 
         window.localStorage.sid1 = this.props.params.sid.replace("+", "%2B").replace(" ", "%20").replace(/\//g, "%2F");
-
-
-        this.props.GetSafeRegions=[];
-
 
         if (!this.props.babyid) {
             //   alert('没值')

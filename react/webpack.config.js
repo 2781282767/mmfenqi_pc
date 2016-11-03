@@ -59,6 +59,14 @@ module.exports = {
         path: path.join(__dirname, 'dist'), //编译到当前目录
         filename: '[name].js'
     },
+
+    externals: {
+        "react": "React",
+        "react-dom": "ReactDOM",
+        "react-router": "ReactRouter",
+        "redux": "Redux",
+        "react-redux": "ReactRedux",
+    },
     // devtool: 'source-map',
     module: {
         loaders: [
