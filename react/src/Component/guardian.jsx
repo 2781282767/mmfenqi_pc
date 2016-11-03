@@ -63,7 +63,34 @@ export default class Guardian extends Component {
             yes:'同步',
             yes_cb: ()=> {
 
-                this.syncGuardian();
+                HttpService.query({
+                    url: '/app/object/syncGuardian',
+                    data: {
+                        token: localStorage.appToken,
+                        babyid: this.props.params.babyid
+                    },
+                    success: (res=> {
+                        console.log(res);
+
+                        if(res.code=='10098'){
+
+                            this.context.router.goBack();
+
+                            window.localStorage._update=false;
+
+                            this.setState({
+                                syncGuardian:{
+                                    flag:true,
+                                    _flag:true,
+                                }
+                            });
+                            Toast.toast(res.msg,3000)
+                        }else{
+                            Toast.toast(res.msg,3000)
+                        }
+
+                    })
+                })
 
 
 
@@ -165,16 +192,19 @@ export default class Guardian extends Component {
 
                 if(res.code=='10098'){
 
-                    this.context.router.goBack();
+                 //   this.context.router.goBack();
 
                     window.localStorage._update=false;
 
+
+
                     this.setState({
                         syncGuardian:{
-                            flag:true,
-                            _flag:true,
+                            flag:false,
+                            _flag:false,
                         }
                     });
+
                     Toast.toast(res.msg,3000)
                 }else{
                     Toast.toast(res.msg,3000)

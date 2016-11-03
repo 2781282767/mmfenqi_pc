@@ -33,10 +33,13 @@ export default class More extends React.Component {
             yes:'确定',
             yes_cb: ()=> {
 
+              //  alert(this.state.info.isadmin)
+
 
                 if(!!this.state.info.isadmin){
                     this.delDevice2()
                 }else{
+
                     this.delDevice()
                 }
 
@@ -94,7 +97,7 @@ export default class More extends React.Component {
         if(!this.state.info.isadmin){
 
             var b={
-                content:'解绑设备，确定要解除绑定吗？',
+                content:'解绑设备,确定要解除绑定吗？',
             }
 
             this.config= Object.assign({},this.config, b);
@@ -102,7 +105,7 @@ export default class More extends React.Component {
         }else{
             var a = {
 
-                content:'解绑设备，解除管理员绑定后，其他监护成员将一同解除，且设备恢复出厂设置，只保留激活状态及设备有效期',
+                content:'解绑设备,解除管理员绑定后,其他监护成员将一同解除,且设备恢复出厂设置,只保留激活状态及设备有效期',
 
             };
 
@@ -126,7 +129,10 @@ export default class More extends React.Component {
             success:(res=>{
                 console.log(res)
                 if(res.code=='10112'){
-                    this.context.router.goBack()
+
+                    window.localStorage.delDevice=true;
+
+                    window.location.href = '/#/map/' + localStorage.sid1 + '';
                 }
             })
 
@@ -144,8 +150,10 @@ export default class More extends React.Component {
 
             success:(res=>{
                 console.log(res);
-                if(res.code=='10112'){
-                    this.context.router.goBack()
+                if(res.code=='10070'){
+
+                    window.localStorage.delDevice=true;
+                    window.location.href = '/#/map/' + localStorage.sid1 + '';
                 }
 
             })
@@ -157,9 +165,9 @@ export default class More extends React.Component {
 
         const {info,admin} =this.state;
         return(
-            <div className="more">
+            <div className="more" style={{background:'#eee',minHeight:'100%'}}>
 
-                <Popup config={this.config} blockOrNone={admin.flag} />
+                <Popup config={this.config} blockOrNone={admin.flag} _flag={admin.flag}/>
                 <R_header left="1" title="更多"/>
                 
 
@@ -201,7 +209,7 @@ export default class More extends React.Component {
                     </div>
 
 
-                    <div className="endtime" onClick={this.deviceCancel.bind(this)}>
+                    <div className="endtime" onClick={this.deviceCancel.bind(this)} style={{marginTop:'1rem',borderTop:'1px solid #eee'}}>
                         <div className="img">
                             <img src={deletes} alt=""/>
                         </div>

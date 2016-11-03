@@ -25,7 +25,9 @@ const initialState = {
     abc: false,
     addr: '',
     isLong: [],
-    datasource: []
+    datasource: [],
+    GetSafeRegions:[],
+    exportMap:[]
 
 
 };
@@ -115,6 +117,14 @@ export default function login(state = initialState, action) {
                 values: action.res,
                 getGuardiansList: [],
                 addr: ''
+            });
+        case types.GetSafeRegions1:
+            return Object.assign({}, state, {
+                GetSafeRegions: action.res,
+            });
+        case types.exportMap:
+            return Object.assign({}, state, {
+                exportMap: action.res,
             });
 
 

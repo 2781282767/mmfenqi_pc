@@ -21,8 +21,10 @@ export const ChangeDevice='ChangeDevice';
 export const aaa='aaa';
 export const GetAddr='GetAddr';
 export const isLogin='isLogin';
+export const exportMap='exportMap';
 
 
 
 
 export const Safetyarea='Safetyarea';
+export const GetSafeRegions1='GetSafeRegions1';

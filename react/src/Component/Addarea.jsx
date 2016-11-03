@@ -33,7 +33,9 @@ export default class Addarea extends React.Component {
             centerlng: [],
             centerlat: [],
             search: false,
-            map: {}
+            map: {},
+            tips:[],
+            placeSearch:''
 
 
         };
@@ -42,6 +44,9 @@ export default class Addarea extends React.Component {
 
 
     componentWillMount() {
+
+
+        window.localStorage.saveSafeRegion=false;
 
 
         console.log(this.props.params.radius);
@@ -60,218 +65,12 @@ export default class Addarea extends React.Component {
         }
 
 
-    }
 
-    componentDidMount() {
-
-
-        var self = this;
-
-
-        var map, geolocation, map2, map3;
-        if (this.state.centerlng != 'null') {
-
-            document.getElementById('safetyarea2').style.display = 'block';
-            document.getElementById('safetyarea').style.display = 'none';
-
-
-            map2 = new AMap.Map('safetyarea2', {
-                resizeEnable: true,
-                zoom: 15,
-                center: [this.state.centerlng, this.state.centerlat]
-            });
-
-
-            self.getAddr(this.state.centerlng, this.state.centerlat);
-
-
-            map2.on('moveend', function (e) {
-
-
-                self.getAddr(map2.getCenter().getLng(), map2.getCenter().getLat());
-
-                self.setState({
-                    centerlng: map2.getCenter().getLng(),
-                    centerlat: map2.getCenter().getLat(),
-                    isPickerShow: false
-
-                })
-
-            });
-
-
-            this.setState({
-                map: map2
-            });
-
-            this.changeName(map2)
-
-
-        } else {
-
-
-            document.getElementById('safetyarea2').style.display = 'none';
-            document.getElementById('safetyarea').style.display = 'block';
-
-            map = new AMap.Map('safetyarea');
-
-            map.plugin('AMap.Geolocation', function () {
-
-                geolocation = new AMap.Geolocation({
-                    enableHighAccuracy: true,//是否使用高精度定位，默认:true
-                    timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-                    showButton: false,
-                    // buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-                    zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-                    // buttonPosition:'RB'
-                });
-                map.addControl(geolocation);
-                geolocation.getCurrentPosition();
-                AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
-                //  AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
-            });
-
-
-            function onComplete(data) {
-
-
-                map3 = new AMap.Map('safetyarea', {
-                    resizeEnable: true,
-                    zoom: 15,
-                    center: [data.position.getLng(), data.position.getLat()]
-                });
-                self.getAddr(data.position.getLng(), data.position.getLat());
-                map3.on('touchend', function (e) {
-                    self.getAddr(map3.getCenter().getLng(), map3.getCenter().getLat());
-
-                    self.setState({
-                        centerlng: map3.getCenter().getLng(),
-                        centerlat: map3.getCenter().getLat(),
-                        isPickerShow: false
-
-                    })
-
-                });
-
-
-                self.changeName(map3)
-            }
-
-        }
-
-
-    }
-
-
-
-
-    changeName(map) {
-        var self3 = this;
-        //输入提示
-
-        map.plugin(["AMap.Autocomplete"], function () {
-            //判断是否IE浏览器
-            if (navigator.userAgent.indexOf("MSIE") > 0) {
-                document.getElementById("tipinput").onpropertychange = autoSearch;
-            }
-            else {
-
-                document.getElementById("tipinput").oninput = autoSearch;
-            }
-        });
-        document.getElementById("tipinput").addEventListener('blur',function () {
-            document.getElementById('tipinput').focus()
-        });
-
-
-        function autoSearch() {
-            var keywords = document.getElementById("tipinput").value;
-            var auto;
-            var autoOptions = {
-                input: "tipinput"
-            };
-
-
-            auto = new AMap.Autocomplete(autoOptions);
-            //查询成功时返回查询结果
-            AMap.event.addListener(auto, "select", select);
-            auto.search(keywords);
-        }
-
-
-
-
-        // var autoOptions = {
-        //     input: "tipinput"
-        // };
-        // var auto = new AMap.Autocomplete(autoOptions);
-        //
-        //
-        // var placeSearch = new AMap.PlaceSearch({
-        //
-        //
-        //
-        //     map: map,
-        // });  //构造地点查询类
-
-
-
-        // AMap.event.addListener(auto, "change", select);
-
-
-      //  AMap.event.addListener(auto, "select", select);//注册监听，当选中某条记录时会触发
-
-
-        function select(e) {
-
-            console.log(e);
-
-            var placeSearch = new AMap.PlaceSearch();
-
-
-            placeSearch.setCity(e.poi.adcode);
-
-            var name=e.poi.name;
-
-            name.replace(name,name+' ');
-
-            placeSearch.search(name, function (status, result) {
-
-                console.log(result.poiList.pois[0].id);
-
-
-                if (status === 'complete' && result.info === 'OK') {
-
-                    // document.getElementsByClassName('amap-sug-result').style.display='hidden'
-
-                }
-
-
-                placeSearch.getDetails(result.poiList.pois[0].id, function (status, result) {
-                    if (status === 'complete' && result.info === 'OK') {
-
-                        console.log(result);
-
-                        // console.log(result)
-
-
-                        //placeSearch_CallBack(result);
-
-                        self3.getAddr(e.poi.location.lng, e.poi.location.lat);
-
-                        self3.setState({
-                            search: false
-                        })
-                    }
-                });
-
-
-            });  //关键字查询查询
-        }
     }
 
 
     getAddr(lng, lat) {
+
 
         var self2 = this;
 
@@ -302,6 +101,238 @@ export default class Addarea extends React.Component {
             }
         });
     }
+
+
+    componentDidMount() {
+
+
+
+        document.getElementById('tipinput').addEventListener('keypress',function(e){
+
+
+           //  alert(e.keyCode);
+            // if(e.keyCode === 13) {
+            //     // 处理相关逻辑
+            //
+            //
+            //     alert(22)
+            // }
+        });
+
+
+
+        // document.getElementById("tipinput").addEventListener('blur',function () {
+        //     if(!self.state.search){
+
+
+
+
+        var self = this;
+
+
+        var map, geolocation, map2, map3;
+        if (this.state.centerlng != 'null') {
+
+
+
+            document.getElementById('safetyarea2').style.display = 'block';
+            document.getElementById('safetyarea').style.display = 'none';
+
+
+            map2 = new AMap.Map('safetyarea2', {
+                resizeEnable: true,
+                zoom: 15,
+                center: [this.state.centerlng, this.state.centerlat]
+            });
+
+
+
+
+            self.getAddr(this.state.centerlng, this.state.centerlat);
+
+
+            map2.on('moveend', function (e) {
+
+
+                self.getAddr(map2.getCenter().getLng(), map2.getCenter().getLat());
+
+                self.setState({
+                    centerlng: map2.getCenter().getLng(),
+                    centerlat: map2.getCenter().getLat(),
+                    isPickerShow: false
+
+                })
+
+            });
+
+
+            self.setState({
+                map: map2
+            });
+
+            self.changeName(map2)
+
+
+        } else {
+
+
+
+            document.getElementById('safetyarea2').style.display = 'none';
+            document.getElementById('safetyarea').style.display = 'block';
+
+            map = new AMap.Map('safetyarea',{
+                resizeEnable: true,
+                zoom: 15,
+            });
+
+            var geolocation;
+
+            map.plugin('AMap.Geolocation', function () {
+
+
+                var geoOptions={
+                    zoomToAccuracy: true,  timeout:200000, enableHighAccuracy:true
+                };
+
+
+
+                geolocation=new AMap.Geolocation(geoOptions);
+
+                geolocation.getCurrentPosition();
+
+                AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+            });
+            //
+            self.setState({
+                map: map
+            });
+
+
+            self.changeName(map);
+
+
+
+            function onComplete(data) {
+
+                map3 = new AMap.Map('safetyarea', {
+                    resizeEnable: true,
+                    zoom: 15,
+                    center: [data.position.lng, data.position.lat]
+                });
+                self.getAddr(data.position.lng, data.position.lat);
+                map3.on('moveend', function (e) {
+
+                    self.getAddr(map3.getCenter().getLng(), map3.getCenter().getLat());
+
+                    self.setState({
+                        centerlng: map3.getCenter().getLng(),
+                        centerlat: map3.getCenter().getLat(),
+                        isPickerShow: false
+
+                    })
+
+                });
+
+                self.setState({
+                    map: map3
+                });
+
+                self.changeName(map3)
+            }
+
+        }
+
+
+    }
+
+
+
+
+
+
+
+
+    changeName(map) {
+        var self3 = this;
+        //输入提示
+
+        map.plugin(["AMap.Autocomplete"], function () {
+            //判断是否IE浏览器
+            if (navigator.userAgent.indexOf("MSIE") > 0) {
+                document.getElementById("tipinput").onpropertychange = autoSearch;
+            }
+            else {
+
+                document.getElementById("tipinput").oninput = autoSearch;
+            }
+        });
+
+
+        var placeSearch;
+        function autoSearch() {
+            var keywords = document.getElementById("tipinput").value;
+            var auto;
+
+            var autoOptions = {
+                pageIndex:1,
+                pageSize:10,
+                city: "" //城市，默认全国
+            };
+
+
+            auto = new AMap.Autocomplete(autoOptions);
+
+             placeSearch= new AMap.PlaceSearch({
+                map: map
+            });  //构造地点查询类
+
+            self3.setState({
+                placeSearch:placeSearch
+            });
+
+
+            //查询成功时返回查询结果
+            AMap.event.addListener(auto, "complete", autocomplete_CallBack);
+            auto.search(keywords);
+        }
+
+
+        // function autoSearch() {
+        //     var keywords = document.getElementById("tipinput").value;
+        //     var auto;
+        //     var autoOptions = {
+        //         pageIndex:1,
+        //         pageSize:10,
+        //         input:'tipinput',
+        //         city: "" //城市，默认全国
+        //     };
+        //     auto = new AMap.Autocomplete(autoOptions);
+        //     //查询成功时返回查询结果
+        //     // AMap.event.addListener(auto, "complete", autocomplete_CallBack);
+        //     AMap.event.addListener(auto, "select", select);
+        //     auto.search(keywords);
+        // }
+
+
+
+        function autocomplete_CallBack(data) {
+
+            console.log(data);
+            var resultStr = "";
+
+            console.log(data.tips);
+
+            self3.setState({
+                tips:data.tips
+            });
+
+            document.getElementById("result1").style.display = "block";
+
+        }
+    }
+
+
+
 
     save() {
 
@@ -349,7 +380,12 @@ export default class Addarea extends React.Component {
             success: (res=> {
                 console.log(res);
                 if (res.code = '10044') {
-                    window.location.href = '#/Safetyarea/' + localStorage.babyid + ''
+
+                    this.state.map.clearMap();
+
+                    this.context.router.goBack();
+                    window.localStorage.saveSafeRegion=true;
+                    //window.location.href = '#/Safetyarea/' + localStorage.babyid + '';
                 }
 
             })
@@ -376,6 +412,32 @@ export default class Addarea extends React.Component {
             isPickerShow: false,
         });
 
+        document.getElementById("result1").style.display = "none";
+
+
+
+        this.refs.names.blur();
+
+
+
+
+
+        // if(document.activeElement.id=="tipinput"){
+        //
+        //
+        //   //  this.refs.names.blur();
+        //
+        //
+        //     // document.getElementById('tipinput').blur();
+        // }
+
+
+
+
+
+
+
+
     }
 
     handlesearch(search) {
@@ -399,7 +461,12 @@ export default class Addarea extends React.Component {
 
     }
 
+
     componentDidUpdate() {
+
+        var self=this;
+
+        console.log(this)
 
 
         this.refs.names.focus();
@@ -409,14 +476,75 @@ export default class Addarea extends React.Component {
         }, false);
 
 
+        // document.getElementById("tipinput").addEventListener('blur',function () {
+        //     if(!self.state.search){
+        //
+        //
+        //
+        //     }else{
+        //         document.getElementById('tipinput').focus()
+        //     }
+        // });
+
+
     }
 
     change(){
 
     }
 
+    sub(e){
+        e.preventDefault()
+    }
+
+    _selectName(name,code,lng,lat,e){
+
+        var self=this;
+        e.preventDefault();
+
+
+        document.getElementById("tipinput").value = name;
+        document.getElementById("result1").style.display = "none";
+
+
+
+            self.state.placeSearch.setCity(code);
+
+            self.state.placeSearch.search(name,function (status, result) {
+
+                console.log(result);
+
+                // self.getAddr(lng, lat);
+                // self.setState({
+                //     search: false
+                // });
+
+                console.log(result.poiList.pois[0].id)
+
+                 self.state.placeSearch.getDetails(result.poiList.pois[0].id, function (status, result) {
+
+
+                     console.log(result)
+
+                     self.getAddr(lng, lat);
+                     self.setState({
+                         search: false
+                     });
+
+                     document.getElementById("result1").style.display = "none";
+                 })
+
+            });  //关键字查询查询
+
+
+    }
+
+
+
 
     render() {
+
+
 
 
         const {optionGroups, valueGroups} = this.state;
@@ -473,17 +601,44 @@ export default class Addarea extends React.Component {
 
                             <div className="img"><img src={sousu}/></div>
 
-                            <form action="#">
+                            <form action="#" onSubmit={this.sub.bind(this)}>
 
                                 <input onChange={this.change} name="search" autocomplete="off" type='search' id="tipinput" ref="names" placeholder="搜索"/>
 
                             </form>
                             <span className="cancle" onClick={this.cancel.bind(this)}>取消</span>
+
+
+
+
                         </div>
                     </div>
 
 
-                    <R_header left="1" right="2" title="添加" handlesearch={this.handlesearch.bind(this)}
+                    <div id="result1" className="autobox" name="result1" style={{display:'none',overflow: 'auto',top:'40px', position:'absolute',zIndex:'4444',
+                        width: '100%',
+                        border: '1px solid gray',
+                        background:'#fff'}}>
+
+                        {
+                            this.state.tips.length!=0?
+                                this.state.tips.map((json,index)=>{
+                                    return (
+                                        <div key={index} >
+                                            <div style={{height:'3rem',lineHeight:'3rem'}} onClick={this._selectName.bind(this,json.name,json.adcode,json.location.lng,json.location.lat)}>
+                                                <span>{json.name}</span>
+                                                <span>{json.district}</span>
+                                            </div>
+
+                                        </div>
+                                    )
+                                }):
+                                null
+                        }
+                    </div>
+
+
+                    <R_header left="1" right="2" title="添加" map={this.state.map} handlesearch={this.handlesearch.bind(this)}
                               search={this.state.search}/>
                     <div className="content">
                         <div className="name">
@@ -504,15 +659,20 @@ export default class Addarea extends React.Component {
                         </div>
 
 
+                        <div onClick={this.save.bind(this)}
+                             style={{position: 'fixed', bottom: '1rem', width: '100%', padding: '0 1rem',zIndex:'1'}}>
+                            <div className="app-pink-radius-button text-center">保存</div>
+                        </div>
+
+
                     </div>
 
-                    <div onClick={this.save.bind(this)}
-                         style={{position: 'fixed', bottom: '1rem', width: '100%', padding: '0 1rem'}}>
-                        <div className="app-pink-radius-button text-center">保存</div>
-                    </div>
+
 
 
                 </div>
+
+
 
 
                 <NamePicker isPickerShow={this.state.isPickerShow} radius={this.state.radius}
@@ -523,3 +683,8 @@ export default class Addarea extends React.Component {
         )
     }
 }
+
+
+Addarea.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};

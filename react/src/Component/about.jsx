@@ -23,7 +23,8 @@ export default class About extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            value: null
+            value: null,
+            map:[]
         }
 
     }
@@ -34,8 +35,9 @@ export default class About extends React.Component {
 
     }
 
-    componentDidMount() {
+    componentWillUnmount(){
 
+       this.state.map.clearMap()
     }
 
 
@@ -50,6 +52,11 @@ export default class About extends React.Component {
 
         this.getHistoryTracks(this.props.params.babyid, value, value.substring(0, 8).concat(parseInt(value.substring(8, 10)) + 1).toString())
     }
+
+
+
+
+
 
 
     map(map) {
@@ -78,6 +85,10 @@ export default class About extends React.Component {
             zoom: 15,
             center: [lng, lat],
             resizeEnable: true,
+        });
+
+        this.setState({
+            map:mapObj
         });
 
 

@@ -216,7 +216,7 @@ class AddGuardian extends Component {
                     <div className="guanxi" onClick={this.add.bind(this)}>
 
                         <div className="img"><img src={chengyuan} style={{width:'100%',height:'100%'}}/></div>
-                        <div className="input"><input type="text" value={this.state.familystatus} placeholder="成员关系" disabled="disabled"/></div>
+                        <div className="input"><input type="text" value={this.state.familystatus} placeholder="成员关系" readOnly="readOnly"/></div>
 
                         <div className="select"><img src={chengyuanguanxi} style={{width:'100%',height:'100%'}}/></div>
                     </div>

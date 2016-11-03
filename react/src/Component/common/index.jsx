@@ -22,6 +22,37 @@ export class R_header extends Component {
         }
     }
 
+
+    componentWillReceiveProps(){
+
+
+        setTimeout( function () {
+
+
+
+            // console.log('index+-----'+this.props.syncGuardian);
+            // console.log('index2+-----'+this.props._flag);
+
+
+            // this.setState({
+            //     flag:this.props.blockOrNone,
+            //     _flag:this.props._flag
+            // })
+        }.bind(this),0)
+
+    }
+
+    map(){
+
+        if(!!this.props.map){
+            this.props.map.clearMap();
+            this.context.router.goBack();
+        }else{
+            this.context.router.goBack();
+        }
+
+    }
+
     handlesearch() {
 
         this.props.handlesearch(this.state.search)
@@ -30,7 +61,10 @@ export class R_header extends Component {
     }
 
     render() {
-        const {title, left, right} = this.props;
+        const {title, left, right,map} = this.props;
+
+
+        console.log(map)
 
 
         return (
@@ -45,9 +79,14 @@ export class R_header extends Component {
                 {
                     left == 1 ?
                         <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
-                             onClick={this.context.router.goBack}>
+                             onClick={this.map.bind(this)}>
                             <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
                         </div> :
+                        !!map?
+                        <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
+                             onClick={this.map.bind(this)}>
+                            <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
+                        </div>:
                         <div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}>
 
                         </div>
@@ -93,11 +132,6 @@ export class R_header_fixed extends Component {
     }
 
 
-    // componentWillMount(){
-    //
-    //
-    //     console.log('=++++++++'+!this.props.syncGuardian)
-    // }
 
 
     componentWillReceiveProps(){
@@ -114,6 +148,25 @@ export class R_header_fixed extends Component {
             //     _flag:this.props._flag
             // })
         }.bind(this),0)
+
+    }
+
+
+    map2(){
+
+
+
+
+        if(!!this.props.map){
+
+
+            this.props.map.map((json,index)=>{
+                json.clearMap()
+            });
+           this.context.router.goBack();
+        }else{
+            this.context.router.goBack();
+        }
 
     }
 
@@ -160,7 +213,7 @@ export class R_header_fixed extends Component {
                         <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
                     </div>
                         :<div style={{display: 'flex', flex: 1, alignItems: 'center', justifyContent: 'flex-start'}}
-                              onClick={this.context.router.goBack}>
+                              onClick={this.map2.bind(this)}>
                         <img src={back} style={{width: '1.7rem', height: '1.6rem',}}/>
                     </div>
 

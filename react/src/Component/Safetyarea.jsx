@@ -8,10 +8,16 @@ import {HttpService, Toast}  from'../Http';
 
 import {Link} from 'react-router';
 
+import {getSafeRegions} from '../action/index'
+
+
+import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
+
 import wuanquan from '../img/safetyarea/wuanquan.png'
 
 
-export default class Safetyarea extends React.Component {
+class Safetyarea extends React.Component {
 
     constructor(props) {
         super(props);
@@ -28,7 +34,13 @@ export default class Safetyarea extends React.Component {
             },
             classright1: {
                 width: '0',
-            }
+            },
+
+            _list:{
+
+            },
+            map:[],
+            map2:[]
 
         };
 
@@ -41,17 +53,77 @@ export default class Safetyarea extends React.Component {
     }
 
     componentWillMount() {
+
+
+
+
+        // if (this.props.GetSafeRegions.length==0) {
+        //
+        //  //   alert(0)
+        //     this.props.getSafeRegions(this.props.params.babyid);
+        //
+        //
+        // }else{
+        //
+        //   //  alert('go')
+        //
+        //     // console.log('ssss'+this.props.GetSafeRegions);
+        //
+        //     this.setState({
+        //         list:this.props.GetSafeRegions
+        //     });
+        //
+        //     this.state.list.forEach(function (item, index) {
+        //
+        //         new AMap.Map('index' + index, {
+        //             zoom: 15,
+        //             center: [item.centerlng - 0.0065, item.centerlat - 0.0060],
+        //             dragEnable: false,
+        //             keyboardEnable: false,
+        //             doubleClickZoom: false,
+        //             scrollWheel: false,
+        //             touchZoom: false,
+        //             resizeEnable: true,
+        //         });
+        //     });
+        // }
+
+
+
         this.getSafeRegions1();
+
+
         window.localStorage.babyid = this.props.params.babyid;
 
         console.log(localStorage.babyid)
+
     }
 
 
+    componentWillReceiveProps(){
+        setTimeout( function () {
+            console.log('++==____--'+this.props.GetSafeRegions);
+
+
+            this.setState({
+                list:this.props.GetSafeRegions
+            });
+            this.S_init(this.state.list)
+        }.bind(this),0)
+
+    }
+
+
+
+
+
+    componentDidUpdate(){
+
+
+
+    }
+
     TouchStart(index, e) {
-
-
-
 
 
         var touchobj = e.changedTouches[0]; // reference first touch point (ie: first finger)
@@ -165,7 +237,11 @@ export default class Safetyarea extends React.Component {
                 });
 
 
-                e.preventDefault();
+               if(!!document.getElementById('item' + index).parentNode){
+                   e.preventDefault();
+               }
+
+
 
 
 
@@ -226,9 +302,9 @@ export default class Safetyarea extends React.Component {
 
 
 
-    getSafeRegions() {
-        this.S_init(localStorage.safeRegions)
-    }
+    // getSafeRegions() {
+    //     this.S_init(localStorage.safeRegions)
+    // }
 
 
     deleteSafeRegions(regionid, index) {
@@ -284,8 +360,14 @@ export default class Safetyarea extends React.Component {
                 if (res.code == '10048') {
 
                     this.setState({
-                        list: res.data.safeRegions
+                        list: res.data.safeRegions,
+
                     });
+
+                   // this.props._list=res.data.safeRegions;
+
+
+                // /    localStorage.setItem("json_data",JSON.stringify(res.data.safeRegions));
 
                     this.S_init(this.state.list);
 
@@ -297,15 +379,21 @@ export default class Safetyarea extends React.Component {
         })
     }
 
-    S_init(list) {
+    S_init(list){
+
 
         var self = this;
 
+        var map;
 
-        const getSafeRegions = list;
-        getSafeRegions.forEach(function (item, index) {
 
-            new AMap.Map('index' + index, {
+        var array=[];
+
+
+
+        list.forEach(function (item, index) {
+
+            map=new AMap.Map('index' + index, {
                 zoom: 15,
                 center: [item.centerlng - 0.0065, item.centerlat - 0.0060],
                 dragEnable: false,
@@ -315,23 +403,53 @@ export default class Safetyarea extends React.Component {
                 touchZoom: false,
                 resizeEnable: true,
             });
+
+
+            self.setState({
+                map: self.state.map.concat(map)
+            })
+
+           // console.log(self.state.map)
+
+            //
+            // self.setState({
+            //     map2:self.state.map.push(self.state.map)
+            // })
+
+        });
+
+
+
+
+
+
+    }
+
+    componentWillUnmount(){
+
+        this.state.map.map((json,index)=>{
+            json.clearMap()
         });
     }
 
 
     render() {
 
+        const {GetSafeRegions} =this.props;
+
+
+        console.log('list'+this.state.list);
 
         return (
             <div className="safetyarea">
 
-                <R_header_fixed left="1" right="1" title="安全区域" syncGuardian="true" />
+                <R_header_fixed left="1" map={this.state.map} right="1" title="安全区域" syncGuardian="true" />
 
 
                 <div className="safetyarea-content">
 
                     {
-                        !!this.state.list.length ?
+                        this.state.list.length!=0?
                             this.state.list.map((res, index)=> {
 
                                 return (
@@ -413,6 +531,21 @@ export default class Safetyarea extends React.Component {
     }
 
 }
+
+
+
+
+const mapStateToProps = state => {
+    return {
+        GetSafeRegions: state.login.GetSafeRegions,
+    };
+};
+const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({
+        getSafeRegions:getSafeRegions
+    }, dispatch);
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Safetyarea);
 
 
 

@@ -5,7 +5,7 @@ import ReactDOM, {render} from 'react-dom';
 
 import {HttpService, Toast, GetCurrentDate} from'../Http';
 
-import {doLogin, change, getOneBabyid, changeSaveBabyStatus,getMap,getCurrentPower} from '../action/index'
+import {doLogin, change, getOneBabyid, changeSaveBabyStatus,getMap,getCurrentPower,exportMap} from '../action/index'
 
 
 import {connect} from 'react-redux';
@@ -102,12 +102,21 @@ class MapIndex extends React.Component {
     }
 
 
+    getDefaultProps() {
+        return {
+            GetSafeRegions: [],
+        };
+    }
+
+
     componentWillMount() {
+
+       // window.localStorage.delDevice=false;//是否解绑过设备
 
         window.localStorage.sid1 = this.props.params.sid.replace("+", "%2B").replace(" ", "%20").replace(/\//g, "%2F");
 
 
-        console.log(this.props)
+        this.props.GetSafeRegions=[];
 
 
         if (!this.props.babyid) {
@@ -116,8 +125,6 @@ class MapIndex extends React.Component {
             this.props.doLogin(this.props.params.sid);
 
         } else {
-
-
 
 
             this.props.getOneBabyid();
@@ -139,8 +146,22 @@ class MapIndex extends React.Component {
 
     }
 
+    componentWillUnmount(){
+
+        console.log(this.props.exportMap);
+
+        this.props.exportMap.clearMap();
+        var node=document.getElementById('container');
+        if (!!node.parentNode) {
+            console.log(22);
+            node.parentNode.removeChild(node);
+        }
+    }
+
+
 
     componentDidMount() {
+
 
     }
 
@@ -240,6 +261,11 @@ class MapIndex extends React.Component {
         const getCurrenttime = GetCurrentDate.time();
 
         const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked, abc, address, isLogin, datasource}=this.props;
+
+
+
+
+        console.log(this.props.exportMap);
 
 
 
@@ -654,7 +680,9 @@ const mapStateToProps = state => {
         abc: state.login.abc,
         address: state.login.addr,
         datasource: state.login.datasource,
-        isLogin: state.login.isLogin
+        isLogin: state.login.isLogin,
+        exportMap:state.login.exportMap
+
     };
 };
 const mapDispatchToProps = (dispatch) => {
@@ -664,7 +692,8 @@ const mapDispatchToProps = (dispatch) => {
         getOneBabyid: getOneBabyid,
         changeSaveBabyStatus: changeSaveBabyStatus,
         getMap:getMap,
-        getCurrentPower:getCurrentPower
+        getCurrentPower:getCurrentPower,
+        exportMap:exportMap,
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);

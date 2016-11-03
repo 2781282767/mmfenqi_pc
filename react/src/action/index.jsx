@@ -201,6 +201,16 @@ function isLong(msg) {
 }
 
 
+function exportMap(res) {
+    return {
+        type: types.exportMap,
+        res
+    }
+}
+
+
+
+
 
 
 export function changeSaveBabyStatus(msg) {
@@ -251,6 +261,13 @@ export function getChecked(msg) {
     return {
         type: types.GetChecked,
         msg
+    }
+}
+
+export function getSafeRegions1(res) {
+    return {
+        type: types.GetSafeRegions1,
+        res
     }
 }
 
@@ -308,11 +325,13 @@ export function getMap(babyid) {
                 if (res.code == '10059') {
 
                     const data = {
-                        lng: 0,
-                        lat: 0
+
+                            lng: 0,
+                            lat: 0
+
                     };
                      dispatch(GetCurrentTrack(data));
-                    init(116.397428, 39.90923);
+                    dispatch(init(116.397428, 39.90923));
 
                     //  dispatch(getAddree(data.lng, data.lat));
 
@@ -320,7 +339,7 @@ export function getMap(babyid) {
                 } else {
                      dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
-                    init(res.data.lng - 0.0065, res.data.lat - 0.0060);
+                    dispatch(init(res.data.lng - 0.0065, res.data.lat - 0.0060));
                     dispatch(getAddree(res.data.lng - 0.0065, res.data.lat - 0.0060));
                 }
             })
@@ -351,6 +370,16 @@ export function getOneBabyid() {
                     dispatch(getA(res.data[0].babyid,res.data));
 
 
+                 if(localStorage.delDevice=='true'){
+
+
+                        dispatch(GetDeviceList(res.data));
+                        // dispatch(A(false))
+
+                        window.localStorage.delDevice='false';
+                    }
+
+
 
                 } else {
 
@@ -362,6 +391,8 @@ export function getOneBabyid() {
 }
 //获取设备list
 export function getDeviceList() {
+
+
 
 
     return function (dispatch) {
@@ -618,11 +649,13 @@ function getCurrentTrack(babyid) {
                 if (res.code == '10059') {
 
                     const data = {
-                        lng: 0,
-                        lat: 0
+
+                            lng: 0,
+                            lat: 0
+
                     };
                     dispatch(GetCurrentTrack(data));
-                    init(116.397428, 39.90923);
+                    dispatch(init(116.397428, 39.90923));
 
                     //  dispatch(getAddree(data.lng, data.lat));
 
@@ -630,7 +663,7 @@ function getCurrentTrack(babyid) {
                 } else {
                     dispatch(GetCurrentTrack(res.data));
                     //dispatch(init(res.data.lng,res.data.lat))
-                    init(res.data.lng - 0.0065, res.data.lat - 0.0060);
+                    dispatch(init(res.data.lng - 0.0065, res.data.lat - 0.0060))
                     dispatch(getAddree(res.data.lng - 0.0065, res.data.lat - 0.0060))
                 }
             })
@@ -667,75 +700,57 @@ function getAddree(lng, lat) {
 
 
 function init(lng, lat) {
+    return function (dispatch) {
+
+        var map, marker;
+        map = new AMap.Map('container', {
+            zoom: 15,
+            center: [lng, lat],
+            resizeEnable: true,
+        });
 
 
-    var map, marker;
-    map = new AMap.Map('container', {
-        zoom: 15,
-        center: [lng, lat],
-        resizeEnable: true,
-    });
+        dispatch(exportMap(map));
 
-    if (lng == 116.397428 && lat == 39.90923) {
-        return;
+        if (lng == 116.397428 && lat == 39.90923) {
+            return;
+        }
+
+        marker = new AMap.Marker({
+            map: map,
+            icon: dian,
+            // icon: new AMap.Icon({  //复杂图标
+            //     // size: new AMap.Size(27, 36),//图标大小
+            //     //  image: '../../src/img/dian.png', //大图地址
+            //   //  imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
+            // }),
+            position: [lng, lat],
+        });
+
+
+        marker.setMap(map);
+
+
+        var circle = new AMap.Circle({
+            center: new AMap.LngLat(lng, lat),// 圆心位置
+            radius: 200, //半径
+            strokeColor: "#00b4ed", //线颜色
+            strokeOpacity: 1, //线透明度
+            fillColor: "#00b4ed", //填充颜色
+            strokeWeight: 1,    //线宽
+            fillOpacity: 0.2//填充透明度
+        });
+        circle.setMap(map);
+
+
+
     }
 
 
-    //
-    // map.setFitView();
-
-    // map.plugin('AMap.Geolocation', function() {
-    //     geolocation = new AMap.Geolocation({
-    //         enableHighAccuracy: true,//是否使用高精度定位，默认:true
-    //         timeout: 10000,          //超过10秒后停止定位，默认：无穷大
-    //         buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
-    //         zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-    //         buttonPosition: 'RB'
-    //     });
-    //     map.addControl(geolocation);
-    // });
-
-
-    marker = new AMap.Marker({
-        map: map,
-        icon: dian,
-        // icon: new AMap.Icon({  //复杂图标
-        //     // size: new AMap.Size(27, 36),//图标大小
-        //     //  image: '../../src/img/dian.png', //大图地址
-        //   //  imageOffset: new AMap.Pixel(-28, 0)//相对于大图的取图位置
-        // }),
-        position: [lng, lat],
-    });
-
-
-    marker.setMap(map);
-
-
-    var circle = new AMap.Circle({
-        center: new AMap.LngLat(lng, lat),// 圆心位置
-        radius: 200, //半径
-        strokeColor: "#00b4ed", //线颜色
-        strokeOpacity: 1, //线透明度
-        fillColor: "#00b4ed", //填充颜色
-        strokeWeight: 1,    //线宽
-        fillOpacity: 0.2//填充透明度
-    });
-
-    // var circle = new AMap.Circle({
-    //     center: [116.433322, 39.900255],// 圆心位置
-    //     radius: 100, //半径
-    //     strokeColor: "#F33", //线颜色
-    //     strokeOpacity: 1, //线透明度
-    //     strokeWeight: 3, //线粗细度
-    //     fillColor: "#ee2200", //填充颜色
-    //     fillOpacity: 0.35//填充透明度
-    // });
-    circle.setMap(map);
 
 
 }
 
-var add;
 
 
 function geocoder_CallBack(data, cb) {
@@ -799,6 +814,50 @@ export function scanDevice(mdtcode) {
                 }
 
 
+            })
+        })
+    }
+}
+
+
+
+export function getSafeRegions(babyid) {
+    return function (dispatch) {
+        return HttpService.query({
+            url: '/app/map/getSafeRegions',
+            data: {
+                token: localStorage.appToken,
+                babyid: babyid,
+                pageindex: 1,
+                pagesize: 50
+            },
+            success: (res=> {
+
+                if (res.code == '10048') {
+
+                    // this.setState({
+                    //     list: res.data.safeRegions,
+                    //
+                    // });
+
+
+                    console.log('------'+res.data.safeRegions);
+
+                    dispatch(getSafeRegions1(res.data.safeRegions));
+
+
+
+                    // this.props._list=res.data.safeRegions;
+
+
+                    // /    localStorage.setItem("json_data",JSON.stringify(res.data.safeRegions));
+
+                    //this.S_init(this.state.list);
+
+                    // this.inits();
+
+
+                }
             })
         })
     }

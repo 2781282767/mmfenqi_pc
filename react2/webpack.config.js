@@ -15,7 +15,7 @@ var plugins = [];
 //     publicPath = '/react-cnode/dist/';
 //     path = __dirname + '/react-cnode/dist/';
 // }
-plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false, drop_console: true}}));//代码压缩
+// plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false, drop_console: true}}));//代码压缩
 
 
 
@@ -97,7 +97,7 @@ module.exports = {
             {
                 test: /\.(png|jpg)$/,
                 exclude: /^node_modules$/,
-                loader: 'url?limit=25000' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+                loader: 'url?limit=20000' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
             },
 
             // {test: /\.(png|jpg)$/, exclude: /^node_modules$/,loader: 'base64-inline-loader'},
