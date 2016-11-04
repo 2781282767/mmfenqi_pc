@@ -7,7 +7,6 @@ import ReactDOM, {render} from 'react-dom';
 import Popup  from './common/popup'
 
 
-
 import {Router, Route, IndexRoute, hashHistory, browserHistory, Link} from 'react-router';
 
 
@@ -42,13 +41,13 @@ export default class Guardian extends Component {
             classright1: {
                 width: '0',
             },
-            syncGuardian:{
-                flag:false,
-                _flag:false,
+            syncGuardian: {
+                flag: false,
+                _flag: false,
             },
 
-            flag:false,
-            _flag:false,
+            flag: false,
+            _flag: false,
         };
 
         this.startx = '';
@@ -58,9 +57,9 @@ export default class Guardian extends Component {
         this.config = {
             isSure: false,
             isCancel: false,
-            content:'您还未向设备同步监护成员信息，确认返回吗？',
-            no:'返回',
-            yes:'同步',
+            content: '您还未向设备同步监护成员信息，确认返回吗？',
+            no: '返回',
+            yes: '同步',
             yes_cb: ()=> {
 
                 HttpService.query({
@@ -72,41 +71,38 @@ export default class Guardian extends Component {
                     success: (res=> {
                         console.log(res);
 
-                        if(res.code=='10098'){
+                        if (res.code == '10098') {
 
                             this.context.router.goBack();
 
-                            window.localStorage._update=false;
+                            window.localStorage._update = false;
 
                             this.setState({
-                                syncGuardian:{
-                                    flag:true,
-                                    _flag:true,
+                                syncGuardian: {
+                                    flag: true,
+                                    _flag: true,
                                 }
                             });
-                            Toast.toast(res.msg,3000)
-                        }else{
-                            Toast.toast(res.msg,3000)
+                            Toast.toast(res.msg, 3000)
+                        } else {
+                            Toast.toast(res.msg, 3000)
                         }
 
                     })
                 })
 
 
-
             },
-            no_cb:()=>{
+            no_cb: ()=> {
                 this.context.router.goBack();
-                window.localStorage._update=false
+                window.localStorage._update = false
             }
         };
 
 
-
     }
 
-    componentDidMount(){
-
+    componentDidMount() {
 
 
     }
@@ -118,30 +114,29 @@ export default class Guardian extends Component {
         //localStorage.clear()
 
 
+        //   console.log('222'+localStorage._update=='true');
 
-     //   console.log('222'+localStorage._update=='true');
 
-
-        if(!localStorage._update){
-            window.localStorage._update=false;
+        if (!localStorage._update) {
+            window.localStorage._update = false;
         }
 
-        console.log('localStorage._update-----'+localStorage._update);
-        console.log('powerValue--------'+localStorage.powerValue);
+        console.log('localStorage._update-----' + localStorage._update);
+        console.log('powerValue--------' + localStorage.powerValue);
 
-        if(localStorage.powerValue=='0'&&localStorage._update=='false'){
+        if (localStorage.powerValue == '0' && localStorage._update == 'false') {
 
             console.log(this);
 
             this.setState({
-                syncGuardian:{
-                    flag:false,
-                    _flag:false,
+                syncGuardian: {
+                    flag: false,
+                    _flag: false,
                 }
             });
 
             console.log(this.state.syncGuardian.flag)
-        }else if(localStorage._update=='true'&&localStorage.powerValue!='0') {
+        } else if (localStorage._update == 'true' && localStorage.powerValue != '0') {
             console.log(this);
 
             this.setState({
@@ -151,7 +146,7 @@ export default class Guardian extends Component {
                 }
             });
 
-        }else if(localStorage.powerValue!='0'&&localStorage._update=='false'){
+        } else if (localStorage.powerValue != '0' && localStorage._update == 'false') {
 
             this.setState({
                 syncGuardian: {
@@ -159,11 +154,11 @@ export default class Guardian extends Component {
                     _flag: false,
                 }
             });
-        }else if(localStorage.powerValue=='0'&&localStorage._update=='true'){
+        } else if (localStorage.powerValue == '0' && localStorage._update == 'true') {
             this.setState({
-                syncGuardian:{
-                    flag:false,
-                    _flag:true,
+                syncGuardian: {
+                    flag: false,
+                    _flag: true,
                 }
             });
         }
@@ -171,12 +166,10 @@ export default class Guardian extends Component {
     }
 
 
-
     syncGuardian() {
 
 
-
-        if(localStorage.powerValue=='0'){
+        if (localStorage.powerValue == '0') {
             Toast.toast('当前设备不在线');
             return;
         }
@@ -190,24 +183,23 @@ export default class Guardian extends Component {
             success: (res=> {
                 console.log(res);
 
-                if(res.code=='10098'){
+                if (res.code == '10098') {
 
-                 //   this.context.router.goBack();
+                    //   this.context.router.goBack();
 
-                    window.localStorage._update=false;
-
+                    window.localStorage._update = false;
 
 
                     this.setState({
-                        syncGuardian:{
-                            flag:false,
-                            _flag:false,
+                        syncGuardian: {
+                            flag: false,
+                            _flag: false,
                         }
                     });
 
-                    Toast.toast(res.msg,3000)
-                }else{
-                    Toast.toast(res.msg,3000)
+                    Toast.toast(res.msg, 3000)
+                } else {
+                    Toast.toast(res.msg, 3000)
                 }
 
             })
@@ -681,33 +673,32 @@ export default class Guardian extends Component {
             success: (res=> {
                 if (res.code == '10112') {
 
-                  //   window.localStorage._update=true;
+                    //   window.localStorage._update=true;
 
                     console.log(res);
 
 
-
-                    var b={
-                        _flag:true
+                    var b = {
+                        _flag: true
                     };
 
-                     var a=Object.assign({},this.state.syncGuardian, b)
+                    var a = Object.assign({}, this.state.syncGuardian, b)
 
                     // this.state.syncGuardian=
 
-                        this.setState({
-                            hasDelete: false,
-                            syncGuardian:a
-                        });
+                    this.setState({
+                        hasDelete: false,
+                        syncGuardian: a
+                    });
 
 
                     if (item == 'delete') {
                         var node = document.getElementById(item + index);
 
-                       // alert(node)
+                        // alert(node)
 
                         node.parentNode.remove();
-                    } else if (item == '_delete'||item=='__delete') {
+                    } else if (item == '_delete' || item == '__delete') {
 
                         console.log(item)
                         var node = document.getElementById(item + index);
@@ -739,26 +730,27 @@ export default class Guardian extends Component {
     }
 
 
-    onChildChanged(newState,newState2){
+    onChildChanged(newState, newState2) {
         this.setState({
-            flag:newState,
-            _flag:newState2
+            flag: newState,
+            _flag: newState2
         });
     }
 
     render() {
 
-        const {familyList, school, member, guardianid,syncGuardian,flag,_flag} =this.state;
+        const {familyList, school, member, guardianid, syncGuardian, flag, _flag} =this.state;
 
 
-        console.log('syncGuardian+++++'+syncGuardian.flag)
-        console.log('syncGuardian-----'+syncGuardian._flag)
+        console.log('syncGuardian+++++' + syncGuardian.flag)
+        console.log('syncGuardian-----' + syncGuardian._flag)
         return (
             <div className="guardian" style={{background: '#eee', minHeight: '100%', paddingTop: '4rem'}}>
 
 
                 <Popup config={this.config} blockOrNone={flag} _flag={_flag}/>
-                <R_header_fixed title="监护成员" left="1" syncGuardian={syncGuardian.flag}  _flag={syncGuardian._flag} callbackParent={this.onChildChanged.bind(this)}/>
+                <R_header_fixed title="监护成员" left="1" syncGuardian={syncGuardian.flag} _flag={syncGuardian._flag}
+                                callbackParent={this.onChildChanged.bind(this)}/>
                 <div className="container" style={{padding: 0}}>
                     <div className="row" style={{margin: '0'}}>
                         <div className="col-xs-12 text-left title">家庭成员</div>

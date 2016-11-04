@@ -36,11 +36,9 @@ class Safetyarea extends React.Component {
                 width: '0',
             },
 
-            _list:{
-
-            },
-            map:[],
-            map2:[]
+            _list: {},
+            map: [],
+            map2: []
 
         };
 
@@ -89,7 +87,6 @@ class Safetyarea extends React.Component {
         // }
 
 
-
         this.getSafeRegions1();
 
 
@@ -100,25 +97,21 @@ class Safetyarea extends React.Component {
     }
 
 
-    componentWillReceiveProps(){
-        setTimeout( function () {
-            console.log('++==____--'+this.props.GetSafeRegions);
+    componentWillReceiveProps() {
+        setTimeout(function () {
+            console.log('++==____--' + this.props.GetSafeRegions);
 
 
             this.setState({
-                list:this.props.GetSafeRegions
+                list: this.props.GetSafeRegions
             });
             this.S_init(this.state.list)
-        }.bind(this),0)
+        }.bind(this), 0)
 
     }
 
 
-
-
-
-    componentDidUpdate(){
-
+    componentDidUpdate() {
 
 
     }
@@ -138,7 +131,6 @@ class Safetyarea extends React.Component {
 
 
     }
-
 
 
     TouchMove(index, e) {
@@ -173,7 +165,6 @@ class Safetyarea extends React.Component {
             if (parseInt(-dist) > 1) {
 
 
-
             } else {
 
             }
@@ -185,8 +176,6 @@ class Safetyarea extends React.Component {
     }
 
     TouchEnd(index, e) {
-
-
 
 
         var touchobj = e.changedTouches[0];
@@ -217,7 +206,7 @@ class Safetyarea extends React.Component {
             console.log(touchobj.clientX)
 
 
-            if (this.startx == touchobj.clientX &&!!self.state.hasDelete) {
+            if (this.startx == touchobj.clientX && !!self.state.hasDelete) {
 
 
                 self.setState({
@@ -237,12 +226,9 @@ class Safetyarea extends React.Component {
                 });
 
 
-               if(!!document.getElementById('item' + index).parentNode){
-                   e.preventDefault();
-               }
-
-
-
+                if (!!document.getElementById('item' + index).parentNode) {
+                    e.preventDefault();
+                }
 
 
                 itemstyle.width = contentwidth + 'px';
@@ -299,7 +285,6 @@ class Safetyarea extends React.Component {
 
 
     }
-
 
 
     // getSafeRegions() {
@@ -364,10 +349,10 @@ class Safetyarea extends React.Component {
 
                     });
 
-                   // this.props._list=res.data.safeRegions;
+                    // this.props._list=res.data.safeRegions;
 
 
-                // /    localStorage.setItem("json_data",JSON.stringify(res.data.safeRegions));
+                    // /    localStorage.setItem("json_data",JSON.stringify(res.data.safeRegions));
 
                     this.S_init(this.state.list);
 
@@ -379,7 +364,7 @@ class Safetyarea extends React.Component {
         })
     }
 
-    S_init(list){
+    S_init(list) {
 
 
         var self = this;
@@ -387,13 +372,12 @@ class Safetyarea extends React.Component {
         var map;
 
 
-        var array=[];
-
+        var array = [];
 
 
         list.forEach(function (item, index) {
 
-            map=new AMap.Map('index' + index, {
+            map = new AMap.Map('index' + index, {
                 zoom: 15,
                 center: [item.centerlng - 0.0065, item.centerlat - 0.0060],
                 dragEnable: false,
@@ -409,7 +393,7 @@ class Safetyarea extends React.Component {
                 map: self.state.map.concat(map)
             })
 
-           // console.log(self.state.map)
+            // console.log(self.state.map)
 
             //
             // self.setState({
@@ -419,15 +403,11 @@ class Safetyarea extends React.Component {
         });
 
 
-
-
-
-
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
 
-        this.state.map.map((json,index)=>{
+        this.state.map.map((json, index)=> {
             json.clearMap()
         });
     }
@@ -438,18 +418,18 @@ class Safetyarea extends React.Component {
         const {GetSafeRegions} =this.props;
 
 
-        console.log('list'+this.state.list);
+        console.log('list' + this.state.list);
 
         return (
             <div className="safetyarea">
 
-                <R_header_fixed left="1" map={this.state.map} right="1" title="安全区域" syncGuardian="true" />
+                <R_header_fixed left="1" map={this.state.map} right="1" title="安全区域" syncGuardian="true"/>
 
 
                 <div className="safetyarea-content">
 
                     {
-                        this.state.list.length!=0?
+                        this.state.list.length != 0 ?
                             this.state.list.map((res, index)=> {
 
                                 return (
@@ -515,7 +495,7 @@ class Safetyarea extends React.Component {
 
                             <div className="_content">
                                 <div>
-                                    <img src={wuanquan} style={{width:'13rem',height:'13rem'}}/>
+                                    <img src={wuanquan} style={{width: '13rem', height: '13rem'}}/>
                                 </div>
 
 
@@ -533,8 +513,6 @@ class Safetyarea extends React.Component {
 }
 
 
-
-
 const mapStateToProps = state => {
     return {
         GetSafeRegions: state.login.GetSafeRegions,
@@ -542,7 +520,7 @@ const mapStateToProps = state => {
 };
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({
-        getSafeRegions:getSafeRegions
+        getSafeRegions: getSafeRegions
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(Safetyarea);

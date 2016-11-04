@@ -24,7 +24,7 @@ export default class About extends React.Component {
         super(props);
         this.state = {
             value: null,
-            map:[]
+            map: []
         }
 
     }
@@ -35,9 +35,9 @@ export default class About extends React.Component {
 
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
 
-       this.state.map.clearMap()
+        this.state.map.clearMap()
     }
 
 
@@ -52,11 +52,6 @@ export default class About extends React.Component {
 
         this.getHistoryTracks(this.props.params.babyid, value, value.substring(0, 8).concat(parseInt(value.substring(8, 10)) + 1).toString())
     }
-
-
-
-
-
 
 
     map(map) {
@@ -88,7 +83,7 @@ export default class About extends React.Component {
         });
 
         this.setState({
-            map:mapObj
+            map: mapObj
         });
 
 
@@ -163,7 +158,6 @@ export default class About extends React.Component {
                         } else {
                             _arry.push({lng: item.lng - 0.0065, lat: item.lat - 0.0060, img: one});
                         }
-
 
 
                     });

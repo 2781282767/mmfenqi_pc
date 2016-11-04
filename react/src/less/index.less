@@ -1,6 +1,6 @@
 html body {
   height: 100%;
-  font-family: "Arial","Microsoft JhengHei","Adobe Fan Heiti Std B";
+  font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif !important;
 
 
   //background-color: #eee;
@@ -674,7 +674,45 @@ header{
 
 
 
+.fixed{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  margin-left: -5.6rem;
+  margin-top: -5rem;
+  z-index: 222;
 
+
+  //top: 50%;
+  //
+  //transform: translateY(-50%);
+  //display: flex;
+
+
+
+  .radio-content{
+    width: 11.2rem;
+    height: 6.8rem;
+    text-align: center;
+    line-height: 6.8rem;
+    position: relative;
+
+    .radio-input{
+      position: absolute !important;
+      top: 0;
+      height: 2.5rem;
+      line-height: 2.5rem;
+      width: 11.2rem;
+      color: #FFFFff;
+
+
+
+    }
+
+  }
+
+
+}
 
 .addSafetyarea{
   width: 100%;
@@ -686,44 +724,7 @@ header{
 
 
 
-  .fixed{
-    position: fixed;
-    top:50%;
-    left: 50%;
-    margin-left: -5.6rem;
-    margin-top: -5rem;
 
-
-    //top: 50%;
-    //
-    //transform: translateY(-50%);
-    //display: flex;
-
-
-
-    .radio-content{
-      width: 11.2rem;
-      height: 6.8rem;
-      text-align: center;
-      line-height: 6.8rem;
-      position: relative;
-
-      .radio-input{
-        position: absolute !important;
-        top: 0;
-        height: 2.5rem;
-        line-height: 2.5rem;
-        width: 11.2rem;
-        color: #FFFFff;
-
-
-
-      }
-
-    }
-
-
-  }
 
   .search{
     position: fixed;

@@ -25,6 +25,9 @@ export default class Success extends React.Component {
     goto() {
 
 
+        window.localStorage.delDevice = 1;
+
+
         window.location.href = '/#/map/' + localStorage.sid1 + '';
     }
 

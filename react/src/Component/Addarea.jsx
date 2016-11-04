@@ -577,20 +577,29 @@ export default class Addarea extends React.Component {
                     zIndex: '1'
                 }}></div>
 
+
+                <div className="fixed">
+                    <div className="radio-content">
+
+                        <img src={dingweidian} style={{width: '11.2rem', height: '6.8rem'}}/>
+
+                        {/*<input type="text" defaultValue={this.state.radius} className="radio-input"/>*/}
+                        <div className="radio-input" onClick={this.togglePicker.bind(this)}>
+                            半径{this.state.radius}米内>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div onClick={this.save.bind(this)}
+                     style={{position: 'absolute', bottom: '1rem', width: '100%', padding: '0 1rem',zIndex:'1'}}>
+                    <div className="app-pink-radius-button text-center">保存</div>
+                </div>
+
                 <div className="addSafetyarea">
 
-                    <div className="fixed">
-                        <div className="radio-content">
 
-                            <img src={dingweidian} style={{width: '11.2rem', height: '6.8rem'}}/>
-
-                            {/*<input type="text" defaultValue={this.state.radius} className="radio-input"/>*/}
-                            <div className="radio-input" onClick={this.togglePicker.bind(this)}>
-                                半径{this.state.radius}米内>
-                            </div>
-
-                        </div>
-                    </div>
 
                     {/*<div className="search"></div><div className="search-content"><input type="text" ref="names" defaultValue='wwww' /></div>*/}
 
@@ -603,7 +612,7 @@ export default class Addarea extends React.Component {
 
                             <form action="#" onSubmit={this.sub.bind(this)}>
 
-                                <input onChange={this.change} name="search" autocomplete="off" type='search' id="tipinput" ref="names" placeholder="搜索"/>
+                                <input onChange={this.change} name="search" type='search' id="tipinput" ref="names" placeholder="搜索"/>
 
                             </form>
                             <span className="cancle" onClick={this.cancel.bind(this)}>取消</span>
@@ -659,10 +668,7 @@ export default class Addarea extends React.Component {
                         </div>
 
 
-                        <div onClick={this.save.bind(this)}
-                             style={{position: 'fixed', bottom: '1rem', width: '100%', padding: '0 1rem',zIndex:'1'}}>
-                            <div className="app-pink-radius-button text-center">保存</div>
-                        </div>
+
 
 
                     </div>

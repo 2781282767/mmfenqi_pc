@@ -209,10 +209,6 @@ function exportMap(res) {
 }
 
 
-
-
-
-
 export function changeSaveBabyStatus(msg) {
     return (dispatch, getState)=> {
         //dispatch(ChangeDevice(data));
@@ -278,25 +274,21 @@ export function A(msg) {
     }
 }
 
-
+/**
+ * login
+ * @param sid
+ * @returns {Function}
+ */
 export function doLogin(sid) {
-
     return function (dispatch) {
         return HttpService.query({
             url: '/apph5/user/login',
             data: {sid: sid},
-
-
-            //O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg
-
-            //data:{sid:'QusMWEX0Wki87l0_HL6hFbew9-lbUeHFloIXooR0r22qwgrBVf-x5YxRXmeotmirgAiCgENkGVZuH26yuDA6ydM6tqmy_zCp3afmoOct4y5MeaRXCLtteY_eH_Ac9RqfEtVx3k0VrZ8jX0ijad4eRA'},
             success: (res=> {
                 if (res.code == '30010') {
                     //dispatch(getToken(res.data));
                     window.localStorage.appToken = res.data.token;
                     window.localStorage.userid = res.data.userid;
-
-
                     dispatch(getDeviceList())
 
                 } else {
@@ -309,8 +301,11 @@ export function doLogin(sid) {
 
 }
 
-
-
+/**
+ * 获取位置
+ * @param babyid
+ * @returns {Function}
+ */
 export function getMap(babyid) {
     return function (dispatch) {
         return HttpService.query({
@@ -320,27 +315,28 @@ export function getMap(babyid) {
 
             success: (res=> {
 
+                console.log('来了')
+
 
                 console.log(res);
                 if (res.code == '10059') {
 
                     const data = {
 
-                            lng: 0,
-                            lat: 0
+                        lng: 0,
+                        lat: 0
 
                     };
-                     dispatch(GetCurrentTrack(data));
+
                     dispatch(init(116.397428, 39.90923));
 
                     //  dispatch(getAddree(data.lng, data.lat));
 
 
                 } else {
-                     dispatch(GetCurrentTrack(res.data));
-                    //dispatch(init(res.data.lng,res.data.lat))
+
                     dispatch(init(res.data.lng - 0.0065, res.data.lat - 0.0060));
-                    dispatch(getAddree(res.data.lng - 0.0065, res.data.lat - 0.0060));
+
                 }
             })
 
@@ -348,7 +344,10 @@ export function getMap(babyid) {
     }
 }
 
-
+/**
+ * 选取成员关系
+ * @returns {Function}
+ */
 export function getOneBabyid() {
     return function (dispatch) {
         return HttpService.query({
@@ -361,39 +360,32 @@ export function getOneBabyid() {
 
                 if (res.code == 10020) {
 
+                    dispatch(getA(res.data[0].babyid, res.data));
 
 
 
-                     //dispatch(getCurrentPower(res.data[0].babyid));
+                    dispatch(getCurrentPower(res.data[0].babyid));
 
 
-                    dispatch(getA(res.data[0].babyid,res.data));
+                    dispatch(getCurrentTrack(res.data[0].babyid));
 
+                    dispatch(getChecked('false'));
 
-                 if(localStorage.delDevice=='true'){
-
-
-                        dispatch(GetDeviceList(res.data));
-                        // dispatch(A(false))
-
-                        window.localStorage.delDevice='false';
-                    }
-
+                    dispatch(GetDeviceList(res.data));
 
 
                 } else {
 
-
+                    dispatch(getChecked('true'));
                 }
             })
         })
     }
 }
+
+
 //获取设备list
 export function getDeviceList() {
-
-
-
 
     return function (dispatch) {
         return HttpService.query({
@@ -423,8 +415,6 @@ export function getDeviceList() {
                     dispatch(getCurrentTrack(res.data[0].babyid));
 
 
-
-
                 } else {
 
                     dispatch(getChecked('true'));
@@ -436,6 +426,55 @@ export function getDeviceList() {
     }
 
 }
+
+/**
+ * 是否含有家长
+ * @param babyid
+ * @param data
+ * @returns {Function}
+ */
+
+function getA(babyid, data) {
+    return function (dispatch) {
+        return HttpService.query({
+            url: '/app/object/getGuardians',
+            data: {
+                token: localStorage.appToken,
+                babyid: babyid
+            },
+            success: (res=> {
+                console.log(res);
+
+                if (res.code == '10068') {
+
+                    //获取监护人
+                    dispatch(_getGuardians(babyid));
+
+                    var getGuardiansList = res.data;
+
+                    for (var a in getGuardiansList) {
+                        if (getGuardiansList[a].familystatus == '家长') {
+
+                            //宝贝列表
+                            dispatch(GetDeviceList(data));
+
+
+                            // dispatch(GetDeviceList(data));
+                             dispatch(A(true));
+
+                            break;
+                        } else {
+                            dispatch(A(false))
+                        }
+                    }
+
+                }
+
+            })
+        })
+    }
+}
+
 
 
 //获取设备电量
@@ -452,19 +491,16 @@ export function getCurrentPower(babyid) {
                 //dispatch(_getGuardians(babyid));
 
 
-
-
-
                 if (res.code == 10011) {
                     //$scope.powervalue = 0;
                     dispatch(GetCurrentPower('0'));
 
-                    window.localStorage.powerValue='0';
+                    window.localStorage.powerValue = '0';
                 } else {
 
                     dispatch(GetCurrentPower(res.data.powerValue));
 
-                    window.localStorage.powerValue=res.data.powerValue;
+                    window.localStorage.powerValue = res.data.powerValue;
                 }
             })
         })
@@ -473,62 +509,12 @@ export function getCurrentPower(babyid) {
 
 }
 
-function getA(babyid,data) {
-    return function (dispatch) {
-        return HttpService.query({
-            url: '/app/object/getGuardians',
-            data: {
-                token: localStorage.appToken,
-                babyid: babyid
-            },
-            success: (res=> {
-                console.log(res);
 
-                if (res.code == '10068') {
-
-
-                    dispatch(_getGuardians(babyid))
-
-                    var getGuardiansList = res.data;
-
-                    for (var a in getGuardiansList) {
-                        if (getGuardiansList[a].familystatus == '家长') {
-
-                            dispatch(GetDeviceList(data));
-                            dispatch(A(true));
-
-                            break;
-                        } else {
-                            dispatch(A(false))
-                        }
-                    }
-
-
-
-
-                    // console.log(res.data);
-                    //
-                    //
-                    // var getGuardiansList = res.data;
-                    //
-                    // for (var a in getGuardiansList) {
-                    //     if (getGuardiansList[a].familystatus == '家长') {
-                    //         dispatch(A('true'));
-                    //
-                    //         break;
-                    //     } else {
-                    //         dispatch(A('false'))
-                    //     }
-                    // }
-
-                }
-
-            })
-        })
-    }
-}
-
-
+/**
+ * 获取监护人
+ * @param babyid
+ * @returns {Function}
+ */
 export function getGuardianss(babyid) {
     return function (dispatch) {
         return HttpService.query({
@@ -579,7 +565,12 @@ export function getGuardianss(babyid) {
     }
 }
 
-
+/**
+ * 获取监护人
+ * @param babyid
+ * @returns {Function}
+ * @private
+ */
 function _getGuardians(babyid) {
 
     return function (dispatch) {
@@ -597,7 +588,6 @@ function _getGuardians(babyid) {
                     console.log(res.data);
 
                     console.log('++' + list);
-
 
 
                     var getGuardiansList = res.data;
@@ -626,7 +616,6 @@ function _getGuardians(babyid) {
                     dispatch(GetGuardians(list));
 
 
-
                 }
             })
         })
@@ -650,8 +639,8 @@ function getCurrentTrack(babyid) {
 
                     const data = {
 
-                            lng: 0,
-                            lat: 0
+                        lng: 0,
+                        lat: 0
 
                     };
                     dispatch(GetCurrentTrack(data));
@@ -672,7 +661,12 @@ function getCurrentTrack(babyid) {
     }
 }
 
-
+/**
+ * 获取地理
+ * @param lng
+ * @param lat
+ * @returns {Function}
+ */
 function getAddree(lng, lat) {
     return function (dispatch) {
         console.log(lng);
@@ -698,7 +692,12 @@ function getAddree(lng, lat) {
     }
 }
 
-
+/**
+ * 初始化地图
+ * @param lng
+ * @param lat
+ * @returns {Function}
+ */
 function init(lng, lat) {
     return function (dispatch) {
 
@@ -743,37 +742,9 @@ function init(lng, lat) {
         circle.setMap(map);
 
 
-
     }
 
 
-
-
-}
-
-
-
-function geocoder_CallBack(data, cb) {
-    var address = data.regeocode.formattedAddress; //返回地址描述
-    console.log(address);
-
-    add = address;
-
-    getAddr(add);
-
-    return cb()
-
-}
-
-function getAddr(address) {
-
-    // return (dispatch, getState)=> {
-    //     //dispatch(ChangeDevice(data));
-    //     dispatch(Addr(address));
-    // }
-    return function (dispatch, address) {
-        console.log('日日')
-    }
 }
 
 
@@ -820,7 +791,6 @@ export function scanDevice(mdtcode) {
 }
 
 
-
 export function getSafeRegions(babyid) {
     return function (dispatch) {
         return HttpService.query({
@@ -841,10 +811,9 @@ export function getSafeRegions(babyid) {
                     // });
 
 
-                    console.log('------'+res.data.safeRegions);
+                    console.log('------' + res.data.safeRegions);
 
                     dispatch(getSafeRegions1(res.data.safeRegions));
-
 
 
                     // this.props._list=res.data.safeRegions;

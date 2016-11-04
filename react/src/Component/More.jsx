@@ -16,63 +16,61 @@ import Popup  from './common/popup'
 export default class More extends React.Component {
 
 
-    constructor(props){
+    constructor(props) {
         super(props);
 
-        this.state={
-            info:{},
-            admin:{
-
-            }
+        this.state = {
+            info: {},
+            admin: {}
         }
 
         this.config = {
             isSure: false,
             isCancel: false,
-            no:'返回',
-            yes:'确定',
+            no: '返回',
+            yes: '确定',
             yes_cb: ()=> {
 
-              //  alert(this.state.info.isadmin)
+                //  alert(this.state.info.isadmin)
 
 
-                if(!!this.state.info.isadmin){
+                if (!!this.state.info.isadmin) {
                     this.delDevice2()
-                }else{
+                } else {
 
                     this.delDevice()
                 }
 
 
             },
-            no_cb:()=>{
-                 this.context.router.goBack()
+            no_cb: ()=> {
+                this.context.router.goBack()
             }
         };
 
 
     }
 
-    componentWillMount(){
+    componentWillMount() {
 
 
         HttpService.query({
-            url:'/app/object/getBaby',
-            data:{
+            url: '/app/object/getBaby',
+            data: {
                 token: localStorage.appToken,
                 babyid: this.props.params.babyid,
             },
-            success:(res=>{
+            success: (res=> {
                 console.log(res)
-                if(res.code=='10038'){
+                if (res.code == '10038') {
                     this.setState({
-                        info:{
-                            url:'http://qr.liantu.com/api.php?&w=200&text='+res.data.mdtid+'',
-                            mdtid:res.data.mdtid,
-                            telephone:res.data.telephone,
-                            endTime:res.data.endtime,
-                            userid:res.data.userid,
-                            isadmin:res.data.isadmin
+                        info: {
+                            url: 'http://qr.liantu.com/api.php?&w=200&text=' + res.data.mdtid + '',
+                            mdtid: res.data.mdtid,
+                            telephone: res.data.telephone,
+                            endTime: res.data.endtime,
+                            userid: res.data.userid,
+                            isadmin: res.data.isadmin
                         }
                     })
                 }
@@ -82,11 +80,11 @@ export default class More extends React.Component {
     }
 
 
-    deviceCancel(){
+    deviceCancel() {
 
         this.setState({
-            admin:{
-                flag:true
+            admin: {
+                flag: true
             }
         });
 
@@ -94,23 +92,23 @@ export default class More extends React.Component {
         console.log(this.state.info.isadmin);
 
 
-        if(!this.state.info.isadmin){
+        if (!this.state.info.isadmin) {
 
-            var b={
-                content:'解绑设备,确定要解除绑定吗？',
+            var b = {
+                content: '解绑设备,确定要解除绑定吗？',
             }
 
-            this.config= Object.assign({},this.config, b);
+            this.config = Object.assign({}, this.config, b);
 
-        }else{
+        } else {
             var a = {
 
-                content:'解绑设备,解除管理员绑定后,其他监护成员将一同解除,且设备恢复出厂设置,只保留激活状态及设备有效期',
+                content: '解绑设备,解除管理员绑定后,其他监护成员将一同解除,且设备恢复出厂设置,只保留激活状态及设备有效期',
 
             };
 
 
-            this.config= Object.assign({},this.config, a);
+            this.config = Object.assign({}, this.config, a);
 
 
         }
@@ -118,19 +116,19 @@ export default class More extends React.Component {
 
     }
 
-    delDevice2(){
+    delDevice2() {
         HttpService.query({
-            url:'/app/object/cancelBaby2',
-            data:{
+            url: '/app/object/cancelBaby2',
+            data: {
                 token: localStorage.appToken,
                 babyid: this.props.params.babyid,
             },
 
-            success:(res=>{
+            success: (res=> {
                 console.log(res)
-                if(res.code=='10112'){
+                if (res.code == '10112') {
 
-                    window.localStorage.delDevice=true;
+                    window.localStorage.delDevice = true;
 
                     window.location.href = '/#/map/' + localStorage.sid1 + '';
                 }
@@ -140,19 +138,19 @@ export default class More extends React.Component {
     }
 
 
-    delDevice(){
+    delDevice() {
         HttpService.query({
-            url:'/app/object/cancelBaby',
-            data:{
+            url: '/app/object/cancelBaby',
+            data: {
                 token: localStorage.appToken,
                 babyid: this.props.params.babyid,
             },
 
-            success:(res=>{
+            success: (res=> {
                 console.log(res);
-                if(res.code=='10070'){
+                if (res.code == '10070') {
 
-                    window.localStorage.delDevice=true;
+                    window.localStorage.delDevice = 1;
                     window.location.href = '/#/map/' + localStorage.sid1 + '';
                 }
 
@@ -161,21 +159,21 @@ export default class More extends React.Component {
         });
     }
 
-    render(){
+    render() {
 
-        const {info,admin} =this.state;
-        return(
-            <div className="more" style={{background:'#eee',minHeight:'100%'}}>
+        const {info, admin} =this.state;
+        return (
+            <div className="more" style={{background: '#eee', minHeight: '100%'}}>
 
                 <Popup config={this.config} blockOrNone={admin.flag} _flag={admin.flag}/>
                 <R_header left="1" title="更多"/>
-                
+
 
                 <div className="more-content">
                     <div className="barcode">
                         <img src={info.url}/>
 
-                        <div className="mdtid" style={{color:'#333'}}>扫描二维码关注宝贝的设备</div>
+                        <div className="mdtid" style={{color: '#333'}}>扫描二维码关注宝贝的设备</div>
 
                         <div className="mdtid">设备IMEI号:{info.mdtid}</div>
                     </div>
@@ -209,7 +207,8 @@ export default class More extends React.Component {
                     </div>
 
 
-                    <div className="endtime" onClick={this.deviceCancel.bind(this)} style={{marginTop:'1rem',borderTop:'1px solid #eee'}}>
+                    <div className="endtime" onClick={this.deviceCancel.bind(this)}
+                         style={{marginTop: '1rem', borderTop: '1px solid #eee'}}>
                         <div className="img">
                             <img src={deletes} alt=""/>
                         </div>
@@ -219,12 +218,9 @@ export default class More extends React.Component {
                         <div className="select">
 
 
-
                         </div>
 
                     </div>
-
-
 
 
                 </div>
@@ -232,7 +228,6 @@ export default class More extends React.Component {
             </div>
         )
     }
-
 
 
 }

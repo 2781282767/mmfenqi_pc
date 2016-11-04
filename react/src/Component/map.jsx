@@ -5,7 +5,7 @@ import ReactDOM, {render} from 'react-dom';
 
 import {HttpService, Toast, GetCurrentDate} from'../Http';
 
-import {doLogin, change, getOneBabyid, changeSaveBabyStatus,getMap,getCurrentPower,exportMap} from '../action/index'
+import {doLogin, change, getOneBabyid, changeSaveBabyStatus, getMap, getCurrentPower, exportMap} from '../action/index'
 
 
 import {connect} from 'react-redux';
@@ -18,7 +18,6 @@ import '../less/index.less'
 
 import '../less/deviceList.less'
 
-import '../less/my.bootstrap.min.css'
 
 
 import usrimg from '../../src/img/user.png'
@@ -32,7 +31,6 @@ import dian1 from '../../src/img/didianliang.png'
 import dian from '../../src/img/lixian.png'
 
 import lishiguiji from '../../src/img/lishiguiji.png'
-
 
 
 import wifi from '../../src/img/wifi.png'
@@ -76,8 +74,6 @@ import sb from '../../src/img/bind/sb.png'
 import lsb from '../../src/img/bind/lsb.png'
 
 
-
-
 class MapIndex extends React.Component {
     constructor(props) {
         super(props);
@@ -92,20 +88,15 @@ class MapIndex extends React.Component {
             babyname: '',
             babyid: '',
 
-            _isopen: false,
-
-            bbb: false,
-
         };
 
 
     }
 
 
-
     componentWillMount() {
 
-       // window.localStorage.delDevice=false;//是否解绑过设备
+        // window.localStorage.delDevice=false;//是否解绑过设备
 
         window.localStorage.sid1 = this.props.params.sid.replace("+", "%2B").replace(" ", "%20").replace(/\//g, "%2F");
 
@@ -115,18 +106,17 @@ class MapIndex extends React.Component {
             this.props.doLogin(this.props.params.sid);
 
         } else {
+            //是否改变过宝贝 1改了 0没改变
 
+            if (localStorage.delDevice != 1) {
 
-            this.props.getOneBabyid();
+                this.props.getMap(this.props.babyid)
 
-
-            this.props.getMap(this.props.babyid);
+            } else {
+                this.props.getOneBabyid();
+            }
 
         }
-
-
-
-
 
 
         if (this.state.isOpen == false) {
@@ -136,23 +126,18 @@ class MapIndex extends React.Component {
 
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
 
         console.log(this.props.exportMap);
 
         this.props.exportMap.clearMap();
-        var node=document.getElementById('container');
+        var node = document.getElementById('container');
         if (!!node.parentNode) {
             console.log(22);
             node.parentNode.removeChild(node);
         }
-    }
 
-
-
-    componentDidMount() {
-
-
+        window.localStorage.delDevice = 0;
     }
 
 
@@ -205,7 +190,6 @@ class MapIndex extends React.Component {
                     console.log(res);
 
 
-
                     this.props.changeSaveBabyStatus(false);
 
 
@@ -253,10 +237,7 @@ class MapIndex extends React.Component {
         const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked, abc, address, isLogin, datasource}=this.props;
 
 
-
-
         console.log(this.props.exportMap);
-
 
 
         var isOpen = this.state.isOpen;
@@ -385,7 +366,7 @@ class MapIndex extends React.Component {
                 }
 
                 {
-                    !!abc?
+                    !!abc ?
 
                         <div>
                             <div className="_zz"></div>
@@ -629,7 +610,7 @@ class MapIndex extends React.Component {
 
 
                             <div className="option">
-                                <Link to={'/More/'+babyid}>
+                                <Link to={'/More/' + babyid}>
                                     <img src={more} style={{width: '2.3rem', height: '2.3rem'}}/>
                                     <div>更多</div>
                                 </Link>
@@ -671,7 +652,7 @@ const mapStateToProps = state => {
         address: state.login.addr,
         datasource: state.login.datasource,
         isLogin: state.login.isLogin,
-        exportMap:state.login.exportMap
+        exportMap: state.login.exportMap
 
     };
 };
@@ -681,9 +662,9 @@ const mapDispatchToProps = (dispatch) => {
         change: change,
         getOneBabyid: getOneBabyid,
         changeSaveBabyStatus: changeSaveBabyStatus,
-        getMap:getMap,
-        getCurrentPower:getCurrentPower,
-        exportMap:exportMap,
+        getMap: getMap,
+        getCurrentPower: getCurrentPower,
+        exportMap: exportMap,
     }, dispatch);
 };
 export default connect(mapStateToProps, mapDispatchToProps)(MapIndex);

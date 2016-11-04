@@ -4,10 +4,6 @@
 import React, {Component, PropTypes} from 'react';
 import ReactDOM, {render} from 'react-dom';
 
-import {connect} from 'react-redux';
-
-import {bindActionCreators} from 'redux';
-
 import {R_header} from './common/index'
 
 import codes from '../../src/img/code.png'
@@ -25,17 +21,23 @@ export default class VerifyText extends React.Component {
             timer: 120,
             val: '',
             bg: 'app-blue-radius-button',
-
             bg2: 'app-little-pink-radius-button'
         };
+        this.countdown = []
     }
 
     componentWillMount() {
 
     }
 
+    componentWillUnmount() {
+        clearInterval(this.countdown);
+    }
+
 
     getCode() {
+
+        var self = this;
 
         if (this.state.disabled) {
             return;
@@ -50,20 +52,24 @@ export default class VerifyText extends React.Component {
                 module: 'scandevice',
                 mdtid: this.props.params.mdtid
             },
-            success: function (res) {
+            success: (res)=> {
 
                 console.log(res);
 
                 if (res.code == 10004) {
 
-                    this.setState({
+                    console.log(2222)
+
+                    console.log(self)
+
+                    self.setState({
                         disabled: true,
                         text: '119s后重新获取',
                         timer: 119,
                         bg: 'app-blue-radius-check-button'
                     });
-                    var self = this;
-                    var tm = setInterval(function () {
+
+                    this.countdown = setInterval(function () {
                         var tt = self.state.timer - 1;
                         if (tt <= 0) {
                             self.setState({
@@ -72,7 +78,7 @@ export default class VerifyText extends React.Component {
                                 timer: 120,
                                 bg: 'app-blue-radius-button'
                             });
-                            clearInterval(tm);
+                            clearInterval(this.countdown);
                             return;
                         }
                         self.setState({
@@ -88,7 +94,7 @@ export default class VerifyText extends React.Component {
                     // $scope.verifyStatus = true;
                 }
 
-            }.bind(this)
+            }
         })
 
 
@@ -123,6 +129,8 @@ export default class VerifyText extends React.Component {
 
                 if (res.code == 10080) {
 
+                    window.localStorage.delDevice = 1;
+
                     window.location.href = '/#/map/' + localStorage.sid1 + '';
                 } else {
 
@@ -139,42 +147,52 @@ export default class VerifyText extends React.Component {
         const {bg2} =this.state;
 
         return (
-            <div className="container" style={{background: '#eee', minHeight: '100%'}}>
-                {/*<form onSubmit={this.next.bind(this,)} name="form">*/}
-                <div className="col-xs-12 text-center"
-                     style={{padding: '2rem 0 1.5rem 0', fontSize: '1.4rem', color: '#333333'}}>
-                    请向设备管理员({phone})索取验证码
-                </div>
-                <div className="col-xs-12 app-white-input" style={{lineHeight: '3rem'}}>
-                    <div className="col-xs-2 text-right" style={{paddingLeft: 0}}>
 
-                        <img src={codes} style={{width: '2.2rem'}}/>
+            <div style={{background: '#eee', minHeight: '100%'}}>
+                <R_header left="1" title='填写验证码'/>
 
 
+                <div className="container" style={{background: '#eee', minHeight: '100%'}}>
+
+
+                    {/*<form onSubmit={this.next.bind(this,)} name="form">*/}
+                    <div className="col-xs-12 text-center"
+                         style={{padding: '2rem 0 1.5rem 0', fontSize: '1.4rem', color: '#333333'}}>
+                        请向设备管理员({phone})索取验证码
                     </div>
-                    <div className="col-xs-6" style={{paddingLeft: 0}}><input id="number" type="text"
-                                                                              placeholder="请输入验证码"
-                                                                              onChange={this.changeValue.bind(this)}
-                                                                              required
-                                                                              style={{
-                                                                                  width: '100%',
-                                                                                  verticalAlign: 'middle'
-                                                                              }}/></div>
-                    <div className="col-xs-4 text-right" style={{padding: '0'}}>
-                        <div className={this.state.bg} style={{textAlign: 'center'}}
-                             onClick={this.getCode.bind(this)}>
-                            {this.state.text}
+                    <div className="col-xs-12 app-white-input" style={{lineHeight: '3rem'}}>
+                        <div className="col-xs-2 text-right" style={{paddingLeft: 0}}>
+
+                            <img src={codes} style={{width: '2.2rem'}}/>
+
+
+                        </div>
+                        <div className="col-xs-6" style={{paddingLeft: 0}}><input id="number" type="text"
+                                                                                  placeholder="请输入验证码"
+                                                                                  onChange={this.changeValue.bind(this)}
+                                                                                  required
+                                                                                  style={{
+                                                                                      width: '100%',
+                                                                                      verticalAlign: 'middle'
+                                                                                  }}/></div>
+                        <div className="col-xs-4 text-right" style={{padding: '0'}}>
+                            <div className={this.state.bg} style={{textAlign: 'center'}}
+                                 onClick={this.getCode.bind(this)}>
+                                {this.state.text}
+                            </div>
                         </div>
                     </div>
+
+                    <label style={{display: 'block'}}>
+
+                        <div className={"col-xs-12  text-center " + bg2} onClick={this.go.bind(this)}
+                             style={{marginTop: '1.5rem', fontSize: '1.6rem'}}>添加
+                        </div>
+                        <button type="submit" style={{display: 'none'}}></button>
+                    </label>
+
                 </div>
 
-                <label style={{display: 'block'}}>
-
-                    <div className={"col-xs-12  text-center " + bg2} onClick={this.go.bind(this)}
-                         style={{marginTop: '1.5rem', fontSize: '1.6rem'}}>添加
-                    </div>
-                    <button type="submit" style={{display: 'none'}}></button>
-                </label>
 
             </div>
         )
