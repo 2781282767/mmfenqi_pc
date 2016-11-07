@@ -16,7 +16,9 @@ import one from '../../src/img/1.png'
 import two from '../../src/img/2.png'
 import three from '../../src/img/3.png'
 
-import {DatePicker} from './date'
+import DatePicker from '../Component/datepicker/DatePicker'
+
+import '../less/date-picker.less'
 
 
 export default class About extends React.Component {

@@ -19,8 +19,16 @@ import DatePanel, {SinglePicker, RangePicker} from 'date-picker-react';
 import yichang from '../img/yichangss.png'
 import chidao from '../../src/img/chidao.png'
 import zaodui from '../../src/img/zaodui.png'
-import {DatePicker} from 'react-ui-component'
-import  'react-ui-component/css/date-picker.less';
+ // import {DatePicker} from 'react-ui-component'
+// import  'react-ui-component/css/date-picker.less';
+
+
+
+import DatePicker2 from '../Component/DatePicker/DatePicker2'
+
+
+import '../less/date-picker.less'
+
 
 
 export default class App extends React.Component {
@@ -107,7 +115,7 @@ export default class App extends React.Component {
 
                         <li>
 
-                            <DatePicker onChange={this.handleValChange.bind(this)}/>
+                            <DatePicker2 onChange={this.handleValChange.bind(this)}/>
 
                         </li>
 

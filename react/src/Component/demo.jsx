@@ -2,14 +2,17 @@
 
 import React, {Component, PropTypes} from 'react';
 
-import Picker from 'react-mobile-picker';
+// import Picker from 'react-mobile-picker';
 
 import ReactDOM, {render} from 'react-dom';
 
-import NamePicker from './NamePicker'
+// import NamePicker from './NamePicker'
 
 
-import '../../src/less/example.less'
+// import DatePicker from '../Component/DatePicker/DatePicker'
+
+
+// import '../../src/less/example.less'
 
 
 
@@ -20,6 +23,11 @@ import '../../src/less/example.less'
 export default class Demo extends Component {
     constructor(props) {
         super(props);
+    }
+
+
+    handleValChange(value){
+        alert(value)
     }
 
 
@@ -37,7 +45,9 @@ export default class Demo extends Component {
             //     </main>
             // </div>
             <div>
+                {/*<DatePicker onChange={this.handleValChange.bind(this)}/>*/}
 
+                sss
 
             </div>
         );
