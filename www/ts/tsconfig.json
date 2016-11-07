@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/",
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "commonjs",
     "target": "es5",
-    //"module": "commonjs",
-    "jsx": "react",
-    //"jsx":"preserve",
-    "sourceMap": true
+    "jsx": "react"
   },
-  "exclude": [
-    "node_modules"
+  "files": [
+    "./src/components/hellow.tsx",
+    "./src/index.tsx"
   ]
 }
