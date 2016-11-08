@@ -99,6 +99,9 @@ export default class Guardian extends Component {
             }
         };
 
+        this.isAndroid=false;
+        this.isiOS=false
+
 
     }
 
@@ -108,6 +111,10 @@ export default class Guardian extends Component {
     }
 
     componentWillMount() {
+
+        let u = navigator.userAgent;
+        this.isAndroid = u.indexOf('Android') > -1 || u.indexOf('Adr') > -1; //android终端
+        this.isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
 
         this.getGuardianList();
 
@@ -527,6 +534,7 @@ export default class Guardian extends Component {
     }
 
     TouchMoves(index, param1, param2, step, tel, admin, wo, e) {
+        e.preventDefault();
 
 
         if (!this.state.hasJ || tel == '' || (!!admin && !!wo)) {
@@ -554,9 +562,43 @@ export default class Guardian extends Component {
         } else if (this.starty - touchobj.clientY < -numRange) {
             console.log('下')
 
-        } else {
+        } else if(this.startx - touchobj.clientX > 1) {
 
-            e.preventDefault();
+            console.log('进来了');
+
+            console.log(self.state.hasDelete);
+
+
+            if (!!self.state.hasDelete) {
+                return
+            }
+
+
+            self.setState({
+                classleft1: {
+                    width: contentwidth - parseInt(contentwidth / 4),
+                    transition: 'all 0.1s ease-in',
+
+                },
+                classright1: {
+                    width: parseInt(contentwidth / 4),
+                    transition: 'all 0.1s ease-in',
+
+                },
+
+                hasDelete: true
+            });
+
+
+            itemstyle.width = contentwidth - parseInt(contentwidth / 4) + 'px';
+
+
+            itemstyle.transition = self.state.classleft1.transition;
+
+
+            deletestyle.width = parseInt(contentwidth / 4) + 'px';
+            deletestyle.transition = self.state.classright1.transition;
+
         }
 
 
@@ -591,7 +633,9 @@ export default class Guardian extends Component {
         } else {
 
 
-            if (this.startx == touchobj.clientX) {
+            if (this.startx == touchobj.clientX&& !!self.state.hasDelete) {
+
+                e.preventDefault();
 
                 self.setState({
                     classleft1: {
@@ -604,13 +648,11 @@ export default class Guardian extends Component {
                         transition: 'all 0.1s ease-out',
 
 
-                    }
-                });
-
-
-                self.setState({
+                    },
                     hasDelete: false
                 });
+
+
 
 
                 itemstyle.width = contentwidth + 'px';
@@ -656,6 +698,37 @@ export default class Guardian extends Component {
                 deletestyle.width = parseInt(contentwidth / 4) + 'px';
                 deletestyle.transition = self.state.classright1.transition;
 
+            }else{
+
+
+                if(self.isAndroid&&!!self.state.hasDelete){
+                    e.preventDefault();
+                }
+                self.setState({
+                    classleft1: {
+                        width: contentwidth,
+
+                        transition: 'all 0.1s  ease-out',
+
+                    },
+                    classright1: {
+                        width: '0',
+                        transition: 'all 0.1s ease-out',
+
+
+                    },
+                    hasDelete: false
+                });
+
+
+
+                itemstyle.width = contentwidth + 'px';
+
+                itemstyle.transition = self.state.classleft1.transition;
+
+
+                deletestyle.width = 0 + 'px';
+                deletestyle.transition = self.state.classright1.transition;
             }
         }
 
