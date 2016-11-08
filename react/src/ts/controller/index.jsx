@@ -9,9 +9,9 @@ import ReactDOM, {render} from 'react-dom';
 import {connect} from 'react-redux';
 
 
-import * as action from './action/index'
+import * as action from '../../action/index'
 
-import '../src/less/index.less';
+import '../../less/index.less';
 
 
 
