@@ -1,0 +1,1 @@
+{"version":3,"file":"AccordionReducer.js","sourceRoot":"","sources":["AccordionReducer.ts"],"names":[],"mappings":"AACA;;;GAGG;AACH,MAAM,cAAc,GACnB;IACC,IAAI,EAAC;QACJ,IAAI,EAAC,IAAI;KACT;CACD,CAAA;AACF,iCAAiC,KAAK,GAAG,cAAc,EAAE,MAAM;IAC9D,MAAM,CAAC,CAAC,MAAM,CAAC,IAAI,CAAC,CAAC,CAAC;QACrB;YACC,MAAM,CAAC,KAAK,CAAA;IACd,CAAC;AACF,CAAC"}

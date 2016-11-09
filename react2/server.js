@@ -36,10 +36,10 @@ var server = new WebpackDevServer(webpack(config), {
 
 //将其他路由，全部返回index.html
 server.app.get('*', function (req, res) {
-    res.sendFile(__dirname + '/index.html')
+    res.sendFile(__dirname + '/map.html')
 });
 
-server.listen(8012, '192.198.0.157');
+server.listen(8030, '192.198.0.157');
 
 
 

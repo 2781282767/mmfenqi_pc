@@ -1,0 +1,144 @@
+@import url('../../css/all.less');
+@import url('menu_demo.less');
+@import url('carousel_demo.less');
+@import url('pin_demo.less');
+
+a {
+    color: @blue;
+}
+
+body {
+    font-size: 15px;
+    line-height: 22px;
+}
+
+ul {
+    padding: 0;
+}
+
+.table {
+    display: table;
+    width: 100%;
+    .row {
+        display: table-row;
+    }
+
+    .cell {
+        vertical-align: middle;
+        display: table-cell;
+    }
+}
+
+.center {
+    text-align: center;
+}
+
+.container {
+    width: 1080px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.header {
+    padding: 50px 0;
+    color: @white;
+    background: @black_b;
+    span {
+        font-size: 14px;
+        &+span{
+            margin-left: 20px;
+        }
+    }
+    a {
+        color: @yellow;
+    }
+}
+
+.footer {
+    a {
+        color: @red;
+    }
+}
+
+.wrapper {
+    background: @white;
+}
+
+ul {
+    ._display {
+        padding: 5px 0;
+        display: inline-block;
+    }
+}
+
+._disabled {
+    color: @gray_a !important;
+    cursor: not-allowed !important;
+}
+
+.gap-word {
+    span+span {
+        &:before {
+            content: ',';
+            margin-right: 3px;
+        }
+        margin-left: 3px;
+    }
+}
+
+#demo_list {
+    overflow: hidden;
+    .demo-nav {
+        padding: 10px;
+        width: 220px;
+        float: left;
+        a.active {
+            color: @black;
+        }
+    }
+    .children {
+        min-height: 1000px;
+        margin-left: 240px;
+        padding: 10px;
+        >div {
+            >ul, >ol {
+                >li {
+                    margin-bottom: 20px;
+                }
+                &.two {
+                    >li {
+                        float: left;
+                        width: 50%;
+                        display: inline-block;
+                    }
+                }
+                &.three {
+                    >li {
+                        float: left;
+                        width: 33.3%;
+                        display: inline-block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+pre {
+    margin: 10px 0;
+    padding: 10px;
+    background: @white_a;
+    white-space: pre;
+    overflow-y: hidden;
+    display: block;
+    overflow-x: auto;
+    code {
+        font-family: Monaco monospace;
+        font-size: 12px;
+        letter-spacing: 1px;
+        line-height: 20px;
+        overflow-y: hidden;
+        display: block;
+        color: @green;
+    }
+}

@@ -8,6 +8,10 @@ import login from './user';
 import safe from './safetyarea';
 
 
+// import HeaderReducer from '../redux/reducers/HeaderReducer'
+// import MenuReducers from '../redux/reducers/MenuReducer';
+
+
 const rootReducer = combineReducers({
     login,safe
 });

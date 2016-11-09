@@ -16,6 +16,68 @@
     <script language="javascript" src="/assets/lib/js/jquery-2.2.4.min.js"></script>
 
 </head>
+
+<style>
+    .add-device{
+        position: absolute;
+        width: 100%;
+        height:100%;
+        z-index: 400;
+        top: 0;
+        left:0;
+        background-color: #000000;
+        opacity: 0.5;
+
+    }
+
+    .add-device-content{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        z-index: 1000;
+        display: flex;
+
+    }
+
+    .aaacontent{
+        display: flex;
+        flex: 1;
+        align-items: center;
+
+        justify-content: center;
+
+    }
+
+    ._btn {
+        position: absolute;
+        left: 6rem;
+        bottom: 5rem;
+        font-weight: 400;
+        text-align: center;
+        cursor: pointer;
+        line-height: 1.5;
+        width: 100px;
+        padding: 10px;
+        border-radius: 6px;
+    }
+
+    .btn_btn {
+        color: #fff;
+        background-color: #00b4ed;
+        border-color: #00b4ed;
+    }
+
+    .btn_btn a{
+        text-decoration: none;
+        color: #fff
+    }
+
+</style>
 <body ng-app="app" ng-controller="mapCtrl">
 <div>
     <div class="container" style="background-color: #ffffff;">
@@ -71,6 +133,35 @@
         <img src="/assets/images/dingwei.png" style="width: 2.8rem;">
         <div>定位</div>
     </div>
+
+    <div ng-if="aa">
+        <div class="add-device">
+
+        </div>
+
+        <div class="add-device-content">
+            <div class="aaacontent">
+                <div style="width:20rem;height:25rem;position: relative" }}>
+
+
+
+                <img src="/assets/images/yichange.png" style="width: 20rem;height: 22rem" />
+
+                    <div class="_btn btn_btn"><a href="tel:400-655-3588">电话咨询</a></div>
+
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+</div>
+
+
 
     <div ng-if="checked">
         <div class="_z"></div>
@@ -266,7 +357,15 @@
 
         var lat = 0;
         var lng = 0;
-        var sid = $scope.getUrlParam("sid") || 'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
+
+
+         //eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI5NTIxIiwiaWF0IjoxNDc2MTgyMTE0LCJzdWIiOiIiLCJpc3MiOiIxODEwMTg4NzM5OCIsImF1ZCI6Imd1YXJkaWFuIn0.LA4VS4ow0ba-nzE47b8NCZV257Mr3UZIhznZrHJh8JU
+        //eyJhbGciOiJIUzI1NiJ9.eyJqdGkiOiI4NzU2IiwiaWF0IjoxNDc2MTgyMjMyLCJzdWIiOiLpu4TlhbToiJ8iLCJpc3MiOiIxMzg2ODExMzIyOSIsImF1ZCI6Imd1YXJkaWFuIn0.gE_mqXex__Nbi6ogBa8w4kvb4NDuYCE00BHDhH_F94M
+
+        // var sid = $scope.getUrlParam("sid") || 'O5QaeMlrCNPI91Ux016a1IOKub3DeOowT9EugDMYn4L7jOxTD2E-sY6V9Tgpk0uoiQk4DX2WP2qyFOllkciZXYg_ObvxmG6niYR3_DMF728Ul0HRb5qd2cDZdLwinOeZVL6BROmg-V0W5BcCRJvGhg';
+
+
+        var sid=$scope.getUrlParam("sid");
         $scope.doLogin = function (success) {
             mapService.doLogin().query({
                 sid: sid
@@ -277,6 +376,10 @@
                     window.localStorage.appToken = res.data.token;
                     console.log(localStorage.appToken);
                     return success()
+                }else{
+
+                    $scope.aa=true;
+                    //Toast('账号异常，请联系管理员', 3000);
                 }
             })
         };
@@ -342,6 +445,11 @@
                 if ("10060" == $scope.latlng.code) {
                     lng = $scope.latlng.data.lng;
                     lat = $scope.latlng.data.lat;
+
+                    console.log(lng);
+                    console.log(lat);
+
+
                     var map = new BMap.Map("allmap");
                     var point = new BMap.Point(lng, lat);
                     var marker = new BMap.Marker();
@@ -562,41 +670,44 @@
 
         console.log(window.localStorage.babyName);
 
-        if (!!window.localStorage.babyName) {
 
-            console.log(localStorage.appToken);
+        $scope.doLogin(function () {
 
-            $scope.babyid = localStorage.getItem('babyid');
-            $scope.babytelephone = localStorage.getItem('babytelephone');
-            $scope.babyName = localStorage.getItem('babyName');
             $scope.getDeviceList(function () {
                 $scope.getTrack(function () {
                     $scope.getCurrentPower(function () {
                         $scope.getGuardians(function () {
 
-                            console.log('来了');
+                            console.log(localStorage.appToken);
                         });
                     })
 
                 });
             })
-        } else {
-            $scope.doLogin(function () {
 
-                $scope.getDeviceList(function () {
-                    $scope.getTrack(function () {
-                        $scope.getCurrentPower(function () {
-                            $scope.getGuardians(function () {
+        });
 
-                                console.log(localStorage.appToken);
-                            });
-                        })
-
-                    });
-                })
-
-            });
-        }
+//        if (!!window.localStorage.babyName) {
+//
+//            console.log(localStorage.appToken);
+//
+//            $scope.babyid = localStorage.getItem('babyid');
+//            $scope.babytelephone = localStorage.getItem('babytelephone');
+//            $scope.babyName = localStorage.getItem('babyName');
+//            $scope.getDeviceList(function () {
+//                $scope.getTrack(function () {
+//                    $scope.getCurrentPower(function () {
+//                        $scope.getGuardians(function () {
+//
+//                            console.log('来了');
+//                        });
+//                    })
+//
+//                });
+//            })
+//        } else {
+//
+//        }
 
 
         //localStorage.clear();
