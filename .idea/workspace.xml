@@ -5,57 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a36e099-482e-4a07-8c70-d68ab910576d" name="Default" comment="Merge branch 'master' of github.com:LiFBoy/mmfenqi_pc&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/modules.xml&#10;#&#9;.idea/workspace.xml&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/jsLinters/tslint.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/typescript-compiler.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/sb.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/Component/appBody.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/Component/appMenu.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/Component/componentsConfig.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/Component/demo2.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/Component/map.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/action/index.jsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/less/app.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/pub/Config.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/pub/Cookie.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/pub/Flash.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/pub/Hello.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/pub/LocalStorage.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/pub/Tool.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/AccordionReducer.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/FormVerifierReducer.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/LoginAction.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/RegistAction.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/actions/HeaderAction.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/actions/MenuAction.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/actions/menu.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/reducers/HeaderReducer.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/reducers/MenuReducer.1.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/reducers/MenuReducer.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/store/BaseStore.1.ts" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/src/redux/store/BaseStore.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ts/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ts/src/components/hello.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ts/tsconfig.json" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/react2/src/Route.jsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/react2/src/map.jsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/universal-starter" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/react2/src/Component/demo.jsx" afterPath="$PROJECT_DIR$/react2/src/Component/Header.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/react2/.gitignore" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.html" afterPath="$PROJECT_DIR$/app.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/assets/css/style.css" afterPath="$PROJECT_DIR$/assets/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/demo.html" afterPath="$PROJECT_DIR$/demo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/map.html" afterPath="$PROJECT_DIR$/map.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/package.json" afterPath="$PROJECT_DIR$/react2/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/server.js" afterPath="$PROJECT_DIR$/react2/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/Template/map.html" afterPath="$PROJECT_DIR$/react2/src/Template/map.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/less/date-picker.less" afterPath="$PROJECT_DIR$/react2/src/less/date-picker.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/less/index.less" afterPath="$PROJECT_DIR$/react2/src/less/index.less" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/reducers/index.jsx" afterPath="$PROJECT_DIR$/react2/src/reducers/index.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/store/index.js" afterPath="$PROJECT_DIR$/react2/src/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/tsconfig.json" afterPath="$PROJECT_DIR$/react2/tsconfig.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/webpack.config.js" afterPath="$PROJECT_DIR$/react2/webpack.config.js" />
     </list>
     <list id="e4688fa8-57c4-4e7e-a30d-e7d9d3335b68" name="Failed commit: Default" comment="ng2&#10;" />
     <list id="a5987c3e-2f90-4bc8-b962-67a5dc4e654b" name="Failed commit: Default (2)" comment="'下班'" />
@@ -80,14 +31,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="map.tsx" pinned="false" current-in-tab="true">
+      <file leaf-file-name="map.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/react2/src/Component/map.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="144">
-              <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="0">
+              <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -114,14 +63,12 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="BaseStore.1.ts" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react2/src/redux/store/BaseStore.1.ts">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/react2/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding>
-                <element signature="e#0#69#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -296,6 +243,7 @@
     <handled-path value="$PROJECT_DIR$/typescript-webpack-react-antd/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
+    <option name="x" value="-3" />
     <option name="y" value="23" />
     <option name="width" value="1920" />
     <option name="height" value="977" />
@@ -546,169 +494,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="redux" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="redux" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="redux" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="reducers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pub" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Component" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="www" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="react2" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
+              <option name="myItemId" value="react" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -735,19 +521,19 @@
     <property name="js-tslint-package" value="$PROJECT_DIR$/../../lib/node_modules/tslint" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/react2" />
+      <recent name="$PROJECT_DIR$/react2/src/redux" />
+      <recent name="$PROJECT_DIR$/react2/src" />
+      <recent name="$PROJECT_DIR$/react2/src/less" />
+      <recent name="$PROJECT_DIR$/react2/src/Component" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/react2/src/reducers/user" />
       <recent name="$PROJECT_DIR$/react2/src/redux/reducers" />
       <recent name="$PROJECT_DIR$/ts/src" />
       <recent name="$PROJECT_DIR$/react2" />
       <recent name="$PROJECT_DIR$/react2/src" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/react2/src/redux" />
-      <recent name="$PROJECT_DIR$/react2/src" />
-      <recent name="$PROJECT_DIR$/react2/src/less" />
-      <recent name="$PROJECT_DIR$/react2/src/Component" />
-      <recent name="$PROJECT_DIR$/react/src/less" />
     </key>
   </component>
   <component name="RunManager">
@@ -906,7 +692,7 @@
       <workItem from="1478593002008" duration="18102000" />
       <workItem from="1478670747161" duration="5281000" />
       <workItem from="1478676069866" duration="2102000" />
-      <workItem from="1478678224323" duration="7589000" />
+      <workItem from="1478678224323" duration="7818000" />
     </task>
     <task id="LOCAL-00001" summary="'add'">
       <created>1474195418641</created>
@@ -961,7 +747,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="853170000" />
+    <option name="totallyTimeSpent" value="853399000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -973,8 +759,8 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="true" />
+    <frame x="-3" y="23" width="1920" height="977" extended-state="6" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15060559" sideWeight="0.8092949" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299435" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -982,7 +768,7 @@
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32542372" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24960506" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3920904" sideWeight="0.49815693" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.19887006" sideWeight="0.49815693" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.15060559" sideWeight="0.19070514" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1044,14 +830,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/react2/src/Component/ComponentsConfig.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react2/src/Component/ComponentsConfig.js.map">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -1408,16 +1186,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/react2/src/redux/RegistAction.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/react2/src/redux/store/BaseStore.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -1479,11 +1247,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/react2/src/Component/map.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="8" column="39" selection-start-line="8" selection-start-column="39" selection-end-line="8" selection-end-column="39" />
+        <state relative-caret-position="0">
+          <caret line="0" column="31" selection-start-line="0" selection-start-column="31" selection-end-line="0" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react2/src/redux/RegistAction.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#0#31#0" expanded="true" />
+            <element signature="e#0#35#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react2/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
