@@ -8,8 +8,10 @@ import {changeActiveAction,switchMenu} from '../../redux/actions/MenuAction';
 import {getAuthAction} from '../../redux/actions/HeaderAction';
 
 import headerMenu from './header_menu';
-
-import '../../../styles/less/app.less'
+import { Spin, Switch, Alert } from 'antd';
+// import '../../../styles/less/app.less';
+// require('../../../styles/app.css')
+// require('../../../styles/app.css.map')
 
 console.log(headerMenu)
 const css_prefix = ComponentsConfig.css_prefix;
@@ -24,6 +26,16 @@ class AppBody extends React.Component<any,any> {
     
     constructor(props){
         super(props);
+        this.state={
+            uiIndex:false,
+        }
+    }
+
+    handleSearch(flag){
+        console.log(flag);
+        this.setState({
+            uiIndex:flag
+        })
     }
     /**
      * body 主容器 包括头部和菜单 <AppHeader /> <AppMenu  />
@@ -34,7 +46,17 @@ class AppBody extends React.Component<any,any> {
         console.log(children)
         let Cls = MenuReducers.menuSwitch ? adCls : adCls + " off";
         return (<div className={`${css_prefix}-body`}>
-                    <AppHeader menuComponent={headerMenu} meu_reducers={MenuReducers} hed_reducers={HeaderReducer} actions = {Actions}/>
+
+                <div className="ui-index-none" style={{display:!!this.state.uiIndex? 'block':'none'}}>
+                    <div className="ui-index">
+                    </div>
+                    <div className="ui-index-content">
+                        <Spin size="large" />
+                    </div>
+                </div>
+
+
+                    <AppHeader handleSearch={this.handleSearch.bind(this)} menuComponent={headerMenu} meu_reducers={MenuReducers} hed_reducers={HeaderReducer} actions = {Actions}/>
                     <div className = { Cls }>
                         <AppMenu />
                         <div className={`${css_prefix}-container`}>

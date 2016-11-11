@@ -14,21 +14,19 @@
     <meta name="HandheldFriendly" content="True">
     <meta name="mobile-web-app-title" content="react组件">
     <meta name="apple-mobile-web-app-title" content="react组件">
-    
-    <link rel="stylesheet" href="/styles/iconfont.css">
-    
-    <link rel="stylesheet" href="/lib/zTree_v3-master/css/zTreeStyle/zTreeStyle.css">
-    
-    
-    <script src="/common/application.config.js"></script>
-    
+    <%for (var css in htmlWebpackPlugin.options.addLinkCss) {%>
+    <link rel="stylesheet" href="<%= htmlWebpackPlugin.options.addLinkCss[css] %>">
+    <%}%>
+    <%for (var js in htmlWebpackPlugin.options.addmommonScript) {%>
+    <script src="<%= htmlWebpackPlugin.options.addmommonScript[js] %>"></script>
+    <%}%>
 
-    <!--<link rel="stylesheet" href="/styles/antd.css" />-->
+    <link rel="stylesheet" href="/styles/antd.css" />
     <link rel="stylesheet" href="/styles/iconfont.css" />
     <link rel="stylesheet" href="/styles/common.css" />
 </head>
 
 <body>
 <div id="example"></div>
-<script type="text/javascript" src="/dist/common.js?08779b05e8c189f82e3d"></script><script type="text/javascript" src="/dist/AccordionContainer.js?08779b05e8c189f82e3d"></script></body>
+</body>
 </html>

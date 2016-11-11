@@ -4,7 +4,7 @@
 //API接口 配置模块 全局注入
 (function(){
         function basePath (){
-                return 'http://192.198.0.157:8036';
+                return 'http://192.198.0.151:8037';
                 //return 'http://cwgjad1.api1.cheweiguanjia.com/'
         }
         window.applicationConfig = {

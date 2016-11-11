@@ -79,18 +79,20 @@ class LoginApp extends React.Component<any, any> {
                 <InputText type="test" placeholder="请输入您的用户名"
                            onChange={(event) => this.valueChange('accout', event.target.value) }/>
             </div>
-            <div className="login-item">
-                <span className="item-icon"><Icon type="mm"/></span>
-                <InputText type="password" placeholder="请输入您的用户名"
-                           onChange={(event) => this.valueChange('password', event.target.value) }/>
-            </div>
-            <div className="login-btn-box">
-                <form action="#" onSubmit={this.sublimeButton.bind(this)}>
+            <form action="#" onSubmit={this.sublimeButton.bind(this)}>
+                <div className="login-item">
+                    <span className="item-icon"><Icon type="mm"/></span>
+                    <InputText type="password" placeholder="请输入您的用户名"
+                               onChange={(event) => this.valueChange('password', event.target.value) }/>
+                </div>
+                <div className="login-btn-box">
+
                     <Buttons type="primary" display="block">
                         登录
                     </Buttons>
-                </form>
-            </div>
+
+                </div>
+            </form>
         </div>
     }
 

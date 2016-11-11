@@ -119,7 +119,24 @@ var config = {
             {
                 test: /\.less$/,
                 loader: "style!css!less"
-            }
+            },
+
+            {
+                test: /\.(eot|woff|svg|ttf|woff2|gif|appcache)(\?|$)/,
+                exclude: /^node_modules$/,
+                loader: 'file-loader?name=[name].[ext]'
+            },
+            {
+                test: /\.(png|jpg)$/,
+                exclude: /^node_modules$/,
+                loader: 'url?limit=25000' //注意后面那个limit的参数，当你图片大小小于这个限制的时候，会自动启用base64编码图片
+            },
+
+            // {
+            //     test: /\.css$/,
+            //     exclude: /^node_modules$/,
+            //     loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader')
+            // }
             /*{
                 test:   /\.css$/,
                 loader: 'style!css'
@@ -181,6 +198,7 @@ fileNames.forEach(function(v){
     if(v.match(regtsx)){
         var chunksContainer = titleCase3(v.match(regtsx)[0]) + 'Container';
         var htmlConfig = {
+            addLinkCss:app_config.addLinkCss,
             addmommonScript:app_config.addmommonScript,
             template: viewPath +'/'+ v,
             //输出html的文件名，依赖于输出环境目录下

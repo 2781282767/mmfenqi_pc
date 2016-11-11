@@ -25,4 +25,4 @@ new WebpackDevServer(webpack(config), {
         colors: true,
         progress: true
     }
-}).listen(8036, '192.198.0.157');
+}).listen(8037, '192.198.0.151');

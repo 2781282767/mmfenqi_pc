@@ -17,6 +17,8 @@ var webpack           = require('webpack');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 //提取公用CSS
 var ExtractTextPlugin = require("extract-text-webpack-plugin");
+
+
 var node_modules = path.resolve(__dirname, 'node_modules');
 //网站根目录
 var pathToBuild  = path.resolve(__dirname,app_config.pathToBuild);
@@ -178,6 +180,7 @@ fileNames2.forEach(function(v){
     if(v.match(regtsx)){
         var chunksContainer = titleCase3(v.match(regtsx)[0]) + 'Container';
         var htmlConfig = {
+            addLinkCss:app_config.addLinkCss,
             addmommonScript:app_config.addmommonScript,
             template: viewPath +'/'+ v,
             //template: './www/view/'+ v,

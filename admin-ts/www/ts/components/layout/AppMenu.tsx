@@ -105,6 +105,7 @@ class AppMenu extends React.Component<AppMenuProps, any>{
         return (
             <div className={`${css_prefix}-menu`}>
                 <ul className={`${css_prefix}-menu-parent`}>
+                    <li style={{fontSize:'14px',padding:'10px'}}>我的菜单</li>
                     {MenuReducers.menuList.map(this.createItem) }
                 </ul>
             </div>

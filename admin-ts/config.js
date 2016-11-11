@@ -16,7 +16,10 @@ var AppConfig = {
   htmlFileName:'pages',
   //公用样式配置
   addLinkCss:['/styles/iconfont.css',
-  '/lib/zTree_v3-master/css/zTreeStyle/zTreeStyle.css'],
+  '/lib/zTree_v3-master/css/zTreeStyle/zTreeStyle.css'
+
+  ],
+
   //公用脚本配置
   addmommonScript:[
     '/common/application.config.js',
