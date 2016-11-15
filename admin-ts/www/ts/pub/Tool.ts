@@ -12,13 +12,11 @@ export default class Tool{
      * 实现跳转功能，参数为跳转的路径 exLinks 为true 需传入整个URL 如:http://www.baidu.com
      */
     static goPush(path: string) {
-        console.log(path)
+        console.log(path);
         if (path.indexOf('http') != -1) {
             window.location.href = path;
             return false;
         }
-
-
         window.location.href = TelBaseUrl + path + '.html';
     }
 

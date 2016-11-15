@@ -14,7 +14,7 @@ var plugins = [];
      }
  }));
 
-plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false, drop_console: true}}));//代码压缩
+// plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false, drop_console: true}}));//代码压缩
 
 
 
@@ -77,7 +77,7 @@ module.exports = {
 
                 test: /\.css$/,
                 exclude: /^node_modules$/,
-                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader','css-loader!postcss-loader')
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader')
             }, {
                 test: /\.less/,
                 exclude: /^node_modules$/,

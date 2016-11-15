@@ -27,18 +27,18 @@ const CHANGE_ACTIVE = 'CHANGE_ACTIVE';
 /**
  * 显示菜单视图
  */
-let OnGetMenu = (state:any) => {
+let OnGetMenu = (state) => {
     return { type: BASE_MENU, state };
 }
 
 /**
  * 切换菜单视图
  */
-let switchMenu = (menuSwitch:any) => {
+let switchMenu = (menuSwitch) => {
     return { type: SWITCH_MENU, menuSwitch };
 }
 
-let OnchangeActive = (active:any) => {
+let OnchangeActive = (active) => {
     return { type: CHANGE_ACTIVE, active };
 }
 
@@ -46,14 +46,14 @@ let OnchangeActive = (active:any) => {
 /**
  * 保存当前父热点状态
  */
-let saveParentActive = (saveData:any) => {
+let saveParentActive = (saveData) => {
     LocalStorage.add('cw_parent_active', saveData);
 }
 
 /**
  * 保存当前子热点状态
  */
-let saveChildActive = (saveData:any) => {
+let saveChildActive = (saveData) => {
     //console.log(saveData);
     LocalStorage.add('cw_child_active', saveData);
 }
@@ -62,7 +62,7 @@ let saveChildActive = (saveData:any) => {
  * 获取本地存储的状态
  */
 let changeActiveAction = () => {
-    return (dispatch:any, getState:any) => {
+    return (dispatch, getState) => {
         let parentActive = LocalStorage.get('cw_parent_active');
         let childActive = LocalStorage.get('cw_child_active');
         let menuActivea:any = {};
@@ -104,7 +104,7 @@ let changeActiveAction = () => {
  */
 function getMenuAction(reddit?: any) {
     
-    return (dispatch:any, getState:any) => {
+    return (dispatch, getState) => {
         let _data = LocalStorage.get('cw_menu');
         /**
          * 如果本地存在就取本地数据，否则获取服务器数据。

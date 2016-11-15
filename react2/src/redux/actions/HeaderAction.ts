@@ -5,11 +5,18 @@ import LocalStorage from '../../pub/LocalStorage';
 /**
  * 菜单初始化获取值
  */
-const GET_AUTH = 'GET_AUTH';
+const GET_AUTH = 'sb';
+const R_login = 'R_login';
 
 let OnGetAuth = (state) => {
     return { type: GET_AUTH, state };
 }
+
+
+let R_Login=(state)=>{
+    return { type: R_login, state };
+}
+
 
 /**
  * 获取个人资料数据，如果存在读取本地数据。
@@ -24,6 +31,14 @@ function getAuthAction(reddit?: any) {
             dispatch(OnGetAuth(_data));
             return false;
         }
+    }
+}
+
+
+function Login(){
+    return function (dispatch) {
+           dispatch(R_Login({name:'sb'}))
+
     }
 }
 
@@ -49,6 +64,9 @@ function loginOutAction(){
 
 export {
     GET_AUTH,
+    R_login,
     getAuthAction,
-    loginOutAction
+    loginOutAction,
+    Login
+
 }

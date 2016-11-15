@@ -22,7 +22,7 @@ export default class More extends React.Component {
         this.state = {
             info: {},
             admin: {}
-        }
+        };
 
         this.config = {
             isSure: false,
@@ -167,7 +167,6 @@ export default class More extends React.Component {
 
                 <Popup config={this.config} blockOrNone={admin.flag} _flag={admin.flag}/>
                 <R_header left="1" title="更多"/>
-
 
                 <div className="more-content">
                     <div className="barcode">

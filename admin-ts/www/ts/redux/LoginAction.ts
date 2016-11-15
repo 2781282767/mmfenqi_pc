@@ -15,7 +15,7 @@ function LoginAction(account?:string,password?:string) {
 		LocalStorage.add('cw_auth', auth);
 
 		console.log(22)
-		Tool.goPush('api');
+		Tool.goPush('index');
 		return false;
 	}
 	Tips({

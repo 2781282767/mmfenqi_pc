@@ -1,8 +1,5 @@
  import { createStore, combineReducers, applyMiddleware} from 'redux';
 
-// import { applyMiddleware, createStore ,compose} from 'redux';
-
-// import thunk from 'redux-thunk';
 import thunkMiddleware from 'redux-thunk';
 import Tool from '../../pub/Tool';
 //公用头部，菜单数据监听
@@ -22,13 +19,3 @@ export function BaseStore(reducers) {
 	);
 	return store;
 }
-
-// export default () => {
-// 	const store = compose(
-// 		applyMiddleware(
-// 			thunk
-// 		)
-// 	)(createStore)(HeaderReducer,MenuReducers);
-//
-// 	return store;
-// }

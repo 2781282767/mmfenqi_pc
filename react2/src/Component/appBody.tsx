@@ -2,7 +2,7 @@
 
 // import * as React from "react";
 
-import React, {Component, PropTypes} from 'react';
+import * as React from "react";
 import {bindActionCreators} from 'redux';
 import { Provider, connect} from 'react-redux';
 import  AppMenu from './appMenu';

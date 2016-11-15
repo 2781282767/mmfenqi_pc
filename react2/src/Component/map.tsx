@@ -2,37 +2,123 @@ import * as React from "react";
 
 import * as ReactDOM from "react-dom";
 
-// import createStore from '../redux/store/BaseStore';
-import BaseStore from '../redux/store/BaseStore';
- const store = '22';
-
-import { Provider } from 'react-redux';
 
 
-export class Demo extends React.Component<any,any> {
+import {bindActionCreators} from 'redux';
+
+
+
+import { Provider, connect} from 'react-redux';
+
+import {BaseStore} from '../redux/store/BaseStore';
+
+
+import ComponentsConfig from "./ComponentsConfig";
+
+
+import {changeActiveAction,switchMenu} from '../redux/actions/MenuAction';
+
+
+import {getAuthAction,Login} from '../redux/actions/HeaderAction';
+
+
+import AppBody from './appBody'
+
+
+import Demo from './demo'
+
+import  AppHeader from './Header';
+
+import AppMenu from './AppMenu'
+
+
+
+
+const css_prefix = ComponentsConfig.css_prefix;
+// let detect = new Detect();
+let adCls = 1==1 ? `${css_prefix}-layout-mobile-main` : `${css_prefix}-layout-pc-main`;
+
+
+const store = BaseStore({ });
+
+
+
+
+class Map extends React.Component<any,any>{
+
+    constructor(props) {
+        super(props);
+    }
+
+
+    componentWillMount():void {
+
+
+        console.log(this.props)
+
+        if(1==1){
+         //   this.props.Login()
+        }
+
+    }
+
+
+
     render() {
-            return (
-                <div>sss</div>
-            )
+        let {MenuReducers,HeaderReducer} = this.props;
+
+        return (
+
+            <div>
+                <AppHeader  meu_reducers={MenuReducers} hed_reducers={HeaderReducer}/>
+
+                <Demo></Demo>
+            </div>
+
+        )
+    }
+
+
+
+}
+
+
+let mapStateToProps = (state) => {
+    return {
+        HeaderReducer: state.HeaderReducer,
+        MenuReducers: state.MenuReducers
     }
 }
 
-// const ElementContainer = document.getElementById("content");
+function mapDispatchToProps(dispatch) {
+    // return {
+    //     Actions: bindActionCreators({
+    //         changeActiveAction,
+    //         switchMenu,
+    //         getAuthAction
+    //     }, dispatch)
+    // };
+
+
+    return bindActionCreators({
+        changeActiveAction:  changeActiveAction,
+        switchMenu: switchMenu,
+        getAuthAction: getAuthAction,
+        Login:Login
+    }, dispatch);
+}
+export default connect(mapStateToProps,mapDispatchToProps)(Map);
 
 
 ReactDOM.render(
     <Provider store={store}>
-        <Demo/>
+        <Map />
     </Provider>,
     document.getElementById("content")
 );
 
 
-// import * as React from "react";
-// import * as ReactDOM from "react-dom";
-//
-// class Hello extends React.Component {
-//     render() {
-//         return <h1>www</h1>;
-//     }
-// }
+// ReactDOM.render(
+//     <map/>,
+//     document.getElementById("content")
+// )

@@ -359,7 +359,7 @@ body {
     width: 100%;
     height: 100%;
     top: 56px;
-    background-color: #faf9f7;
+    /*background-color: #faf9f7;*/
 }
 
 .ui-container {
@@ -368,8 +368,8 @@ body {
     position: relative;
     z-index: 99;
     -webkit-box-flex: 1;
-    background-color: #faf9f7;
-    padding: .48rem;
+    /*background-color: #faf9f7;*/
+    padding: 1rem 2rem;
     font-size: 12px;
     -moz-transition: all 0.5s;
     /* Firefox 4 */
@@ -405,7 +405,7 @@ body {
 }
 
 .ui-layout-pc-main .ui-container {
-    margin-left: 230px;
+    margin-left: 180px;
 }
 
 .ui-layout-pc-main.off .ui-container {
@@ -862,7 +862,7 @@ body {
 }
 
 .ui-logo {
-    width: 180px;
+    min-width: 180px;
     display: flex;
     height: 100%;
     text-align: center;
@@ -898,6 +898,9 @@ body {
 
     display: flex;
 
+    width: 300px;
+    min-width: 150px;
+
     align-items: center;
 
     background-color: #4e5158;
@@ -908,8 +911,6 @@ body {
     color: #FFFFFF;
     padding-left: 10px;
     margin-left: 2px;
-
-    width: 100%;
 }
 
 
@@ -965,10 +966,18 @@ body {
 }
 
 .ui-auth .operator {
-    font-size: 16px;
+    font-size: 14px;
     display: flex;
     align-items: center;
-    padding-right: 20px;
+    color: #FFFFFF;
+}
+
+.ui-auth .operator img{
+    margin-right: 10px;
+}
+
+.ui-auth .operator li:first-child{
+    margin-right: 20px;
 }
 
 /*.ui-auth h3 {*/
@@ -1177,7 +1186,7 @@ body {
 .ui-panel {
     background-color: #fff;
     border: 1px solid #e4e5e7;
-    color: #4c4c4c;
+    /*color: #4c4c4c;*/
     box-shadow: 0 1px 10px rgba(0, 0, 0, 0.07);
     border-radius: 3px;
     margin-bottom: .48rem;
@@ -1222,7 +1231,7 @@ body {
     vertical-align: middle;
     cursor: pointer;
     background-image: none;
-    border: 1px solid transparent;
+    /*border: 1px solid transparent;*/
     white-space: nowrap;
     line-height: 1.5;
     padding: 8px 20px;
@@ -1265,6 +1274,10 @@ body {
     /*border-color: darken(@btn-blue, 6%);*/
 }
 
+
+
+
+
 .ui-btn-primary:not([disabled]):hover,
 .ui-btn-primary:focus {
     color: #fff;
@@ -1301,7 +1314,7 @@ body {
 
 .ui-btn-danger {
     color: #fff;
-    background-color: #f44336;
+    background-color: #ff5a5a;
     /*border-color: darken(@btn-red,6%);*/
 }
 
@@ -1341,22 +1354,22 @@ body {
 
 .ui-btn-warning {
     color: #fff;
-    background-color: #ff5722;
+    background-color: #f7ba00;
     /*border-color: darken(@btn-warning,6%);*/
 }
 
 .ui-btn-warning:not([disabled]):hover,
 .ui-btn-warning:focus {
     color: #fff;
-    background-color: #e64c1e;
-    border-color: #ce4117;
+    background-color: #f7ba00;
+    border-color: #f7ba00;
 }
 
 .ui-btn-warning:active,
 .ui-btn-warning.active {
     color: #fff;
-    background-color: #e79857;
-    border-color: #e3883c;
+    background-color: #f7ba00;
+    border-color: #f7ba00;
 }
 
 .ui-btn-link {
@@ -1508,7 +1521,7 @@ fieldset[disabled] .ui-btn {
 
 .ui-table {
     font-size: 12px;
-    color: #666;
+    /*color: #666;*/
     overflow: hidden;
 }
 
@@ -1522,11 +1535,13 @@ fieldset[disabled] .ui-btn {
 .ui-table td {
     padding: .2rem;
     word-break: break-all;
+    text-align: center;
 }
 
 .ui-table th {
-    background-color: #e4e7eb;
+    /*background-color: #e4e7eb;*/
     font-weight: bold;
+    background-color: #f7f8fa;
 }
 
 .ui-table tr {
@@ -1534,7 +1549,7 @@ fieldset[disabled] .ui-btn {
 }
 
 .ui-table tr:nth-child(2n) {
-    background-color: #f6f9fb;
+    /*background-color: #f6f9fb;*/
 }
 
 /*.@{css-prefix}table tbody tr:hover{
@@ -1559,8 +1574,10 @@ fieldset[disabled] .ui-btn {
     overflow-x: auto;
 }
 
+
+
 .ui-text-primary {
-    color: #2196f3;
+    color: #01b4ee;
 }
 
 .ui-text-info {
@@ -1568,14 +1585,14 @@ fieldset[disabled] .ui-btn {
 }
 
 .ui-text-error {
-    color: #f44336;
+    color: #ff5a5a;
 }
 
 .ui-text-wring {
-    color: #ff5722;
+    color: #f7ba00;
 }
 
-.ui-text-succe {
+.ui-text-success {
     color: #00c249;
 }
 

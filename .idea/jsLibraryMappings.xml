@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="JavaScriptLibraryMappings">
+    <file url="file://$PROJECT_DIR$/admin" libraries="{www/admin/node_modules}" />
+    <file url="file://$PROJECT_DIR$/admin-ts" libraries="{www/admin-ts/node_modules}" />
     <file url="file://$PROJECT_DIR$/react" libraries="{www/react/node_modules}" />
+    <file url="file://$PROJECT_DIR$/react-echarts" libraries="{www/react-echarts/node_modules}" />
     <file url="file://$PROJECT_DIR$/react-mobile-picker" libraries="{www/react-mobile-picker/node_modules}" />
     <file url="file://$PROJECT_DIR$/react-swipeout" libraries="{www/react-swipeout/node_modules}" />
     <file url="file://$PROJECT_DIR$/react2" libraries="{www/react2/node_modules}" />
     <file url="file://$PROJECT_DIR$/redux-devtools" libraries="{www/redux-devtools/node_modules}" />
-    <file url="file://$PROJECT_DIR$/typescript-webpack-react-antd" libraries="{www/typescript-webpack-react-antd/node_modules}" />
     <includedPredefinedLibrary name="ECMAScript 6" />
   </component>
 </project>

@@ -1,5 +1,5 @@
 'usr strict';
-import  GET_AUTH from '../actions/HeaderAction';
+import  {GET_AUTH,R_login} from '../actions/HeaderAction';
 import Tool from '../../pub/Tool';
 /**
  * 菜单父键和值,二级菜单键和值,菜单切换状态,菜单数据
@@ -14,6 +14,9 @@ export default function HeaderReducer(state = HeaderState, action) {
 	switch (action.type) {
 		case GET_AUTH:
 			return Tool.assign({}, state, action.state);
+
+		case R_login:
+			return Tool.assign({},state,action.state)
 
 		default:
 			return state

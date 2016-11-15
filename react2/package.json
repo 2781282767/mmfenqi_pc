@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "autoprefixer-loader": "^3.2.0",
     "classnames": "^2.2.0",
     "jquery": "^2.2.2",
     "object-assign": "^4.0.1",

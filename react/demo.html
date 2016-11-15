@@ -4,8 +4,48 @@
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
-<body>
 
+<style>
+    .bubble {
+        padding: 10px 0;
+        width: 200px;
+        font-size: 20px;
+        background: #ededed;
+        border: 2px solid #666;
+        -moz-border-radius:10px;
+        -webkit-border-radius:10px;
+        -moz-box-shadow:0 0 5px #888;
+        -webkit-box-shadow: 0 0 5px #888;
+        text-align: center;
+        position: relative;
+    }
+    .bubble-arrow {
+        border-color: #666 transparent transparent transparent;
+        border-width: 10px;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        position: absolute;
+        bottom: -22px;
+        left: 91px;
+    }
+    .bubble-arrow-inner {
+        border-color: #ededed transparent transparent transparent;
+        border-width: 10px;
+        border-style: solid;
+        width: 0;
+        height: 0;
+        position: absolute;
+        bottom: -19px;
+        left: 91px;
+    }
+</style>
+<body>
+<div class="bubble">
+    Hello World!
+    <div class="bubble-arrow"></div>
+    <div class="bubble-arrow-inner"></div>
+</div>
 </body>
 
 <script>

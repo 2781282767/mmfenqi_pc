@@ -42,7 +42,7 @@ function loginOutAction(){
     let actions = [
         { label: '取消' },
         { label: '确定', onClick: buyConfirm, primary: true }
-    ]
+    ];
 
     Dialog.show('您确定要退出？', actions);
     

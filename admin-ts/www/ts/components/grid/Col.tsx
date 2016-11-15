@@ -15,6 +15,8 @@ export default class Col extends React.Component<any,any> {
             [`${typeCol}${span}`]: true,
             [`${addClassName}`]: className
         });
+
+        console.log(Cls)
         return (<div className = {Cls} >
                     {children}
                 </div>

@@ -39,7 +39,7 @@ server.app.get('*', function (req, res) {
     res.sendFile(__dirname + '/map.html')
 });
 
-server.listen(8030, '192.198.0.157');
+server.listen(8031, '192.198.0.157');
 
 
 

@@ -76,6 +76,13 @@ class Dialog extends React.Component<DialogProps, any> {
 
         let Children = React.cloneElement(this.props.children);
 
+        //
+        // console.log('2222')
+        // console.log(...this.props);
+
+        console.log('children');
+        console.log(this.props.children);
+
         return (
             <div id={this.props.id} className={className}>
                 <div {...this.props} className={contentClassName}>

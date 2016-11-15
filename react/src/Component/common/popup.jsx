@@ -21,17 +21,6 @@ export  default  class Popup extends React.Component{
         this.props.config.no_cb();
     }
 
-    // componentWillReceiveProps(nextProps) {
-    //
-    //     if (nextProps) {
-    //         this.setState({
-    //             blockOrNone:this.props.blockOrNone,
-    //             _flag:this.props._flag
-    //         })
-    //     }
-    //
-    // }
-
     componentWillReceiveProps(){
         setTimeout( function () {
             this.setState({

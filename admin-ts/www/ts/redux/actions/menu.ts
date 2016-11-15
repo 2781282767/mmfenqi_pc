@@ -1,19 +1,12 @@
 const MenuData = {
   "menuList": [
+
     {
-      "description": "api",
+      "description": "首页",
       "menuId": 21,
-      "name": "api",
+      "name": "首页",
       "subMunu": [],
-      "icon":"sy",
-      "url": "api"
-    },
-    {
-      "description": "手风琴",
-      "menuId": 21,
-      "name": "手风琴",
-      "subMunu": [],
-      "url": "accordion"
+      "url": "index"
     },
     {
       "description": "账户",
@@ -22,6 +15,9 @@ const MenuData = {
       "subMunu": [],
       "url": "account"
     },
+
+
+
   ]
 }
 

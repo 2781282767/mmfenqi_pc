@@ -474,10 +474,10 @@ button,
 input,
 select,
 textarea {
-  /*font-family: inherit;*/
-  /*font-size: inherit;*/
-  /*line-height: inherit;*/
-  /*color: inherit;*/
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
 }
 ul,
 ol {
@@ -13036,10 +13036,10 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-tooltip-inner {
   max-width: 250px;
   padding: 8px 10px;
-  color: #fff;
+  color: #333333;
   text-align: left;
   text-decoration: none;
-  background-color: rgba(64, 64, 64, 0.85);
+  background-color: #fff;
   border-radius: 6px;
   box-shadow: 0 1px 6px rgba(0, 0, 0, 0.2);
   min-height: 34px;
@@ -13737,7 +13737,7 @@ textarea.ant-pagination-options-quick-jumper input {
   font-weight: bold;
   -webkit-transition: background .3s ease;
   transition: background .3s ease;
-  text-align: left;
+  text-align: center;
 }
 .ant-table-thead > tr > th .anticon-filter {
   margin-left: 4px;
@@ -13760,6 +13760,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-table-tbody > tr {
   -webkit-transition: all .3s ease;
   transition: all .3s ease;
+  text-align: center;
 }
 .ant-table-thead > tr.ant-table-row-hover,
 .ant-table-tbody > tr.ant-table-row-hover,
@@ -13807,6 +13808,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-table-tbody > tr > td {
   padding: 16px 8px;
   word-break: break-all;
+  border: 1px solid #f6f7f7;
 }
 .ant-table-thead > tr > th.ant-table-selection-column,
 .ant-table-tbody > tr > td.ant-table-selection-column {

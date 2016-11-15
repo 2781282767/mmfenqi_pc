@@ -37,6 +37,15 @@ class AppBody extends React.Component<any,any> {
             uiIndex:flag
         })
     }
+
+
+    componentWillReceiveProps(nextProps) {
+            this.setState({
+                uiIndex:nextProps.flag
+            })
+    }
+
+
     /**
      * body 主容器 包括头部和菜单 <AppHeader /> <AppMenu  />
      */

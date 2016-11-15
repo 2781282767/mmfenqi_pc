@@ -1,14 +1,18 @@
 'usr strict';
-import React, {Component, PropTypes} from 'react';
-import * as ReactDOM from "react-dom";
+import * as React from "react";
+
 import {connect} from 'react-redux';
-import Tool from '../pub/Tool';
-// import Icon from '../icon/Icon';
+
 import ComponentsConfig from "./ComponentsConfig";
 const css_prefix = ComponentsConfig.css_prefix;
-import {getMenuAction, saveParentActive, saveChildActive, changeActiveAction} from '../redux/actions/MenuAction';
 const now_url = window.location.href.match(/(?:\w*)(?=.html)/);
-interface AppMenuProps {
+
+
+import '../less/app.less'
+
+import {getMenuAction, saveParentActive, saveChildActive, changeActiveAction} from '../redux/actions/MenuAction';
+
+export interface AppMenuProps {
     active: number;
     MenuReducers: any;
     dispatch: Function;
@@ -16,7 +20,7 @@ interface AppMenuProps {
     childActive?: any;
 }
 
-class AppMenu extends React.Component<AppMenuProps, any>{
+class AppMenu extends React.Component<AppMenuProps, {}>{
     /**
      * 设置默认属性头部
      */
@@ -35,6 +39,16 @@ class AppMenu extends React.Component<AppMenuProps, any>{
             parentActive: MenuReducers.active.parent,
             childActive: MenuReducers.active.child
         }
+    }
+
+
+    componentDidMount() {
+        let {MenuReducers, dispatch} = this.props;
+        /**
+         * 读取菜单数据
+         */
+        dispatch(getMenuAction());
+
     }
 
     handleOrderTabClick(event, parentIndex, parentName, URL) {
@@ -59,14 +73,14 @@ class AppMenu extends React.Component<AppMenuProps, any>{
     }
 
     push(event, childIndex, childName, URL) {
-        let {MenuReducers, dispatch} = this.props;
-        dispatch(changeActiveAction())
-        let active_Json = { childkey: childIndex, childvalue: childName };
-        saveChildActive(active_Json);
-        Tool.goPush(URL);
-        //防止冒泡多次触发
-        event.preventDefault();
-        event.stopPropagation();
+        // let {MenuReducers, dispatch} = this.props;
+        // dispatch(changeActiveAction())
+        // let active_Json = { childkey: childIndex, childvalue: childName };
+        // saveChildActive(active_Json);
+        // Tool.goPush(URL);
+        // //防止冒泡多次触发
+        // event.preventDefault();
+        // event.stopPropagation();
     }
 
     createItem(item, index) {
@@ -81,7 +95,7 @@ class AppMenu extends React.Component<AppMenuProps, any>{
             >
                 <h3 className = {hasChild ? 'on' : 'off'} data-href = {ParentUrl}>
                     {/*{item.icon ? <Icon type={item.icon}/> : false}*/}
-                    {/*{item.name}*/}
+                    {item.name}
                 </h3>
                 { hasChild ? (
                     <ul className={`${css_prefix}-menu-child`}>
@@ -91,7 +105,7 @@ class AppMenu extends React.Component<AppMenuProps, any>{
                             return (<li key = {childIndex} className={childActive}>
                                     <a href={URL} onClick = {(event) => this.push(event, childIndex, childItem.name, ChildUrl) }>
                                         {/*{childItem.icon ? <Icon type={childItem.icon}/> : false}*/}
-                                        {/*{childItem.name}*/}
+                                        {childItem.name}
                                     </a>
                                 </li>
                             )
@@ -103,6 +117,9 @@ class AppMenu extends React.Component<AppMenuProps, any>{
 
     render() {
         let {MenuReducers, dispatch} = this.props;
+
+
+        console.log(MenuReducers);
         return (
             <div className={`${css_prefix}-menu`}>
                 <ul className={`${css_prefix}-menu-parent`}>
@@ -112,14 +129,6 @@ class AppMenu extends React.Component<AppMenuProps, any>{
         );
     }
 
-    componentDidMount() {
-        let {MenuReducers, dispatch} = this.props;
-        /**
-         * 读取菜单数据
-         */
-        dispatch(getMenuAction());
-
-    }
 
 }
 

@@ -165,8 +165,16 @@ export default class AppHeader extends React.Component<AppHeaderProps, any> {
                     <div className={cls}>
 
                         <div className="operator">
-                            <li>操作</li>
-                            <li>退出</li>
+                            <div className="operator">
+                                <img src="/dist/images/user.png"/>
+                                <li style={{marginRight:'40px'}}>操作</li>
+                            </div>
+
+
+                            <div className="operator" onClick = {this.exit.bind(this)}>
+                                <img src="/dist/images/exit.png"/>
+                                <li style={{marginRight:'40px'}}>退出</li>
+                            </div>
                         </div>
                         {/*<h3 onClick = {(event) => this.handleAuthSwitch(event) }>欢迎您&nbsp;:&nbsp;{auchUserName}</h3>*/}
 
