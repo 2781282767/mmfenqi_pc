@@ -13,6 +13,7 @@
     box-sizing: border-box;
 }
 
+
 /*样式重置*/
 html,
 body,
@@ -73,7 +74,7 @@ video {
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', Arial, sans-serif;
+    font-family: Microsoft YaHei,'宋体' , Tahoma, Helvetica, Arial, "\5b8b\4f53", sans-serif !important;
     line-height: 1.5;
     font-size: 14px;
     color: #4c4c4c;

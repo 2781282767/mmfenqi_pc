@@ -5,137 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8a36e099-482e-4a07-8c70-d68ab910576d" name="Default" comment="Merge branch 'master' of github.com:LiFBoy/mmfenqi_pc&#10;&#10;# Conflicts:&#10;#&#9;.idea/misc.xml&#10;#&#9;.idea/modules.xml&#10;#&#9;.idea/workspace.xml&#10;">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/dist/images/exit.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/dist/images/gongkong.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/dist/images/tooltip.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/dist/images/user.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/styles/account/account.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/styles/account/index.less" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/ts/components/modul.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/ts/controller/IndexContainer.tsx" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/admin-ts/www/view/index.ejs" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/AccordionContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/ApiContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/ButtonContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/CardContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/CombinationContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/CrumbsContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/DialogContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/EchartsContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/FormContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/Form_data_backfillContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/Form_verifierContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/GridContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/IcionContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/MaskContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/PaginationContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/TableContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/TabsContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/TipsContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/ToastContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/TreeContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/UploadContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/dist/calendarContainer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/accordion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/api.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/button.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/calendar.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/card.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/combination.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/crumbs.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/dashboard.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/dialog.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/echarts.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/form.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/form_data_backfill.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/form_verifier.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/grid.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/icion.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/mask.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/pagination.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/table.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/tabs.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/tips.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/toast.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/tree.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/pages/upload.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/AccordionContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/ApiContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/ButtonContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/CardContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/CombinationContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/CrumbsContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/DialogContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/EchartsContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/FormContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/Form_data_backfillContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/Form_verifierContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/GridContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/IcionContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/MaskContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/PaginationContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/TableContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/TabsContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/TipsContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/ToastContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/TreeContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/UploadContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/calendarContainer.tsx" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/view/accordion.ejs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/admin-ts/www/view/api.ejs" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/react2/src/Component/demo.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/react2/src/Component/demo.js.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/typescript-webpack-react-antd" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin" afterPath="$PROJECT_DIR$/admin" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/package.json" afterPath="$PROJECT_DIR$/admin-ts/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/webpack.server.js" afterPath="$PROJECT_DIR$/admin-ts/webpack.server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/common/application.config.js" afterPath="$PROJECT_DIR$/admin-ts/www/common/application.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/dist/AccountContainer.js" afterPath="$PROJECT_DIR$/admin-ts/www/dist/AccountContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/dist/LoginContainer.js" afterPath="$PROJECT_DIR$/admin-ts/www/dist/LoginContainer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/dist/common.js" afterPath="$PROJECT_DIR$/admin-ts/www/dist/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/pages/account.html" afterPath="$PROJECT_DIR$/admin-ts/www/pages/account.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/pages/login.html" afterPath="$PROJECT_DIR$/admin-ts/www/pages/login.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/styles/antd.css" afterPath="$PROJECT_DIR$/admin-ts/www/styles/antd.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/styles/common.css" afterPath="$PROJECT_DIR$/admin-ts/www/styles/common.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/components/dialog/Dialog.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/components/dialog/Dialog.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/components/echarts/Echarts.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/components/echarts/Echarts.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/components/grid/Col.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/components/grid/Col.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppBody.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppBody.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppHeader.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppHeader.tsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx" afterPath="$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/pub/Tool.ts" afterPath="$PROJECT_DIR$/admin-ts/www/ts/pub/Tool.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/redux/LoginAction.ts" afterPath="$PROJECT_DIR$/admin-ts/www/ts/redux/LoginAction.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/redux/actions/HeaderAction.ts" afterPath="$PROJECT_DIR$/admin-ts/www/ts/redux/actions/HeaderAction.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/ts/redux/actions/menu.ts" afterPath="$PROJECT_DIR$/admin-ts/www/ts/redux/actions/menu.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/admin-ts/www/view/login.ejs" afterPath="$PROJECT_DIR$/admin-ts/www/view/login.ejs" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/demo.html" afterPath="$PROJECT_DIR$/react/demo.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/dist/css/index.css" afterPath="$PROJECT_DIR$/react/dist/css/index.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/dist/index.js" afterPath="$PROJECT_DIR$/react/dist/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/dist/vendors.js" afterPath="$PROJECT_DIR$/react/dist/vendors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/index.html" afterPath="$PROJECT_DIR$/react/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/server.js" afterPath="$PROJECT_DIR$/react/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/src/Component/More.jsx" afterPath="$PROJECT_DIR$/react/src/Component/More.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/src/Component/common/popup.jsx" afterPath="$PROJECT_DIR$/react/src/Component/common/popup.jsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react/webpack.config.js" afterPath="$PROJECT_DIR$/react/webpack.config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/dist/map.js" afterPath="$PROJECT_DIR$/react2/dist/map.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/dist/vendors.js" afterPath="$PROJECT_DIR$/react2/dist/vendors.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/map.html" afterPath="$PROJECT_DIR$/react2/map.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/package.json" afterPath="$PROJECT_DIR$/react2/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/server.js" afterPath="$PROJECT_DIR$/react2/server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/Component/AppMenu.tsx" afterPath="$PROJECT_DIR$/react2/src/Component/AppMenu.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/Component/Header.tsx" afterPath="$PROJECT_DIR$/react2/src/Component/Header.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/Component/appBody.tsx" afterPath="$PROJECT_DIR$/react2/src/Component/appBody.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/Component/demo.tsx" afterPath="$PROJECT_DIR$/react2/src/Component/demo.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/Component/map.tsx" afterPath="$PROJECT_DIR$/react2/src/Component/map.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/redux/actions/HeaderAction.ts" afterPath="$PROJECT_DIR$/react2/src/redux/actions/HeaderAction.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/redux/actions/MenuAction.ts" afterPath="$PROJECT_DIR$/react2/src/redux/actions/MenuAction.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/redux/reducers/HeaderReducer.ts" afterPath="$PROJECT_DIR$/react2/src/redux/reducers/HeaderReducer.ts" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/src/redux/store/BaseStore.tsx" afterPath="$PROJECT_DIR$/react2/src/redux/store/BaseStore.tsx" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/tsconfig.json" afterPath="$PROJECT_DIR$/react2/tsconfig.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/react2/webpack.config.js" afterPath="$PROJECT_DIR$/react2/webpack.config.js" />
     </list>
     <list id="e4688fa8-57c4-4e7e-a30d-e7d9d3335b68" name="Failed commit: Default" comment="ng2&#10;" />
     <list id="a5987c3e-2f90-4bc8-b962-67a5dc4e654b" name="Failed commit: Default (2)" comment="'下班'" />
@@ -163,93 +38,55 @@
       <file leaf-file-name="AppHeader.tsx" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppHeader.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
+            <state relative-caret-position="247">
+              <caret line="56" column="15" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="common.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/admin-ts/www/styles/common.css">
+      <file leaf-file-name="HeaderAction.ts" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/redux/actions/HeaderAction.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="355">
-              <caret line="923" column="33" selection-start-line="923" selection-start-column="33" selection-end-line="923" selection-end-column="33" />
+            <state relative-caret-position="247">
+              <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/src/action/index.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="180">
-              <caret line="30" column="6" selection-start-line="30" selection-start-column="6" selection-end-line="30" selection-end-column="6" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Http.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/src/Http.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-3024">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="index.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/src/index.jsx">
+      <file leaf-file-name=".gitignore" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-ts/.gitignore">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="0">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AccountContainer.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="589">
+              <caret line="124" column="65" selection-start-line="124" selection-start-column="65" selection-end-line="124" selection-end-column="65" />
               <folding>
-                <element signature="n#!!doc" expanded="true" />
+                <element signature="e#315#385#0" expanded="true" />
+                <element signature="e#786#815#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/react/src/store/index.js">
+      <file leaf-file-name="TableOne.tsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Route.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/src/Route.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+            <state relative-caret-position="454">
+              <caret line="243" column="29" selection-start-line="243" selection-start-column="29" selection-end-line="243" selection-end-column="29" />
               <folding>
-                <element signature="e#0#50#0" expanded="true" />
+                <element signature="e#82#257#0" expanded="true" />
+                <marker date="1479198173000" expanded="true" signature="6815:7017" ph="..." />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Tool.jsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/src/Tool.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="486">
-              <caret line="51" column="18" selection-start-line="51" selection-start-column="18" selection-end-line="51" selection-end-column="18" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/react/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="0">
-              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
             </state>
           </provider>
         </entry>
@@ -306,12 +143,10 @@
         <option value="$PROJECT_DIR$/admin-ts/www/ts/components/grid/Col.tsx" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/controller/ApiContainer.tsx" />
         <option value="$PROJECT_DIR$/admin-ts/www/styles/iconfont.css" />
-        <option value="$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx" />
         <option value="$PROJECT_DIR$/react/src/Component/More.jsx" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/components/dialog/Dialog.tsx" />
         <option value="$PROJECT_DIR$/react/src/Component/common/popup.jsx" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/components/modul.tsx" />
-        <option value="$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx" />
         <option value="$PROJECT_DIR$/admin-ts/www/styles/account/account.less" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/components/echarts/Echarts.tsx" />
         <option value="$PROJECT_DIR$/admin-ts/webpack.server.js" />
@@ -320,7 +155,6 @@
         <option value="$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppBody.tsx" />
         <option value="$PROJECT_DIR$/react/demo.html" />
         <option value="$PROJECT_DIR$/admin-ts/node_modules/antd/lib/tooltip/index.js" />
-        <option value="$PROJECT_DIR$/admin-ts/www/styles/antd.css" />
         <option value="$PROJECT_DIR$/admin-ts/www/styles/account/index.less" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/controller/IndexContainer.tsx" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/redux/actions/menu.ts" />
@@ -328,8 +162,11 @@
         <option value="$PROJECT_DIR$/admin-ts/www/ts/redux/LoginAction.ts" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/pub/Tool.ts" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/redux/actions/HeaderAction.ts" />
-        <option value="$PROJECT_DIR$/admin-ts/www/styles/common.css" />
         <option value="$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppHeader.tsx" />
+        <option value="$PROJECT_DIR$/admin-ts/www/styles/antd.css" />
+        <option value="$PROJECT_DIR$/admin-ts/www/styles/common.css" />
+        <option value="$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx" />
+        <option value="$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx" />
       </list>
     </option>
   </component>
@@ -449,7 +286,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="react" />
+              <option name="myItemId" value="admin-ts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -463,11 +300,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="react" />
+              <option name="myItemId" value="admin-ts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -481,15 +318,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="react" />
+              <option name="myItemId" value="admin-ts" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
+              <option name="myItemId" value="www" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="store" />
+              <option name="myItemId" value="ts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="admin-ts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="www" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ts" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controller" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -698,7 +561,7 @@
       <workItem from="1479088799374" duration="7110000" />
       <workItem from="1479097857886" duration="136000" />
       <workItem from="1479098014423" duration="18746000" />
-      <workItem from="1479177101424" duration="12514000" />
+      <workItem from="1479177101424" duration="13920000" />
     </task>
     <task id="LOCAL-00001" summary="'add'">
       <created>1474195418641</created>
@@ -753,7 +616,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="943673000" />
+    <option name="totallyTimeSpent" value="945079000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -837,24 +700,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/components/echarts/Echarts.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="15" column="63" selection-start-line="15" selection-start-column="63" selection-end-line="15" selection-end-column="63" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/EchartsContainer.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="34" column="67" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="67" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin-ts/webpack.dev.config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-918">
@@ -933,17 +778,6 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="234">
-          <caret line="178" column="28" selection-start-line="178" selection-start-column="28" selection-end-line="184" selection-end-column="34" />
-          <folding>
-            <element signature="e#315#385#0" expanded="false" />
-            <element signature="e#786#815#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1036,26 +870,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/styles/antd.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="13008" column="22" selection-start-line="13008" selection-start-column="22" selection-end-line="13008" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin-ts/www/styles/account/index.less">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
           <caret line="36" column="17" selection-start-line="36" selection-start-column="17" selection-end-line="36" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="29" />
           <folding />
         </state>
       </provider>
@@ -1175,34 +993,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/redux/actions/HeaderAction.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="44" column="6" selection-start-line="44" selection-start-column="6" selection-end-line="44" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/admin-ts/www/dist/AccountContainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppHeader.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="391">
-          <caret line="171" column="0" selection-start-line="171" selection-start-column="0" selection-end-line="171" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/admin-ts/www/styles/common.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="923" column="33" selection-start-line="923" selection-start-column="33" selection-end-line="923" selection-end-column="33" />
           <folding />
         </state>
       </provider>
@@ -1261,9 +1055,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/react/src/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/react/src/less/index.less">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="7" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/www/styles/antd.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="17" column="9" selection-start-line="17" selection-start-column="9" selection-end-line="17" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/www/styles/common.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/AccountContainer.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="589">
+          <caret line="124" column="65" selection-start-line="124" selection-start-column="65" selection-end-line="124" selection-end-column="65" />
+          <folding>
+            <element signature="e#315#385#0" expanded="true" />
+            <element signature="e#786#815#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/redux/actions/HeaderAction.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="35" column="39" selection-start-line="35" selection-start-column="39" selection-end-line="35" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/components/layout/AppHeader.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="56" column="15" selection-start-line="56" selection-start-column="15" selection-end-line="56" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/admin-ts/www/ts/controller/Table/TableOne.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="454">
+          <caret line="243" column="29" selection-start-line="243" selection-start-column="29" selection-end-line="243" selection-end-column="29" />
+          <folding>
+            <element signature="e#82#257#0" expanded="true" />
+            <marker date="1479198173000" expanded="true" signature="6815:7017" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>

@@ -105,24 +105,13 @@ class IndexApp extends BaseContainer {
     search(e) {
         let self = this;
         e.preventDefault();
-
-        // let flag=true;
-        //
-        //
-        //
-        // self.props.handleSearch(flag);
-        //
-        // setTimeout(abc,5000);
-        //
-        // function abc(){
-        //     flag=false;
-        //     self.props.handleSearch(flag);
-        // }
     }
 
     render() {
         let {Actions} = this.props;
         const {info, admin} =this.state;
+
+        const abc='李建彬';
         return (
             <AppBody>
 
@@ -132,13 +121,13 @@ class IndexApp extends BaseContainer {
 
                         <div className="ui-form-input-content">
 
-                            <label for="name">姓名</label>
-                            <input type="text" placeholder="请输入姓名" id="name"/>
+                            <label>姓名</label>
+                            <input type="text" defaultValue={abc} placeholder="请输入姓名" id="name"/>
                         </div>
 
                         <div className="ui-form-input-content">
 
-                            <label for="zuzhi">隶属组织</label>
+                            <label>隶属组织</label>
                             <input type="text" placeholder="请输入姓名" id="zuzhi"/>
                         </div>
 
@@ -146,26 +135,25 @@ class IndexApp extends BaseContainer {
                         <div className="ui-form-input-content">
 
 
-                            <label for="gohao">工号</label>
+                            <label>工号</label>
                             <input type="text" placeholder="请输入登录工号" id="gohao"/>
                         </div>
                         <div className="ui-form-input-content">
-                            <label for="phonoe">手机号码</label>
+                            <label>手机号码</label>
                             <input type="text" placeholder="请输入手机号码" id="phone"/>
                         </div>
 
                         <div className="ui-form-input-content">
-                            <label for="email">邮箱</label>
+                            <label>邮箱</label>
                             <input type="text" placeholder="请输入邮箱" id="email"/>
                         </div>
                         <div className="ui-form-input-content">
-                            <label for="email">地址</label>
+                            <label>地址</label>
                             <input type="text" placeholder="请输入详细地址" id="email"/>
                         </div>
 
                         <div className="ui-form-input-content">
-                            <label for="email">地址</label>
-                            <select name="" id=""></select>
+                            <label>地址</label>
                         </div>
                     </form>
 

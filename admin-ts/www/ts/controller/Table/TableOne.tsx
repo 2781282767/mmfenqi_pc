@@ -152,8 +152,7 @@ export default class TableOne extends React.Component<any, any> {
                     key: 'operation',
                     render: (text, record) => (
                         <span>
-                            <Buttons type="warning" size="small"
-                                     onClick={() => { this.handChange( record) } }>
+                            <Buttons type="warning" size="small">
                                 修改
                             </Buttons>
                             <Buttons type="danger" size="small" onClick={() => { this.handDelete(text, record) } }>
@@ -201,8 +200,8 @@ export default class TableOne extends React.Component<any, any> {
                 key: i,
                 account:`account ${i}`,
                 name: `Edward King ${i}`,
-                zuzhi: '杭州',
-                email: '122',
+                zuzhi: `杭州 ${i}`,
+                email: `${i}qq.com`,
                 address: `London, Park Lane no. ${i}`,
             });
         }
