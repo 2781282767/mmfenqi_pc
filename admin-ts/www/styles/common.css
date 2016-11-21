@@ -370,7 +370,7 @@ body {
     z-index: 99;
     -webkit-box-flex: 1;
     /*background-color: #faf9f7;*/
-    padding: 1rem 2rem;
+    /*padding: 1rem;*/
     font-size: 12px;
     -moz-transition: all 0.5s;
     /* Firefox 4 */
@@ -407,6 +407,7 @@ body {
 
 .ui-layout-pc-main .ui-container {
     margin-left: 180px;
+    height: 100%;
 }
 
 .ui-layout-pc-main.off .ui-container {
@@ -852,7 +853,7 @@ body {
     height: 56px;
     margin: 0;
     padding: 0;
-    z-index: 999;
+    z-index: 300;
 }
 
 .ui-header-container {
@@ -1097,7 +1098,7 @@ body {
 }
 
 .ui-menu-parent > li.active h3 {
-    background-color: #2f323b;
+    background-color: #212329;
     color: #fff;
 }
 
@@ -1271,7 +1272,7 @@ body {
 
 .ui-btn-primary {
     color: #fff;
-    background-color: #2196f3;
+    background-color: #01b4ee;
     /*border-color: darken(@btn-blue, 6%);*/
 }
 
@@ -1282,15 +1283,15 @@ body {
 .ui-btn-primary:not([disabled]):hover,
 .ui-btn-primary:focus {
     color: #fff;
-    background-color: #1e85d9;
-    border-color: #1a75be;
+    background-color: #01b4ee;
+    border-color: #01b4ee;
 }
 
 .ui-btn-primary:active,
 .ui-btn-primary.active {
     color: #fff;
-    background-color: #4e97d9;
-    border-color: #3588d4;
+    background-color: #01b4ee;
+    border-color: #01b4ee;
 }
 
 .ui-btn-success {
@@ -2304,15 +2305,16 @@ fieldset[disabled] .ui-btn {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 80%;
-    height: auto;
-    left: 0;
-    right: 0;
-    top: 10%;
-    bottom: 10%;
+    width: 100%;
+    height: 100%;
+
+    /*left: 0;*/
+    /*right: 0;*/
+    /*top: 10%;*/
+    /*bottom: 10%;*/
     margin: auto;
     border-radius: 10%;
-    z-index: 400;
+    z-index: 402;
 }
 
 /*# sourceMappingURL=app.css.map */

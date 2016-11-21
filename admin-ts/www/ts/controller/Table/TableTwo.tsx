@@ -7,71 +7,155 @@ import {
     Echarts,
     Buttons,
     Row,
-    Col,Icon,TableList} from '../../components/index';
-export default class TableOne extends React.Component<any, any> {
+    Col,
+    Icon,
+    Dialog,
+    FormGroup,
+    FormItems,
+    InputText
+} from '../../components/index';
+
+import { Table } from 'antd';
+
+
+export default class TableTwo extends React.Component<any, any> {
     constructor(props) {
         super(props);
         this.state = {
-            classification:[
+
+            columns: [{
+                title: '设备类型',
+                dataIndex: 'account',
+                key: 'account',
+                render: (text) => <a href="#">{text}</a>,
+            }, {
+                title: '生产商',
+                dataIndex: 'name',
+                key: 'name',
+            },
+
                 {
-                    row_title:'交易报名',
-                    columns: [{
-                        title: '电子劵送劵量',
-                        dataIndex: 'name',
-                        key: 'name'
-                    }, {
-                        title: '电子交易量',
-                        dataIndex: 'age',
-                        key: 'age',
-                    }],
-                    data: [{
-                        key: '1',
-                        name: '小明',
-                        age: 32
-                    }, {
-                        key: '2',
-                        name: '小红',
-                        age: 42
-                    }
-                    ]
+                    title: '设备IMEI号',
+                    dataIndex: 'zuzhi',
+                    key: 'zuzhi',
                 },
                 {
-                    row_title:'销售报名',
-                    columns: [{
-                        title: '点击次数',
-                        dataIndex: 'click',
-                        key: 'click'
-                    }, {
-                        title: '充值金额',
-                        dataIndex: 'paynum',
-                        key: 'paynum',
-                    }],
-                    data: [{
-                        key: '1',
-                        click: '10次',
-                        paynum: 32
-                    }, {
-                        key: '2',
-                        click: '20次',
-                        paynum: 42
-                    }
-                    ]
-                }
+                    title: '设备手机号',
+                    dataIndex: 'email',
+                    key: 'email',
+                },
+                {
+                    title: '激活日期',
+                    dataIndex: 'address',
+                    key: 'address',
+                }, {
+                    title: '设备有效日期',
+                    dataIndex: 'effectiveTime',
+                    key: 'effectiveTime',
+                },{
+                    title: '缴费状态',
+                    dataIndex: 'type',
+                    key: 'type',
+                },{
+                    title: '推广价',
+                    dataIndex: 'promotionPrice',
+                    key: 'promotionPrice',
+                },{
+                    title: '套餐价格',
+                    dataIndex: 'price',
+                    key: 'price',
+                }, {
+                    title: '操作',
+                    key: 'operation',
+                    render: (text, record) => (
+                        <span>
+                            <Buttons type="primary" size="small" onClick={this.detailed.bind(this,record)}>
+                                查看
+                            </Buttons>
+                        </span>
+                    ),
+                }],
+            data: [
+
+
             ]
+
+        };
+
+
+        this.data = [];
+        for (let i = 0; i < 46; i++) {
+            this.data.push({
+                key: i,
+                account:`acc${i}`,
+                name: `Edward ${i}`,
+                zuzhi: `杭州 ${i}`,
+                email: `${i}qq.com`,
+                address: `no. ${i}`,
+                effectiveTime:`2010-11-${i}`,
+                type:`${i},`,
+                promotionPrice:`10${i}`,
+                price:`10${i}`
+
+            });
         }
+
+
+
+
+        this.pagination = {
+            total: this.state.data.length,
+            showSizeChanger: true,
+            onShowSizeChange(current, pageSize) {
+                console.log('Current: ', current, '; PageSize: ', pageSize);
+            },
+            onChange(current) {
+                console.log('Current: ', current);
+            },
+        };
+
+
+         this.rowSelection = {
+            onChange: (selectedRowKeys, selectedRows) => {
+                console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+            },
+            onSelect: (record, selected, selectedRows) => {
+                console.log(record, selected, selectedRows);
+            },
+            onSelectAll: (selected, selectedRows, changeRows) => {
+                console.log(selected, selectedRows, changeRows);
+            },
+        };
     }
 
-    render() {
-        return (
-            <div>
-                <TableList data = {this.state.classification}/>
-            </div>
+    detailed(text, record) {
 
+
+        console.log(text);
+        console.log(record)
+
+
+
+    }
+
+
+
+
+
+
+    render() {
+
+        console.log('33333'+this.pagination);
+        return (
+            <Table  rowSelection={this.rowSelection} columns={this.state.columns} dataSource={this.state.data}/>
         );
     }
 
-    componentDidMount(): void {
+    componentWillMount(): void {
 
+        this.setState({
+            data:this.data
+        })
     }
 
     componentWillUnmount(): void {

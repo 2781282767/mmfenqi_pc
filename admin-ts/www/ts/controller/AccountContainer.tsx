@@ -2,15 +2,17 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {bindActionCreators} from 'redux';
 import {Provider, connect} from 'react-redux';
+
+
+import { Tooltip } from 'antd';
+const text = <span>prompt text</span>;
+
+
+
+
 //自己的第三方组件
 import {
     AppBody,
-    Panel,
-    Echarts,
-    Buttons,
-    Row,
-    Col,
-    Icon, Dashboard, Label
 } from '../components/index';
 //自己书写的基类
 import BaseContainer from '../components/pubController/BaseContainer';
@@ -18,11 +20,9 @@ import {BaseStore} from '../redux/store/BaseStore';
 
 import Popup from '../components/modul'
 import TableOne from './Table/TableOne';
-import TableTwo from './Table/TableTwo';
-import TableThree from './Table/TableThree';
-import TableFour from './Table/TableFour';
 
-import '../../styles/account/account.less'
+
+import '../../styles/containerLess/account.less'
 //表单验证模块
 import verifier from '../pub/Verifier';
 const store = BaseStore({});
@@ -36,26 +36,31 @@ class IndexApp extends BaseContainer {
 
         this.state = {
             info: {},
-            admin: {}
-        }
+            admin: {},
+            changeData:{
 
-
-        this.config = {
-            isSure: false,
-            isCancel: true,
-            no: '返回',
-            yes: '确定',
-            yes_cb: ()=> {
-
-
-                this.setState({
-                    admin: {
-                        flag: false
-                    }
-                })
             },
-            no_cb: ()=> {
+            config:{
+                isSure: false,
+                isCancel: true,
+                no: '返回',
+                yes: '确定',
+                yes_cb: ()=> {
 
+
+                    this.setState({
+                        admin: {
+                            flag: false,
+
+                        },
+                        changeData:{
+
+                        }
+                    })
+                },
+                no_cb: ()=> {
+
+                }
             }
         };
     }
@@ -74,29 +79,6 @@ class IndexApp extends BaseContainer {
         });
 
 
-        console.log(this.state.info.isadmin);
-
-
-        if (!this.state.info.isadmin) {
-
-            var b = {
-                content: '解绑设备,确定要解除绑定吗？',
-            }
-
-            this.config = Object.assign({}, this.config, b);
-
-        } else {
-            var a = {
-
-                content: '解绑设备,解除管理员绑定后,其他监护成员将一同解除,且设备恢复出厂设置,只保留激活状态及设备有效期',
-
-            };
-
-
-            this.config = Object.assign({}, this.config, a);
-
-
-        }
 
 
     }
@@ -107,28 +89,42 @@ class IndexApp extends BaseContainer {
         e.preventDefault();
     }
 
+    onChildChanged(newState){
+        this.setState({
+            changeData:newState,
+            admin:{
+                flag:true
+            }
+        })
+    }
+
     render() {
         let {Actions} = this.props;
-        const {info, admin} =this.state;
-
-        const abc='李建彬';
+        const { admin,changeData,config} =this.state;
         return (
             <AppBody>
 
 
-                <Popup config={this.config} blockOrNone={admin.flag} _flag={admin.flag}>
+                <Popup config={config} blockOrNone={admin.flag} _flag={admin.flag}>
                     <form action="#">
 
                         <div className="ui-form-input-content">
 
                             <label>姓名</label>
-                            <input type="text" defaultValue={abc} placeholder="请输入姓名" id="name"/>
+
+
+                            {
+                                !!changeData.name?
+                                    <input type="text"  value={changeData.name} placeholder="请输入姓名" id="name"/>:
+
+                                    <input type="text"  placeholder="请输入姓名" id="name"/>
+                            }
                         </div>
 
                         <div className="ui-form-input-content">
 
                             <label>隶属组织</label>
-                            <input type="text" placeholder="请输入姓名" id="zuzhi"/>
+                            <input type="text" value={!!changeData.zuzhi?changeData.zuzhi:''} placeholder="请输入姓名" id="zuzhi"/>
                         </div>
 
 
@@ -136,7 +132,7 @@ class IndexApp extends BaseContainer {
 
 
                             <label>工号</label>
-                            <input type="text" placeholder="请输入登录工号" id="gohao"/>
+                            <input type="text"  placeholder="请输入登录工号" id="gohao"/>
                         </div>
                         <div className="ui-form-input-content">
                             <label>手机号码</label>
@@ -161,7 +157,11 @@ class IndexApp extends BaseContainer {
 
                 <div className="ui-account">
                     <div className="ui-col2">
-                        <div className="col1">组织管理</div>
+                        <div className="col1">组织管理
+                            <Tooltip placement="right" title={text}>
+                                <img src="/dist/images/tooltip.png" style={{width:'30px',height:'30px',marginLeft:'10px'}}/>
+                            </Tooltip>
+                        </div>
                         <div className="col2">
 
                             <div style={{display:'flex',alignItems:'center',position:'relative'}}>
@@ -179,22 +179,39 @@ class IndexApp extends BaseContainer {
                         <div className="col1">全部</div>
                         <div className="col2">
 
-                            <button type="primary" className="ui-btn ui-btn-primary">首选primary</button>
+                            <button type="primary" className="ui-btn ui-btn-primary">+添加分组</button>
                         </div>
                     </div>
 
-                    <div className="ui-col2">
-                        <div className="col1">账户列表</div>
-                        <div className="col2">
 
+                    <div className="organization" id="organization">
+
+                        <button type="primary" className="ui-btn ui-btn-primary">随寻科技</button>
+                        <button type="default" className="ui-btn ui-btn-default">1111</button>
+                        <button type="default" className="ui-btn ui-btn-default">2222</button>
+
+                    </div>
+
+
+
+
+
+
+
+                    <div className="ui-col2" style={{border:0}}>
+                        <div className="col1">账户列表
+                            <Tooltip placement="right" title={text}>
+                                <img src="/dist/images/tooltip.png" style={{width:'30px',height:'30px',marginLeft:'10px'}}/>
+                            </Tooltip>
+                        </div>
+
+                        <div className="col2">
                             <button type="primary" className="ui-btn ui-btn-primary"
                                     onClick={this.deviceCancel.bind(this)}>+添加账户
                             </button>
                         </div>
                     </div>
-
-
-                    <TableOne />
+                    <TableOne callbackParent={this.onChildChanged.bind(this)} />
 
                 </div>
 
@@ -204,6 +221,27 @@ class IndexApp extends BaseContainer {
 
     componentDidMount(): void {
         let {MenuReducers, Actions} = this.props;
+
+
+        // var oUl = document.getElementById('organization');
+        // var aLi = oUl.getElementsByTagName("button");
+        //
+        // for(var i=0; i<aLi.length; i++){
+        //
+        //     // if(aLi[i]!=oli){
+        //     //     aLi[i].style.color="";
+        //     // }
+        //
+        //     // aLi[i].setAttribute('class', 'mar_l pad');
+        //     aLi[i].onclick = function(){
+        //
+        //         this.style.backgroundColor='#01b4ee';
+        //
+        //
+        //     };
+        //
+        //
+        // }
     }
 
     componentWillUnmount(): void {

@@ -16,7 +16,7 @@ export default class Icon extends React.Component<any,any> {
             [`${typeButton}${type}`] : true,
             [`${addClassName}`]: className
         });
-        return (<i className={Cls}></i>);
+        return (<i className={Cls} style={{fontSize:size}}></i>);
     }
 
 }

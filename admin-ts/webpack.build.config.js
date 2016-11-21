@@ -118,7 +118,8 @@ var config = {
             },
             {
                 test: /\.less$/,
-                loader: "style!css!less"
+                exclude: /^node_modules$/,
+                loader: ExtractTextPlugin.extract('style-loader', 'css-loader!autoprefixer-loader!less-loader')
             },
 
             {

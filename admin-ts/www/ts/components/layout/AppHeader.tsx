@@ -68,7 +68,7 @@ export default class AppHeader extends React.Component<AppHeaderProps, any> {
 
         self.props.handleSearch(flag);
 
-        setTimeout(abc,5000)
+        setTimeout(abc,10000);
 
         function abc(){
             flag=false;

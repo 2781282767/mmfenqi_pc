@@ -152,7 +152,7 @@ export default class TableOne extends React.Component<any, any> {
                     key: 'operation',
                     render: (text, record) => (
                         <span>
-                            <Buttons type="warning" size="small">
+                            <Buttons type="warning" size="small" onClick={this.handChange.bind(this,record)}>
                                 修改
                             </Buttons>
                             <Buttons type="danger" size="small" onClick={() => { this.handDelete(text, record) } }>
@@ -222,40 +222,52 @@ export default class TableOne extends React.Component<any, any> {
     }
 
     handDelete(text, record) {
-        this.state.data.map((d, i) => {
-            if (d.key == record.key) {
-                this.state.data.splice(i, 1)
-            }
-        })
-        this.setState({
-            data: this.state.data
-        })
+
+
+        console.log(text)
+        console.log(record)
+
+
+        // this.state.data.map((d, i) => {
+        //     if (d.key == record.key) {
+        //         this.state.data.splice(i, 1)
+        //     }
+        // })
+        // this.setState({
+        //     data: this.state.data
+        // })
     }
 
     /**
      * 修改
      */
     handChange(record) {
-        let text;
-        let data = {
-            record
-        }
-        let buyConfirm = (modal) => {
-            console.log(text)
-            modal.close();
-        };
-        let buyConfirm1 = (modal) => {
-            modal.close();
-        };
-        let actions = [
-            {label: '取消', onClick: buyConfirm1},
-            {label: '确定', onClick: buyConfirm, primary: true}
-        ];
-        let ok = (call) => {
-            text = call;
-        }
 
-        Dialog.show(<div><ChangeTable data={data} callback={(call)=>(ok(call))}/></div>, actions, '修改资料');
+        console.log(this)
+
+        console.log(record)
+
+        this.props.callbackParent(record);
+        // let text;
+        // let data = {
+        //     record
+        // }
+        // let buyConfirm = (modal) => {
+        //     console.log(text)
+        //     modal.close();
+        // };
+        // let buyConfirm1 = (modal) => {
+        //     modal.close();
+        // };
+        // let actions = [
+        //     {label: '取消', onClick: buyConfirm1},
+        //     {label: '确定', onClick: buyConfirm, primary: true}
+        // ];
+        // let ok = (call) => {
+        //     text = call;
+        // }
+        //
+        // Dialog.show(<div><ChangeTable data={data} callback={(call)=>(ok(call))}/></div>, actions, '修改资料');
     }
 
 

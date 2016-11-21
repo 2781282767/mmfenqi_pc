@@ -4,17 +4,11 @@ import Config from '../pub/Config';
 import {LoginAction} from '../redux/LoginAction';
 import Cookie from '../pub/Cookie';
 
-const TelBaseUrl = Config.TelBaseUrl;
 //自己的第三方组件
 import {
-    FormGroup,
-    FormItems,
+
     InputText,
-    InputSelect,
-    InputRadio,
-    InputCheckbox,
-    CheckGroup,
-    RadioGroup,
+
     Buttons,
     Tips,
     Toast, Icon
@@ -73,16 +67,18 @@ class LoginApp extends React.Component<any, any> {
     }
 
     createLogin() {
-        return <div>
+        return <div className="login-content-input">
+
+            <div style={{padding:'30px 0'}}><img src="/dist/images/logo2.png" alt=""/></div>
             <div className="login-item">
-                <span className="item-icon"><Icon type="zh"/></span>
-                <InputText type="test" placeholder="请输入您的用户名"
+                <span className="item-icon"><Icon type="user" size="25"/></span>
+                <InputText type="test" placeholder="请输入账号"
                            onChange={(event) => this.valueChange('accout', event.target.value) }/>
             </div>
             <form action="#" onSubmit={this.sublimeButton.bind(this)}>
                 <div className="login-item">
                     <span className="item-icon"><Icon type="mm"/></span>
-                    <InputText type="password" placeholder="请输入您的用户名"
+                    <InputText type="password" placeholder="请输入密码"
                                onChange={(event) => this.valueChange('password', event.target.value) }/>
                 </div>
                 <div className="login-btn-box">
@@ -117,14 +113,32 @@ class LoginApp extends React.Component<any, any> {
             }
         }
         return (
+            // <div>
+            //     <div className="login-log">
+            //         <img src="/dist/images/tu.png" />
+            //     </div>
+            //     <div className="login-header">
+            //         <h1 onClick={()=>{this.changeType(1)}}> 登录</h1>
+            //         {/*<b className="line"></b>*/}
+            //         {/*<span className={this.state.type == 2 ? 'on' : ''} onClick={()=>{this.changeType(2)}}> 注册</span>*/}
+            //     </div>
+            //     {stateType()}
+            // </div>
+
+
             <div>
-                <div className="login-header">
-                    <span className={this.state.type == 1 ? 'on' : ''} onClick={()=>{this.changeType(1)}}> 登录</span>
-                    <b className="line"></b>
-                    <span className={this.state.type == 2 ? 'on' : ''} onClick={()=>{this.changeType(2)}}> 注册</span>
-                </div>
-                {stateType()}
+
+                    <div className="login-log">
+                        <img src="/dist/images/tu.png" />
+                    </div>
+                    <div className="login-header">
+
+                        {stateType()}
+                    </div>
+
+
             </div>
+
         );
     }
 
