@@ -19,7 +19,6 @@ import '../less/index.less'
 import '../less/deviceList.less'
 
 
-
 import usrimg from '../../src/img/user.png'
 
 import qiehuan from '../../src/img/qiehuan.png'
@@ -236,7 +235,6 @@ class MapIndex extends React.Component {
 
         const {babyName, babytelephone, list, babyid, headimg, values, lng, lat, gpstime, getGuardiansList, _checked, abc, address, isLogin, datasource}=this.props;
 
-
         console.log(this.props.exportMap);
 
 
@@ -246,14 +244,64 @@ class MapIndex extends React.Component {
         const checked = this.state.checked;
 
 
+
+
+
+        let valueType = ()=> {
+
+
+            if (values == '0') {
+                return <img src={dian} style={{width: '1.3rem', height: '1.1rem', marginLeft: '0'}}/>
+            } else if (values == '1') {
+                return <img src={dian1} style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
+            } else if (values == '2') {
+                return <img src={dian2} style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
+            } else if (values == '3') {
+                return <img src={dian3} style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
+            } else if (values == '4') {
+                return <img src={dian4} style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
+            }
+        }
+
+
+        let listItem = list.map((json, index)=> {
+            return (
+                <div className="device-info" key={index}
+                     onClick={this._change.bind(this, json.babyname, json.babyid, json.headimg, json.babytelephone)}>
+                    <div className="headimg">
+
+                        {
+                        !json.headimg ?
+                        <img src={touxiang} style={{
+                        width: '3.4rem',
+                        height: '3.4rem'
+                        }}/> :
+                        <img src={"/media" + json.headimg} style={{
+                        width: '3.4rem',
+                        height: '3.4rem'
+                        }}/>
+                        }
+                    </div>
+                    <div className="info">
+                        <div className="name">{json.babyname}</div>
+                        <div className="time">设备有效日期{json.starttime}</div>
+                    </div>
+
+                </div>
+            )
+        })
+
+
         return (
             <div>
 
 
                 {/*我的设备*/}
-                {
+                {/*<div style={{display: checked == true ? 'block' : 'none'}}>*/}
 
+                {
                     checked == true ?
+
                         <div>
                             <div className="_z"></div>
                             <div className="layer_content">
@@ -266,87 +314,56 @@ class MapIndex extends React.Component {
                                 </div>
                                 <div className="layer_content2">
                                     {
-                                        list.map((json, index)=> {
-                                            return (
-                                                <div className="device-info" key={index}
-                                                     onClick={this._change.bind(this, json.babyname, json.babyid, json.headimg, json.babytelephone)}>
-                                                    <div className="headimg">
-
-                                                        {
-                                                            !json.headimg ?
-                                                                <img src={touxiang} style={{
-                                                                    width: '3.4rem',
-                                                                    height: '3.4rem'
-                                                                }}/> :
-                                                                <img src={"/media" + json.headimg} style={{
-                                                                    width: '3.4rem',
-                                                                    height: '3.4rem'
-                                                                }}/>
-                                                        }
-                                                    </div>
-                                                    <div className="info">
-                                                        <div className="name">{json.babyname}</div>
-                                                        <div className="time">设备有效日期{json.starttime}</div>
-                                                    </div>
-
-                                                </div>
-                                            )
-                                        })
+                                        listItem
                                     }
 
                                 </div>
                             </div>
-                        </div>
-                        :
-                        null
-                }
-
-                {/*是否为0*/}
-                {/*_checked == 'true' ?*/}
-
-                {
-
-                    _checked == 'true' ?
-                        <div>
-                            <div className="add-device">
-
-                            </div>
-
-                            <div className="add-device-content">
-                                <div className="content">
-                                    <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
-
-                                        <img src={sb} style={{width: '20rem', height: '25rem'}}/>
-
-                                        <Link to="/AddDevice">
-                                            <div className="_btn btn_btn">添加设备</div>
-                                        </Link>
-
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-
-
                         </div> :
                         null
                 }
 
-                {
 
-                    isLogin == false ?
-                        <div>
-                            <div className="add-device">
+                {/*是否为0*/}
+                {/*_checked == 'true' ?*/}
+                <div style={{display: _checked == 'true' ? 'block' : 'none'}}>
+                    <div className="add-device">
+
+                    </div>
+
+                    <div className="add-device-content">
+                        <div className="content">
+                            <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
+
+                                <img src={sb} style={{width: '20rem', height: '25rem'}}/>
+
+                                <Link to="/AddDevice">
+                                    <div className="_btn btn_btn">添加设备</div>
+                                </Link>
 
                             </div>
 
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                {
+                    isLogin == false ?
+                        <div>
+
+                            <div className="add-device">
+
+                            </div>
                             <div className="add-device-content">
                                 <div className="content">
                                     <div style={{width: '20rem', height: '25rem', position: 'relative'}}>
 
                                         <img src={lsb} style={{width: '20rem', height: '25rem'}}/>
+                                        {/*<img src={dian} alt=""/>*/}
 
                                         {/*<Link to="/AddDevice">*/}
                                         <div className="_btn btn_btn" style={{bottom: '3rem'}}><a
@@ -359,10 +376,9 @@ class MapIndex extends React.Component {
                                 </div>
 
                             </div>
-
-
                         </div> :
                         null
+
                 }
 
                 {
@@ -443,40 +459,21 @@ class MapIndex extends React.Component {
                             <span className="row1">{babyName}</span>
                             <span className="row2">[最后上报时间]&nbsp;</span>
 
-
                             {
                                 datasource == '1' ?
                                     <img src={gbs} style={{width: '1.2rem', height: '1.2rem'}}/> :
-
                                     datasource == '2' ?
                                         <img src={wifi} style={{width: '1.2rem', height: '1.2rem'}}/> :
                                         datasource == '3' ?
                                             <img src={lbs} style={{width: '1.2rem', height: '1.2rem'}}/> :
+
                                             null
 
                             }
 
 
                             {
-                                values == '0' ?
-                                    <img src={dian} style={{width: '1.3rem', height: '1.1rem', marginLeft: '0'}}/>
-                                    :
-                                    values == '1' ?
-                                        <img src={dian1} style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
-                                        :
-                                        values == '2' ?
-                                            <img src={dian2}
-                                                 style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
-                                            :
-                                            values == '3' ?
-                                                <img src={dian3}
-                                                     style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
-                                                :
-                                                values == '4' ?
-                                                    <img src={dian4}
-                                                         style={{width: '1.8rem', height: '1.1rem', marginLeft: '0'}}/>
-                                                    :
-                                                    null
+                                valueType()
                             }
 
 

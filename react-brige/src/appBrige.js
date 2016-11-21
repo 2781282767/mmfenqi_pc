@@ -1,7 +1,7 @@
 /**
  * Created by sheldon on 2016/4/14.
  */
-var myBridge;
+let myBridge=111;
 
 document.addEventListener('WebViewJavascriptBridgeReady', function (event) {
     var bridge = event.bridge;
@@ -26,3 +26,5 @@ function setupWebViewJavascriptBridge(callback) {
 setupWebViewJavascriptBridge(function(bridge) {
     myBridge = bridge;
 });
+
+export default myBridge;

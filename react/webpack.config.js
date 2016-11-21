@@ -15,7 +15,7 @@ var plugins = [];
 //     publicPath = '/react-cnode/dist/';
 //     path = __dirname + '/react-cnode/dist/';
 // }
-// plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false, drop_console: true}}));//代码压缩
+plugins.push(new webpack.optimize.UglifyJsPlugin({compress: {warnings: false, drop_console: true}}));//代码压缩
 
 
 

@@ -2,6 +2,8 @@
 
 import * as types from '../../constants/ActionTypes';
 
+import {Tool} from '../../Tool'
+
 const initialState = {
     users: [],
     user: {},
@@ -45,7 +47,7 @@ export default function login(state = initialState, action) {
 
         case types.GetDeviceList:
 
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 list: action.res,
                 babyName: action.res[0].babyname,
                 babyid: action.res[0].babyid,
@@ -57,14 +59,14 @@ export default function login(state = initialState, action) {
 
         case types.GetChecked:
 
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 checked: action.msg,
                 getGuardiansList: [],
                 addr: ''
 
             });
         case  types.Change:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 babyName: action.res.babyName,
                 babyid: action.res.babyid,
                 babytelephone: action.res.babytelephone,
@@ -76,13 +78,13 @@ export default function login(state = initialState, action) {
 
 
         case types.GetGuardians:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 getGuardiansList: action.res
             });
 
 
         case types.GetGuardianss:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 getGuardiansLists: action.res
             });
         //     return {
@@ -90,7 +92,7 @@ export default function login(state = initialState, action) {
         //     };
 
         case types.GetCurrentTrack:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 lng: action.res.lng,
                 lat: action.res.lat,
                 gpstime: action.res.gpstime,
@@ -99,31 +101,31 @@ export default function login(state = initialState, action) {
 
             });
         case types.GetAddr:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 addr: action.msg
             });
         case types.aaa:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 abc: action.msg
             });
         case types.isLogin:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 isLogin: action.msg
             });
 
 
         case types.GetCurrentPower:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 values: action.res,
                 getGuardiansList: [],
                 addr: ''
             });
         case types.GetSafeRegions1:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 GetSafeRegions: action.res,
             });
         case types.exportMap:
-            return Object.assign({}, state, {
+            return Tool.assign({}, state, {
                 exportMap: action.res,
             });
 

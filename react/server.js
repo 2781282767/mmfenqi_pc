@@ -39,7 +39,7 @@ server.app.get('*', function (req, res) {
     res.sendFile(__dirname + '/index.html')
 });
 
-server.listen(8012, '192.198.0.151');
+server.listen(8012, '192.198.0.157');
 
 
 

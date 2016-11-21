@@ -5,6 +5,8 @@
 
 import {HttpService, Toast}  from'../Http';
 
+
+
 import * as types from '../constants/ActionTypes';
 
 import dian from '../../src/img/dian.png'
@@ -398,6 +400,7 @@ export function getDeviceList() {
 
                 if (res.code == 10020) {
 
+
                     //dispatch(getChecked('false'));
 
 
@@ -481,6 +484,7 @@ function getA(babyid, data) {
 export function getCurrentPower(babyid) {
     return function (dispatch) {
 
+
         return HttpService.query({
             url: '/app/alarm/getCurrentPower',
             data: {token: localStorage.appToken, babyid: babyid},
@@ -491,12 +495,17 @@ export function getCurrentPower(babyid) {
                 //dispatch(_getGuardians(babyid));
 
 
+
+
+
                 if (res.code == 10011) {
                     //$scope.powervalue = 0;
                     dispatch(GetCurrentPower('0'));
 
                     window.localStorage.powerValue = '0';
                 } else {
+
+
 
                     dispatch(GetCurrentPower(res.data.powerValue));
 

@@ -176,4 +176,22 @@ Tool.removeLocalItem = function (key) {
     return localStorage.removeItem();
 }
 
+
+Tool.assign=function(...args) {
+    /*if(Object.assign){
+     return Object.assign({},...args)
+     }*/
+    let from,
+        target = args[0] || {},
+        length = args.length;
+    for (let i = 0; i < length; i++) {
+        if ((from = args[i]) != null) {
+            for (let key in from) {
+                target[key] = from[key];
+            }
+        }
+    }
+    return target;
+};
+
 export {Tool, config}
