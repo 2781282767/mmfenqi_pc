@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Created by x on 11/23/15.
- */
 var webpack          = require('webpack');
 var WebpackDevServer = require('webpack-dev-server');
 var config           = require('./webpack.dev.config');

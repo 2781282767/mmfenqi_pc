@@ -1,28 +1,21 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 //自己的第三方组件
-import {
-    AppBody,
-    Panel,
-    Echarts,
-    Buttons,
-    Row,
-    Col,
-    Icon,
-    Dialog,
-    FormGroup,
-    FormItems,
-    InputText
-} from '../../components/index';
+import {Buttons} from '../../components/index';
 
 import { Table } from 'antd';
 
 
 export default class TableTwo extends React.Component<any, any> {
+
+    public data:any;
+
+    public pagination:any;
+
+    public rowSelection:any;
     constructor(props) {
         super(props);
         this.state = {
-
             columns: [{
                 title: '设备类型',
                 dataIndex: 'account',

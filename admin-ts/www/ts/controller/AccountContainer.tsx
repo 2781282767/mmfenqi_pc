@@ -2,14 +2,12 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import {bindActionCreators} from 'redux';
 import {Provider, connect} from 'react-redux';
-
-
 import { Tooltip } from 'antd';
 const text = <span>prompt text</span>;
 
+import {Select} from 'antd';
 
-
-
+const Option = Select.Option;
 //自己的第三方组件
 import {
     AppBody,
@@ -20,19 +18,11 @@ import {BaseStore} from '../redux/store/BaseStore';
 
 import Popup from '../components/modul'
 import TableOne from './Table/TableOne';
-
-
 import '../../styles/containerLess/account.less'
-//表单验证模块
-import verifier from '../pub/Verifier';
 const store = BaseStore({});
-let divStyle = {
-    marginBottom: '10px',
-};
 class IndexApp extends BaseContainer {
     constructor(props) {
         super(props);
-
 
         this.state = {
             info: {},
@@ -65,12 +55,12 @@ class IndexApp extends BaseContainer {
         };
     }
 
-    handleButton() {
+    handleButton():void {
         //let {MenuReducers, dispatch} = this.props;
         alert('点击优惠码')
     }
 
-    deviceCancel() {
+    deviceCancel():void{
 
         this.setState({
             admin: {
@@ -78,18 +68,13 @@ class IndexApp extends BaseContainer {
             }
         });
 
-
-
-
     }
-
-
-    search(e) {
+    search(e):void {
         let self = this;
         e.preventDefault();
     }
 
-    onChildChanged(newState){
+    onChildChanged(newState):void{
         this.setState({
             changeData:newState,
             admin:{
@@ -97,10 +82,14 @@ class IndexApp extends BaseContainer {
             }
         })
     }
-
     render() {
         let {Actions} = this.props;
         const { admin,changeData,config} =this.state;
+        const list = [
+            {name: '学校'},
+            {name: '学校2'}
+        ];
+
         return (
             <AppBody>
 
@@ -164,13 +153,7 @@ class IndexApp extends BaseContainer {
                         </div>
                         <div className="col2">
 
-                            <div style={{display:'flex',alignItems:'center',position:'relative'}}>
-                                <form action="#" onSubmit={this.search.bind(this)}>
-                                    <input type="search" placeholder="输入设备IMEI号"/>
 
-                                    <i className="iconfont icon-search"></i>
-                                </form>
-                            </div>
                         </div>
                     </div>
 
@@ -187,15 +170,10 @@ class IndexApp extends BaseContainer {
                     <div className="organization" id="organization">
 
                         <button type="primary" className="ui-btn ui-btn-primary">随寻科技</button>
-                        <button type="default" className="ui-btn ui-btn-default">1111</button>
-                        <button type="default" className="ui-btn ui-btn-default">2222</button>
+                        <button type="default" className="ui-btn ui-btn-default">研发中心</button>
+                        <button type="default" className="ui-btn ui-btn-default">运营中心</button>
 
                     </div>
-
-
-
-
-
 
 
                     <div className="ui-col2" style={{border:0}}>
@@ -206,6 +184,37 @@ class IndexApp extends BaseContainer {
                         </div>
 
                         <div className="col2">
+
+
+                            <Select size="large" defaultValue="姓名" style={{ minWidth: 60 }}>
+
+                                {
+                                    list.map((json, index)=> {
+
+
+                                        return (
+
+
+
+                                            <Option value={json.name}>{json.name}</Option>
+
+                                        )
+                                    })
+                                }
+
+                            </Select>
+
+
+
+
+
+                            <div style={{display:'flex',alignItems:'center',position:'relative',marginRight:'20px'}}>
+                                <form action="#" onSubmit={this.search.bind(this)}>
+                                    <input type="search" placeholder="搜索姓名"/>
+
+                                    <i className="iconfont icon-search"></i>
+                                </form>
+                            </div>
                             <button type="primary" className="ui-btn ui-btn-primary"
                                     onClick={this.deviceCancel.bind(this)}>+添加账户
                             </button>
@@ -221,27 +230,6 @@ class IndexApp extends BaseContainer {
 
     componentDidMount(): void {
         let {MenuReducers, Actions} = this.props;
-
-
-        // var oUl = document.getElementById('organization');
-        // var aLi = oUl.getElementsByTagName("button");
-        //
-        // for(var i=0; i<aLi.length; i++){
-        //
-        //     // if(aLi[i]!=oli){
-        //     //     aLi[i].style.color="";
-        //     // }
-        //
-        //     // aLi[i].setAttribute('class', 'mar_l pad');
-        //     aLi[i].onclick = function(){
-        //
-        //         this.style.backgroundColor='#01b4ee';
-        //
-        //
-        //     };
-        //
-        //
-        // }
     }
 
     componentWillUnmount(): void {

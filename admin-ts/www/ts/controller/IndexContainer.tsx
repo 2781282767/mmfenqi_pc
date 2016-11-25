@@ -16,23 +16,19 @@ const text = <span>prompt text</span>;
 import {Table} from 'antd';
 //自己的第三方组件
 import {
-    AppBody,
+    AppBody
 } from '../components/index';
 //自己书写的基类
 import BaseContainer from '../components/pubController/BaseContainer';
 import {BaseStore} from '../redux/store/BaseStore';
 
 import '../../styles/containerLess/index.less'
-//表单验证模块
-import verifier from '../pub/Verifier';
 const store = BaseStore({});
-let divStyle = {
-    marginBottom: '10px',
-};
-class IndexApp extends BaseContainer {
+
+class IndexApp extends BaseContainer{
+
     constructor(props) {
         super(props);
-
 
         this.state = {
 
@@ -78,28 +74,32 @@ class IndexApp extends BaseContainer {
 
                 {
                     key: '1',
-                    kinds: '学生',
+                    kinds: '智能学生证',
                     account: '11111',
-                    name: '小明',
-                    zuzhi: '杭州',
+                    name: '33',
+                    zuzhi: '44',
                     email: '122',
-                    address: '西湖区湖底公园1号',
+                    address: '111',
                 }, {
                     key: '2',
-                    kinds: '考勤',
+                    kinds: '2.4G考勤卡',
                     account: '11111',
-                    name: '小明',
-                    zuzhi: '杭州',
+                    name: '33',
+                    zuzhi: '4422',
                     email: '122',
-                    address: '西湖区湖底公园1号',
+                    address: '222',
                 }],
 
 
             option:{
                 title: {
-                    text: '数量',
-                    x: '20',
-                    y: '20',
+                    text: '数量(台)',
+                    x: '90',
+                    y: '30',
+                    textStyle: {
+                        fontSize: '14',
+                        color: '#01b4ee'
+                    },
 
 
                 },
@@ -107,7 +107,7 @@ class IndexApp extends BaseContainer {
                     trigger: 'axis'
                 },
                 // legend: {
-                //     data:['蒸发量','降水量']
+                //     data:['智能学生证激活量','2.4G考勤卡激活量','缴费量']
                 // },
                 toolbox: {
                     show: false,
@@ -122,53 +122,47 @@ class IndexApp extends BaseContainer {
                 xAxis: [
                     {
                         type: 'category',
-                        data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                        data: ['11/10', '11/11', '11/12', '11/13', '11/14', '11/15', '11/16']
                     }
                 ],
                 yAxis: [
                     {
-                        type: 'value'
+                        type: 'value',
+                        position: 'left',
                     }
                 ],
                 series: [
                     {
-                        name: '蒸发量',
+                        name: '智能学生证激活量',
                         type: 'bar',
-                        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
-                        // markPoint : {
-                        //     data : [
-                        //         {type : 'max', name: '最大值'},
-                        //         {type : 'min', name: '最小值'}
-                        //     ]
-                        // },
-                        // markLine : {
-                        //     data : [
-                        //         {type : 'average', name: '平均值'}
-                        //     ]
-                        // }
+                        data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 22.6],
+
+                        itemStyle:{
+                            normal:{color:'#01b4ee'}
+                        }
                     },
                     {
-                        name: '降水量',
+                        name: '2.4G考勤卡激活量',
                         type: 'bar',
-                        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
-                        // markPoint : {
-                        //     data : [
-                        //         {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183},
-                        //         {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
-                        //     ]
-                        // // },
-                        // markLine : {
-                        //     data : [
-                        //         {type : 'average', name : '平均值'}
-                        //     ]
-                        // }
+                        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 122],
+
+                        itemStyle:{
+                            normal:{color:'#f7ba00'}
+                        }
+                    },
+                    {
+                        name: '缴费量',
+                        type: 'bar',
+                        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 333.6],
+
+                        itemStyle:{
+                            normal:{color:'#1ec94c'}
+                        }
                     }
                 ]
             }
 
         };
-
-
 
     }
 
@@ -187,7 +181,7 @@ class IndexApp extends BaseContainer {
         let self = this;
         e.preventDefault();
 
-        setTimeout(abc,5000)
+        setTimeout(abc,1000);
         self.setState({
             flag:true,
         });
@@ -203,15 +197,16 @@ class IndexApp extends BaseContainer {
     render() {
         let {Actions} = this.props;
 
+        let {flag}=this.state;
+
         const list = [
-            {name: 'over'},
-            {name: 'jk'}
-        ]
+            {name: '学校'},
+            {name: '学校2'}
+        ];
 
         return (
 
-
-            <AppBody flag={this.state.flag}>
+            <AppBody _flag={flag}>
 
 
                 <div className="ui-aindex">
@@ -219,11 +214,11 @@ class IndexApp extends BaseContainer {
                     <div className="ui-col2">
                         <div className="col1" style={{color:'#333',borderSize:'14px'}}>
                         <img src="/dist/images/gongkong.png" style={{width:'30px',height:'30px',marginRight:'10px'}}/>
-                         杭州杭州杭州杭州杭州杭州杭州杭州杭州杭州
+                        某某   杭州  新增了一台智能学生证，设备IMEI号为 88888888 <span className="time">2012-10-01</span>
                             </div>
                     </div>
                     <div className="ui-col2" style={{border:0}}>
-                        <div className="col1">数据总览
+                        <div className="col1" style={{fontSize:'18px'}}>数据总览
 
                             <Tooltip placement="right" title={text}>
                                 <img src="/dist/images/tooltip.png" style={{width:'30px',height:'30px',marginLeft:'10px'}}/>
@@ -238,7 +233,7 @@ class IndexApp extends BaseContainer {
 
 
                     <div className="ui-col2" style={{border:0}}>
-                        <div className="col1">一周趋势
+                        <div className="col1" style={{fontSize:'18px'}}>一周趋势
                             <Tooltip placement="right" title={text}>
                                 <img src="/dist/images/tooltip.png" style={{width:'30px',height:'30px',marginLeft:'10px'}}/>
                             </Tooltip>
@@ -249,32 +244,66 @@ class IndexApp extends BaseContainer {
                     <div className="echarts">
 
                         <div style={{display:'flex',height:'40px',alignItems:'center',margin: '20px 0 0 40px'}}>
-                            <Select size="large" defaultValue="jk" style={{ width: 120 }}>
-
-                                {
-                                    list.map((json, index)=> {
+                            <div style={{display:'flex',flex:'1'}}>
 
 
-                                        return (
+                                <Select size="large" defaultValue="学校学校" style={{ minWidth: 70 }}>
+
+                                    {
+                                        list.map((json, index)=> {
+
+
+                                            return (
 
 
 
-                                            <Option key={index} value={json.name}>{json.name}</Option>
+                                                <Option  value={json.name}>{json.name}</Option>
 
-                                        )
-                                    })
-                                }
+                                            )
+                                        })
+                                    }
 
-                            </Select>
-                            <div style={{display:'flex',position:'relative'}}>
-                                <form action="#" onSubmit={this.search.bind(this)}>
-                                    <input type="search" placeholder="输入设备IMEI号"/>
+                                </Select>
+                                <div style={{display:'flex',position:'relative'}}>
+                                    <form action="#" onSubmit={this.search.bind(this)}>
+                                        <input type="search" placeholder="请输入学校筛选"/>
 
-                                    <i className="iconfont icon-search"></i>
-                                </form>
+                                        <i className="iconfont icon-search"></i>
+                                    </form>
+                                </div>
+                            </div>
+
+
+                            <div style={{display:'flex',flex:'1'}}>
+
+                                <div className="legend">
+
+                                    <div className="step1">
+
+                                        <div></div>
+
+                                        <span>智能学生证激活量</span>
+
+
+                                    </div>
+                                    <div className="step2">
+                                        <div></div>
+                                        <span>2.4G考勤卡激活量</span>
+
+                                    </div>
+                                    <div className="step3">
+                                        <div></div>
+                                        <span>缴费量</span>
+
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
+
+
+
 
 
                         <div id="container" style={{height:'400px',width:'100%'}}></div>

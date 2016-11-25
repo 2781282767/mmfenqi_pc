@@ -1,10 +1,14 @@
 {
   "compilerOptions": {
     "target": "es6",
-    //"module": "commonjs",
+//    "module": "commonjs",
     "jsx": "react",
     //"jsx":"preserve",
-    "sourceMap": true
+    "sourceMap": true,
+    "noImplicitAny": false,
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "declaration": true
   },
   "exclude": [
     "node_modules"

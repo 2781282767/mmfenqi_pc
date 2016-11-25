@@ -19,11 +19,6 @@ class AppMenu extends React.Component<AppMenuProps, any>{
     /**
     * 设置默认属性头部
     */
-    //TODO: 添加默认属性static与redux会报错,尚未解决.纯组件状态下能结合
-    /*static defaultProps = {
-        parentActive: ACTIVE.parentActive.parentkey,
-        childActive: ACTIVE.childActive.childkey
-     }*/
 
     constructor(props) {
         super(props);
@@ -69,7 +64,11 @@ class AppMenu extends React.Component<AppMenuProps, any>{
     }
 
     createItem(item, index) {
+
         let {MenuReducers, dispatch} = this.props;
+        console.log(MenuReducers.active.parent)
+
+        console.log(index)
         //判断是否存在子菜单
         let hasChild = item.subMunu.length > 0 ? true : false;
         let parentActive = MenuReducers.active.parent == index ? `${css_prefix}-menu-parent-item active` : `${css_prefix}-menu-parent-item`;
@@ -80,7 +79,13 @@ class AppMenu extends React.Component<AppMenuProps, any>{
                 >
                 <h3 className = {hasChild ? 'on' : 'off'} data-href = {ParentUrl}>
                     {item.icon ? <Icon type={item.icon}/> : false}
-                    {item.name}
+
+                    <div className="img"><img src={item.img} /></div>
+
+
+
+                    <div className="name">{item.name}</div>
+
                 </h3>
                 { hasChild ? (
                     <ul className={`${css_prefix}-menu-child`}>
@@ -102,6 +107,10 @@ class AppMenu extends React.Component<AppMenuProps, any>{
 
     render() {
         let {MenuReducers, dispatch} = this.props;
+
+        console.log('----------');
+
+        console.log(MenuReducers)
         return (
             <div className={`${css_prefix}-menu`}>
                 <ul className={`${css_prefix}-menu-parent`}>

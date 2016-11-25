@@ -1,8 +1,5 @@
 'use strict';
 
-/**
- * Created by x on 11/23/15.
- */
 var path = require('path');
 
 var fs = require('fs');

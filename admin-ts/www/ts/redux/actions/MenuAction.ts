@@ -78,6 +78,7 @@ let changeActiveAction = () => {
                 if (now_url[0] === v.url) {
                     menuActivea.parent = i;
                     menuActivea.child = -1;
+
                     dispatch(OnchangeActive(menuActivea));
                 }
                 /**

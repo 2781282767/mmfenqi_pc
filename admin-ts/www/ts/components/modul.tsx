@@ -2,6 +2,8 @@
 import * as React from "react";
 import * as ReactDOM from "react-dom";
 export  default  class Popup extends React.Component<any,any>{
+
+    public config:Object;
     constructor(props){
         super(props);
         this.state={
@@ -34,9 +36,7 @@ export  default  class Popup extends React.Component<any,any>{
         var isSure=config.isSure;
         var isCancel=config.isCancel;
 
-
-        //
-        console.log('_flag'+this.state._flag)
+        console.log('_flag'+this.state._flag);
         console.log('blockOrNone'+this.state.blockOrNone);
         return (
 

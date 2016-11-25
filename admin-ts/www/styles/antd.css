@@ -13716,7 +13716,7 @@ textarea.ant-pagination-options-quick-jumper input {
   font-size: 12px;
   color: #666;
   position: relative;
-  border-radius: 6px 6px 0 0;
+  /*border-radius: 6px 6px 0 0;*/
   overflow: hidden;
   /* fix firefox scrollbar bug */
 }
@@ -13726,14 +13726,14 @@ textarea.ant-pagination-options-quick-jumper input {
 }
 .ant-table table {
   width: 100%;
-  border-collapse: separate;
+  border-collapse: collapse;
   border-spacing: 0;
   text-align: left;
-  border-radius: 6px 6px 0 0;
+  /*border-radius: 6px 6px 0 0;*/
   overflow: hidden;
 }
 .ant-table-thead > tr > th {
-  background: #f7f7f7;
+  background: #f7f8fa;
   font-weight: bold;
   -webkit-transition: background .3s ease;
   transition: background .3s ease;
@@ -13808,7 +13808,7 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-table-tbody > tr > td {
   padding: 11px 8px;
   word-break: break-all;
-  border: 1px solid #f6f7f7;
+  border: 1px solid #dddddd;
 }
 .ant-table-thead > tr > th.ant-table-selection-column,
 .ant-table-tbody > tr > td.ant-table-selection-column {
@@ -13988,6 +13988,9 @@ textarea.ant-pagination-options-quick-jumper input {
 .ant-table-pagination {
   margin: 16px 0;
   float: right;
+  /*height: 80px;*/
+
+
 }
 .ant-table-filter-dropdown {
   min-width: 96px;

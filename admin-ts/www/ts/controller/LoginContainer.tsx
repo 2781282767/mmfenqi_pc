@@ -2,16 +2,13 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 import Config from '../pub/Config';
 import {LoginAction} from '../redux/LoginAction';
-import Cookie from '../pub/Cookie';
 
 //自己的第三方组件
 import {
 
     InputText,
-
     Buttons,
     Tips,
-    Toast, Icon
 } from '../components/index';
 //表单验证模块
 import Verifier from '../pub/Verifier';
@@ -69,15 +66,15 @@ class LoginApp extends React.Component<any, any> {
     createLogin() {
         return <div className="login-content-input">
 
-            <div style={{padding:'30px 0'}}><img src="/dist/images/logo2.png" alt=""/></div>
+            <div style={{padding:'30px 0'}}><img src="/dist/images/logo2.png"/></div>
             <div className="login-item">
-                <span className="item-icon"><Icon type="user" size="25"/></span>
+                <span className="item-icon"><img src="/dist/images/zhanghu.png" /></span>
                 <InputText type="test" placeholder="请输入账号"
                            onChange={(event) => this.valueChange('accout', event.target.value) }/>
             </div>
             <form action="#" onSubmit={this.sublimeButton.bind(this)}>
                 <div className="login-item">
-                    <span className="item-icon"><Icon type="mm"/></span>
+                    <span className="item-icon"><img src="/dist/images/mima.png"/></span>
                     <InputText type="password" placeholder="请输入密码"
                                onChange={(event) => this.valueChange('password', event.target.value) }/>
                 </div>
@@ -88,6 +85,8 @@ class LoginApp extends React.Component<any, any> {
                     </Buttons>
 
                 </div>
+
+                <div style={{paddingTop:'10px',color:'#ff5a5a'}}>忘记密码?</div>
             </form>
         </div>
     }
@@ -113,19 +112,6 @@ class LoginApp extends React.Component<any, any> {
             }
         }
         return (
-            // <div>
-            //     <div className="login-log">
-            //         <img src="/dist/images/tu.png" />
-            //     </div>
-            //     <div className="login-header">
-            //         <h1 onClick={()=>{this.changeType(1)}}> 登录</h1>
-            //         {/*<b className="line"></b>*/}
-            //         {/*<span className={this.state.type == 2 ? 'on' : ''} onClick={()=>{this.changeType(2)}}> 注册</span>*/}
-            //     </div>
-            //     {stateType()}
-            // </div>
-
-
             <div>
 
                     <div className="login-log">

@@ -6,34 +6,27 @@ const MenuData = {
       "menuId": 21,
       "name": "首页",
       "subMunu": [],
-      "url": "index"
+      "url": "index",
+      'img':'/dist/images/index.png'
     },
     {
-      "description": "账户",
+      "description": "账户管理",
       "menuId": 21,
-      "name": "账户",
+      "name": "账户管理",
       "subMunu": [],
-      "url": "account"
+      "url": "account",
+      'img':'/dist/images/account.png'
     },
-    {
-      "description": "设备",
-      "menuId": 21,
-      "name": "设备",
-      "subMunu": [],
-      "url": "device"
-    },
-
     {
       "description": "设备管理",
-      "menuId": 23,
+      "menuId": 21,
       "name": "设备管理",
       "subMunu": [],
-      "url": "mdevice"
+      "url": "device",
+      'img':'/dist/images/device.png'
     },
 
-
-
   ]
-}
+};
 
 export default MenuData;

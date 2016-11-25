@@ -147,7 +147,7 @@ let verifyConfig = (input, verifyConfigs, immediately = false) => {
 
             if (typeof verifyOneResult == 'string') {
 
-                let tips = verifyConfig['name'] + verifyOneResult;
+                let tips:any = verifyConfig['name'] + verifyOneResult;
                 tips = {name: configName, tips};
                 if (immediately) {
                     return [tips];

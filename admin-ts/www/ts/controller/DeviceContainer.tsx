@@ -4,10 +4,7 @@ import {bindActionCreators} from 'redux';
 import {Provider, connect} from 'react-redux';
 
 
-import { Tooltip } from 'antd';
-const text = <span>prompt text</span>;
-
-import { Button } from 'antd';
+import {Button} from 'antd';
 
 
 import {Select} from 'antd';
@@ -21,20 +18,11 @@ import {
 import BaseContainer from '../components/pubController/BaseContainer';
 import {BaseStore} from '../redux/store/BaseStore';
 
-
-
-
-
 import TableTwo from './Table/TableTwo';
 
 
 import '../../styles/containerLess/device.less'
-//表单验证模块
-import verifier from '../pub/Verifier';
 const store = BaseStore({});
-let divStyle = {
-    marginBottom: '10px',
-};
 class IndexApp extends BaseContainer {
     constructor(props) {
         super(props);
@@ -43,11 +31,9 @@ class IndexApp extends BaseContainer {
         this.state = {
             info: {},
             admin: {},
-            changeData:{
-
-            },
-            mouseOver:false,
-            index:null
+            changeData: {},
+            mouseOver: false,
+            index: null
         }
 
     }
@@ -66,8 +52,6 @@ class IndexApp extends BaseContainer {
         });
 
 
-
-
     }
 
 
@@ -76,66 +60,66 @@ class IndexApp extends BaseContainer {
         e.preventDefault();
     }
 
-    onChildChanged(newState){
+    onChildChanged(newState) {
         this.setState({
-            changeData:newState,
-            admin:{
-                flag:true
+            changeData: newState,
+            admin: {
+                flag: true
             }
         })
     }
 
-    del(school,index){
-        console.log(index+ school)
+    del(school, index) {
+        console.log(index + school)
     }
 
-    handMouseOver(index){
-        console.log(index)
+    handMouseOver(index) {
+        console.log(index);
 
         this.setState({
-            mouseOver:true,
-            index:index
-        })
-    }
-    handMouseOver2(index){
-        console.log(index)
-
-        this.setState({
-            mouseOver:true,
+            mouseOver: true,
+            index: index
         })
     }
 
-    handMouseOut(){
+    handMouseOver2(index) {
+        console.log(index);
 
         this.setState({
-            mouseOver:false
+            mouseOver: true,
+        })
+    }
+
+    handMouseOut() {
+
+        this.setState({
+            mouseOver: false
         })
 
     }
-
 
 
     render() {
         let {Actions} = this.props;
-        const { admin,changeData} =this.state;
+        const {admin, changeData} =this.state;
 
 
         const list = [
-            {name: 'over'},
-            {name: 'jk'}
-        ]
+            {name: '学校'},
+            {name: '学校2'}
+        ];
 
 
-        const schoolList=[
-            {school:'浙大1',del:'删除'},
-            {school:'浙大2',del:'删除'},
-            {school:'浙大3',del:'删除'},
-            {school:'浙大4',del:'删除'},
-            {school:'浙大5',del:'删除'},
-        ]
+        const schoolList = [
+            {school: '重庆南开中学(3中)', del: '删除'},
+            {school: '重庆巴蜀中学(41中)', del: '删除'},
+            {school: '重庆育才中学(20中)', del: '删除'},
+            {school: '重庆川外附属外国语学校', del: '删除'},
+            {school: '重庆巴县中学(巴中)', del: '删除'},
+        ];
 
 
-        console.log(this.state.mouseOver)
+        console.log(this.state.mouseOver);
         return (
             <AppBody>
 
@@ -144,7 +128,7 @@ class IndexApp extends BaseContainer {
 
                         <div className="search-condition">
                             <div style={{display:'flex',height:'40px',alignItems:'center'}}>
-                                <Select size="large" defaultValue="jk" style={{ width: 60 }}>
+                                <Select size="large" defaultValue="学校" style={{ minWidth: 70 }}>
 
                                     {
                                         list.map((json, index)=> {
@@ -154,7 +138,7 @@ class IndexApp extends BaseContainer {
 
 
 
-                                                <Option key={index} value={json.name}>{json.name}</Option>
+                                                <Option value={json.name}>{json.name}</Option>
 
                                             )
                                         })
@@ -178,26 +162,25 @@ class IndexApp extends BaseContainer {
                             <div className="search-number">全部</div>
 
                             {
-                                schoolList.map((json,index)=>{
-                                    return(
-                                        <div className="search-school" key={index}  onMouseOver={this.handMouseOver.bind(this,index)} onMouseOut={this.handMouseOut.bind(this)}>
+                                schoolList.map((json, index)=> {
+                                    return (
+                                        <div className="search-school"
+                                             onMouseOver={this.handMouseOver.bind(this,index)}
+                                             onMouseOut={this.handMouseOut.bind(this)}>
                                             <div className="name">{json.school}</div>
 
-                                            <div className="del" onMouseOver={this.handMouseOver.bind(this,index)} onClick={this.del.bind(this)}>
-
+                                            <div className="del" onMouseOver={this.handMouseOver.bind(this,index)}
+                                                 onClick={this.del.bind(this)}>
 
 
                                                 {
-                                                !!this.state.mouseOver&&this.state.index==index?
-                                                  '删除' :
-                                                    null
+                                                    !!this.state.mouseOver && this.state.index == index ?
+                                                        '删除' :
+                                                        null
 
 
-                                            }
+                                                }
                                             </div>
-
-
-
 
 
                                         </div>
@@ -209,17 +192,15 @@ class IndexApp extends BaseContainer {
                     </div>
 
 
-
-
                     <div className="right">
 
 
                         <div className="ui-col2">
-                            <div className="col1">浙大浙大浙大浙大浙大浙大浙大浙大 <span>11000台</span>
+                            <div className="col1">重庆育才中学(20中)<span style={{margin:'0 20px'}}>11000台</span>
 
 
                                 <div style={{display:'flex',height:'40px',alignItems:'center'}}>
-                                    <Select size="large" defaultValue="jk" style={{ width: 100 }}>
+                                    <Select size="large" defaultValue="jk" style={{ minWidth: 70 }}>
 
                                         {
                                             list.map((json, index)=> {
@@ -229,7 +210,7 @@ class IndexApp extends BaseContainer {
 
 
 
-                                                    <Option key={index} value={json.name}>{json.name}</Option>
+                                                    <Option  value={json.name}>{json.name}</Option>
 
                                                 )
                                             })
@@ -249,19 +230,19 @@ class IndexApp extends BaseContainer {
 
 
                                     <div style={{display:'flex'}}>
-                                        <img src="/dist/images/huishou.png" />
+                                        <img src="/dist/images/huishou.png"/>
                                         &nbsp;
                                         <span>回收</span>
                                     </div>
                                 </Button>
 
 
+                                <div className="export">
+                                    <img src="/dist/images/export.png"/>
+                                    &nbsp;
+                                    <span>导出</span>
+                                </div>
 
-                                    <div className="export" style={{display:'flex',borderLeft:'1px solid #ddd',    marginLeft: '10px',paddingLeft: '10px'}}>
-                                        <img src="/dist/images/export.png" />
-                                        &nbsp;
-                                        <span>导出</span>
-                                    </div>
 
                             </div>
                         </div>
@@ -271,17 +252,13 @@ class IndexApp extends BaseContainer {
                 </div>
 
 
-
-
-
-
             </AppBody>
         );
     }
 
-    componentWillMount(){
+    componentWillMount() {
         this.setState({
-            mouseOver:false
+            mouseOver: false
         })
     }
 
@@ -292,15 +269,11 @@ class IndexApp extends BaseContainer {
     componentWillUnmount(): void {
 
     }
-
-    /*shouldComponentUpdate(){
-     return false
-     }*/
 }
 
 let mapStateToProps = (state) => {
     return {}
-}
+};
 
 function mapDispatchToProps(dispatch) {
     return {

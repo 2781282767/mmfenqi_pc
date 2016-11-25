@@ -359,7 +359,7 @@ body {
     position: absolute;
     width: 100%;
     height: 100%;
-    top: 56px;
+    top: 70px;
     /*background-color: #faf9f7;*/
 }
 
@@ -529,8 +529,9 @@ body {
     position: relative;
     display: block;
     width: 100%;
-    height: 34px;
-    padding: 6px 12px;
+    /*height: 34px;*/
+    /*padding: 6px 12px;*/
+    margin: 14px 10px;
     font-size: 14px;
     line-height: 1.42857143;
     color: #555;
@@ -850,14 +851,14 @@ body {
     width: 100%;
     background-color: #2f323b;
     display: block;
-    height: 56px;
+    height: 70px;
     margin: 0;
     padding: 0;
     z-index: 300;
 }
 
 .ui-header-container {
-    height: 56px;
+    height: 70px;
     background-color: #2f323b;
     display: flex;
     /*box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.14);*/
@@ -1019,7 +1020,7 @@ body {
 .ui-auth-menu {
     display: none;
     position: absolute;
-    top: 56px;
+    top: 70px;
     right: 0;
     background: #fff;
     color: #333 !important;
@@ -1079,9 +1080,29 @@ body {
 .ui-menu-parent > li > h3 {
     position: relative;
     font-size: 14px;
-    padding: 15px 20px;
+    padding: 10px 0;
     cursor: pointer;
-    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+
+
+}
+
+.ui-menu-parent > li > h3 > .img {
+
+    display: flex;
+    margin-left: 30px;
+    margin-right: 20px;
+
+
+}
+
+.ui-menu-parent > li > h3 > .name {
+
+
+  display: flex;
+
 }
 
 .ui-menu-parent > li > h3 > .icon {
